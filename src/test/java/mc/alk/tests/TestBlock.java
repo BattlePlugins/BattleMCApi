@@ -1,6 +1,6 @@
 package mc.alk.tests;
 
-import mc.alk.mc.MCBlock;
+import mc.alk.mc.block.MCBlock;
 import mc.alk.mc.MCLocation;
 import mc.alk.mc.MCWorld;
 

@@ -1,10 +1,12 @@
-package mc.alk.bukkit;
+package mc.alk.bukkit.command;
 
-
+import mc.alk.mc.command.MCCommandSender;
 import org.bukkit.command.CommandSender;
 
-public class BukkitCommandSender implements MCCommandSender{
-	final CommandSender sender;
+public class BukkitCommandSender implements MCCommandSender {
+
+	private CommandSender sender;
+
 	public BukkitCommandSender(CommandSender sender){
 		this.sender = sender;
 	}
@@ -22,5 +24,9 @@ public class BukkitCommandSender implements MCCommandSender{
 	@Override
 	public String getName() {
 		return "Console";
+	}
+
+	public CommandSender getBukkitCommandSender() {
+		return sender;
 	}
 }

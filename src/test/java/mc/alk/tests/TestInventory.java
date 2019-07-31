@@ -3,8 +3,8 @@ package mc.alk.tests;
 import java.util.Comparator;
 import java.util.TreeMap;
 
-import mc.alk.mc.MCInventory;
-import mc.alk.mc.MCItemStack;
+import mc.alk.mc.inventory.MCInventory;
+import mc.alk.mc.inventory.MCItemStack;
 
 import org.apache.commons.lang.StringUtils;
 

@@ -3,7 +3,7 @@ package mc.alk.tests;
 import java.util.HashMap;
 import java.util.Map;
 
-import mc.alk.bukkit.BukkitItemStack;
+import mc.alk.bukkit.inventory.BukkitItemStack;
 
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;

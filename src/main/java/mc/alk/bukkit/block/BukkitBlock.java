@@ -1,13 +1,16 @@
-package mc.alk.bukkit;
+package mc.alk.bukkit.block;
 
-import mc.alk.mc.MCBlock;
+import mc.alk.bukkit.BukkitLocation;
+import mc.alk.bukkit.BukkitWorld;
+import mc.alk.mc.block.MCBlock;
 import mc.alk.mc.MCLocation;
 import mc.alk.mc.MCWorld;
 
 import org.bukkit.block.Block;
 
-public class BukkitBlock implements MCBlock{
-	Block block;
+public class BukkitBlock implements MCBlock {
+
+	private Block block;
 
 	public BukkitBlock(Block block) {
 		this.block = block;
@@ -39,8 +42,8 @@ public class BukkitBlock implements MCBlock{
 	}
 
 	@Override
-	public int getType() {
-		return block.getTypeId();
+	public String getType() {
+		return block.getType().name();
 	}
 
 	@Override
@@ -53,7 +56,7 @@ public class BukkitBlock implements MCBlock{
 		return new BukkitBlock(block);
 	}
 
-	public Block getBlock() {
+	public Block getBukkitBlock() {
 		return block;
 	}
 

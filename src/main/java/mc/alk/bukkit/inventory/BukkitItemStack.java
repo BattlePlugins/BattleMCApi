@@ -1,29 +1,33 @@
-package mc.alk.bukkit;
+package mc.alk.bukkit.inventory;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import mc.alk.bukkit.util.BukkitInventoryUtil;
-import mc.alk.mc.MCItemStack;
+import mc.alk.mc.inventory.MCItemStack;
 
+import mc.euro.bukkitadapter.enchant.BattleEnchant;
+import mc.euro.bukkitadapter.material.BattleMaterial;
+import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
-public class BukkitItemStack implements MCItemStack{
-	ItemStack itemStack;
+public class BukkitItemStack implements MCItemStack {
+
+	private ItemStack itemStack;
 
 	public BukkitItemStack(ItemStack itemStack) {
-		this.itemStack = itemStack == null ? new ItemStack(0): itemStack;
+		this.itemStack = itemStack == null ? new ItemStack(Material.AIR): itemStack;
 	}
 
 	@Override
-	public void setType(int id) {
-		itemStack.setTypeId(id);
+	public void setType(String type) {
+		itemStack.setType(BattleMaterial.fromString(type).parseMaterial());
 	}
 
 	@Override
-	public int getType() {
-		return itemStack.getTypeId();
+	public String getType() {
+		return itemStack.getType().name();
 	}
 
 	@Override
@@ -47,10 +51,11 @@ public class BukkitItemStack implements MCItemStack{
 	}
 
 	@Override
-	public Map<Integer, Integer> getEnchantments() {
-		Map<Integer, Integer> encs = new HashMap<Integer,Integer>();
+	public Map<String, Integer> getEnchantments() {
+		Map<String, Integer> encs = new HashMap<String,Integer>();
 		for (Map.Entry<Enchantment, Integer> entry : itemStack.getEnchantments().entrySet()) {
-			encs.put(entry.getKey().getId(), entry.getValue());}
+			encs.put(entry.getKey().getName(), entry.getValue());
+		}
 		return encs;
 	}
 
@@ -80,8 +85,8 @@ public class BukkitItemStack implements MCItemStack{
 	}
 
 	@Override
-	public void addEnchantment(int id, int level) {
-		itemStack.addEnchantment(Enchantment.getById(id), level);
+	public void addEnchantment(String ench, int level) {
+		itemStack.addEnchantment(BattleEnchant.fromString(ench).parseEnchant(), level);
 	}
 
 	public void addEnchantment(Enchantment enc, int level) {
@@ -101,5 +106,4 @@ public class BukkitItemStack implements MCItemStack{
 
 		return special;
 	}
-
 }

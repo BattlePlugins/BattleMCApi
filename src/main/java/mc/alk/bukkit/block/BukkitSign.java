@@ -1,12 +1,12 @@
-package mc.alk.bukkit.blocks;
+package mc.alk.bukkit.block;
 
-import mc.alk.bukkit.BukkitBlock;
-import mc.alk.mc.blocks.MCSign;
+import mc.alk.mc.block.MCSign;
 
 import org.bukkit.block.Sign;
 
 public class BukkitSign extends BukkitBlock implements MCSign{
-	Sign sign;
+
+	private Sign sign;
 
 	public BukkitSign(Sign sign) {
 		super(sign.getBlock());
@@ -38,7 +38,7 @@ public class BukkitSign extends BukkitBlock implements MCSign{
 		sign.update(true);
 	}
 
-	public Sign getSign(){
+	public Sign getBukkitSign(){
 		return sign;
 	}
 }

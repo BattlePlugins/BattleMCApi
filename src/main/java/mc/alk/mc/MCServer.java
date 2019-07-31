@@ -1,9 +1,9 @@
 package mc.alk.mc;
 
-
-
+import mc.alk.mc.plugin.MCPlugin;
 
 public abstract class MCServer {
+
 	private static MCServer INSTANCE;
 	private static APIType type;
 
@@ -15,7 +15,7 @@ public abstract class MCServer {
 	}
 
 	public static MCLocation getLocation(String world, int x, int y, int z){
-		return INSTANCE.getMCLocation(world,x,y,z);
+		return INSTANCE.getMCLocation(world, x, y, z);
 	}
 
 	public static MCWorld getWorld(String world){
@@ -46,6 +46,7 @@ public abstract class MCServer {
 	public static int scheduleAsynchrounousTask(MCPlugin plugin, Runnable task, long millis) {
 		return Scheduler.scheduleAsynchrounousTask(task, millis);
 	}
+
 	public static MCPlayer getPlayer(String name) {
 		return INSTANCE.getMCPlayer(name);
 	}

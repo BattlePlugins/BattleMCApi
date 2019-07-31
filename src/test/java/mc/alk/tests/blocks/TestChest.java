@@ -1,11 +1,11 @@
 package mc.alk.tests.blocks;
 
-import mc.alk.mc.MCBlock;
-import mc.alk.mc.MCInventory;
-import mc.alk.mc.MCItemStack;
+import mc.alk.mc.block.MCBlock;
+import mc.alk.mc.inventory.MCInventory;
+import mc.alk.mc.inventory.MCItemStack;
 import mc.alk.mc.MCLocation;
 import mc.alk.mc.MCWorld;
-import mc.alk.mc.blocks.MCChest;
+import mc.alk.mc.block.MCChest;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.Material;

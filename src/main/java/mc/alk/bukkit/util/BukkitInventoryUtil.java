@@ -6,6 +6,7 @@ import java.util.Map;
 
 import mc.alk.mc.util.MCInventoryUtil;
 
+import mc.euro.bukkitadapter.material.BattleMaterial;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Chest;
@@ -14,35 +15,39 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
 /**
  *
  * @author alkarin
  *
  */
 public class BukkitInventoryUtil implements MCInventoryUtil{
-	public static HashMap<String,ItemStack> commonToStack = new HashMap<String,ItemStack>();
-	public static HashMap<String,String> idToCommon = new HashMap<String,String>();
-	public static final HashMap<String,ItemStack> itemNames = new HashMap<String,ItemStack>();
+
+	private static Map<String, ItemStack> commonToStack = new HashMap<String, ItemStack>();
+	private static Map<String, String> typeToCommon = new HashMap<String, String>();
+
+	private static final Map<String, ItemStack> itemNames = new HashMap<String,ItemStack>();
+
 	static {
-		itemNames.put("light_gray_wool", new ItemStack(Material.WOOL.getId(), 1,(short) 8));
-		itemNames.put("stone_brick", new ItemStack(Material.SMOOTH_BRICK, 1,(short) 0));
-		itemNames.put("mossy_stone", new ItemStack(Material.SMOOTH_BRICK, 1,(short) 1));
-		itemNames.put("mossy_smooth", new ItemStack(Material.SMOOTH_BRICK, 1,(short) 1));
-		itemNames.put("cracked_stone", new ItemStack(Material.SMOOTH_BRICK, 1,(short) 2));
-		itemNames.put("piston", new ItemStack(Material.PISTON_BASE, 1,(short) 0));
-		itemNames.put("sticky_piston", new ItemStack(Material.PISTON_STICKY_BASE, 1,(short) 0));
-		itemNames.put("long_grass", new ItemStack(Material.GRASS, 1,(short) 0));
-		itemNames.put("fern", new ItemStack(Material.GRASS, 1,(short) 0));
-		itemNames.put("mycelium", new ItemStack(Material.MYCEL, 1,(short) 0));
-		itemNames.put("nether_wart", new ItemStack(Material.NETHER_STALK, 1,(short) 0));
-		itemNames.put("redstone_lamp", new ItemStack(Material.REDSTONE_LAMP_OFF, 1,(short) 0));
-		itemNames.put("redstone_torch", new ItemStack(Material.REDSTONE_TORCH_ON, 1,(short) 0));
-		itemNames.put("carrot", new ItemStack(Material.CARROT_ITEM, 1,(short) 0));
-		itemNames.put("carrots", new ItemStack(Material.CARROT, 1,(short) 0));
-		itemNames.put("carrot_seed", new ItemStack(Material.CARROT, 1,(short) 0));
-		itemNames.put("potato", new ItemStack(Material.POTATO_ITEM, 1,(short) 0));
-		itemNames.put("potatoes", new ItemStack(Material.POTATO, 1,(short) 0));
-		itemNames.put("potato_seed", new ItemStack(Material.POTATO, 1,(short) 0));
+		itemNames.put("light_gray_wool", BattleMaterial.LIGHT_GRAY_WOOL.parseItem());
+		itemNames.put("stone_brick", BattleMaterial.STONE_BRICKS.parseItem());
+		itemNames.put("mossy_stone", BattleMaterial.MOSSY_COBBLESTONE.parseItem());
+		itemNames.put("mossy_smooth", BattleMaterial.MOSSY_STONE_BRICKS.parseItem());
+		itemNames.put("cracked_stone", BattleMaterial.CRACKED_STONE_BRICKS.parseItem());
+		itemNames.put("piston", BattleMaterial.PISTON.parseItem());
+		itemNames.put("sticky_piston", BattleMaterial.STICKY_PISTON.parseItem());
+		itemNames.put("long_grass", BattleMaterial.GRASS.parseItem());
+		itemNames.put("fern", BattleMaterial.FERN.parseItem());
+		itemNames.put("mycelium", BattleMaterial.MYCELIUM.parseItem());
+		itemNames.put("nether_wart", BattleMaterial.NETHER_WART.parseItem());
+		itemNames.put("redstone_lamp", BattleMaterial.REDSTONE_LAMP.parseItem());
+		itemNames.put("redstone_torch", BattleMaterial.REDSTONE_TORCH.parseItem());
+		itemNames.put("carrot", BattleMaterial.CARROT.parseItem());
+		itemNames.put("carrots", BattleMaterial.CARROTS.parseItem());
+		itemNames.put("carrot_seed", BattleMaterial.CARROT.parseItem());
+		itemNames.put("potato", BattleMaterial.POTATO.parseItem());
+		itemNames.put("potatoes", BattleMaterial.POTATOES.parseItem());
+		itemNames.put("potato_seed", BattleMaterial.POTATO.parseItem());
 	}
 
 	static {
@@ -59,7 +64,7 @@ public class BukkitInventoryUtil implements MCInventoryUtil{
 					s = s.replaceAll("^\\s+", "").replaceAll("\\s+$", ""); ///remove left and right whitespace
 					s = s.replaceAll(" ", "_");
 					s = s.toLowerCase();
-					if ( s.split("_").length > 3 || s.contains("(") || s.contains(")")){ /// Some strange blocks
+					if ( s.split("_").length > 3 || s.contains("(") || s.contains(")")){ /// Some strange block
 						break;
 					}
 					if (commonToStack.containsKey(s)){ /// already have gone through all of these
@@ -70,7 +75,7 @@ public class BukkitInventoryUtil implements MCInventoryUtil{
 					is.setAmount(1);
 					commonToStack.put(s, is);
 					s = s.replaceAll("_", " ");
-					idToCommon.put(is.getTypeId() +":"+is.getDurability(), s);
+					typeToCommon.put(is.getType() + ":" +is.getDurability(), s);
 				} catch (Exception e){
 					/// well whoops.. no data for that byte
 					break;
@@ -269,9 +274,9 @@ public class BukkitInventoryUtil implements MCInventoryUtil{
 	}
 
 	public static String printItemStack(ItemStack is){
-		StringBuilder sb = new StringBuilder("[ItemStack] " +is.getTypeId() + ":" + is.getAmount() + " dura="+is.getDurability());
+		StringBuilder sb = new StringBuilder("[ItemStack] " +is.getType() + ":" + is.getAmount() + " dura="+is.getDurability());
 		if (is.getData() != null){
-			sb.append(" data=" + is.getData() + "  d.itemType=" + is.getData().getItemType() + " d.itemTypeId=" + is.getData().getItemTypeId() +
+			sb.append(" data=" + is.getData() + "  d.itemType=" + is.getType() +
 					" d.data=" + is.getData().getData());
 		} else {
 			sb.append(" data=null");
@@ -305,9 +310,14 @@ public class BukkitInventoryUtil implements MCInventoryUtil{
 		if (is != null){
 			return is;}
 
-		Material mat = Material.matchMaterial(name);
-		if (mat != null && mat != Material.AIR) {
-			return new ItemStack(mat.getId(), 1, dataValue);
+		BattleMaterial mat;
+		if (dataValue > 0) {
+			mat = BattleMaterial.fromString(name + ":" + 0);
+		} else {
+			mat = BattleMaterial.fromString(name);
+		}
+		if (mat != null && mat != BattleMaterial.AIR) {
+			return mat.parseItem();
 		}
 		/// Try to get from our generic list
 		is = commonToStack.get(name);
@@ -350,7 +360,7 @@ public class BukkitInventoryUtil implements MCInventoryUtil{
 //	}
 
 	public static String getCommonName(ItemStack is) {
-		int id = is.getTypeId();
+		Material type = is.getType();
 		short datavalue = is.getDurability();
 
 		//		System.out.println(id + "   " + datavalue)
@@ -358,15 +368,16 @@ public class BukkitInventoryUtil implements MCInventoryUtil{
 		String iname = "";
 		try {
 			if (datavalue > 0){
-				iname = Material.getMaterial(id).toString() + ":" + datavalue;}
-			String idkey = id +":" + datavalue;
+				iname = type.toString() + ":" + datavalue;
+			}
+			String idkey = type + ":" + datavalue;
 
-			String cname = BukkitInventoryUtil.idToCommon.get(idkey);
+			String cname = typeToCommon.get(idkey);
 			if (cname != null)
 				return cname;
-			iname = Material.getMaterial(id).toString().toLowerCase() + " durability(" + datavalue+")";
+			iname = type.toString().toLowerCase() + " durability(" + datavalue+")";
 		} catch (Exception e){
-			System.err.println("Error getting commonName id=" + id + "   iname=" + iname + "   datavalue=" + datavalue);
+			System.err.println("Error getting commonName type=" + type + "   iname=" + iname + "   datavalue=" + datavalue);
 			e.printStackTrace();
 		}
 		return iname;
@@ -380,8 +391,8 @@ public class BukkitInventoryUtil implements MCInventoryUtil{
 		return displayName == null || displayName.isEmpty() ? item.getType().name().toLowerCase() : displayName;
 	}
 
-	public static ItemStack getItemStack(int id, short datavalue) {
-		return new ItemStack(id,1,datavalue);
+	public static ItemStack getItemStack(Material type, short datavalue) {
+		return BattleMaterial.fromString(type + ":" + datavalue).parseItem();
 	}
 
 

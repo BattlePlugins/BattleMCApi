@@ -29,6 +29,12 @@
             <version>1.14.0-R0.1</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>mc.euro</groupId>
+            <artifactId>BukkitAdapter</artifactId>
+            <version>1.2.8</version>
+            <scope>compile</scope>
+        </dependency>
         <!-- unknown plugins that I had to add to the repo -->
     </dependencies>
     <!-- How we will compile the plugin -->
@@ -69,6 +75,19 @@
                         <goals>
                             <goal>shade</goal>
                         </goals>
+                        <configuration>
+                        <artifactSet>
+                            <includes>
+                                <include>mc.euro:BukkitAdapter</include>
+                            </includes>
+                        </artifactSet>
+                            <relocations>
+                                <relocation>
+                                    <pattern>mc.euro.bukkitadapter</pattern>
+                                    <shadedPattern>mc.alk.bukkit.bukkitadapter</shadedPattern>
+                                </relocation>
+                            </relocations>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

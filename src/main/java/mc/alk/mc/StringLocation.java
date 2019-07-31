@@ -1,10 +1,11 @@
 package mc.alk.mc;
 
 public class StringLocation implements MCLocation{
-	String world;
-	int x;
-	int y;
-	int z;
+
+	private String world;
+	private int x;
+	private int y;
+	private int z;
 
 	public StringLocation(String world, Integer x, Integer y, Integer z) {
 		this.world = world;
@@ -36,6 +37,4 @@ public class StringLocation implements MCLocation{
 	public int getBlockZ() {
 		return z;
 	}
-
-
 }

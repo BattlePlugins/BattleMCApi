@@ -1,5 +1,7 @@
 package mc.alk.mc;
 
-public interface MCPlayerInventory extends MCInventory{
+import mc.alk.mc.inventory.MCInventory;
+
+public interface MCPlayerInventory extends MCInventory {
 
 }

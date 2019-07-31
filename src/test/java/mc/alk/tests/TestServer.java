@@ -6,7 +6,7 @@ import java.util.Map;
 import mc.alk.mc.APIType;
 import mc.alk.mc.MCLocation;
 import mc.alk.mc.MCPlayer;
-import mc.alk.mc.MCPlugin;
+import mc.alk.mc.plugin.MCPlugin;
 import mc.alk.mc.MCServer;
 import mc.alk.mc.MCWorld;
 

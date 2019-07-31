@@ -6,8 +6,9 @@ import mc.alk.mc.MCWorld;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
-public class BukkitLocation implements MCLocation{
-	Location loc;
+public class BukkitLocation implements MCLocation {
+
+	private Location loc;
 
 	public BukkitLocation(Location loc){
 		this.loc = loc;
@@ -37,9 +38,10 @@ public class BukkitLocation implements MCLocation{
 		return loc.getBlockZ();
 	}
 
-	public Location getLocation() {
+	public Location getBukkitLocation() {
 		return loc;
 	}
+
 	@Override
 	public String toString(){
 		return loc == null ? "[Location null]" :  "[Location "+loc.getWorld()+" "+

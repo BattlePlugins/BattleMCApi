@@ -6,6 +6,7 @@ import java.util.TimerTask;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Scheduler {
+
 	static int count = 0; /// count of current async timers
 
 	/** Our current async timers */
@@ -39,5 +40,4 @@ public class Scheduler {
 		}
 		return tid;
 	}
-
 }

@@ -1,15 +1,14 @@
 package mc.alk.mc;
 
-
+import mc.alk.mc.block.MCBlock;
 
 public interface MCWorld {
-	public String getName();
 
-	public MCBlock getBlockAt(int x, int y, int z);
+	String getName();
 
-	public MCBlock getBlockAt(MCLocation loc);
+	MCBlock getBlockAt(int x, int y, int z);
+	MCBlock getBlockAt(MCLocation loc);
 
-	public boolean isType(MCBlock block, Class<? extends MCBlock> clazz);
-
-	public MCBlock toType(MCBlock block, Class<? extends MCBlock> clazz) throws ClassCastException;
+	boolean isType(MCBlock block, Class<? extends MCBlock> clazz);
+	MCBlock toType(MCBlock block, Class<? extends MCBlock> clazz) throws ClassCastException;
 }

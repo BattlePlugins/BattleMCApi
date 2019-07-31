@@ -1,12 +1,11 @@
-package mc.alk.bukkit.blocks;
+package mc.alk.bukkit.block;
 
-import mc.alk.bukkit.BukkitBlock;
-import mc.alk.bukkit.BukkitInventory;
-import mc.alk.bukkit.BukkitItemStack;
-import mc.alk.mc.MCBlock;
-import mc.alk.mc.MCInventory;
-import mc.alk.mc.MCItemStack;
-import mc.alk.mc.blocks.MCChest;
+import mc.alk.bukkit.inventory.BukkitInventory;
+import mc.alk.bukkit.inventory.BukkitItemStack;
+import mc.alk.mc.block.MCBlock;
+import mc.alk.mc.inventory.MCInventory;
+import mc.alk.mc.inventory.MCItemStack;
+import mc.alk.mc.block.MCChest;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -15,7 +14,9 @@ import org.bukkit.block.Chest;
 import org.bukkit.inventory.ItemStack;
 
 public class BukkitChest extends BukkitBlock implements MCChest{
-	Chest chest;
+
+	private Chest chest;
+
 	public BukkitChest(Chest chest) {
 		super(chest.getBlock());
 		this.chest = chest;
@@ -45,7 +46,7 @@ public class BukkitChest extends BukkitBlock implements MCChest{
 	}
 
 	public static MCChest getNeighborChest(MCBlock block) {
-		Block b = ((BukkitBlock)block).getBlock();
+		Block b = ((BukkitBlock)block).getBukkitBlock();
 		if (b.getRelative(BlockFace.NORTH).getType() == Material.CHEST)
 			return new BukkitChest((Chest) b.getRelative(BlockFace.NORTH).getState());
 		else if (b.getRelative(BlockFace.SOUTH).getType() == Material.CHEST)

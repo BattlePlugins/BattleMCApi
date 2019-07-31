@@ -1,16 +1,16 @@
-package mc.alk.bukkit;
-
-import java.util.ArrayList;
+package mc.alk.bukkit.inventory;
 
 import mc.alk.bukkit.util.BukkitInventoryUtil;
-import mc.alk.mc.MCInventory;
-import mc.alk.mc.MCItemStack;
+import mc.alk.mc.inventory.MCInventory;
+import mc.alk.mc.inventory.MCItemStack;
 
+import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-public class BukkitInventory implements MCInventory{
-	Inventory inventory;
+public class BukkitInventory implements MCInventory {
+
+	private Inventory inventory;
 
 	public BukkitInventory(Inventory inventory) {
 		this.inventory = inventory;
@@ -23,40 +23,11 @@ public class BukkitInventory implements MCInventory{
 	}
 
 	public void addItem(MCItemStack itemStack) {
-		if (itemStack != null && itemStack.getType()==0){
-			return;}
-
-		addItemToInventory(inventory, ((BukkitItemStack)itemStack).getItem(),itemStack.getQuantity());
-	}
-
-	///Adds item to inventory
-	public static void addItemToInventory(Inventory inv, ItemStack is, int left){
-		int maxStackSize = is.getType().getMaxStackSize();
-		if(left <= maxStackSize){
-			is.setAmount(left);
-			inv.addItem(is);
+		if (itemStack != null || itemStack.getType().equals(Material.AIR.name())) {
 			return;
 		}
 
-		if(maxStackSize != 64){
-			ArrayList<ItemStack> items = new ArrayList<ItemStack>();
-			for (int i = 0; i < Math.ceil(left / maxStackSize); i++) {
-				if (left < maxStackSize) {
-					is.setAmount(left);
-					items.add(is);
-					return;
-				}else{
-					is.setAmount(maxStackSize);
-					items.add(is);
-				}
-			}
-			Object[] iArray = items.toArray();
-			for(Object o : iArray){
-				inv.addItem((ItemStack) o);
-			}
-		}else{
-			inv.addItem(is);
-		}
+		BukkitInventoryUtil.addItemToInventory(inventory, ((BukkitItemStack)itemStack).getItem(),itemStack.getQuantity());
 	}
 
 	@Override
@@ -84,10 +55,6 @@ public class BukkitInventory implements MCInventory{
 				((BukkitItemStack)itemStack).getItem(), itemStack.getQuantity()) ;
 	}
 
-	public Inventory getInventory() {
-		return inventory;
-	}
-
 	@Override
 	public MCItemStack[] getContents() {
 		ItemStack[] is = inventory.getContents();
@@ -98,5 +65,7 @@ public class BukkitInventory implements MCInventory{
 		return items;
 	}
 
-
+	public Inventory getBukkitInventory() {
+		return inventory;
+	}
 }

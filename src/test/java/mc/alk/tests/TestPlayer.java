@@ -1,6 +1,6 @@
 package mc.alk.tests;
 
-import mc.alk.mc.MCInventory;
+import mc.alk.mc.inventory.MCInventory;
 import mc.alk.mc.MCLocation;
 import mc.alk.mc.MCPlayer;
 import mc.alk.mc.MCWorld;

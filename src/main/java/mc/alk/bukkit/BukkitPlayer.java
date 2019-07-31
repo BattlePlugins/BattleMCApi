@@ -1,17 +1,21 @@
 package mc.alk.bukkit;
 
-import mc.alk.mc.MCInventory;
+import mc.alk.bukkit.command.BukkitCommandSender;
+import mc.alk.bukkit.inventory.BukkitPlayerInventory;
+import mc.alk.mc.inventory.MCInventory;
 import mc.alk.mc.MCPlayer;
 import mc.alk.mc.MCWorld;
 
 import org.bukkit.entity.Player;
 
 public class BukkitPlayer extends BukkitCommandSender implements MCPlayer{
-	final Player player;
-	final String name;
+
+	private Player player;
+	private String name;
 
 	public BukkitPlayer(Player player){
 		super(player);
+
 		this.player = player;
 		this.name = player.getName();
 	}
@@ -36,10 +40,6 @@ public class BukkitPlayer extends BukkitCommandSender implements MCPlayer{
 		return player.hasPermission(node);
 	}
 
-	public Player getPlayer() {
-		return player;
-	}
-
 	@Override
 	public MCInventory getInventory() {
 		return new BukkitPlayerInventory(player.getInventory());
@@ -49,5 +49,9 @@ public class BukkitPlayer extends BukkitCommandSender implements MCPlayer{
 	@Override
 	public void updateInventory() {
 		player.updateInventory();
+	}
+
+	public Player getBukkitPlayer() {
+		return player;
 	}
 }

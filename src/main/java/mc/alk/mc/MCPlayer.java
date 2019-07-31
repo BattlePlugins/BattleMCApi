@@ -1,16 +1,15 @@
 package mc.alk.mc;
 
-import mc.alk.bukkit.MCCommandSender;
+import mc.alk.mc.command.MCCommandSender;
+import mc.alk.mc.inventory.MCInventory;
 
 public interface MCPlayer extends MCCommandSender {
 
-	public MCWorld getWorld();
+	MCWorld getWorld();
 
-	public String getName();
+	String getName();
+	String getDiplayName();
 
-	public String getDiplayName();
-
-	public MCInventory getInventory();
-
-	public void updateInventory();
+	MCInventory getInventory();
+	void updateInventory();
 }
