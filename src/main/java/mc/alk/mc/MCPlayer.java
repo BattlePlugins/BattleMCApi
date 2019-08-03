@@ -8,7 +8,7 @@ public interface MCPlayer extends MCCommandSender {
 	MCWorld getWorld();
 
 	String getName();
-	String getDiplayName();
+	String getDisplayName();
 
 	MCInventory getInventory();
 	void updateInventory();

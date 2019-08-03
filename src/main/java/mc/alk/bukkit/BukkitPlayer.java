@@ -31,7 +31,7 @@ public class BukkitPlayer extends BukkitCommandSender implements MCPlayer{
 	}
 
 	@Override
-	public String getDiplayName() {
+	public String getDisplayName() {
 		return player.getDisplayName();
 	}
 

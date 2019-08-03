@@ -35,7 +35,7 @@ public class TestPlayer implements MCPlayer {
 	}
 
 	@Override
-	public String getDiplayName() {
+	public String getDisplayName() {
 		return displayName == null ? name : displayName;
 	}
 

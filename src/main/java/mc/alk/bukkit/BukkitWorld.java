@@ -56,7 +56,7 @@ public class BukkitWorld implements MCWorld {
 
 	@Override
 	public MCBlock getBlockAt(MCLocation loc) {
-		return getBlockAt(loc.getBlockX(),loc.getBlockY(),loc.getBlockZ());
+		return getBlockAt(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
 	}
 
 	@Override

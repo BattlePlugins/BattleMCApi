@@ -4,12 +4,13 @@ import mc.alk.mc.block.MCSign;
 
 import org.bukkit.block.Sign;
 
-public class BukkitSign extends BukkitBlock implements MCSign{
+public class BukkitSign extends BukkitBlock implements MCSign {
 
 	private Sign sign;
 
 	public BukkitSign(Sign sign) {
 		super(sign.getBlock());
+
 		this.sign = sign;
 	}
 

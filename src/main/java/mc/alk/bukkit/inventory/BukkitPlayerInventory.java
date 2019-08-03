@@ -8,6 +8,7 @@ public class BukkitPlayerInventory extends BukkitInventory {
 
 	public BukkitPlayerInventory(PlayerInventory inventory) {
 		super(inventory);
+
 		this.inventory = inventory;
 	}
 

@@ -106,4 +106,8 @@ public class BukkitItemStack implements MCItemStack {
 
 		return special;
 	}
+
+	public ItemStack getBukkitItemStack() {
+		return itemStack;
+	}
 }

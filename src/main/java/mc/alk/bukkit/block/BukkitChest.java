@@ -13,12 +13,13 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.block.Chest;
 import org.bukkit.inventory.ItemStack;
 
-public class BukkitChest extends BukkitBlock implements MCChest{
+public class BukkitChest extends BukkitBlock implements MCChest {
 
 	private Chest chest;
 
 	public BukkitChest(Chest chest) {
 		super(chest.getBlock());
+
 		this.chest = chest;
 	}
 
@@ -42,19 +43,19 @@ public class BukkitChest extends BukkitBlock implements MCChest{
 
 	@Override
 	public MCChest getNeighborChest() {
-		return getNeighborChest(this);
-	}
-
-	public static MCChest getNeighborChest(MCBlock block) {
-		Block b = ((BukkitBlock)block).getBukkitBlock();
+		Block b = getBukkitBlock();
 		if (b.getRelative(BlockFace.NORTH).getType() == Material.CHEST)
 			return new BukkitChest((Chest) b.getRelative(BlockFace.NORTH).getState());
+
 		else if (b.getRelative(BlockFace.SOUTH).getType() == Material.CHEST)
 			return new BukkitChest((Chest) b.getRelative(BlockFace.SOUTH).getState());
+
 		else if (b.getRelative(BlockFace.EAST).getType() == Material.CHEST)
 			return new BukkitChest((Chest) b.getRelative(BlockFace.EAST).getState());
+
 		else if (b.getRelative(BlockFace.WEST).getType() == Material.CHEST)
 			return new BukkitChest((Chest) b.getRelative(BlockFace.WEST).getState());
+
 		return null;
 	}
 
