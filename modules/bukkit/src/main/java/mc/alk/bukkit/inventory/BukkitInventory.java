@@ -27,32 +27,32 @@ public class BukkitInventory implements MCInventory {
 			return;
 		}
 
-		BukkitInventoryUtil.addItemToInventory(inventory, ((BukkitItemStack)itemStack).getItem(),itemStack.getQuantity());
+		BukkitInventoryUtil.addItemToInventory(inventory, ((BukkitItemStack)itemStack).getBukkitItemStack(),itemStack.getQuantity());
 	}
 
 	@Override
 	public void removeItem(MCItemStack itemStack) {
 		BukkitInventoryUtil.removeItem(inventory,
-				((BukkitItemStack)itemStack).getItem()) ;
+				((BukkitItemStack)itemStack).getBukkitItemStack()) ;
 	}
 
 	@Override
 	public int getItemAmount(MCItemStack itemStack) {
 		return BukkitInventoryUtil.getItemAmountFromInventory(inventory,
-				((BukkitItemStack)itemStack).getItem()) ;
+				((BukkitItemStack)itemStack).getBukkitItemStack()) ;
 	}
 
 	@Override
 	public boolean canFit(MCItemStack itemStack) {
 		int space = BukkitInventoryUtil.amountFreeSpace(inventory,
-				((BukkitItemStack)itemStack).getItem(), itemStack.getQuantity()) ;
+				((BukkitItemStack)itemStack).getBukkitItemStack(), itemStack.getQuantity()) ;
 		return space >= 0;
 	}
 
 	@Override
 	public int freeSpaceAfter(MCItemStack itemStack) {
 		return BukkitInventoryUtil.amountFreeSpace(inventory,
-				((BukkitItemStack)itemStack).getItem(), itemStack.getQuantity()) ;
+				((BukkitItemStack)itemStack).getBukkitItemStack(), itemStack.getQuantity()) ;
 	}
 
 	@Override

@@ -74,10 +74,6 @@ public class BukkitItemStack implements MCItemStack {
 		return new BukkitItemStack(itemStack.clone());
 	}
 
-	public ItemStack getItem() {
-		return itemStack;
-	}
-
 	@Override
 	public String toString(){
 		return itemStack != null ? "["+ itemStack.getType() +":"+itemStack.getDurability() + " q="+

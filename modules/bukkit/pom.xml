@@ -11,7 +11,7 @@
     <artifactId>McAPI-bukkit</artifactId>
     <version>parent</version>
     <packaging>jar</packaging>
-    <name>MCAPI-bukkit</name>
+    <name>McAPI-bukkit</name>
     <dependencies>
         <dependency>
             <groupId>org.bukkit</groupId>

@@ -9,7 +9,7 @@
     </parent>
     <groupId>mc.alk</groupId>
     <artifactId>McAPI</artifactId>
-    <version>2.2.0</version>
+    <version>2.3.0</version>
     <packaging>jar</packaging>
     <name>BattleMcAPI</name>
     <url>https://github.com/BattlePlugins/BattleMCApi/</url>
@@ -26,14 +26,12 @@
             <version>parent</version>
             <scope>compile</scope>
         </dependency>
-        <!--
         <dependency>
             <groupId>mc.alk</groupId>
             <artifactId>McAPI-nukkit</artifactId>
             <version>parent</version>
             <scope>compile</scope>
         </dependency>
-        -->
         <dependency>
             <groupId>mc.alk</groupId>
             <artifactId>McAPI-sponge</artifactId>

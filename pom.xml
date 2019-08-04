@@ -16,6 +16,7 @@
     <modules>
         <module>modules/api</module>
         <module>modules/bukkit</module>
+        <module>modules/nukkit</module>
         <module>modules/sponge</module>
         <module>modules/BattleMcAPI</module>
     </modules>
@@ -23,6 +24,10 @@
         <repository>
             <id>battleplugins-repo</id>
             <url>https://repo.battleplugins.org/artifactory/libs-release</url>
+        </repository>
+        <repository>
+            <id>nukkit-repo</id>
+            <url>https://repo.nukkitx.com/maven-snapshots</url>
         </repository>
         <repository>
             <id>sponge-repo</id>
