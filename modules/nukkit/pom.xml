@@ -11,7 +11,7 @@
     <artifactId>McAPI-nukkit</artifactId>
     <version>parent</version>
     <packaging>jar</packaging>
-    <name>MCAPI-nukkit</name>
+    <name>McAPI-nukkit</name>
     <dependencies>
         <dependency>
             <groupId>cn.nukkit</groupId>
