@@ -5,8 +5,12 @@ import mc.alk.mc.MCWorld;
 import mc.alk.mc.block.MCBlock;
 import mc.alk.mc.block.MCChest;
 import mc.alk.mc.block.MCSign;
+import mc.alk.sponge.block.SpongeChest;
+import mc.alk.sponge.block.SpongeSign;
 
 import org.spongepowered.api.block.BlockState;
+import org.spongepowered.api.block.tileentity.Sign;
+import org.spongepowered.api.block.tileentity.carrier.Chest;
 import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
 
@@ -54,13 +58,13 @@ public class SpongeWorld implements MCWorld {
 
         if (clazz == MCSign.class) {
             if (blockState.getType().getName().toLowerCase().contains("sign")) {
-                // return sponge sign
+                return new SpongeSign((Sign) loc.getTileEntity().get());
             }
         }
 
         if (clazz == MCChest.class) {
             if (blockState.getType().getName().toLowerCase().contains("chest")) {
-                // return sponge chest
+                return new SpongeChest((Chest) loc.getTileEntity().get());
             }
         }
 
