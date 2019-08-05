@@ -2,6 +2,7 @@ package mc.alk.bukkit;
 
 import mc.alk.mc.APIType;
 import mc.alk.mc.MCLocation;
+import mc.alk.mc.MCOfflinePlayer;
 import mc.alk.mc.MCPlayer;
 import mc.alk.mc.plugin.MCPlugin;
 import mc.alk.mc.MCServer;
@@ -10,6 +11,8 @@ import mc.alk.mc.MCWorld;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.UUID;
 
 public class BukkitServer extends MCServer {
 
@@ -37,6 +40,16 @@ public class BukkitServer extends MCServer {
 	public MCPlayer getMCPlayer(String name) {
 		Player p = Bukkit.getPlayer(name);
 		return p == null ? null : new BukkitPlayer(p);
+	}
+
+	@Override
+	public MCOfflinePlayer getMCOfflinePlayer(String name) {
+		return new BukkitOfflinePlayer(Bukkit.getOfflinePlayer(name));
+	}
+
+	@Override
+	public MCOfflinePlayer getMCOfflinePlayer(UUID uuid) {
+		return new BukkitOfflinePlayer(Bukkit.getOfflinePlayer(uuid));
 	}
 
 	@Override

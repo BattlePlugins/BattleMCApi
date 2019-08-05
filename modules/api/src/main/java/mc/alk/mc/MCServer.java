@@ -2,6 +2,8 @@ package mc.alk.mc;
 
 import mc.alk.mc.plugin.MCPlugin;
 
+import java.util.UUID;
+
 public abstract class MCServer {
 
 	private static MCServer INSTANCE;
@@ -61,5 +63,15 @@ public abstract class MCServer {
 		return INSTANCE.cancelMCTask(id);
 	}
 
+	public abstract MCOfflinePlayer getMCOfflinePlayer(String name);
 
+	public static MCOfflinePlayer getOfflinePlayer(String name) {
+		return INSTANCE.getMCOfflinePlayer(name);
+	}
+
+	public abstract MCOfflinePlayer getMCOfflinePlayer(UUID uuid);
+
+	public static MCOfflinePlayer getOfflinePlayer(UUID uuid) {
+		return INSTANCE.getMCOfflinePlayer(uuid);
+	}
 }

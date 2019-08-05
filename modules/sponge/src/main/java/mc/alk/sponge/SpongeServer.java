@@ -2,6 +2,7 @@ package mc.alk.sponge;
 
 import mc.alk.mc.APIType;
 import mc.alk.mc.MCLocation;
+import mc.alk.mc.MCOfflinePlayer;
 import mc.alk.mc.MCPlayer;
 import mc.alk.mc.MCServer;
 import mc.alk.mc.MCWorld;
@@ -9,9 +10,11 @@ import mc.alk.mc.plugin.MCPlugin;
 
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.service.user.UserStorageService;
 import org.spongepowered.api.world.Location;
 
 import java.util.Optional;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 public class SpongeServer extends MCServer {
@@ -46,5 +49,17 @@ public class SpongeServer extends MCServer {
     public MCPlayer getMCPlayer(String name) {
         Optional<Player> player = Sponge.getServer().getPlayer(name);
         return new SpongePlayer(player.get());
+    }
+
+    @Override
+    public MCOfflinePlayer getMCOfflinePlayer(String name) {
+        Optional<UserStorageService> userStorageService = Sponge.getServiceManager().provide(UserStorageService.class);
+        return new SpongeOfflinePlayer(userStorageService.get().get(name).get());
+    }
+
+    @Override
+    public MCOfflinePlayer getMCOfflinePlayer(UUID uuid) {
+        Optional<UserStorageService> userStorageService = Sponge.getServiceManager().provide(UserStorageService.class);
+        return new SpongeOfflinePlayer(userStorageService.get().get(uuid).get());
     }
 }
