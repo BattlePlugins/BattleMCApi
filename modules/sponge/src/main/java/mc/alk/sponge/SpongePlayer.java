@@ -36,6 +36,16 @@ public class SpongePlayer extends SpongeCommandSender implements MCPlayer {
     }
 
     @Override
+    public boolean hasPermission(String node) {
+        return player.hasPermission(node);
+    }
+
+    @Override
+    public boolean isOp() {
+        return false; // Why sponge.. why?
+    }
+
+    @Override
     public MCInventory getInventory() {
         return new SpongeInventory(player.getInventory());
     }
@@ -43,5 +53,14 @@ public class SpongePlayer extends SpongeCommandSender implements MCPlayer {
     @Override
     public void updateInventory() {
         // TODO: Add API here
+    }
+
+    @Override
+    public boolean isOnline() {
+        return player.isOnline();
+    }
+
+    public Player getSpongePlayer() {
+        return player;
     }
 }

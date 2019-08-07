@@ -8,7 +8,7 @@ import mc.alk.mc.MCWorld;
 
 import org.bukkit.entity.Player;
 
-public class BukkitPlayer extends BukkitCommandSender implements MCPlayer{
+public class BukkitPlayer extends BukkitCommandSender implements MCPlayer {
 
 	private Player player;
 	private String name;
@@ -36,6 +36,11 @@ public class BukkitPlayer extends BukkitCommandSender implements MCPlayer{
 	}
 
 	@Override
+	public boolean isOp() {
+		return player.isOp();
+	}
+
+	@Override
 	public boolean hasPermission(String node) {
 		return player.hasPermission(node);
 	}
@@ -45,10 +50,14 @@ public class BukkitPlayer extends BukkitCommandSender implements MCPlayer{
 		return new BukkitPlayerInventory(player.getInventory());
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void updateInventory() {
 		player.updateInventory();
+	}
+
+	@Override
+	public boolean isOnline() {
+		return player.isOnline();
 	}
 
 	public Player getBukkitPlayer() {

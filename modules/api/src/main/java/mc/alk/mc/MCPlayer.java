@@ -12,4 +12,6 @@ public interface MCPlayer extends MCCommandSender {
 
 	MCInventory getInventory();
 	void updateInventory();
+
+	boolean isOnline();
 }

@@ -3,7 +3,7 @@ package mc.alk.bukkit.command;
 import mc.alk.mc.command.MCCommandSender;
 import org.bukkit.command.CommandSender;
 
-public class BukkitCommandSender implements MCCommandSender {
+public abstract class BukkitCommandSender implements MCCommandSender {
 
 	private CommandSender sender;
 

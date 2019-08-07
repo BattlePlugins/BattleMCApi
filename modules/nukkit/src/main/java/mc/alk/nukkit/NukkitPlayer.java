@@ -40,6 +40,11 @@ public class NukkitPlayer extends NukkitCommandSender implements MCPlayer{
 	}
 
 	@Override
+	public boolean isOp() {
+		return player.isOp();
+	}
+
+	@Override
 	public MCInventory getInventory() {
 		return new NukkitPlayerInventory(player.getInventory());
 	}
@@ -47,6 +52,11 @@ public class NukkitPlayer extends NukkitCommandSender implements MCPlayer{
 	@Override
 	public void updateInventory() {
 		// TODO: Add API here
+	}
+
+	@Override
+	public boolean isOnline() {
+		return player.isOnline();
 	}
 
 	public Player getNukkitPlayer() {

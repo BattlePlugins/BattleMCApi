@@ -7,4 +7,6 @@ public interface MCCommandSender {
 	void sendMessage(String message);
 
 	String getName();
+
+	boolean isOp();
 }

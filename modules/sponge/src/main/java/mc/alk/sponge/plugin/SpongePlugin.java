@@ -1,6 +1,7 @@
 package mc.alk.sponge.plugin;
 
 import mc.alk.mc.MCServer;
+import mc.alk.mc.command.MCCommandExecutor;
 import mc.alk.mc.plugin.MCPlugin;
 import mc.alk.sponge.SpongeServer;
 import org.spongepowered.api.event.Listener;
@@ -37,5 +38,10 @@ public abstract class SpongePlugin implements MCPlugin {
         }
 
         return server;
+    }
+
+    @Override
+    public void registerMCCommand(String command, MCCommandExecutor executor) {
+        // TODO: Add API here
     }
 }

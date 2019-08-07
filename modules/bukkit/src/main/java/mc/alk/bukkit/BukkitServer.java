@@ -9,10 +9,15 @@ import mc.alk.mc.MCServer;
 import mc.alk.mc.MCWorld;
 
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class BukkitServer extends MCServer {
 
@@ -50,6 +55,24 @@ public class BukkitServer extends MCServer {
 	@Override
 	public MCOfflinePlayer getMCOfflinePlayer(UUID uuid) {
 		return new BukkitOfflinePlayer(Bukkit.getOfflinePlayer(uuid));
+	}
+
+	@Override
+	public Collection<MCPlayer> getMCOnlinePlayers() {
+		Collection<MCPlayer> players = new ArrayList<>();
+		for (Player player : Bukkit.getOnlinePlayers()) {
+			players.add(new BukkitPlayer(player));
+		}
+		return players;
+	}
+
+	@Override
+	public Collection<MCOfflinePlayer> getMCOfflinePlayers() {
+		Collection<MCOfflinePlayer> players = new ArrayList<>();
+		for (OfflinePlayer player : Bukkit.getOfflinePlayers()) {
+			players.add(new BukkitOfflinePlayer(player));
+		}
+		return players;
 	}
 
 	@Override

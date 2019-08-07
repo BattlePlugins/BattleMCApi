@@ -4,7 +4,7 @@ import cn.nukkit.command.CommandSender;
 
 import mc.alk.mc.command.MCCommandSender;
 
-public class NukkitCommandSender implements MCCommandSender {
+public abstract class NukkitCommandSender implements MCCommandSender {
 
 	private CommandSender sender;
 

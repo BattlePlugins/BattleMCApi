@@ -5,7 +5,7 @@ import mc.alk.mc.command.MCCommandSender;
 import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.text.Text;
 
-public class SpongeCommandSender implements MCCommandSender {
+public abstract class SpongeCommandSender implements MCCommandSender {
 
     private CommandSource sender;
 
@@ -26,5 +26,9 @@ public class SpongeCommandSender implements MCCommandSender {
     @Override
     public String getName() {
         return sender.getName();
+    }
+
+    public CommandSource getSpongeCommandSender() {
+        return sender;
     }
 }

@@ -2,6 +2,7 @@ package mc.alk.mc;
 
 import mc.alk.mc.plugin.MCPlugin;
 
+import java.util.Collection;
 import java.util.UUID;
 
 public abstract class MCServer {
@@ -73,5 +74,17 @@ public abstract class MCServer {
 
 	public static MCOfflinePlayer getOfflinePlayer(UUID uuid) {
 		return INSTANCE.getMCOfflinePlayer(uuid);
+	}
+
+	public abstract Collection<MCPlayer> getMCOnlinePlayers();
+
+	public static Collection<MCPlayer> getOnlinePlayers() {
+		return INSTANCE.getMCOnlinePlayers();
+	}
+
+	public abstract Collection<MCOfflinePlayer> getMCOfflinePlayers();
+
+	public static Collection<MCOfflinePlayer> getOfflinePlayers() {
+		return INSTANCE.getMCOfflinePlayers();
 	}
 }
