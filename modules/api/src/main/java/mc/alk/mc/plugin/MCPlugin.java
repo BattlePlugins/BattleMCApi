@@ -1,6 +1,7 @@
 package mc.alk.mc.plugin;
 
 import mc.alk.mc.MCServer;
+import mc.alk.mc.command.MCCommand;
 import mc.alk.mc.command.MCCommandExecutor;
 
 public interface MCPlugin {
@@ -12,5 +13,5 @@ public interface MCPlugin {
 
 	boolean isEnabled();
 
-	void registerMCCommand(String command, MCCommandExecutor executor);
+	void registerMCCommand(MCCommand command, MCCommandExecutor executor);
 }

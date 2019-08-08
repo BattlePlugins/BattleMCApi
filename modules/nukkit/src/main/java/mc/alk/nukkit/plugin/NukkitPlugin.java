@@ -3,6 +3,7 @@ package mc.alk.nukkit.plugin;
 import cn.nukkit.plugin.PluginBase;
 
 import mc.alk.mc.MCServer;
+import mc.alk.mc.command.MCCommand;
 import mc.alk.mc.command.MCCommandExecutor;
 import mc.alk.mc.plugin.MCPlugin;
 import mc.alk.nukkit.NukkitServer;
@@ -23,7 +24,13 @@ public abstract class NukkitPlugin extends PluginBase implements MCPlugin {
     }
 
     @Override
-    public void registerMCCommand(String command, MCCommandExecutor executor) {
-        getServer().getCommandMap().register(command, new NukkitCommandExecutor(command, executor));
+    public void registerMCCommand(MCCommand command, MCCommandExecutor executor) {
+        NukkitCommandExecutor nukkitExecutor = new NukkitCommandExecutor(command.getLabel(), executor);
+        nukkitExecutor.setDescription(command.getDescription());
+        nukkitExecutor.setPermission(command.getPermission());
+        nukkitExecutor.setAliases(command.getAliases().toArray(new String[command.getAliases().size()]));
+
+
+        getServer().getCommandMap().register(command.getLabel(),nukkitExecutor);
     }
 }

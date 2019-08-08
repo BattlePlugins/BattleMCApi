@@ -6,32 +6,18 @@ import org.bukkit.command.Command;
 
 import java.util.List;
 
-public class BukkitCommand implements MCCommand {
+public class BukkitCommand extends MCCommand {
 
     private Command command;
 
     public BukkitCommand(Command command) {
+        this(command.getLabel(), command.getDescription(), command.getPermission(), command.getAliases());
+
         this.command = command;
     }
 
-    @Override
-    public String getLabel() {
-        return command.getLabel();
-    }
-
-    @Override
-    public String getDescription() {
-        return command.getDescription();
-    }
-
-    @Override
-    public String getPermission() {
-        return command.getPermission();
-    }
-
-    @Override
-    public List<String> getAliases() {
-        return command.getAliases();
+    public BukkitCommand(String label, String description, String permission, List<String> aliases) {
+        super(label, description, permission, aliases);
     }
 
     public Command getBukkitCommand() {

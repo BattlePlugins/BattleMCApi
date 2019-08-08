@@ -7,32 +7,18 @@ import mc.alk.mc.command.MCCommand;
 import java.util.Arrays;
 import java.util.List;
 
-public class NukkitCommand implements MCCommand {
+public class NukkitCommand extends MCCommand {
 
     private Command command;
 
     public NukkitCommand(Command command) {
+        this(command.getLabel(), command.getDescription(), command.getPermission(), Arrays.asList(command.getAliases()));
+
         this.command = command;
     }
 
-    @Override
-    public String getLabel() {
-        return command.getLabel();
-    }
-
-    @Override
-    public String getDescription() {
-        return command.getDescription();
-    }
-
-    @Override
-    public String getPermission() {
-        return command.getPermission();
-    }
-
-    @Override
-    public List<String> getAliases() {
-        return Arrays.asList(command.getAliases());
+    public NukkitCommand(String label, String description, String permission, List<String> aliases) {
+        super(label, description, permission, aliases);
     }
 
     public Command getNukkitCommand() {
