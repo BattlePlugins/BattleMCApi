@@ -2,11 +2,14 @@ package mc.alk.bukkit;
 
 import mc.alk.bukkit.command.BukkitCommandSender;
 import mc.alk.bukkit.inventory.BukkitPlayerInventory;
+import mc.alk.mc.MCLocation;
 import mc.alk.mc.inventory.MCInventory;
 import mc.alk.mc.MCPlayer;
 import mc.alk.mc.MCWorld;
 
 import org.bukkit.entity.Player;
+
+import java.util.UUID;
 
 public class BukkitPlayer extends BukkitCommandSender implements MCPlayer {
 
@@ -28,6 +31,36 @@ public class BukkitPlayer extends BukkitCommandSender implements MCPlayer {
 	@Override
 	public String getName() {
 		return name;
+	}
+
+	@Override
+	public UUID getUniqueId() {
+		return player.getUniqueId();
+	}
+
+	@Override
+	public MCPlayer getPlayer() {
+		return this;
+	}
+
+	@Override
+	public long getFirstPlayed() {
+		return player.getFirstPlayed();
+	}
+
+	@Override
+	public long getLastPlayed() {
+		return player.getLastPlayed();
+	}
+
+	@Override
+	public boolean hasPlayedBefore() {
+		return player.hasPlayedBefore();
+	}
+
+	@Override
+	public MCLocation getBedSpawnLocation() {
+		return new BukkitLocation(player.getBedSpawnLocation());
 	}
 
 	@Override

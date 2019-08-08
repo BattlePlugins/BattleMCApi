@@ -3,7 +3,7 @@ package mc.alk.mc;
 import mc.alk.mc.command.MCCommandSender;
 import mc.alk.mc.inventory.MCInventory;
 
-public interface MCPlayer extends MCCommandSender {
+public interface MCPlayer extends MCCommandSender, MCOfflinePlayer {
 
 	MCWorld getWorld();
 

@@ -1,12 +1,17 @@
 package mc.alk.sponge;
 
+import mc.alk.mc.MCLocation;
 import mc.alk.mc.MCPlayer;
 import mc.alk.mc.MCWorld;
 import mc.alk.mc.inventory.MCInventory;
 import mc.alk.sponge.command.SpongeCommandSender;
 import mc.alk.sponge.inventory.SpongeInventory;
 
+import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.util.RespawnLocation;
+
+import java.util.UUID;
 
 public class SpongePlayer extends SpongeCommandSender implements MCPlayer {
 
@@ -28,6 +33,40 @@ public class SpongePlayer extends SpongeCommandSender implements MCPlayer {
     @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public UUID getUniqueId() {
+        return player.getUniqueId();
+    }
+
+    @Override
+    public MCPlayer getPlayer() {
+        return this;
+    }
+
+    @Override
+    public long getFirstPlayed() {
+        return player.get(Keys.FIRST_DATE_PLAYED).get().toEpochMilli();
+    }
+
+    @Override
+    public long getLastPlayed() {
+        return player.get(Keys.LAST_DATE_PLAYED).get().toEpochMilli();
+    }
+
+    @Override
+    public boolean hasPlayedBefore() {
+        return player != null;
+    }
+
+    @Override
+    public MCLocation getBedSpawnLocation() {
+        RespawnLocation respawnLoc = player.get(Keys.RESPAWN_LOCATIONS).get().get(player.getWorldUniqueId().get());
+        if (respawnLoc != null && respawnLoc.isForced()) {
+            return new SpongeLocation(respawnLoc.asLocation().get());
+        }
+        return null;
     }
 
     @Override

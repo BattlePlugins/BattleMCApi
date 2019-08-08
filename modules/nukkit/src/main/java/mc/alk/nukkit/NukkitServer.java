@@ -50,6 +50,8 @@ public class NukkitServer extends MCServer {
 		IPlayer player = Server.getInstance().getOfflinePlayer(name);
 		if (player instanceof OfflinePlayer)
 			return new NukkitOfflinePlayer((OfflinePlayer) player);
+		else if (player instanceof Player)
+			return new NukkitPlayer((Player) player);
 
 		return null;
 	}
@@ -59,6 +61,8 @@ public class NukkitServer extends MCServer {
 		IPlayer player = Server.getInstance().getOfflinePlayer(uuid);
 		if (player instanceof OfflinePlayer)
 			return new NukkitOfflinePlayer((OfflinePlayer) player);
+		else if (player instanceof Player)
+			return new NukkitPlayer((Player) player);
 
 		return null;
 	}
