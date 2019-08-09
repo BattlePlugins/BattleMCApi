@@ -4,6 +4,8 @@ import mc.alk.mc.MCServer;
 import mc.alk.mc.command.MCCommand;
 import mc.alk.mc.command.MCCommandExecutor;
 
+import java.io.File;
+
 public interface MCPlugin {
 
 	MCServer getMCServer();
@@ -13,5 +15,7 @@ public interface MCPlugin {
 
 	boolean isEnabled();
 
+	File getDataFolder();
+	
 	void registerMCCommand(MCCommand command, MCCommandExecutor executor);
 }

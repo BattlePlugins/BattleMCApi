@@ -1,5 +1,6 @@
 package mc.alk.sponge.plugin;
 
+import com.google.inject.Inject;
 import mc.alk.mc.MCServer;
 import mc.alk.mc.command.MCCommand;
 import mc.alk.mc.command.MCCommandExecutor;
@@ -7,25 +8,19 @@ import mc.alk.mc.plugin.MCPlugin;
 import mc.alk.sponge.SpongeServer;
 import mc.alk.sponge.command.SpongeCommandExecutor;
 import org.spongepowered.api.Sponge;
-import org.spongepowered.api.command.CommandCallable;
-import org.spongepowered.api.command.CommandException;
-import org.spongepowered.api.command.CommandResult;
-import org.spongepowered.api.command.CommandSource;
-import org.spongepowered.api.command.args.GenericArguments;
-import org.spongepowered.api.command.spec.CommandSpec;
+import org.spongepowered.api.config.ConfigDir;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GameStartedServerEvent;
 import org.spongepowered.api.event.game.state.GameStoppedEvent;
-import org.spongepowered.api.text.Text;
-import org.spongepowered.api.world.Location;
-import org.spongepowered.api.world.World;
 
-import javax.annotation.Nullable;
-import java.util.Arrays;
+import java.io.File;
 import java.util.List;
-import java.util.Optional;
 
 public abstract class SpongePlugin implements MCPlugin {
+
+    @Inject
+    @ConfigDir(sharedRoot = false)
+    private File configDir;
 
     private MCServer server;
     private boolean enabled = false;
@@ -55,6 +50,11 @@ public abstract class SpongePlugin implements MCPlugin {
         }
 
         return server;
+    }
+
+    @Override
+    public File getDataFolder() {
+        return configDir;
     }
 
     @Override
