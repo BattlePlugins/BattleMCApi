@@ -2,6 +2,7 @@ package mc.alk.bukkit.plugin;
 
 import mc.alk.bukkit.BukkitServer;
 import mc.alk.bukkit.command.BukkitCommandExecutor;
+import mc.alk.bukkit.util.BukkitCommandUtil;
 import mc.alk.mc.MCServer;
 import mc.alk.mc.command.MCCommand;
 import mc.alk.mc.command.MCCommandExecutor;
@@ -25,6 +26,9 @@ public abstract class BukkitPlugin extends JavaPlugin implements MCPlugin {
 
     @Override
     public void registerMCCommand(MCCommand command, MCCommandExecutor executor) {
-        getCommand(command.getLabel()).setExecutor(new BukkitCommandExecutor(executor));
+        BukkitCommandUtil.BattleBukkitCommand bukkitCommand = new BukkitCommandUtil.BattleBukkitCommand(command, this, new BukkitCommandExecutor(executor));
+        BukkitCommandUtil.registerCommand(command.getLabel(), bukkitCommand);
+
+        // getCommand(command.getLabel()).setExecutor(new BukkitCommandExecutor(executor));
     }
 }
