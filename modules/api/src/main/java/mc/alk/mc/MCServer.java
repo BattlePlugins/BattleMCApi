@@ -17,6 +17,10 @@ public abstract class MCServer {
 		}
 	}
 
+	public static MCLocation getLocation(String world, int x, int y, int z, float pitch, float yaw){
+		return INSTANCE.getMCLocation(world, x, y, z, pitch, yaw);
+	}
+
 	public static MCLocation getLocation(String world, int x, int y, int z){
 		return INSTANCE.getMCLocation(world, x, y, z);
 	}
@@ -34,6 +38,7 @@ public abstract class MCServer {
 	}
 
 	public abstract MCLocation getMCLocation(String world, int x, int y, int z);
+	public abstract MCLocation getMCLocation(String world, int x, int y, int z, float pitch, float yaw);
 
 	public abstract MCWorld getMCWorld(String world);
 

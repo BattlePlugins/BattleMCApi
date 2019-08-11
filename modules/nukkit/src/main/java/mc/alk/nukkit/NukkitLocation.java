@@ -1,5 +1,6 @@
 package mc.alk.nukkit;
 
+import cn.nukkit.Server;
 import cn.nukkit.level.Location;
 
 import mc.alk.mc.MCLocation;
@@ -13,8 +14,12 @@ public class NukkitLocation implements MCLocation {
 		this.loc = loc;
 	}
 
-	public NukkitLocation(String world, int x, int y, int z) {
-		this.loc = new Location(x, y, z);
+	public NukkitLocation(String world, double x, double y, double z) {
+		this.loc = new Location(x, y, z, Server.getInstance().getLevelByName(world));
+	}
+
+	public NukkitLocation(String world, double x, double y, double z, float pitch, float yaw) {
+		this.loc = new Location(x, y, z, pitch, yaw, Server.getInstance().getLevelByName(world));
 	}
 
 	@Override
@@ -23,18 +28,43 @@ public class NukkitLocation implements MCLocation {
 	}
 
 	@Override
+	public double getX() {
+		return loc.getX();
+	}
+
+	@Override
+	public double getY() {
+		return loc.getY();
+	}
+
+	@Override
+	public double getZ() {
+		return loc.getZ();
+	}
+
+	@Override
+	public float getPitch() {
+		return (float) loc.getPitch();
+	}
+
+	@Override
+	public float getYaw() {
+		return (float) loc.getYaw();
+	}
+
+	@Override
 	public int getBlockX() {
-		return (int) loc.getX();
+		return loc.getFloorX();
 	}
 
 	@Override
 	public int getBlockY() {
-		return (int) loc.getY();
+		return loc.getFloorY();
 	}
 
 	@Override
 	public int getBlockZ() {
-		return (int) loc.getZ();
+		return loc.getFloorZ();
 	}
 
 	public Location getNukkitLocation() {

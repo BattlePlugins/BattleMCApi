@@ -31,6 +31,11 @@ public class NukkitServer extends MCServer {
 	}
 
 	@Override
+	public MCLocation getMCLocation(String world, int x, int y, int z, float pitch, float yaw) {
+		return new NukkitLocation(world, x, y, z, pitch, yaw);
+	}
+
+	@Override
 	public MCWorld getMCWorld(String world) {
 		return new NukkitWorld(Server.getInstance().getLevelByName(world));
 	}

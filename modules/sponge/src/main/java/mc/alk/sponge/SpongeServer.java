@@ -33,6 +33,11 @@ public class SpongeServer extends MCServer {
     }
 
     @Override
+    public MCLocation getMCLocation(String world, int x, int y, int z, float pitch, float yaw) {
+        return new SpongeLocation(world, x, y, z, pitch, yaw);
+    }
+
+    @Override
     public MCWorld getMCWorld(String world) {
         return new SpongeWorld(Sponge.getServer().getWorld(world).get());
     }
