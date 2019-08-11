@@ -27,12 +27,12 @@ public class BukkitServer extends MCServer {
 	}
 
 	@Override
-	public MCLocation getMCLocation(String world, int x, int y, int z) {
+	public MCLocation getMCLocation(String world, double x, double y, double z) {
 		return new BukkitLocation(world, x, y, z);
 	}
 
 	@Override
-	public MCLocation getMCLocation(String world, int x, int y, int z, float pitch, float yaw) {
+	public MCLocation getMCLocation(String world, double x, double y, double z, float pitch, float yaw) {
 		return new BukkitLocation(world, x, y, z, pitch, yaw);
 	}
 

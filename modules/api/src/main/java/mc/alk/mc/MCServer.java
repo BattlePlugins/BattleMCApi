@@ -17,11 +17,11 @@ public abstract class MCServer {
 		}
 	}
 
-	public static MCLocation getLocation(String world, int x, int y, int z, float pitch, float yaw){
+	public static MCLocation getLocation(String world, double x, double y, double z, float pitch, float yaw){
 		return INSTANCE.getMCLocation(world, x, y, z, pitch, yaw);
 	}
 
-	public static MCLocation getLocation(String world, int x, int y, int z){
+	public static MCLocation getLocation(String world, double x, double y, double z){
 		return INSTANCE.getMCLocation(world, x, y, z);
 	}
 
@@ -37,8 +37,8 @@ public abstract class MCServer {
 		return INSTANCE.scheduleSyncTask(plugin, runnable, millis);
 	}
 
-	public abstract MCLocation getMCLocation(String world, int x, int y, int z);
-	public abstract MCLocation getMCLocation(String world, int x, int y, int z, float pitch, float yaw);
+	public abstract MCLocation getMCLocation(String world, double x, double y, double z);
+	public abstract MCLocation getMCLocation(String world, double x, double y, double z, float pitch, float yaw);
 
 	public abstract MCWorld getMCWorld(String world);
 
