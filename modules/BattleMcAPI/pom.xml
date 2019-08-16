@@ -41,7 +41,7 @@
     </dependencies>
     <build>
         <finalName>BattleMcAPI</finalName>
-        <directory>../../target</directory>
+        <directory>./target</directory>
         <extensions>
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
