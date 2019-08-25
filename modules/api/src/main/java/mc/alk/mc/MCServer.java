@@ -98,4 +98,16 @@ public abstract class MCServer {
 	public static boolean isMainThread() {
 		return INSTANCE.isMCMainThread();
 	}
+
+	public abstract boolean isMCOnlineMode();
+
+	public static boolean isOnlineMode() {
+		return INSTANCE.isMCOnlineMode();
+	}
+
+	public abstract String getMCVersion();
+
+	public static String getVersion() {
+		return INSTANCE.getMCVersion();
+	}
 }

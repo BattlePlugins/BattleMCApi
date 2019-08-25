@@ -90,4 +90,14 @@ public class SpongeServer extends MCServer {
     public boolean isMCMainThread() {
         return Sponge.getServer().isMainThread();
     }
+
+    @Override
+    public boolean isMCOnlineMode() {
+        return Sponge.getServer().getOnlineMode();
+    }
+
+    @Override
+    public String getMCVersion() {
+        return "Java-" + Sponge.getGame().getPlatform().getMinecraftVersion().getName();
+    }
 }

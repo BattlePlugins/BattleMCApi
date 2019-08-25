@@ -83,7 +83,17 @@ public class BukkitServer extends MCServer {
 		return Bukkit.isPrimaryThread();
 	}
 
-    @Override
+	@Override
+	public boolean isMCOnlineMode() {
+		return Bukkit.getOnlineMode();
+	}
+
+	@Override
+	public String getMCVersion() {
+		return "Java-" + Bukkit.getVersion();
+	}
+
+	@Override
 	public boolean cancelMCTask(long id) {
 		Bukkit.getScheduler().cancelTask((int)id);
 		return true;

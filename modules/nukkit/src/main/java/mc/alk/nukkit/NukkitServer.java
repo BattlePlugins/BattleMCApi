@@ -94,7 +94,17 @@ public class NukkitServer extends MCServer {
 		return Server.getInstance().isPrimaryThread();
 	}
 
-    @Override
+	@Override
+	public boolean isMCOnlineMode() {
+		return Server.getInstance().getProperties().getBoolean("xbox-auth");
+	}
+
+	@Override
+	public String getMCVersion() {
+		return "Bedrock-" + Server.getInstance().getVersion();
+	}
+
+	@Override
 	public boolean cancelMCTask(long id) {
 		Server.getInstance().getScheduler().cancelTask((int) id);
 		return true;
