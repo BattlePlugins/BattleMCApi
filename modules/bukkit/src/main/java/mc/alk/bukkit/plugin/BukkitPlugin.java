@@ -10,6 +10,8 @@ import mc.alk.mc.plugin.MCPlugin;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.List;
+
 public abstract class BukkitPlugin extends JavaPlugin implements MCPlugin {
 
     private MCServer server;
@@ -22,6 +24,16 @@ public abstract class BukkitPlugin extends JavaPlugin implements MCPlugin {
         }
 
         return server;
+    }
+
+    @Override
+    public List<String> getAuthors() {
+        return getDescription().getAuthors();
+    }
+
+    @Override
+    public String getVersion() {
+        return getDescription().getVersion();
     }
 
     @Override

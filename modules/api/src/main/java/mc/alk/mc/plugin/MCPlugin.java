@@ -5,6 +5,7 @@ import mc.alk.mc.command.MCCommand;
 import mc.alk.mc.command.MCCommandExecutor;
 
 import java.io.File;
+import java.util.List;
 
 public interface MCPlugin {
 
@@ -16,6 +17,10 @@ public interface MCPlugin {
 	boolean isEnabled();
 
 	File getDataFolder();
-	
+
+	String getName();
+	List<String> getAuthors();
+	String getVersion();
+
 	void registerMCCommand(MCCommand command, MCCommandExecutor executor);
 }

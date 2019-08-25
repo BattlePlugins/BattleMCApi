@@ -12,6 +12,7 @@ import org.spongepowered.api.config.ConfigDir;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GameStartedServerEvent;
 import org.spongepowered.api.event.game.state.GameStoppedEvent;
+import org.spongepowered.api.plugin.PluginManager;
 
 import java.io.File;
 import java.util.List;
@@ -21,6 +22,9 @@ public abstract class SpongePlugin implements MCPlugin {
     @Inject
     @ConfigDir(sharedRoot = false)
     private File configDir;
+
+    @Inject
+    private PluginManager pluginManager;
 
     private MCServer server;
     private boolean enabled = false;
@@ -55,6 +59,21 @@ public abstract class SpongePlugin implements MCPlugin {
     @Override
     public File getDataFolder() {
         return configDir;
+    }
+
+    @Override
+    public String getName() {
+        return pluginManager.fromInstance(this).get().getName();
+    }
+
+    @Override
+    public List<String> getAuthors() {
+        return pluginManager.fromInstance(this).get().getAuthors();
+    }
+
+    @Override
+    public String getVersion() {
+        return pluginManager.fromInstance(this).get().getVersion().get();
     }
 
     @Override
