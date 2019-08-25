@@ -81,6 +81,11 @@ public class BukkitServer extends MCServer {
 	}
 
 	@Override
+	public boolean isMCMainThread() {
+		return Bukkit.isPrimaryThread();
+	}
+
+	@Override
 	public boolean cancelMCTask(long id) {
 		Bukkit.getScheduler().cancelTask((int)id);
 		return true;

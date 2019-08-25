@@ -92,4 +92,10 @@ public abstract class MCServer {
 	public static Collection<MCOfflinePlayer> getOfflinePlayers() {
 		return INSTANCE.getMCOfflinePlayers();
 	}
+
+	public abstract boolean isMCMainThread();
+
+	public static boolean isMainThread() {
+		return INSTANCE.isMCMainThread();
+	}
 }

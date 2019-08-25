@@ -89,6 +89,11 @@ public class NukkitServer extends MCServer {
 	}
 
 	@Override
+	public boolean isMCMainThread() {
+		return Server.getInstance().isPrimaryThread();
+	}
+
+	@Override
 	public boolean cancelMCTask(long id) {
 		Server.getInstance().getScheduler().cancelTask((int) id);
 		return true;

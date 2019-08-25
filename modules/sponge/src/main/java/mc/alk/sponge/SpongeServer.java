@@ -86,4 +86,9 @@ public class SpongeServer extends MCServer {
         // TODO: Find a way to do this
         return players;
     }
+
+    @Override
+    public boolean isMCMainThread() {
+        return Sponge.getServer().isMainThread();
+    }
 }
