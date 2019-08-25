@@ -3,6 +3,7 @@ package mc.alk.mc.plugin;
 import mc.alk.mc.MCServer;
 import mc.alk.mc.command.MCCommand;
 import mc.alk.mc.command.MCCommandExecutor;
+import mc.alk.mc.logger.MCLogger;
 
 import java.io.File;
 import java.util.List;
@@ -23,4 +24,6 @@ public interface MCPlugin {
 	String getVersion();
 
 	void registerMCCommand(MCCommand command, MCCommandExecutor executor);
+
+	MCLogger getMCLogger();
 }

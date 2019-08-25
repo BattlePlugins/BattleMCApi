@@ -16,8 +16,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.UUID;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class BukkitServer extends MCServer {
 
@@ -85,7 +83,7 @@ public class BukkitServer extends MCServer {
 		return Bukkit.isPrimaryThread();
 	}
 
-	@Override
+    @Override
 	public boolean cancelMCTask(long id) {
 		Bukkit.getScheduler().cancelTask((int)id);
 		return true;

@@ -4,9 +4,12 @@ import com.google.inject.Inject;
 import mc.alk.mc.MCServer;
 import mc.alk.mc.command.MCCommand;
 import mc.alk.mc.command.MCCommandExecutor;
+import mc.alk.mc.logger.MCLogger;
 import mc.alk.mc.plugin.MCPlugin;
 import mc.alk.sponge.SpongeServer;
 import mc.alk.sponge.command.SpongeCommandExecutor;
+import mc.alk.sponge.logger.SpongeLogger;
+import org.slf4j.Logger;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.config.ConfigDir;
 import org.spongepowered.api.event.Listener;
@@ -18,6 +21,9 @@ import java.io.File;
 import java.util.List;
 
 public abstract class SpongePlugin implements MCPlugin {
+
+    @Inject
+    private Logger logger;
 
     @Inject
     @ConfigDir(sharedRoot = false)
@@ -81,5 +87,10 @@ public abstract class SpongePlugin implements MCPlugin {
         List<String> aliases = command.getAliases();
         aliases.add(command.getLabel());
         Sponge.getCommandManager().register(this, new SpongeCommandExecutor(executor, command), aliases);
+    }
+
+    @Override
+    public MCLogger getMCLogger() {
+        return new SpongeLogger(logger);
     }
 }
