@@ -6,8 +6,10 @@ import mc.alk.mc.MCOfflinePlayer;
 import mc.alk.mc.MCPlayer;
 import mc.alk.mc.MCServer;
 import mc.alk.mc.MCWorld;
+import mc.alk.mc.chat.Message;
 import mc.alk.mc.plugin.MCPlugin;
 
+import mc.alk.sponge.chat.SpongeMessage;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.service.user.UserStorageService;
@@ -99,5 +101,10 @@ public class SpongeServer extends MCServer {
     @Override
     public String getMCVersion() {
         return "Java-" + Sponge.getGame().getPlatform().getMinecraftVersion().getName();
+    }
+
+    @Override
+    public Message getMCMessage() {
+        return new SpongeMessage();
     }
 }

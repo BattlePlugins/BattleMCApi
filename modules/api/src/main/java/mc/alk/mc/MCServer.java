@@ -1,5 +1,6 @@
 package mc.alk.mc;
 
+import mc.alk.mc.chat.Message;
 import mc.alk.mc.plugin.MCPlugin;
 
 import java.util.Collection;
@@ -109,5 +110,11 @@ public abstract class MCServer {
 
 	public static String getVersion() {
 		return INSTANCE.getMCVersion();
+	}
+
+	public abstract Message getMCMessage();
+
+	public static Message getPlatformMessage() {
+		return INSTANCE.getMCMessage();
 	}
 }

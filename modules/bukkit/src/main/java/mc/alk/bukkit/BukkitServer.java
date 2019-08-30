@@ -1,9 +1,12 @@
 package mc.alk.bukkit;
 
+import mc.alk.bukkit.chat.BukkitMessage;
+import mc.alk.bukkit.chat.SpigotMessage;
 import mc.alk.mc.APIType;
 import mc.alk.mc.MCLocation;
 import mc.alk.mc.MCOfflinePlayer;
 import mc.alk.mc.MCPlayer;
+import mc.alk.mc.chat.Message;
 import mc.alk.mc.plugin.MCPlugin;
 import mc.alk.mc.MCServer;
 import mc.alk.mc.MCWorld;
@@ -94,8 +97,38 @@ public class BukkitServer extends MCServer {
 	}
 
 	@Override
+	public Message getMCMessage() {
+		if (isSpigot())
+			return new SpigotMessage();
+
+		return new BukkitMessage();
+	}
+
+	@Override
 	public boolean cancelMCTask(long id) {
 		Bukkit.getScheduler().cancelTask((int)id);
 		return true;
+	}
+
+	public boolean isSpigot() {
+		try {
+			Class.forName("org.spigotmc.SpigotConfig");
+			return true;
+		} catch (Throwable ex) {
+			/* do nothing */
+		}
+
+		return false;
+	}
+
+	public boolean isPaper() {
+		try {
+			Class.forName("com.destroystokyo.paper.PaperConfig");
+			return true;
+		} catch (Throwable ex) {
+			/* do nothing */
+		}
+
+		return false;
 	}
 }

@@ -1,7 +1,6 @@
 package mc.alk.nukkit;
 
 import cn.nukkit.IPlayer;
-import cn.nukkit.Nukkit;
 import cn.nukkit.OfflinePlayer;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
@@ -11,9 +10,11 @@ import mc.alk.mc.APIType;
 import mc.alk.mc.MCLocation;
 import mc.alk.mc.MCOfflinePlayer;
 import mc.alk.mc.MCPlayer;
+import mc.alk.mc.chat.Message;
 import mc.alk.mc.plugin.MCPlugin;
 import mc.alk.mc.MCServer;
 import mc.alk.mc.MCWorld;
+import mc.alk.nukkit.chat.NukkitMessage;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -108,5 +109,10 @@ public class NukkitServer extends MCServer {
 	public boolean cancelMCTask(long id) {
 		Server.getInstance().getScheduler().cancelTask((int) id);
 		return true;
+	}
+
+	@Override
+	public Message getMCMessage() {
+		return new NukkitMessage();
 	}
 }
