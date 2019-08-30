@@ -12,7 +12,7 @@ import mc.alk.mc.MCOfflinePlayer;
 import mc.alk.mc.MCPlayer;
 import mc.alk.mc.chat.Message;
 import mc.alk.mc.plugin.MCPlugin;
-import mc.alk.mc.MCServer;
+import mc.alk.mc.MCPlatform;
 import mc.alk.mc.MCWorld;
 import mc.alk.nukkit.chat.NukkitMessage;
 
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.UUID;
 
-public class NukkitServer extends MCServer {
+public class NukkitPlatform extends MCPlatform {
 
 	@Override
 	public APIType getAPIType() {

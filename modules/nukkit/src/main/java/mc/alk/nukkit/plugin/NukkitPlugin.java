@@ -2,12 +2,12 @@ package mc.alk.nukkit.plugin;
 
 import cn.nukkit.plugin.PluginBase;
 
-import mc.alk.mc.MCServer;
+import mc.alk.mc.MCPlatform;
 import mc.alk.mc.command.MCCommand;
 import mc.alk.mc.command.MCCommandExecutor;
 import mc.alk.mc.logger.MCLogger;
 import mc.alk.mc.plugin.MCPlugin;
-import mc.alk.nukkit.NukkitServer;
+import mc.alk.nukkit.NukkitPlatform;
 import mc.alk.nukkit.command.NukkitCommandExecutor;
 import mc.alk.nukkit.logger.NukkitLogger;
 
@@ -15,16 +15,16 @@ import java.util.List;
 
 public abstract class NukkitPlugin extends PluginBase implements MCPlugin {
 
-    private MCServer server;
+    private MCPlatform platform;
 
     @Override
-    public MCServer getMCServer() {
-        if (server == null) {
-            server = new NukkitServer();
-            MCServer.setInstance(server);
+    public MCPlatform getPlatform() {
+        if (platform == null) {
+            platform = new NukkitPlatform();
+            MCPlatform.setInstance(platform);
         }
 
-        return server;
+        return platform;
     }
 
     @Override

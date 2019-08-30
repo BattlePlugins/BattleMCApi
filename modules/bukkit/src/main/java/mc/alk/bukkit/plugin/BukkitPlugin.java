@@ -1,10 +1,10 @@
 package mc.alk.bukkit.plugin;
 
-import mc.alk.bukkit.BukkitServer;
+import mc.alk.bukkit.BukkitPlatform;
 import mc.alk.bukkit.command.BukkitCommandExecutor;
 import mc.alk.bukkit.logger.BukkitLogger;
 import mc.alk.bukkit.util.BukkitCommandUtil;
-import mc.alk.mc.MCServer;
+import mc.alk.mc.MCPlatform;
 import mc.alk.mc.command.MCCommand;
 import mc.alk.mc.command.MCCommandExecutor;
 import mc.alk.mc.logger.MCLogger;
@@ -16,16 +16,16 @@ import java.util.List;
 
 public abstract class BukkitPlugin extends JavaPlugin implements MCPlugin {
 
-    private MCServer server;
+    private MCPlatform platform;
 
     @Override
-    public MCServer getMCServer() {
-        if (server == null) {
-            server = new BukkitServer();
-            MCServer.setInstance(server);
+    public MCPlatform getPlatform() {
+        if (platform == null) {
+            platform = new BukkitPlatform();
+            MCPlatform.setInstance(platform);
         }
 
-        return server;
+        return platform;
     }
 
     @Override

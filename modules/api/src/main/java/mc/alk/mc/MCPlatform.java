@@ -6,12 +6,12 @@ import mc.alk.mc.plugin.MCPlugin;
 import java.util.Collection;
 import java.util.UUID;
 
-public abstract class MCServer {
+public abstract class MCPlatform {
 
-	private static MCServer INSTANCE;
+	private static MCPlatform INSTANCE;
 	private static APIType type;
 
-	public static void setInstance(MCServer api){
+	public static void setInstance(MCPlatform api){
 		if (INSTANCE == null){
 			INSTANCE = api;
 			type = api.getAPIType();

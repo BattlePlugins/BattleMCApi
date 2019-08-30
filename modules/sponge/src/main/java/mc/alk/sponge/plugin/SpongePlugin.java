@@ -1,12 +1,12 @@
 package mc.alk.sponge.plugin;
 
 import com.google.inject.Inject;
-import mc.alk.mc.MCServer;
+import mc.alk.mc.MCPlatform;
 import mc.alk.mc.command.MCCommand;
 import mc.alk.mc.command.MCCommandExecutor;
 import mc.alk.mc.logger.MCLogger;
 import mc.alk.mc.plugin.MCPlugin;
-import mc.alk.sponge.SpongeServer;
+import mc.alk.sponge.SpongePlatform;
 import mc.alk.sponge.command.SpongeCommandExecutor;
 import mc.alk.sponge.logger.SpongeLogger;
 import org.slf4j.Logger;
@@ -32,7 +32,7 @@ public abstract class SpongePlugin implements MCPlugin {
     @Inject
     private PluginManager pluginManager;
 
-    private MCServer server;
+    private MCPlatform platform;
     private boolean enabled = false;
 
     @Listener
@@ -53,13 +53,13 @@ public abstract class SpongePlugin implements MCPlugin {
     }
 
     @Override
-    public MCServer getMCServer() {
-        if (server == null) {
-            server = new SpongeServer();
-            MCServer.setInstance(server);
+    public MCPlatform getPlatform() {
+        if (platform == null) {
+            platform = new SpongePlatform();
+            MCPlatform.setInstance(platform);
         }
 
-        return server;
+        return platform;
     }
 
     @Override

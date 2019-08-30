@@ -1,6 +1,6 @@
 package mc.alk.mc.plugin;
 
-import mc.alk.mc.MCServer;
+import mc.alk.mc.MCPlatform;
 import mc.alk.mc.command.MCCommand;
 import mc.alk.mc.command.MCCommandExecutor;
 import mc.alk.mc.logger.MCLogger;
@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface MCPlugin {
 
-	MCServer getMCServer();
+	MCPlatform getPlatform();
 
 	void onEnable();
 	void onDisable();

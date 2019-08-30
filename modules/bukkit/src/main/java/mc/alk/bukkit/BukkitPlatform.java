@@ -8,7 +8,7 @@ import mc.alk.mc.MCOfflinePlayer;
 import mc.alk.mc.MCPlayer;
 import mc.alk.mc.chat.Message;
 import mc.alk.mc.plugin.MCPlugin;
-import mc.alk.mc.MCServer;
+import mc.alk.mc.MCPlatform;
 import mc.alk.mc.MCWorld;
 
 import org.bukkit.Bukkit;
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.UUID;
 
-public class BukkitServer extends MCServer {
+public class BukkitPlatform extends MCPlatform {
 
 	@Override
 	public APIType getAPIType() {

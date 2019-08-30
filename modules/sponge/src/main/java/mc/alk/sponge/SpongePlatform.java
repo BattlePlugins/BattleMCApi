@@ -4,7 +4,7 @@ import mc.alk.mc.APIType;
 import mc.alk.mc.MCLocation;
 import mc.alk.mc.MCOfflinePlayer;
 import mc.alk.mc.MCPlayer;
-import mc.alk.mc.MCServer;
+import mc.alk.mc.MCPlatform;
 import mc.alk.mc.MCWorld;
 import mc.alk.mc.chat.Message;
 import mc.alk.mc.plugin.MCPlugin;
@@ -21,7 +21,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-public class SpongeServer extends MCServer {
+public class SpongePlatform extends MCPlatform {
 
     @Override
     public APIType getAPIType() {
