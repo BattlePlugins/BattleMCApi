@@ -5,19 +5,16 @@ import mc.alk.mc.MCLocation;
 import mc.alk.mc.inventory.MCInventory;
 import mc.alk.mc.MCPlayer;
 import mc.alk.mc.MCWorld;
-import mc.alk.nukkit.command.NukkitCommandSender;
 import mc.alk.nukkit.inventory.NukkitPlayerInventory;
 
 import java.util.UUID;
 
-public class NukkitPlayer extends NukkitCommandSender implements MCPlayer {
+public class NukkitPlayer extends MCPlayer {
 
 	private Player player;
 	private String name;
 
 	public NukkitPlayer(Player player){
-		super(player);
-
 		this.player = player;
 		this.name = player.getName();
 	}
@@ -71,6 +68,11 @@ public class NukkitPlayer extends NukkitCommandSender implements MCPlayer {
 	@Override
 	public boolean hasPermission(String node) {
 		return player.hasPermission(node);
+	}
+
+	@Override
+	public void sendMessage(String message) {
+		player.sendMessage(message);
 	}
 
 	@Override

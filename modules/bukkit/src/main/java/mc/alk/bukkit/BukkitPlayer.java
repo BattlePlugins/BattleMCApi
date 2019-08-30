@@ -1,6 +1,5 @@
 package mc.alk.bukkit;
 
-import mc.alk.bukkit.command.BukkitCommandSender;
 import mc.alk.bukkit.inventory.BukkitPlayerInventory;
 import mc.alk.mc.MCLocation;
 import mc.alk.mc.inventory.MCInventory;
@@ -11,14 +10,12 @@ import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
-public class BukkitPlayer extends BukkitCommandSender implements MCPlayer {
+public class BukkitPlayer extends MCPlayer {
 
 	private Player player;
 	private String name;
 
 	public BukkitPlayer(Player player){
-		super(player);
-
 		this.player = player;
 		this.name = player.getName();
 	}
@@ -76,6 +73,11 @@ public class BukkitPlayer extends BukkitCommandSender implements MCPlayer {
 	@Override
 	public boolean hasPermission(String node) {
 		return player.hasPermission(node);
+	}
+
+	@Override
+	public void sendMessage(String message) {
+		player.sendMessage(message);
 	}
 
 	@Override

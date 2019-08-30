@@ -1,17 +1,22 @@
 package mc.alk.mc;
 
+import mc.alk.mc.chat.Message;
 import mc.alk.mc.command.MCCommandSender;
 import mc.alk.mc.inventory.MCInventory;
 
-public interface MCPlayer extends MCCommandSender, MCOfflinePlayer {
+public abstract class MCPlayer implements MCCommandSender, MCOfflinePlayer {
 
-	MCWorld getWorld();
+	public abstract MCWorld getWorld();
 
-	String getName();
-	String getDisplayName();
+	public abstract String getName();
+	public abstract String getDisplayName();
 
-	MCInventory getInventory();
-	void updateInventory();
+	public abstract MCInventory getInventory();
+	public abstract void updateInventory();
 
-	boolean isOnline();
+	public abstract boolean isOnline();
+
+	public void sendMessage(Message message) {
+		message.sendMessage(this);
+	}
 }
