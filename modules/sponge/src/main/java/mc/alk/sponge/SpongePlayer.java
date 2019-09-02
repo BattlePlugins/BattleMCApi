@@ -3,10 +3,10 @@ package mc.alk.sponge;
 import mc.alk.mc.MCLocation;
 import mc.alk.mc.MCPlayer;
 import mc.alk.mc.MCWorld;
-import mc.alk.mc.inventory.MCInventory;
-import mc.alk.sponge.command.SpongeCommandSender;
+import mc.alk.mc.inventory.MCPlayerInventory;
 import mc.alk.sponge.inventory.SpongeInventory;
 
+import mc.alk.sponge.inventory.SpongePlayerInventory;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
@@ -89,8 +89,8 @@ public class SpongePlayer extends MCPlayer {
     }
 
     @Override
-    public MCInventory getInventory() {
-        return new SpongeInventory(player.getInventory());
+    public MCPlayerInventory getInventory() {
+        return new SpongePlayerInventory(player.getInventory());
     }
 
     @Override

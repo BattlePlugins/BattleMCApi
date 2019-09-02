@@ -2,9 +2,9 @@ package mc.alk.nukkit;
 
 import cn.nukkit.Player;
 import mc.alk.mc.MCLocation;
-import mc.alk.mc.inventory.MCInventory;
 import mc.alk.mc.MCPlayer;
 import mc.alk.mc.MCWorld;
+import mc.alk.mc.inventory.MCPlayerInventory;
 import mc.alk.nukkit.inventory.NukkitPlayerInventory;
 
 import java.util.UUID;
@@ -81,7 +81,7 @@ public class NukkitPlayer extends MCPlayer {
 	}
 
 	@Override
-	public MCInventory getInventory() {
+	public MCPlayerInventory getInventory() {
 		return new NukkitPlayerInventory(player.getInventory());
 	}
 

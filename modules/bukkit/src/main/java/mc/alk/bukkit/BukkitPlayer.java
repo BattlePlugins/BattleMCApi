@@ -2,9 +2,9 @@ package mc.alk.bukkit;
 
 import mc.alk.bukkit.inventory.BukkitPlayerInventory;
 import mc.alk.mc.MCLocation;
-import mc.alk.mc.inventory.MCInventory;
 import mc.alk.mc.MCPlayer;
 import mc.alk.mc.MCWorld;
+import mc.alk.mc.inventory.MCPlayerInventory;
 
 import org.bukkit.entity.Player;
 
@@ -81,7 +81,7 @@ public class BukkitPlayer extends MCPlayer {
 	}
 
 	@Override
-	public MCInventory getInventory() {
+	public MCPlayerInventory getInventory() {
 		return new BukkitPlayerInventory(player.getInventory());
 	}
 
