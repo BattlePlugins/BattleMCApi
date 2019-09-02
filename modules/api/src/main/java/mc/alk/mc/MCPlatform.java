@@ -117,4 +117,8 @@ public abstract class MCPlatform {
 	public static Message getPlatformMessage() {
 		return INSTANCE.getMCMessage();
 	}
+
+	public static void broadcastMessage(Message message) {
+		getOnlinePlayers().forEach(player -> player.sendMessage(message));
+	}
 }
