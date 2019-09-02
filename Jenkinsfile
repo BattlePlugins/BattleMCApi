@@ -4,6 +4,6 @@ library identifier: 'BattlePipelineLib@master', retriever: modernSCM(
      credentialsId: 'github-login'])
 
 compileAndDeployMaven {
-    repo = 'BattleMCApi'
+    repo = 'BattleMcAPI'
     target_path = 'modules/BattleMcAPI/'
 }

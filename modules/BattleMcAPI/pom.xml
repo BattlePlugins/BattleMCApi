@@ -12,7 +12,7 @@
     <version>2.6.0</version>
     <packaging>jar</packaging>
     <name>BattleMcAPI</name>
-    <url>https://github.com/BattlePlugins/BattleMCApi/</url>
+    <url>https://github.com/BattlePlugins/BattleMcAPI/</url>
     <dependencies>
         <dependency>
             <groupId>mc.alk</groupId>
