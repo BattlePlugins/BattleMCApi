@@ -3,35 +3,18 @@ package mc.alk.nukkit;
 import cn.nukkit.Player;
 import mc.alk.mc.MCLocation;
 import mc.alk.mc.MCPlayer;
-import mc.alk.mc.MCWorld;
-import mc.alk.mc.inventory.MCPlayerInventory;
-import mc.alk.nukkit.inventory.NukkitPlayerInventory;
+import mc.alk.nukkit.entity.NukkitHumanEntity;
 
-import java.util.UUID;
-
-public class NukkitPlayer extends MCPlayer {
+public class NukkitPlayer extends NukkitHumanEntity implements MCPlayer {
 
 	private Player player;
 	private String name;
 
 	public NukkitPlayer(Player player){
+		super(player);
+
 		this.player = player;
 		this.name = player.getName();
-	}
-
-	@Override
-	public MCWorld getWorld() {
-		return new NukkitWorld(player.getLevel());
-	}
-
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	@Override
-	public UUID getUniqueId() {
-		return player.getUniqueId();
 	}
 
 	@Override
@@ -78,11 +61,6 @@ public class NukkitPlayer extends MCPlayer {
 	@Override
 	public boolean isOp() {
 		return player.isOp();
-	}
-
-	@Override
-	public MCPlayerInventory getInventory() {
-		return new NukkitPlayerInventory(player.getInventory());
 	}
 
 	@Override

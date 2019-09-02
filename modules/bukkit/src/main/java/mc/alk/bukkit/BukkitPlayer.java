@@ -1,38 +1,21 @@
 package mc.alk.bukkit;
 
-import mc.alk.bukkit.inventory.BukkitPlayerInventory;
+import mc.alk.bukkit.entity.BukkitHumanEntity;
 import mc.alk.mc.MCLocation;
 import mc.alk.mc.MCPlayer;
-import mc.alk.mc.MCWorld;
-import mc.alk.mc.inventory.MCPlayerInventory;
 
 import org.bukkit.entity.Player;
 
-import java.util.UUID;
-
-public class BukkitPlayer extends MCPlayer {
+public class BukkitPlayer extends BukkitHumanEntity implements MCPlayer {
 
 	private Player player;
 	private String name;
 
 	public BukkitPlayer(Player player){
+	    super(player);
+
 		this.player = player;
 		this.name = player.getName();
-	}
-
-	@Override
-	public MCWorld getWorld() {
-		return new BukkitWorld(player.getWorld());
-	}
-
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	@Override
-	public UUID getUniqueId() {
-		return player.getUniqueId();
 	}
 
 	@Override
@@ -78,11 +61,6 @@ public class BukkitPlayer extends MCPlayer {
 	@Override
 	public void sendMessage(String message) {
 		player.sendMessage(message);
-	}
-
-	@Override
-	public MCPlayerInventory getInventory() {
-		return new BukkitPlayerInventory(player.getInventory());
 	}
 
 	@Override

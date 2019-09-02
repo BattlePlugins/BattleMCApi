@@ -4,6 +4,7 @@ import mc.alk.mc.MCLocation;
 import mc.alk.mc.MCPlayer;
 import mc.alk.mc.MCWorld;
 import mc.alk.mc.inventory.MCPlayerInventory;
+import mc.alk.sponge.entity.SpongeHumanEntity;
 import mc.alk.sponge.inventory.SpongeInventory;
 
 import mc.alk.sponge.inventory.SpongePlayerInventory;
@@ -14,29 +15,21 @@ import org.spongepowered.api.util.RespawnLocation;
 
 import java.util.UUID;
 
-public class SpongePlayer extends MCPlayer {
+public class SpongePlayer extends SpongeHumanEntity implements MCPlayer {
 
     private Player player;
     private String name;
 
     public SpongePlayer(Player player) {
+        super(player);
+
         this.player = player;
         this.name = player.getName();
     }
 
     @Override
-    public MCWorld getWorld() {
-        return new SpongeWorld(player.getWorld());
-    }
-
-    @Override
     public String getName() {
         return name;
-    }
-
-    @Override
-    public UUID getUniqueId() {
-        return player.getUniqueId();
     }
 
     @Override
@@ -86,11 +79,6 @@ public class SpongePlayer extends MCPlayer {
     @Override
     public boolean isOp() {
         return false; // Why sponge.. why?
-    }
-
-    @Override
-    public MCPlayerInventory getInventory() {
-        return new SpongePlayerInventory(player.getInventory());
     }
 
     @Override
