@@ -1,6 +1,7 @@
 package mc.alk.sponge.inventory;
 
 import mc.alk.mc.inventory.MCItemStack;
+import mc.alk.sponge.util.SpongeInventoryUtil;
 
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.data.key.Keys;
@@ -87,6 +88,11 @@ public class SpongeItemStack implements MCItemStack {
     @Override
     public String getCommonName() {
         return itemStack.getType().getName();
+    }
+
+    @Override
+    public String getFormattedCommonName() {
+        return SpongeInventoryUtil.getFormattedCommonName(itemStack);
     }
 
     @Override

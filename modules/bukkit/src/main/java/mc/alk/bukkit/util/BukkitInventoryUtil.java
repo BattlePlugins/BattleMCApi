@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import mc.alk.mc.util.MCInventoryUtil;
-
 import mc.euro.bukkitadapter.material.BattleMaterial;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Chest;
@@ -21,7 +20,7 @@ import org.bukkit.inventory.meta.ItemMeta;
  * @author alkarin
  *
  */
-public class BukkitInventoryUtil implements MCInventoryUtil{
+public class BukkitInventoryUtil {
 
 	private static Map<String, ItemStack> commonToStack = new HashMap<String, ItemStack>();
 	private static Map<String, String> typeToCommon = new HashMap<String, String>();
@@ -359,11 +358,9 @@ public class BukkitInventoryUtil implements MCInventoryUtil{
 //		return Material.getMaterial(id).toString();
 //	}
 
-	public static String getCommonName(ItemStack is) {
+	public static String getFormattedCommonName(ItemStack is) {
 		Material type = is.getType();
 		short datavalue = is.getDurability();
-
-		//		System.out.println(id + "   " + datavalue)
 
 		String iname = "";
 		try {
@@ -375,7 +372,10 @@ public class BukkitInventoryUtil implements MCInventoryUtil{
 			String cname = typeToCommon.get(idkey);
 			if (cname != null)
 				return cname;
-			iname = type.toString().toLowerCase() + " durability(" + datavalue+")";
+
+			int maxDurability = type.getMaxDurability();
+
+			iname = formatCommonName(type.toString().toLowerCase()) + " (" + (maxDurability - datavalue) + "/" + maxDurability + ")";
 		} catch (Exception e){
 			System.err.println("Error getting commonName type=" + type + "   iname=" + iname + "   datavalue=" + datavalue);
 			e.printStackTrace();
@@ -395,7 +395,14 @@ public class BukkitInventoryUtil implements MCInventoryUtil{
 		return BattleMaterial.fromString(type + ":" + datavalue).parseItem();
 	}
 
+	private static String formatCommonName(String name) {
+		name = name.toLowerCase().replace("_", " ");
 
+		String[] words = name.split(" ");
+		for (int i = 0; i < words.length; i++) {
+			words[i] = words[i].substring(0, 1).toUpperCase() + words[i].substring(1).toLowerCase();
+		}
 
-
+		return String.join(" ", words);
+	}
 }

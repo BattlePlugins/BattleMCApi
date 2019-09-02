@@ -5,9 +5,9 @@ import java.util.Map;
 
 import mc.alk.bukkit.util.BukkitInventoryUtil;
 import mc.alk.mc.inventory.MCItemStack;
-
 import mc.euro.bukkitadapter.enchant.BattleEnchant;
 import mc.euro.bukkitadapter.material.BattleMaterial;
+
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
@@ -66,7 +66,12 @@ public class BukkitItemStack implements MCItemStack {
 
 	@Override
 	public String getCommonName() {
-		return BukkitInventoryUtil.getCommonName(itemStack);
+		return itemStack.getType().name().toLowerCase();
+	}
+
+	@Override
+	public String getFormattedCommonName() {
+		return BukkitInventoryUtil.getFormattedCommonName(itemStack);
 	}
 
 	@Override

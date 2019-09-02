@@ -19,6 +19,7 @@ public interface MCItemStack {
 	boolean hasMetaData();
 
 	String getCommonName();
+	String getFormattedCommonName();
 
 	MCItemStack clone();
 	int isSpecial();

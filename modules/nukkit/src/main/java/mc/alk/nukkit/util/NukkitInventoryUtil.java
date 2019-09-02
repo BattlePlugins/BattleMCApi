@@ -5,8 +5,6 @@ import cn.nukkit.inventory.Inventory;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
 
-import mc.alk.mc.util.MCInventoryUtil;
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,7 +15,7 @@ import java.util.List;
  * @author alkarin
  *
  */
-public class NukkitInventoryUtil implements MCInventoryUtil {
+public class NukkitInventoryUtil {
 
     public static int getItemAmountFromInventory(Inventory inv, Item is) {
         return getItemAmount(inv.getContents().values(), is);
@@ -47,6 +45,21 @@ public class NukkitInventoryUtil implements MCInventoryUtil {
             }
         }
         return count;
+    }
+
+    public static String getFormattedCommonName(Item is) {
+        int datavalue = is.getDamage();
+
+        String iname = "";
+        try {
+            int maxDurability = is.getMaxDurability();
+
+            iname = formatCommonName(is.getName().toLowerCase()) + " (" + (maxDurability - datavalue) + "/" + maxDurability + ")";
+        } catch (Exception e){
+            System.err.println("Error getting commonName type=" + is + "   iname=" + iname + "   datavalue=" + datavalue);
+            e.printStackTrace();
+        }
+        return iname;
     }
 
     /// Checks if there is enough free space in inventory
@@ -149,5 +162,16 @@ public class NukkitInventoryUtil implements MCInventoryUtil {
         }
 
         return String.valueOf(id);
+    }
+
+    private static String formatCommonName(String name) {
+        name = name.toLowerCase().replace("_", " ");
+
+        String[] words = name.split(" ");
+        for (int i = 0; i < words.length; i++) {
+            words[i] = words[i].substring(0, 1).toUpperCase() + words[i].substring(1).toLowerCase();
+        }
+
+        return String.join(" ", words);
     }
 }

@@ -77,6 +77,11 @@ public class NukkitItemStack implements MCItemStack {
 	}
 
 	@Override
+	public String getFormattedCommonName() {
+		return NukkitInventoryUtil.getFormattedCommonName(itemStack);
+	}
+
+	@Override
 	public MCItemStack clone(){
 		return new NukkitItemStack(itemStack.clone());
 	}
