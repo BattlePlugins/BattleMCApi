@@ -1,6 +1,7 @@
 package mc.alk.mc;
 
 import mc.alk.mc.chat.Message;
+import mc.alk.mc.inventory.MCInventory;
 import mc.alk.mc.plugin.MCPlugin;
 
 import java.util.Collection;
@@ -120,5 +121,11 @@ public abstract class MCPlatform {
 
 	public static void broadcastMessage(Message message) {
 		getOnlinePlayers().forEach(player -> player.sendMessage(message));
+	}
+
+	public abstract MCInventory createMCInventory(MCPlugin plugin, int slots, String title);
+
+	public static MCInventory createInventory(MCPlugin plugin, int slots, String title) {
+		return INSTANCE.createMCInventory(plugin, slots, title);
 	}
 }

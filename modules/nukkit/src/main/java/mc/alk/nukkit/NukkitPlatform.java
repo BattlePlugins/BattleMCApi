@@ -4,6 +4,7 @@ import cn.nukkit.IPlayer;
 import cn.nukkit.OfflinePlayer;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
+import cn.nukkit.inventory.Inventory;
 import cn.nukkit.plugin.Plugin;
 
 import mc.alk.mc.APIType;
@@ -11,10 +12,14 @@ import mc.alk.mc.MCLocation;
 import mc.alk.mc.MCOfflinePlayer;
 import mc.alk.mc.MCPlayer;
 import mc.alk.mc.chat.Message;
+import mc.alk.mc.inventory.MCInventory;
 import mc.alk.mc.plugin.MCPlugin;
 import mc.alk.mc.MCPlatform;
 import mc.alk.mc.MCWorld;
 import mc.alk.nukkit.chat.NukkitMessage;
+import mc.alk.nukkit.inventory.NukkitInventory;
+import mc.alk.nukkit.inventory.fakeinventory.VirtualChestInventory;
+import mc.alk.nukkit.inventory.fakeinventory.VirtualDoubleChestInventory;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -114,5 +119,18 @@ public class NukkitPlatform extends MCPlatform {
 	@Override
 	public Message getMCMessage() {
 		return new NukkitMessage();
+	}
+
+	@Override
+	public MCInventory createMCInventory(MCPlugin plugin, int slots, String title) {
+		// Nukkit on its own does not have support for virtual inventories
+		// So instead, we have to use some hacky methods and packets to create this
+		// However, they can only be 27 slots (3 rows) or 54 slots (6 rows) in size
+		Inventory inventory = new VirtualChestInventory();
+		if (slots > 27) {
+			inventory = new VirtualDoubleChestInventory();
+		}
+
+		return new NukkitInventory(inventory);
 	}
 }

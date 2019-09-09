@@ -2,11 +2,13 @@ package mc.alk.bukkit;
 
 import mc.alk.bukkit.chat.BukkitMessage;
 import mc.alk.bukkit.chat.SpigotMessage;
+import mc.alk.bukkit.inventory.BukkitInventory;
 import mc.alk.mc.APIType;
 import mc.alk.mc.MCLocation;
 import mc.alk.mc.MCOfflinePlayer;
 import mc.alk.mc.MCPlayer;
 import mc.alk.mc.chat.Message;
+import mc.alk.mc.inventory.MCInventory;
 import mc.alk.mc.plugin.MCPlugin;
 import mc.alk.mc.MCPlatform;
 import mc.alk.mc.MCWorld;
@@ -102,6 +104,11 @@ public class BukkitPlatform extends MCPlatform {
 			return new SpigotMessage();
 
 		return new BukkitMessage();
+	}
+
+	@Override
+	public MCInventory createMCInventory(MCPlugin plugin, int slots, String title) {
+		return new BukkitInventory(Bukkit.createInventory(null, slots, title));
 	}
 
 	@Override

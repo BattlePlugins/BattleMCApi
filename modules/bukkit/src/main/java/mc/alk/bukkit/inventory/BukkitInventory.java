@@ -37,6 +37,16 @@ public class BukkitInventory implements MCInventory {
 	}
 
 	@Override
+	public void setItem(int slot, MCItemStack item) {
+		inventory.setItem(slot, ((BukkitItemStack) item).getBukkitItemStack());
+	}
+
+	@Override
+	public MCItemStack getItem(int slot) {
+		return new BukkitItemStack(inventory.getItem(slot));
+	}
+
+	@Override
 	public int getItemAmount(MCItemStack itemStack) {
 		return BukkitInventoryUtil.getItemAmountFromInventory(inventory,
 				((BukkitItemStack)itemStack).getBukkitItemStack()) ;

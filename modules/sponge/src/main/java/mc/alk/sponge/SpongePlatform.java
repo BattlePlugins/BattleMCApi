@@ -7,12 +7,21 @@ import mc.alk.mc.MCPlayer;
 import mc.alk.mc.MCPlatform;
 import mc.alk.mc.MCWorld;
 import mc.alk.mc.chat.Message;
+import mc.alk.mc.inventory.MCInventory;
 import mc.alk.mc.plugin.MCPlugin;
 
 import mc.alk.sponge.chat.SpongeMessage;
+import mc.alk.sponge.inventory.SpongeInventory;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.item.inventory.Inventory;
+import org.spongepowered.api.item.inventory.InventoryArchetypes;
+import org.spongepowered.api.item.inventory.InventoryProperty;
+import org.spongepowered.api.item.inventory.property.InventoryCapacity;
+import org.spongepowered.api.item.inventory.property.InventoryDimension;
+import org.spongepowered.api.item.inventory.property.InventoryTitle;
 import org.spongepowered.api.service.user.UserStorageService;
+import org.spongepowered.api.text.Text;
 import org.spongepowered.api.world.Location;
 
 import java.util.ArrayList;
@@ -106,5 +115,13 @@ public class SpongePlatform extends MCPlatform {
     @Override
     public Message getMCMessage() {
         return new SpongeMessage();
+    }
+
+    @Override
+    public MCInventory createMCInventory(MCPlugin plugin, int slots, String title) {
+        Inventory inventory = Inventory.builder().property(InventoryTitle.PROPERTY_NAME, InventoryTitle.of(Text.of(title)))
+                .property(InventoryDimension.PROPERTY_NAME, new InventoryDimension( 9, 6)).build(plugin);
+
+        return new SpongeInventory(inventory);
     }
 }

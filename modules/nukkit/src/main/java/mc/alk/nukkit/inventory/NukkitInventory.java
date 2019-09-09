@@ -38,6 +38,16 @@ public class NukkitInventory implements MCInventory {
 	}
 
 	@Override
+	public void setItem(int slot, MCItemStack item) {
+		inventory.setItem(slot, ((NukkitItemStack) item).getNukkitItem());
+	}
+
+	@Override
+	public MCItemStack getItem(int slot) {
+		return new NukkitItemStack(inventory.getItem(slot));
+	}
+
+	@Override
 	public int getItemAmount(MCItemStack itemStack) {
 		return NukkitInventoryUtil.getItemAmountFromInventory(inventory, ((NukkitItemStack) itemStack).getNukkitItem());
 	}
