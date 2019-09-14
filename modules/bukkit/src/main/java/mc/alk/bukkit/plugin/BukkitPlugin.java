@@ -8,13 +8,13 @@ import mc.alk.mc.MCPlatform;
 import mc.alk.mc.command.MCCommand;
 import mc.alk.mc.command.MCCommandExecutor;
 import mc.alk.mc.logger.MCLogger;
-import mc.alk.mc.plugin.MCPlugin;
+import mc.alk.mc.plugin.PlatformPlugin;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.List;
 
-public abstract class BukkitPlugin extends JavaPlugin implements MCPlugin {
+public abstract class BukkitPlugin extends JavaPlugin implements PlatformPlugin {
 
     private MCPlatform platform;
 
@@ -29,11 +29,20 @@ public abstract class BukkitPlugin extends JavaPlugin implements MCPlugin {
     }
 
     @Override
+    public void onEnable() {
+        MCPlatform.getPluginManager().initializePlugin(this);
+        MCPlatform.getPluginManager().enablePlugin();
+    }
+
+    @Override
+    public void onDisable() {
+        MCPlatform.getPluginManager().disablePlugin();
+    }
+
     public List<String> getAuthors() {
         return getDescription().getAuthors();
     }
 
-    @Override
     public String getVersion() {
         return getDescription().getVersion();
     }

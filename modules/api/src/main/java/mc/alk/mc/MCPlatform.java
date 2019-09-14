@@ -3,6 +3,8 @@ package mc.alk.mc;
 import mc.alk.mc.chat.Message;
 import mc.alk.mc.inventory.MCInventory;
 import mc.alk.mc.plugin.MCPlugin;
+import mc.alk.mc.plugin.MCPluginManager;
+import mc.alk.mc.plugin.PlatformPlugin;
 
 import java.util.Collection;
 import java.util.UUID;
@@ -11,6 +13,8 @@ public abstract class MCPlatform {
 
 	private static MCPlatform INSTANCE;
 	private static APIType type;
+
+	private static MCPluginManager pluginManager = new MCPluginManager();
 
 	public static void setInstance(MCPlatform api){
 		if (INSTANCE == null){
@@ -31,11 +35,11 @@ public abstract class MCPlatform {
 		return INSTANCE.getMCWorld(world);
 	}
 
-	public static long scheduleSyncDelayedTask(MCPlugin plugin, Runnable runnable){
+	public static long scheduleSyncDelayedTask(PlatformPlugin plugin, Runnable runnable){
 		return scheduleSyncDelayedTask(plugin, runnable,0L);
 	}
 
-	public static long scheduleSyncDelayedTask(MCPlugin plugin, Runnable runnable, long millis) {
+	public static long scheduleSyncDelayedTask(PlatformPlugin plugin, Runnable runnable, long millis) {
 		return INSTANCE.scheduleSyncTask(plugin, runnable, millis);
 	}
 
@@ -46,7 +50,7 @@ public abstract class MCPlatform {
 
 	public abstract APIType getAPIType();
 
-	public abstract long scheduleSyncTask(MCPlugin plugin, Runnable runnable, long millis);
+	public abstract long scheduleSyncTask(PlatformPlugin plugin, Runnable runnable, long millis);
 	public abstract boolean cancelMCTask(long id);
 
 	public static int scheduleAsynchrounousTask(MCPlugin plugin, Runnable task) {
@@ -127,5 +131,9 @@ public abstract class MCPlatform {
 
 	public static MCInventory createInventory(MCPlugin plugin, int slots, String title) {
 		return INSTANCE.createMCInventory(plugin, slots, title);
+	}
+
+	public static MCPluginManager getPluginManager() {
+		return pluginManager;
 	}
 }

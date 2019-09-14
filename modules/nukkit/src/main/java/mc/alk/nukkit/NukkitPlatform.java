@@ -16,6 +16,7 @@ import mc.alk.mc.inventory.MCInventory;
 import mc.alk.mc.plugin.MCPlugin;
 import mc.alk.mc.MCPlatform;
 import mc.alk.mc.MCWorld;
+import mc.alk.mc.plugin.PlatformPlugin;
 import mc.alk.nukkit.chat.NukkitMessage;
 import mc.alk.nukkit.inventory.NukkitInventory;
 import mc.alk.nukkit.inventory.fakeinventory.VirtualChestInventory;
@@ -48,7 +49,7 @@ public class NukkitPlatform extends MCPlatform {
 	}
 
 	@Override
-	public long scheduleSyncTask(MCPlugin plugin, Runnable runnable, long millis) {
+	public long scheduleSyncTask(PlatformPlugin plugin, Runnable runnable, long millis) {
 		return Server.getInstance().getScheduler().scheduleDelayedTask((Plugin) plugin, runnable, (int) millis/50).getTaskId();
 	}
 

@@ -1,29 +1,41 @@
 package mc.alk.mc.plugin;
 
-import mc.alk.mc.MCPlatform;
 import mc.alk.mc.command.MCCommand;
 import mc.alk.mc.command.MCCommandExecutor;
 import mc.alk.mc.logger.MCLogger;
 
 import java.io.File;
-import java.util.List;
 
-public interface MCPlugin {
+public abstract class MCPlugin {
 
-	MCPlatform getPlatform();
+	private PlatformPlugin platformPlugin;
 
-	void onEnable();
-	void onDisable();
+	private boolean enabled = false;
 
-	boolean isEnabled();
+	public abstract void onEnable();
+	public abstract void onDisable();
 
-	File getDataFolder();
+	public boolean isEnabled() {
+		return platformPlugin.isEnabled();
+	}
 
-	String getName();
-	List<String> getAuthors();
-	String getVersion();
+	public File getDataFolder() {
+		return platformPlugin.getDataFolder();
+	}
 
-	void registerMCCommand(MCCommand command, MCCommandExecutor executor);
+	public MCLogger getLogger() {
+		return platformPlugin.getMCLogger();
+	}
 
-	MCLogger getMCLogger();
+	public void registerCommand(MCCommand command, MCCommandExecutor executor) {
+		platformPlugin.registerMCCommand(command, executor);
+	}
+
+	public PlatformPlugin getPlatformPlugin() {
+		return platformPlugin;
+	}
+
+	protected void setPlatformPlugin(PlatformPlugin platformPlugin) {
+		this.platformPlugin = platformPlugin;
+	}
 }

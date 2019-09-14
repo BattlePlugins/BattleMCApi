@@ -10,14 +10,13 @@ import mc.alk.mc.chat.Message;
 import mc.alk.mc.inventory.MCInventory;
 import mc.alk.mc.plugin.MCPlugin;
 
+import mc.alk.mc.plugin.PlatformPlugin;
 import mc.alk.sponge.chat.SpongeMessage;
 import mc.alk.sponge.inventory.SpongeInventory;
+
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.item.inventory.Inventory;
-import org.spongepowered.api.item.inventory.InventoryArchetypes;
-import org.spongepowered.api.item.inventory.InventoryProperty;
-import org.spongepowered.api.item.inventory.property.InventoryCapacity;
 import org.spongepowered.api.item.inventory.property.InventoryDimension;
 import org.spongepowered.api.item.inventory.property.InventoryTitle;
 import org.spongepowered.api.service.user.UserStorageService;
@@ -53,7 +52,7 @@ public class SpongePlatform extends MCPlatform {
     }
 
     @Override
-    public long scheduleSyncTask(MCPlugin plugin, Runnable runnable, long millis) {
+    public long scheduleSyncTask(PlatformPlugin plugin, Runnable runnable, long millis) {
         Sponge.getScheduler().createTaskBuilder().interval(millis, TimeUnit.MILLISECONDS).execute(runnable).submit(plugin);
         return 0; // No support for sponge task ids
     }
