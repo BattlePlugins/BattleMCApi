@@ -26,14 +26,6 @@ public class MCPluginManager {
                         throw new RuntimeException("@PluginProperties annotation is not present!");
 
                     PluginProperties annotation = pluginClass.getAnnotation(PluginProperties.class);
-
-                    //PluginConstants.ID = annotation.id();
-                    //PluginConstants.NAME = annotation.name();
-                    //PluginConstants.VERSION = annotation.version();
-                    //PluginConstants.DESCRIPTION = annotation.description();
-                    //PluginConstants.URL = annotation.url();
-                    //PluginConstants.AUTHORS = annotation.authors();
-
                     plugin.setPlatformPlugin(platformPlugin);
                 }
             }

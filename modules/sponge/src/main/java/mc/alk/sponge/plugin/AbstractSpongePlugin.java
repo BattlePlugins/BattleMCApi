@@ -6,7 +6,6 @@ import mc.alk.mc.command.MCCommand;
 import mc.alk.mc.command.MCCommandExecutor;
 import mc.alk.mc.logger.MCLogger;
 import mc.alk.mc.plugin.PlatformPlugin;
-import mc.alk.mc.plugin.PluginConstants;
 import mc.alk.sponge.SpongePlatform;
 import mc.alk.sponge.command.SpongeCommandExecutor;
 import mc.alk.sponge.logger.SpongeLogger;
@@ -16,15 +15,12 @@ import org.spongepowered.api.config.ConfigDir;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GameStartedServerEvent;
 import org.spongepowered.api.event.game.state.GameStoppedEvent;
-import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.plugin.PluginManager;
 
 import java.io.File;
 import java.util.List;
 
-@Plugin(id = PluginConstants.ID, name = PluginConstants.NAME, version = PluginConstants.VERSION,
-        description = PluginConstants.DESCRIPTION, url = PluginConstants.URL, authors = PluginConstants.AUTHORS)
-public abstract class SpongePlugin implements PlatformPlugin {
+public class AbstractSpongePlugin implements PlatformPlugin {
 
     @Inject
     private Logger logger;
@@ -43,7 +39,6 @@ public abstract class SpongePlugin implements PlatformPlugin {
     public void onServerStart(GameStartedServerEvent event) {
         MCPlatform.getPluginManager().initializePlugin(this);
         MCPlatform.getPluginManager().enablePlugin();
-        onEnable();
         enabled = true;
     }
 
@@ -51,7 +46,6 @@ public abstract class SpongePlugin implements PlatformPlugin {
     public void onServerStop(GameStoppedEvent event) {
         enabled = false;
         MCPlatform.getPluginManager().disablePlugin();
-        onDisable();
     }
 
 

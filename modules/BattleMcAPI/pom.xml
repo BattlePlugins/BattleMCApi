@@ -65,12 +65,17 @@
                                 <includes>
                                     <include>mc.alk:McAPI-*</include>
                                     <include>mc.euro:BukkitAdapter</include>
+                                    <include>javassist:javassist</include>
                                 </includes>
                             </artifactSet>
                             <relocations>
                                 <relocation>
                                     <pattern>mc.euro.bukkitadapter</pattern>
                                     <shadedPattern>mc.alk.bukkit.adapter</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>javassist</pattern>
+                                    <shadedPattern>mc.alk.mc.alib.javassist</shadedPattern>
                                 </relocation>
                             </relocations>
                         </configuration>

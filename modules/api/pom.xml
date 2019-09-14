@@ -12,6 +12,14 @@
     <version>parent</version>
     <packaging>jar</packaging>
     <name>McAPI-api</name>
+    <dependencies>
+        <dependency>
+            <groupId>javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.12.1.GA</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
     <build>
         <resources>
             <resource>

@@ -41,6 +41,10 @@
             <id>sponge-repo</id>
             <url>https://repo.spongepowered.org/maven</url>
         </repository>
+        <repository>
+            <id>javassist-repo</id>
+            <url>https://mvnrepository.com/artifact/javassist/javassist</url>
+        </repository>
     </repositories>
     <build>
         <defaultGoal>install</defaultGoal>

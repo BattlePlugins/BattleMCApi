@@ -21,8 +21,5 @@ public interface PlatformPlugin {
     MCPlatform getPlatform();
     MCLogger getMCLogger();
 
-    void onEnable();
-    void onDisable();
-
     boolean isEnabled();
 }

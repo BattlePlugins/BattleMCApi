@@ -1,5 +1,17 @@
 package mc.alk.mc.plugin;
 
+import javassist.CannotCompileException;
+import javassist.ClassPool;
+import javassist.CtClass;
+import javassist.CtNewConstructor;
+import javassist.LoaderClassPath;
+import javassist.bytecode.AnnotationsAttribute;
+import javassist.bytecode.ClassFile;
+import javassist.bytecode.ConstPool;
+import javassist.bytecode.annotation.Annotation;
+import javassist.bytecode.annotation.ArrayMemberValue;
+import javassist.bytecode.annotation.StringMemberValue;
+
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.RoundEnvironment;
@@ -12,6 +24,7 @@ import javax.tools.Diagnostic;
 import javax.tools.FileObject;
 import javax.tools.StandardLocation;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -134,6 +147,43 @@ public class PluginProcessor extends AbstractProcessor {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+
+        try {
+            ClassPool pool = ClassPool.getDefault();
+            pool.insertClassPath(new LoaderClassPath(getClass().getClassLoader()));
+
+            CtClass ctSponge = pool.makeClass("mc.alk.sponge.plugin.SpongePlugin");
+            ctSponge.setSuperclass(pool.makeClass("mc.alk.sponge.plugin.AbstractSpongePlugin"));
+            ctSponge.addConstructor(CtNewConstructor.make(null, null, CtNewConstructor.PASS_PARAMS, null, null, ctSponge));
+            ClassFile classFile = ctSponge.getClassFile();
+            ConstPool cPool = classFile.getConstPool();
+
+            AnnotationsAttribute attribute = new AnnotationsAttribute(cPool, AnnotationsAttribute.visibleTag);
+            Annotation annotation = new Annotation("org.spongepowered.api.plugin.Plugin", cPool);
+            annotation.addMemberValue("id", new StringMemberValue(plugin.id(), cPool));
+            annotation.addMemberValue("name", new StringMemberValue(plugin.name(), cPool));
+            annotation.addMemberValue("version", new StringMemberValue(plugin.version(), cPool));
+            annotation.addMemberValue("description", new StringMemberValue(plugin.description(), cPool));
+            annotation.addMemberValue("url", new StringMemberValue(plugin.url(), cPool));
+
+            StringMemberValue[] members = new StringMemberValue[plugin.authors().length];
+            for (int i = 0; i < plugin.authors().length; i++) {
+                members[i] = new StringMemberValue(plugin.authors()[i], cPool);
+            }
+
+            ArrayMemberValue arrayMemberValue = new ArrayMemberValue(cPool);
+            arrayMemberValue.setValue(members);
+
+            annotation.addMemberValue("authors", arrayMemberValue);
+
+
+            attribute.addAnnotation(annotation);
+            classFile.addAttribute(attribute);
+
+            writeClassToRoot(ctSponge);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     private BufferedWriter createPluginWriter() throws IOException {
@@ -189,5 +239,10 @@ public class PluginProcessor extends AbstractProcessor {
         }
 
         return false;
+    }
+
+    private void writeClassToRoot(CtClass ctClass) throws CannotCompileException, IOException {
+        FileObject file = processingEnv.getFiler().getResource(StandardLocation.CLASS_OUTPUT, "", "root");
+        ctClass.writeFile(new File(file.toUri()).getParent());
     }
 }
