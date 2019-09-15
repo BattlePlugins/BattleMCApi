@@ -25,6 +25,8 @@ import mc.alk.nukkit.inventory.fakeinventory.VirtualDoubleChestInventory;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class NukkitPlatform extends MCPlatform {
 
@@ -55,12 +57,19 @@ public class NukkitPlatform extends MCPlatform {
 
 	@Override
 	public MCPlayer getMCPlayer(String name) {
+		Player player = Server.getInstance().getPlayer(name);
+		if (player == null)
+			return null;
+
 		return new NukkitPlayer(Server.getInstance().getPlayer(name));
 	}
 
 	@Override
 	public MCOfflinePlayer getMCOfflinePlayer(String name) {
 		IPlayer player = Server.getInstance().getOfflinePlayer(name);
+		if (player == null)
+			return null;
+
 		if (player instanceof OfflinePlayer)
 			return new NukkitOfflinePlayer((OfflinePlayer) player);
 		else if (player instanceof Player)
@@ -72,6 +81,9 @@ public class NukkitPlatform extends MCPlatform {
 	@Override
 	public MCOfflinePlayer getMCOfflinePlayer(UUID uuid) {
 		IPlayer player = Server.getInstance().getOfflinePlayer(uuid);
+		if (player == null)
+			return null;
+
 		if (player instanceof OfflinePlayer)
 			return new NukkitOfflinePlayer((OfflinePlayer) player);
 		else if (player instanceof Player)
@@ -82,11 +94,8 @@ public class NukkitPlatform extends MCPlatform {
 
 	@Override
 	public Collection<MCPlayer> getMCOnlinePlayers() {
-		Collection<MCPlayer> players = new ArrayList<>();
-		for (Player player : Server.getInstance().getOnlinePlayers().values()) {
-			players.add(new NukkitPlayer(player));
-		}
-		return players;
+		return Server.getInstance().getOnlinePlayers().values()
+				.stream().map(NukkitPlayer::new).collect(Collectors.toList());
 	}
 
 	@Override

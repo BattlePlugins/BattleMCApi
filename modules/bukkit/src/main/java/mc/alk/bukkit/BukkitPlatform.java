@@ -22,6 +22,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class BukkitPlatform extends MCPlatform {
 
@@ -68,20 +70,14 @@ public class BukkitPlatform extends MCPlatform {
 
 	@Override
 	public Collection<MCPlayer> getMCOnlinePlayers() {
-		Collection<MCPlayer> players = new ArrayList<>();
-		for (Player player : Bukkit.getOnlinePlayers()) {
-			players.add(new BukkitPlayer(player));
-		}
-		return players;
+		return Bukkit.getOnlinePlayers().stream().map(BukkitPlayer::new)
+				.collect(Collectors.toList());
 	}
 
 	@Override
 	public Collection<MCOfflinePlayer> getMCOfflinePlayers() {
-		Collection<MCOfflinePlayer> players = new ArrayList<>();
-		for (OfflinePlayer player : Bukkit.getOfflinePlayers()) {
-			players.add(new BukkitOfflinePlayer(player));
-		}
-		return players;
+		return Stream.of(Bukkit.getOfflinePlayers())
+				.map(BukkitOfflinePlayer::new).collect(Collectors.toList());
 	}
 
 	@Override

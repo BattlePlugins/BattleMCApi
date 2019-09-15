@@ -28,6 +28,7 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 public class SpongePlatform extends MCPlatform {
 
@@ -65,28 +66,37 @@ public class SpongePlatform extends MCPlatform {
     @Override
     public MCPlayer getMCPlayer(String name) {
         Optional<Player> player = Sponge.getServer().getPlayer(name);
-        return new SpongePlayer(player.get());
+        return player.map(SpongePlayer::new).orElse(null);
     }
 
     @Override
     public MCOfflinePlayer getMCOfflinePlayer(String name) {
         Optional<UserStorageService> userStorageService = Sponge.getServiceManager().provide(UserStorageService.class);
+        if (!userStorageService.isPresent())
+            return null;
+
+        if (!userStorageService.get().get(name).isPresent())
+            return null;
+
         return new SpongeOfflinePlayer(userStorageService.get().get(name).get());
     }
 
     @Override
     public MCOfflinePlayer getMCOfflinePlayer(UUID uuid) {
         Optional<UserStorageService> userStorageService = Sponge.getServiceManager().provide(UserStorageService.class);
+        if (!userStorageService.isPresent())
+            return null;
+
+        if (!userStorageService.get().get(uuid).isPresent())
+            return null;
+
         return new SpongeOfflinePlayer(userStorageService.get().get(uuid).get());
     }
 
     @Override
     public Collection<MCPlayer> getMCOnlinePlayers() {
-        Collection<MCPlayer> players = new ArrayList<>();
-        for (Player player : Sponge.getServer().getOnlinePlayers()) {
-            players.add(new SpongePlayer(player));
-        }
-        return players;
+        return Sponge.getServer().getOnlinePlayers().stream()
+                .map(SpongePlayer::new).collect(Collectors.toList());
     }
 
     @Override
