@@ -1,7 +1,7 @@
 package mc.alk.bukkit.entity;
 
 import mc.alk.bukkit.inventory.BukkitPlayerInventory;
-import mc.alk.mc.inventory.MCHumanEntity;
+import mc.alk.mc.entity.MCHumanEntity;
 import mc.alk.mc.inventory.MCPlayerInventory;
 
 import org.bukkit.entity.HumanEntity;
@@ -17,7 +17,7 @@ public class BukkitHumanEntity extends BukkitLivingEntity implements MCHumanEnti
     }
 
     @Override
-    public MCPlayerInventory getInventory() {
+    public BukkitPlayerInventory getInventory() {
         return new BukkitPlayerInventory(humanEntity.getInventory());
     }
 }

@@ -3,61 +3,53 @@ package mc.alk.nukkit.block;
 import cn.nukkit.block.Block;
 
 import mc.alk.mc.block.MCBlock;
-import mc.alk.mc.MCLocation;
-import mc.alk.mc.MCWorld;
+import mc.alk.mc.util.MCWrapper;
 import mc.alk.nukkit.NukkitLocation;
 import mc.alk.nukkit.NukkitWorld;
 
-public class NukkitBlock implements MCBlock {
-
-	private Block block;
+public class NukkitBlock extends MCWrapper<Block> implements MCBlock {
 
 	public NukkitBlock(Block block) {
-		this.block = block;
+		super(block);
 	}
 
 	@Override
-	public MCWorld getWorld() {
-		return new NukkitWorld(block.getLevel());
+	public NukkitWorld getWorld() {
+		return new NukkitWorld(handle.getLevel());
 	}
 
 	@Override
-	public MCLocation getLocation() {
-		return new NukkitLocation(block.getLocation());
+	public NukkitLocation getLocation() {
+		return new NukkitLocation(handle.getLocation());
 	}
 
 	@Override
 	public int getX() {
-		return (int) block.x;
+		return (int) handle.x;
 	}
 
 	@Override
 	public int getY() {
-		return (int) block.y;
+		return (int) handle.y;
 	}
 
 	@Override
 	public int getZ() {
-		return (int) block.z;
+		return (int) handle.z;
 	}
 
 	@Override
 	public String getType() {
-		return String.valueOf(block.getId());
+		return String.valueOf(handle.getId());
 	}
 
 	@Override
 	public void update(boolean b) {
-		block.onUpdate(1); // Not sure if this works..
+		handle.onUpdate(1); // Not sure if this works..
 	}
 
 	@Override
 	public NukkitBlock clone(){
-		return new NukkitBlock(block);
+		return new NukkitBlock(handle);
 	}
-
-	public Block getNukkitBlock() {
-		return block;
-	}
-
 }

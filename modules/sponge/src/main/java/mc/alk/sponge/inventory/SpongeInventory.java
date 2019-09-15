@@ -2,39 +2,38 @@ package mc.alk.sponge.inventory;
 
 import mc.alk.mc.inventory.MCInventory;
 import mc.alk.mc.inventory.MCItemStack;
+import mc.alk.mc.util.MCWrapper;
 
 import org.spongepowered.api.item.inventory.Inventory;
 import org.spongepowered.api.item.inventory.property.SlotPos;
 import org.spongepowered.api.item.inventory.query.QueryOperationTypes;
 
-public class SpongeInventory implements MCInventory {
-
-    private Inventory inventory;
+public class SpongeInventory extends MCWrapper<Inventory> implements MCInventory {
 
     public SpongeInventory(Inventory inventory) {
-        this.inventory = inventory;
+        super(inventory);
     }
 
     @Override
     public void addItem(MCItemStack... itemStacks) {
         for (MCItemStack itemStack : itemStacks) {
-            inventory.set(((SpongeItemStack) itemStack).getSpongeItemStack());
+            handle.set(((SpongeItemStack) itemStack).getHandle());
         }
     }
 
     @Override
     public void removeItem(MCItemStack itemStack) {
-        inventory.query(QueryOperationTypes.ITEM_STACK_IGNORE_QUANTITY.of(((SpongeItemStack) itemStack).getSpongeItemStack())).poll();
+        handle.query(QueryOperationTypes.ITEM_STACK_IGNORE_QUANTITY.of(((SpongeItemStack) itemStack).getHandle())).poll();
     }
 
     @Override
     public void setItem(int slot, MCItemStack item) {
-        inventory.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(slot))).offer(((SpongeItemStack) item).getSpongeItemStack());
+        handle.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(slot))).offer(((SpongeItemStack) item).getHandle());
     }
 
     @Override
-    public MCItemStack getItem(int slot) {
-        return new SpongeItemStack(inventory.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(slot))).peek().get());
+    public SpongeItemStack getItem(int slot) {
+        return new SpongeItemStack(handle.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(slot))).peek().get());
     }
 
     @Override
@@ -50,22 +49,18 @@ public class SpongeInventory implements MCInventory {
 
     @Override
     public boolean canFit(MCItemStack itemStack) {
-        return inventory.canFit(((SpongeItemStack) itemStack).getSpongeItemStack());
+        return handle.canFit(((SpongeItemStack) itemStack).getHandle());
     }
 
     @Override
-    public MCItemStack[] getContents() {
-        MCItemStack[] itemStacks = new MCItemStack[inventory.capacity()];
+    public SpongeItemStack[] getContents() {
+        SpongeItemStack[] itemStacks = new SpongeItemStack[handle.capacity()];
         // Inventory for slots... what..? okay sure, whatever works ig
         int i = 0;
-        for (Inventory inventory : inventory.slots()) {
+        for (Inventory inventory : handle.slots()) {
             itemStacks[i] = new SpongeItemStack(inventory.peek().get());
             i++;
         }
         return itemStacks;
-    }
-
-    public Inventory getSpongeInventory() {
-        return inventory;
     }
 }

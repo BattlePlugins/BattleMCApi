@@ -43,8 +43,4 @@ public class NukkitSign extends NukkitBlock implements MCSign {
 		sign.onUpdate();
 		sign.getBlock().onUpdate(1);
 	}
-
-	public BlockEntitySign getNukkitSign(){
-		return sign;
-	}
 }

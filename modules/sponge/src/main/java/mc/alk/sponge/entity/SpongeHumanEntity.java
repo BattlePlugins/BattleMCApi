@@ -1,6 +1,6 @@
 package mc.alk.sponge.entity;
 
-import mc.alk.mc.inventory.MCHumanEntity;
+import mc.alk.mc.entity.MCHumanEntity;
 import mc.alk.mc.inventory.MCPlayerInventory;
 import mc.alk.sponge.inventory.SpongePlayerInventory;
 
@@ -17,8 +17,7 @@ public class SpongeHumanEntity extends SpongeLivingEntity implements MCHumanEnti
     }
 
     @Override
-    public MCPlayerInventory getInventory() {
+    public SpongePlayerInventory getInventory() {
         return new SpongePlayerInventory(humanEntity.getInventory());
     }
-
 }

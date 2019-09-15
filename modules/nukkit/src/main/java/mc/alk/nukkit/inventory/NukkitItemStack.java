@@ -4,63 +4,62 @@ import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
 
 import mc.alk.mc.inventory.MCItemStack;
+import mc.alk.mc.util.MCWrapper;
 import mc.alk.nukkit.util.NukkitInventoryUtil;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class NukkitItemStack implements MCItemStack {
-
-	private Item itemStack;
+public class NukkitItemStack extends MCWrapper<Item> implements MCItemStack {
 
 	public NukkitItemStack(Item itemStack) {
-		this.itemStack = itemStack == null ? new Item(0): itemStack;
+		super(itemStack == null ? new Item(0): itemStack);
 	}
 
 	@Override
 	public void setType(String type) {
 		// Nukkit doesn't have a setter for items.. so get from string instead
 		Item item = Item.fromString(type);
-		item.setCount(itemStack.getCount());
-		item.setCompoundTag(itemStack.getCompoundTag());
-		item.setCustomName(itemStack.getCustomName());
-		item.setCustomBlockData(itemStack.getCustomBlockData());
-		item.setDamage(itemStack.getDamage());
-		item.setLore(itemStack.getLore());
-		item.setNamedTag(itemStack.getNamedTag());
+		item.setCount(handle.getCount());
+		item.setCompoundTag(handle.getCompoundTag());
+		item.setCustomName(handle.getCustomName());
+		item.setCustomBlockData(handle.getCustomBlockData());
+		item.setDamage(handle.getDamage());
+		item.setLore(handle.getLore());
+		item.setNamedTag(handle.getNamedTag());
 
-		this.itemStack = item;
+		this.handle = item;
 	}
 
 	@Override
 	public String getType() {
-		return NukkitInventoryUtil.getTypeFromId(itemStack.getId());
+		return NukkitInventoryUtil.getTypeFromId(handle.getId());
 	}
 
 	@Override
 	public void setDataValue(short value) {
-		itemStack.setDamage((int) value);
+		handle.setDamage((int) value);
 	}
 
 	@Override
 	public short getDataValue() {
-		return (short) itemStack.getDamage();
+		return (short) handle.getDamage();
 	}
 
 	@Override
 	public void setQuantity(int quantity) {
-		itemStack.setCount(quantity);
+		handle.setCount(quantity);
 	}
 
 	@Override
 	public int getQuantity() {
-		return itemStack.getCount();
+		return handle.getCount();
 	}
 
 	@Override
 	public Map<String, Integer> getEnchantments() {
 		Map<String, Integer> encs = new HashMap<String,Integer>();
-		for (Enchantment enchant : itemStack.getEnchantments()) {
+		for (Enchantment enchant : handle.getEnchantments()) {
 			encs.put(enchant.getName(), enchant.getId());
 		}
 		return encs;
@@ -68,27 +67,27 @@ public class NukkitItemStack implements MCItemStack {
 
 	@Override
 	public boolean hasMetaData() {
-		return itemStack.hasMeta();
+		return handle.hasMeta();
 	}
 
 	@Override
 	public String getCommonName() {
-		return itemStack.getName();
+		return handle.getName();
 	}
 
 	@Override
 	public String getFormattedCommonName() {
-		return NukkitInventoryUtil.getFormattedCommonName(itemStack);
+		return NukkitInventoryUtil.getFormattedCommonName(handle);
 	}
 
 	@Override
-	public MCItemStack clone(){
-		return new NukkitItemStack(itemStack.clone());
+	public NukkitItemStack clone(){
+		return new NukkitItemStack(handle.clone());
 	}
 
 	@Override
 	public String toString(){
-		return itemStack != null ? "["+ itemStack.getName() +":"+itemStack.getDamage() + " q="+
+		return handle != null ? "["+ handle.getName() +":"+handle.getDamage() + " q="+
 				getQuantity()+"]" : "null";
 	}
 
@@ -98,13 +97,9 @@ public class NukkitItemStack implements MCItemStack {
 			if (!enchant.getName().equalsIgnoreCase(ench))
 				continue;
 
-			itemStack.addEnchantment(enchant);
+			handle.addEnchantment(enchant);
 			return;
 		}
-	}
-
-	public void addEnchantment(Enchantment enc, int level) {
-		itemStack.addEnchantment(enc);
 	}
 
 	@Override
@@ -119,9 +114,5 @@ public class NukkitItemStack implements MCItemStack {
 //		}
 
 		return special;
-	}
-
-	public Item getNukkitItem() {
-		return itemStack;
 	}
 }

@@ -1,52 +1,48 @@
 package mc.alk.sponge.logger;
 
 import mc.alk.mc.logger.MCLogger;
+import mc.alk.mc.util.MCWrapper;
+
 import org.slf4j.Logger;
 
-public class SpongeLogger implements MCLogger {
-
-    private Logger logger;
+public class SpongeLogger extends MCWrapper<Logger> implements MCLogger {
 
     private boolean debug;
 
     public SpongeLogger(Logger logger) {
-        this.logger = logger;
+        super(logger);
 
         this.debug = false;
     }
 
     @Override
     public void severe(String message) {
-        logger.warn(message);
+        handle.warn(message);
     }
 
     @Override
     public void error(String message) {
-        logger.error(message);
+        handle.error(message);
     }
 
     @Override
     public void warning(String message) {
-        logger.warn(message);
+        handle.warn(message);
     }
 
     @Override
     public void info(String message) {
-        logger.info(message);
+        handle.info(message);
     }
 
     @Override
     public void debug(String message) {
         if (debug)
-            logger.info(message);
+            handle.info(message);
     }
 
     @Override
     public void setDebug(boolean debug) {
         this.debug = debug;
-    }
-
-    public Logger getSpongeLogger() {
-        return logger;
     }
 }

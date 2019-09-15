@@ -1,32 +1,28 @@
 package mc.alk.bukkit.command;
 
 import mc.alk.mc.command.MCCommandSender;
+import mc.alk.mc.util.MCWrapper;
+
 import org.bukkit.command.CommandSender;
 
-public abstract class BukkitCommandSender implements MCCommandSender {
-
-	private CommandSender sender;
+public abstract class BukkitCommandSender extends MCWrapper<CommandSender> implements MCCommandSender {
 
 	public BukkitCommandSender(CommandSender sender){
-		this.sender = sender;
+		super(sender);
 	}
 
 	@Override
 	public boolean hasPermission(String node) {
-		return sender.hasPermission(node);
+		return handle.hasPermission(node);
 	}
 
 	@Override
 	public void sendMessage(String message) {
-		sender.sendMessage(message);
+		handle.sendMessage(message);
 	}
 
 	@Override
 	public String getName() {
 		return "Console";
-	}
-
-	public CommandSender getBukkitCommandSender() {
-		return sender;
 	}
 }

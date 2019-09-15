@@ -3,31 +3,26 @@ package mc.alk.nukkit.command;
 import cn.nukkit.command.CommandSender;
 
 import mc.alk.mc.command.MCCommandSender;
+import mc.alk.mc.util.MCWrapper;
 
-public abstract class NukkitCommandSender implements MCCommandSender {
-
-	private CommandSender sender;
+public abstract class NukkitCommandSender extends MCWrapper<CommandSender> implements MCCommandSender {
 
 	public NukkitCommandSender(CommandSender sender){
-		this.sender = sender;
+		super(sender);
 	}
 
 	@Override
 	public boolean hasPermission(String node) {
-		return sender.hasPermission(node);
+		return handle.hasPermission(node);
 	}
 
 	@Override
 	public void sendMessage(String message) {
-		sender.sendMessage(message);
+		handle.sendMessage(message);
 	}
 
 	@Override
 	public String getName() {
 		return "Console";
-	}
-
-	public CommandSender getNukkitCommandSender() {
-		return sender;
 	}
 }

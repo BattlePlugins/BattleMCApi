@@ -4,16 +4,15 @@ import mc.alk.bukkit.util.BukkitInventoryUtil;
 import mc.alk.mc.inventory.MCInventory;
 import mc.alk.mc.inventory.MCItemStack;
 
+import mc.alk.mc.util.MCWrapper;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-public class BukkitInventory implements MCInventory {
-
-	private Inventory inventory;
+public class BukkitInventory extends MCWrapper<Inventory> implements MCInventory {
 
 	public BukkitInventory(Inventory inventory) {
-		this.inventory = inventory;
+		super(inventory);
 	}
 
 	@Override
@@ -23,59 +22,55 @@ public class BukkitInventory implements MCInventory {
 	}
 
 	public void addItem(MCItemStack itemStack) {
-		if (itemStack != null || itemStack.getType().equals(Material.AIR.name())) {
+		if (itemStack == null || itemStack.getType().equals(Material.AIR.name())) {
 			return;
 		}
 
-		BukkitInventoryUtil.addItemToInventory(inventory, ((BukkitItemStack)itemStack).getBukkitItemStack(),itemStack.getQuantity());
+		BukkitInventoryUtil.addItemToInventory(handle, ((BukkitItemStack) itemStack).getHandle(),itemStack.getQuantity());
 	}
 
 	@Override
 	public void removeItem(MCItemStack itemStack) {
-		BukkitInventoryUtil.removeItem(inventory,
-				((BukkitItemStack)itemStack).getBukkitItemStack()) ;
+		BukkitInventoryUtil.removeItem(handle,
+				((BukkitItemStack)itemStack).getHandle()) ;
 	}
 
 	@Override
 	public void setItem(int slot, MCItemStack item) {
-		inventory.setItem(slot, ((BukkitItemStack) item).getBukkitItemStack());
+		handle.setItem(slot, ((BukkitItemStack) item).getHandle());
 	}
 
 	@Override
-	public MCItemStack getItem(int slot) {
-		return new BukkitItemStack(inventory.getItem(slot));
+	public BukkitItemStack getItem(int slot) {
+		return new BukkitItemStack(handle.getItem(slot));
 	}
 
 	@Override
 	public int getItemAmount(MCItemStack itemStack) {
-		return BukkitInventoryUtil.getItemAmountFromInventory(inventory,
-				((BukkitItemStack)itemStack).getBukkitItemStack()) ;
+		return BukkitInventoryUtil.getItemAmountFromInventory(handle,
+				((BukkitItemStack) itemStack).getHandle()) ;
 	}
 
 	@Override
 	public boolean canFit(MCItemStack itemStack) {
-		int space = BukkitInventoryUtil.amountFreeSpace(inventory,
-				((BukkitItemStack)itemStack).getBukkitItemStack(), itemStack.getQuantity()) ;
+		int space = BukkitInventoryUtil.amountFreeSpace(handle,
+				((BukkitItemStack) itemStack).getHandle(), itemStack.getQuantity()) ;
 		return space >= 0;
 	}
 
 	@Override
 	public int freeSpaceAfter(MCItemStack itemStack) {
-		return BukkitInventoryUtil.amountFreeSpace(inventory,
-				((BukkitItemStack)itemStack).getBukkitItemStack(), itemStack.getQuantity()) ;
+		return BukkitInventoryUtil.amountFreeSpace(handle,
+				((BukkitItemStack) itemStack).getHandle(), itemStack.getQuantity()) ;
 	}
 
 	@Override
-	public MCItemStack[] getContents() {
-		ItemStack[] is = inventory.getContents();
-		MCItemStack[] items = new MCItemStack[is.length];
+	public BukkitItemStack[] getContents() {
+		ItemStack[] is = handle.getContents();
+		BukkitItemStack[] items = new BukkitItemStack[is.length];
 		for (int i=0;i< is.length;i++){
 			items[i] = new BukkitItemStack(is[i]);
 		}
 		return items;
-	}
-
-	public Inventory getBukkitInventory() {
-		return inventory;
 	}
 }

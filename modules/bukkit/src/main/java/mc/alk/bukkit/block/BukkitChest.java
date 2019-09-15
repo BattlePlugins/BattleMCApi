@@ -2,9 +2,6 @@ package mc.alk.bukkit.block;
 
 import mc.alk.bukkit.inventory.BukkitInventory;
 import mc.alk.bukkit.inventory.BukkitItemStack;
-import mc.alk.mc.block.MCBlock;
-import mc.alk.mc.inventory.MCInventory;
-import mc.alk.mc.inventory.MCItemStack;
 import mc.alk.mc.block.MCChest;
 
 import org.bukkit.Material;
@@ -24,11 +21,12 @@ public class BukkitChest extends BukkitBlock implements MCChest {
 	}
 
 	@Override
-	public MCItemStack[] getItems() {
+	public BukkitItemStack[] getItems() {
 		ItemStack[] items1 = chest.getInventory().getContents();
-		MCItemStack[] items2 = new MCItemStack[items1.length];
-		for (int i=0;i<items1.length;i++){
-			items2[i] = new BukkitItemStack(items1[i]);}
+		BukkitItemStack[] items2 = new BukkitItemStack[items1.length];
+		for (int i = 0; i < items1.length; i++){
+			items2[i] = new BukkitItemStack(items1[i]);
+		}
 		return items2;
 	}
 
@@ -42,25 +40,24 @@ public class BukkitChest extends BukkitBlock implements MCChest {
 	}
 
 	@Override
-	public MCChest getNeighborChest() {
-		Block b = getBukkitBlock();
-		if (b.getRelative(BlockFace.NORTH).getType() == Material.CHEST)
-			return new BukkitChest((Chest) b.getRelative(BlockFace.NORTH).getState());
+	public BukkitChest getNeighborChest() {
+		if (handle.getRelative(BlockFace.NORTH).getType() == Material.CHEST)
+			return new BukkitChest((Chest) handle.getRelative(BlockFace.NORTH).getState());
 
-		else if (b.getRelative(BlockFace.SOUTH).getType() == Material.CHEST)
-			return new BukkitChest((Chest) b.getRelative(BlockFace.SOUTH).getState());
+		else if (handle.getRelative(BlockFace.SOUTH).getType() == Material.CHEST)
+			return new BukkitChest((Chest) handle.getRelative(BlockFace.SOUTH).getState());
 
-		else if (b.getRelative(BlockFace.EAST).getType() == Material.CHEST)
-			return new BukkitChest((Chest) b.getRelative(BlockFace.EAST).getState());
+		else if (handle.getRelative(BlockFace.EAST).getType() == Material.CHEST)
+			return new BukkitChest((Chest) handle.getRelative(BlockFace.EAST).getState());
 
-		else if (b.getRelative(BlockFace.WEST).getType() == Material.CHEST)
-			return new BukkitChest((Chest) b.getRelative(BlockFace.WEST).getState());
+		else if (handle.getRelative(BlockFace.WEST).getType() == Material.CHEST)
+			return new BukkitChest((Chest) handle.getRelative(BlockFace.WEST).getState());
 
 		return null;
 	}
 
 	@Override
-	public MCInventory getInventory() {
+	public BukkitInventory getInventory() {
 		return new BukkitInventory(chest.getInventory());
 	}
 }

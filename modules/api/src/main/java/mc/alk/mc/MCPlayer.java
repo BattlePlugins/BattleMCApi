@@ -2,7 +2,7 @@ package mc.alk.mc;
 
 import mc.alk.mc.chat.Message;
 import mc.alk.mc.command.MCCommandSender;
-import mc.alk.mc.inventory.MCHumanEntity;
+import mc.alk.mc.entity.MCHumanEntity;
 
 public interface MCPlayer extends MCCommandSender, MCOfflinePlayer, MCHumanEntity {
 

@@ -4,76 +4,70 @@ import cn.nukkit.Server;
 import cn.nukkit.level.Location;
 
 import mc.alk.mc.MCLocation;
-import mc.alk.mc.MCWorld;
+import mc.alk.mc.util.MCWrapper;
 
-public class NukkitLocation implements MCLocation {
+public class NukkitLocation extends MCWrapper<Location> implements MCLocation {
 
-	private Location loc;
+    public NukkitLocation(Location loc){
+        super(loc);
+    }
 
-	public NukkitLocation(Location loc){
-		this.loc = loc;
-	}
+    public NukkitLocation(String world, double x, double y, double z) {
+        super(new Location(x, y, z, Server.getInstance().getLevelByName(world)));
+    }
 
-	public NukkitLocation(String world, double x, double y, double z) {
-		this.loc = new Location(x, y, z, Server.getInstance().getLevelByName(world));
-	}
+    public NukkitLocation(String world, double x, double y, double z, float pitch, float yaw) {
+        super(new Location(x, y, z, pitch, yaw, Server.getInstance().getLevelByName(world)));
+    }
 
-	public NukkitLocation(String world, double x, double y, double z, float pitch, float yaw) {
-		this.loc = new Location(x, y, z, pitch, yaw, Server.getInstance().getLevelByName(world));
-	}
+    @Override
+    public NukkitWorld getWorld() {
+        return new NukkitWorld(handle.getLevel());
+    }
 
-	@Override
-	public MCWorld getWorld() {
-		return new NukkitWorld(loc.getLevel());
-	}
+    @Override
+    public double getX() {
+        return handle.getX();
+    }
 
-	@Override
-	public double getX() {
-		return loc.getX();
-	}
+    @Override
+    public double getY() {
+        return handle.getY();
+    }
 
-	@Override
-	public double getY() {
-		return loc.getY();
-	}
+    @Override
+    public double getZ() {
+        return handle.getZ();
+    }
 
-	@Override
-	public double getZ() {
-		return loc.getZ();
-	}
+    @Override
+    public float getPitch() {
+        return (float) handle.getPitch();
+    }
 
-	@Override
-	public float getPitch() {
-		return (float) loc.getPitch();
-	}
+    @Override
+    public float getYaw() {
+        return (float) handle.getYaw();
+    }
 
-	@Override
-	public float getYaw() {
-		return (float) loc.getYaw();
-	}
+    @Override
+    public int getBlockX() {
+        return handle.getFloorX();
+    }
 
-	@Override
-	public int getBlockX() {
-		return loc.getFloorX();
-	}
+    @Override
+    public int getBlockY() {
+        return handle.getFloorY();
+    }
 
-	@Override
-	public int getBlockY() {
-		return loc.getFloorY();
-	}
+    @Override
+    public int getBlockZ() {
+        return handle.getFloorZ();
+    }
 
-	@Override
-	public int getBlockZ() {
-		return loc.getFloorZ();
-	}
-
-	public Location getNukkitLocation() {
-		return loc;
-	}
-
-	@Override
-	public String toString(){
-		return loc == null ? "[Location null]" :  "[Location "+loc.getLevel()+" "+
-				loc.getX() +":"+ loc.getY()+":"+loc.getZ()+"]";
-	}
+    @Override
+    public String toString(){
+        return handle == null ? "[Location null]" :  "[Location "+handle.getLevel()+" "+
+                handle.getX() +":"+ handle.getY()+":"+handle.getZ()+"]";
+    }
 }

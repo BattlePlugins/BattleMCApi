@@ -14,7 +14,7 @@ public interface MCEntity {
     MCLocation getLocation();
     MCWorld getWorld();
 
-    List<MCEntity> getNearbyEntities(double x, double y, double z);
+    List<? extends MCEntity> getNearbyEntities(double x, double y, double z);
 
     String getCustomName();
     boolean isCustomNameVisible();

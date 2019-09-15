@@ -1,38 +1,38 @@
 package mc.alk.nukkit.logger;
 
 import cn.nukkit.utils.Logger;
+
 import mc.alk.mc.logger.MCLogger;
+import mc.alk.mc.util.MCWrapper;
 
-public class NukkitLogger implements MCLogger {
-
-    private Logger logger;
+public class NukkitLogger extends MCWrapper<Logger> implements MCLogger {
 
     private boolean debug;
 
     public NukkitLogger(Logger logger) {
-        this.logger = logger;
+        super(logger);
 
         this.debug = false;
     }
 
     @Override
     public void severe(String message) {
-        logger.emergency(message);
+        handle.emergency(message);
     }
 
     @Override
     public void error(String message) {
-        logger.error(message);
+        handle.error(message);
     }
 
     @Override
     public void warning(String message) {
-        logger.warning(message);
+        handle.warning(message);
     }
 
     @Override
     public void info(String message) {
-        logger.info(message);
+        handle.info(message);
     }
 
     @Override
@@ -44,9 +44,5 @@ public class NukkitLogger implements MCLogger {
     @Override
     public void setDebug(boolean debug) {
         this.debug = debug;
-    }
-
-    public Logger getNukkitLogger() {
-        return logger;
     }
 }

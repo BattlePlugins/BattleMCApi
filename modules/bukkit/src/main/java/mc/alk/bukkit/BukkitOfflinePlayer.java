@@ -1,57 +1,55 @@
 package mc.alk.bukkit;
 
-import mc.alk.mc.MCLocation;
 import mc.alk.mc.MCOfflinePlayer;
-import mc.alk.mc.MCPlayer;
+import mc.alk.mc.util.MCWrapper;
+
 import org.bukkit.OfflinePlayer;
 
 import java.util.UUID;
 
-public class BukkitOfflinePlayer implements MCOfflinePlayer {
-
-    private OfflinePlayer offlinePlayer;
+public class BukkitOfflinePlayer extends MCWrapper<OfflinePlayer> implements MCOfflinePlayer {
 
     public BukkitOfflinePlayer(OfflinePlayer offlinePlayer) {
-        this.offlinePlayer = offlinePlayer;
+        super(offlinePlayer);
     }
 
     @Override
     public boolean isOnline() {
-        return offlinePlayer.isOnline();
+        return handle.isOnline();
     }
 
     @Override
     public String getName() {
-        return offlinePlayer.getName();
+        return handle.getName();
     }
 
     @Override
     public UUID getUniqueId() {
-        return offlinePlayer.getUniqueId();
+        return handle.getUniqueId();
     }
 
     @Override
-    public MCPlayer getPlayer() {
-        return new BukkitPlayer(offlinePlayer.getPlayer());
+    public BukkitPlayer getPlayer() {
+        return new BukkitPlayer(handle.getPlayer());
     }
 
     @Override
     public long getFirstPlayed() {
-        return offlinePlayer.getFirstPlayed();
+        return handle.getFirstPlayed();
     }
 
     @Override
     public long getLastPlayed() {
-        return offlinePlayer.getLastPlayed();
+        return handle.getLastPlayed();
     }
 
     @Override
     public boolean hasPlayedBefore() {
-        return offlinePlayer.hasPlayedBefore();
+        return handle.hasPlayedBefore();
     }
 
     @Override
-    public MCLocation getBedSpawnLocation() {
-        return new BukkitLocation(offlinePlayer.getBedSpawnLocation());
+    public BukkitLocation getBedSpawnLocation() {
+        return new BukkitLocation(handle.getBedSpawnLocation());
     }
 }

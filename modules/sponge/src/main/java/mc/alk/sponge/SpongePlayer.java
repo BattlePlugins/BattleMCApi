@@ -1,39 +1,30 @@
 package mc.alk.sponge;
 
-import mc.alk.mc.MCLocation;
 import mc.alk.mc.MCPlayer;
-import mc.alk.mc.MCWorld;
-import mc.alk.mc.inventory.MCPlayerInventory;
 import mc.alk.sponge.entity.SpongeHumanEntity;
-import mc.alk.sponge.inventory.SpongeInventory;
 
-import mc.alk.sponge.inventory.SpongePlayerInventory;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.util.RespawnLocation;
 
-import java.util.UUID;
-
 public class SpongePlayer extends SpongeHumanEntity implements MCPlayer {
 
     private Player player;
-    private String name;
 
     public SpongePlayer(Player player) {
         super(player);
 
         this.player = player;
-        this.name = player.getName();
     }
 
     @Override
     public String getName() {
-        return name;
+        return player.getName();
     }
 
     @Override
-    public MCPlayer getPlayer() {
+    public SpongePlayer getPlayer() {
         return this;
     }
 
@@ -53,7 +44,7 @@ public class SpongePlayer extends SpongeHumanEntity implements MCPlayer {
     }
 
     @Override
-    public MCLocation getBedSpawnLocation() {
+    public SpongeLocation getBedSpawnLocation() {
         RespawnLocation respawnLoc = player.get(Keys.RESPAWN_LOCATIONS).get().get(player.getWorldUniqueId().get());
         if (respawnLoc != null && respawnLoc.isForced()) {
             return new SpongeLocation(respawnLoc.asLocation().get());
@@ -89,9 +80,5 @@ public class SpongePlayer extends SpongeHumanEntity implements MCPlayer {
     @Override
     public boolean isOnline() {
         return player.isOnline();
-    }
-
-    public Player getSpongePlayer() {
-        return player;
     }
 }

@@ -2,7 +2,7 @@ package mc.alk.nukkit.entity;
 
 import cn.nukkit.entity.EntityHuman;
 
-import mc.alk.mc.inventory.MCHumanEntity;
+import mc.alk.mc.entity.MCHumanEntity;
 import mc.alk.mc.inventory.MCPlayerInventory;
 import mc.alk.nukkit.inventory.NukkitPlayerInventory;
 
@@ -19,7 +19,7 @@ public class NukkitHumanEntity extends NukkitLivingEntity implements MCHumanEnti
     }
 
     @Override
-    public MCPlayerInventory getInventory() {
+    public NukkitPlayerInventory getInventory() {
         return new NukkitPlayerInventory(humanEntity.getInventory());
     }
 

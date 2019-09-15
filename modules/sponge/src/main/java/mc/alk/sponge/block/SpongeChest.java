@@ -1,8 +1,7 @@
 package mc.alk.sponge.block;
 
 import mc.alk.mc.block.MCChest;
-import mc.alk.mc.inventory.MCInventory;
-import mc.alk.mc.inventory.MCItemStack;
+import mc.alk.sponge.inventory.SpongeInventory;
 import mc.alk.sponge.inventory.SpongeItemStack;
 
 import org.spongepowered.api.block.BlockSnapshot;
@@ -32,8 +31,8 @@ public class SpongeChest extends SpongeBlock implements MCChest {
     }
 
     @Override
-    public MCItemStack[] getItems() {
-        MCItemStack[] items = new MCItemStack[chest.getInventory(Direction.NONE).totalItems()];
+    public SpongeItemStack[] getItems() {
+        SpongeItemStack[] items = new SpongeItemStack[chest.getInventory(Direction.NONE).totalItems()];
 
         int i = 0;
         for (Inventory slot : chest.getInventory(Direction.NONE)) {
@@ -49,9 +48,8 @@ public class SpongeChest extends SpongeBlock implements MCChest {
         return items;
     }
     @Override
-    public MCChest getNeighborChest() {
-        BlockSnapshot snapshot = getSpongeBlock();
-        Location<World> loc = snapshot.getLocation().get();
+    public SpongeChest getNeighborChest() {
+        Location<World> loc = handle.getLocation().get();
         if (loc.getRelative(Direction.NORTH).getBlock().getType() == BlockTypes.CHEST)
             return new SpongeChest((Chest) loc.getRelative(Direction.NORTH).getTileEntity().get());
 
@@ -68,7 +66,7 @@ public class SpongeChest extends SpongeBlock implements MCChest {
     }
 
     @Override
-    public MCInventory getInventory() {
+    public SpongeInventory getInventory() {
         return null;
     }
 }

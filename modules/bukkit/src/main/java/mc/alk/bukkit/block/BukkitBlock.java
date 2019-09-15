@@ -3,61 +3,53 @@ package mc.alk.bukkit.block;
 import mc.alk.bukkit.BukkitLocation;
 import mc.alk.bukkit.BukkitWorld;
 import mc.alk.mc.block.MCBlock;
-import mc.alk.mc.MCLocation;
-import mc.alk.mc.MCWorld;
+import mc.alk.mc.util.MCWrapper;
 
 import org.bukkit.block.Block;
 
-public class BukkitBlock implements MCBlock {
-
-	private Block block;
+public class BukkitBlock extends MCWrapper<Block> implements MCBlock {
 
 	public BukkitBlock(Block block) {
-		this.block = block;
+		super(block);
 	}
 
 	@Override
-	public MCWorld getWorld() {
-		return new BukkitWorld(block.getWorld());
+	public BukkitWorld getWorld() {
+		return new BukkitWorld(handle.getWorld());
 	}
 
 	@Override
-	public MCLocation getLocation() {
-		return new BukkitLocation(block.getLocation());
+	public BukkitLocation getLocation() {
+		return new BukkitLocation(handle.getLocation());
 	}
 
 	@Override
 	public int getX() {
-		return block.getX();
+		return handle.getX();
 	}
 
 	@Override
 	public int getY() {
-		return block.getY();
+		return handle.getY();
 	}
 
 	@Override
 	public int getZ() {
-		return block.getZ();
+		return handle.getZ();
 	}
 
 	@Override
 	public String getType() {
-		return block.getType().name();
+		return handle.getType().name();
 	}
 
 	@Override
 	public void update(boolean b) {
-		block.getState().update();
+		handle.getState().update();
 	}
 
 	@Override
 	public BukkitBlock clone(){
-		return new BukkitBlock(block);
+		return new BukkitBlock(handle);
 	}
-
-	public Block getBukkitBlock() {
-		return block;
-	}
-
 }

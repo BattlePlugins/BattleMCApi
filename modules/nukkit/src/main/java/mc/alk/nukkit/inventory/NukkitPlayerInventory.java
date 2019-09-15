@@ -17,37 +17,32 @@ public class NukkitPlayerInventory extends NukkitInventory implements MCPlayerIn
 	}
 
 	@Override
-	public MCItemStack getItemInMainHand() {
+	public NukkitItemStack getItemInMainHand() {
 		return new NukkitItemStack(inventory.getItemInHand());
 	}
 
 	@Override
-	public MCItemStack getItemInOffHand() {
+	public NukkitItemStack getItemInOffHand() {
 		return new NukkitItemStack(Item.get(Item.AIR));
 	}
 
 	@Override
-	public MCItemStack getHelmet() {
+	public NukkitItemStack getHelmet() {
 		return new NukkitItemStack(inventory.getHelmet());
 	}
 
 	@Override
-	public MCItemStack getChestplate() {
+	public NukkitItemStack getChestplate() {
 		return new NukkitItemStack(inventory.getChestplate());
 	}
 
 	@Override
-	public MCItemStack getLeggings() {
+	public NukkitItemStack getLeggings() {
 		return new NukkitItemStack(inventory.getLeggings());
 	}
 
 	@Override
-	public MCItemStack getBoots() {
+	public NukkitItemStack getBoots() {
 		return new NukkitItemStack(inventory.getBoots());
-	}
-
-	@Override
-	public PlayerInventory getNukkitInventory() {
-		return inventory;
 	}
 }

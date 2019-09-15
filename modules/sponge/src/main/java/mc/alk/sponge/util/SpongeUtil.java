@@ -1,6 +1,5 @@
 package mc.alk.sponge.util;
 
-import com.flowpowered.math.vector.Vector3d;
 import com.google.common.base.Preconditions;
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.util.AABB;

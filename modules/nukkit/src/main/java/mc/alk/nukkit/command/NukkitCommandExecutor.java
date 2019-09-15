@@ -23,7 +23,7 @@ public class NukkitCommandExecutor extends Command {
     public boolean execute(CommandSender sender, String label, String[] args) {
         MCCommandSender mcSender = null;
         if (sender instanceof ConsoleCommandSender)
-            mcSender = new NukkitConsoleCommandSender(sender);
+            mcSender = new NukkitConsoleCommandSender((ConsoleCommandSender) sender);
         else
             mcSender = new NukkitPlayer((Player) sender);
 

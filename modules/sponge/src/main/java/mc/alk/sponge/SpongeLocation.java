@@ -1,18 +1,16 @@
 package mc.alk.sponge;
 
 import mc.alk.mc.MCLocation;
-import mc.alk.mc.MCWorld;
+import mc.alk.mc.util.MCWrapper;
 
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
 
-public class SpongeLocation implements MCLocation {
-
-    private Location<World> loc;
+public class SpongeLocation extends MCWrapper<Location<World>> implements MCLocation {
 
     public SpongeLocation(Location loc){
-        this.loc = loc;
+        super(loc);
     }
 
     public SpongeLocation(String world, double x, double y, double z) {
@@ -20,26 +18,26 @@ public class SpongeLocation implements MCLocation {
     }
 
     public SpongeLocation(String world, double x, double y, double z, float pitch, float yaw) {
-        this.loc = new Location<World>(Sponge.getServer().getWorld(world).get(), x, y, z);
+        super(new Location<>(Sponge.getServer().getWorld(world).get(), x, y, z));
     }
     @Override
-    public MCWorld getWorld() {
-        return new SpongeWorld(loc.getExtent());
+    public SpongeWorld getWorld() {
+        return new SpongeWorld(handle.getExtent());
     }
 
     @Override
     public double getX() {
-        return loc.getX();
+        return handle.getX();
     }
 
     @Override
     public double getY() {
-        return loc.getY();
+        return handle.getY();
     }
 
     @Override
     public double getZ() {
-        return loc.getZ();
+        return handle.getZ();
     }
 
     @Override
@@ -54,20 +52,16 @@ public class SpongeLocation implements MCLocation {
 
     @Override
     public int getBlockX() {
-        return loc.getBlockX();
+        return handle.getBlockX();
     }
 
     @Override
     public int getBlockY() {
-        return loc.getBlockY();
+        return handle.getBlockY();
     }
 
     @Override
     public int getBlockZ() {
-        return loc.getBlockZ();
-    }
-
-    public Location<World> getSpongeLocation() {
-        return loc;
+        return handle.getBlockZ();
     }
 }

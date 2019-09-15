@@ -1,39 +1,38 @@
 package mc.alk.bukkit.logger;
 
 import mc.alk.mc.logger.MCLogger;
+import mc.alk.mc.util.MCWrapper;
 
 import java.util.logging.Logger;
 
-public class BukkitLogger implements MCLogger {
-
-    private Logger logger;
+public class BukkitLogger extends MCWrapper<Logger> implements MCLogger {
 
     private boolean debug;
 
     public BukkitLogger(Logger logger) {
-        this.logger = logger;
+        super(logger);
 
         this.debug = false;
     }
 
     @Override
     public void severe(String message) {
-        logger.severe(message);
+        handle.severe(message);
     }
 
     @Override
     public void error(String message) {
-        logger.warning(message);
+        handle.warning(message);
     }
 
     @Override
     public void warning(String message) {
-        logger.warning(message);
+        handle.warning(message);
     }
 
     @Override
     public void info(String message) {
-        logger.info(message);
+        handle.info(message);
     }
 
     @Override
@@ -45,9 +44,5 @@ public class BukkitLogger implements MCLogger {
     @Override
     public void setDebug(boolean debug) {
         this.debug = debug;
-    }
-
-    public Logger getBukkitLogger() {
-        return logger;
     }
 }

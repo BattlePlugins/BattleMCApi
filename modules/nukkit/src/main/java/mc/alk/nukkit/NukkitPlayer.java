@@ -7,73 +7,67 @@ import mc.alk.nukkit.entity.NukkitHumanEntity;
 
 public class NukkitPlayer extends NukkitHumanEntity implements MCPlayer {
 
-	private Player player;
-	private String name;
+    private Player player;
 
-	public NukkitPlayer(Player player){
-		super(player);
+    public NukkitPlayer(Player player){
+        super(player);
 
-		this.player = player;
-		this.name = player.getName();
-	}
+        this.player = player;
+    }
 
-	@Override
-	public MCPlayer getPlayer() {
-		return this;
-	}
+    @Override
+    public NukkitPlayer getPlayer() {
+        return this;
+    }
 
-	@Override
-	public long getFirstPlayed() {
-		return player.getFirstPlayed();
-	}
+    @Override
+    public long getFirstPlayed() {
+        return player.getFirstPlayed();
+    }
 
-	@Override
-	public long getLastPlayed() {
-		return player.getLastPlayed();
-	}
+    @Override
+    public long getLastPlayed() {
+        return player.getLastPlayed();
+    }
 
-	@Override
-	public boolean hasPlayedBefore() {
-		return player.hasPlayedBefore();
-	}
+    @Override
+    public boolean hasPlayedBefore() {
+        return player.hasPlayedBefore();
+    }
 
-	@Override
-	public MCLocation getBedSpawnLocation() {
-		// TODO: Add API here
-		return null;
-	}
+    @Override
+    public NukkitLocation getBedSpawnLocation() {
+        // TODO: Add API here
+        return null;
+    }
 
-	@Override
-	public String getDisplayName() {
-		return player.getDisplayName();
-	}
+    @Override
+    public String getDisplayName() {
+        return player.getDisplayName();
+    }
 
-	@Override
-	public boolean hasPermission(String node) {
-		return player.hasPermission(node);
-	}
+    @Override
+    public boolean hasPermission(String node) {
+        return player.hasPermission(node);
+    }
 
-	@Override
-	public void sendMessage(String message) {
-		player.sendMessage(message);
-	}
+    @Override
+    public void sendMessage(String message) {
+        player.sendMessage(message);
+    }
 
-	@Override
-	public boolean isOp() {
-		return player.isOp();
-	}
+    @Override
+    public boolean isOp() {
+        return player.isOp();
+    }
 
-	@Override
-	public void updateInventory() {
-		// TODO: Add API here
-	}
+    @Override
+    public void updateInventory() {
+        // TODO: Add API here
+    }
 
-	@Override
-	public boolean isOnline() {
-		return player.isOnline();
-	}
-
-	public Player getNukkitPlayer() {
-		return player;
-	}
+    @Override
+    public boolean isOnline() {
+        return player.isOnline();
+    }
 }

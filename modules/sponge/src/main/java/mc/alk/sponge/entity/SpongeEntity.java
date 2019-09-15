@@ -1,78 +1,71 @@
 package mc.alk.sponge.entity;
 
-import mc.alk.mc.MCLocation;
-import mc.alk.mc.MCWorld;
 import mc.alk.mc.entity.MCEntity;
+import mc.alk.mc.util.MCWrapper;
 import mc.alk.sponge.SpongeLocation;
 import mc.alk.sponge.SpongeWorld;
 import mc.alk.sponge.util.SpongeUtil;
 
 import org.spongepowered.api.data.key.Keys;
+import org.spongepowered.api.data.value.mutable.Value;
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.text.Text;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
-public class SpongeEntity implements MCEntity {
-
-    private Entity entity;
+public class SpongeEntity extends MCWrapper<Entity> implements MCEntity {
 
     public SpongeEntity(Entity entity) {
-        this.entity = entity;
+        super(entity);
     }
 
     @Override
     public String getName() {
-        return entity.getType().getName();
+        return handle.getType().getName();
     }
 
     @Override
     public UUID getUniqueId() {
-        return entity.getUniqueId();
+        return handle.getUniqueId();
     }
 
     @Override
-    public MCLocation getLocation() {
-        return new SpongeLocation(entity.getLocation());
+    public SpongeLocation getLocation() {
+        return new SpongeLocation(handle.getLocation());
     }
 
     @Override
-    public MCWorld getWorld() {
-        return new SpongeWorld(entity.getWorld());
+    public SpongeWorld getWorld() {
+        return new SpongeWorld(handle.getWorld());
     }
 
     @Override
-    public List<MCEntity> getNearbyEntities(double x, double y, double z) {
-        List<MCEntity> entities = new ArrayList<>();
-        SpongeUtil.getNearbyEntities(entity, x, y, z).forEach(spongeEntity -> entities.add(new SpongeEntity(spongeEntity)));
-        return entities;
+    public List<SpongeEntity> getNearbyEntities(double x, double y, double z) {
+        return SpongeUtil.getNearbyEntities(handle, x, y, z).stream()
+                .map(SpongeEntity::new).collect(Collectors.toList());
     }
 
     @Override
     public String getCustomName() {
-        if (!entity.get(Keys.DISPLAY_NAME).isPresent()) {
-            return entity.getType().getName();
-        }
-        return entity.get(Keys.DISPLAY_NAME).get().toPlain();
+        return handle.get(Keys.DISPLAY_NAME).map(Text::toPlain).orElseGet(() -> handle.getType().getName());
     }
 
     @Override
     public boolean isCustomNameVisible() {
-        if (!entity.get(Keys.CUSTOM_NAME_VISIBLE).isPresent()) {
-            return false;
-        }
-        return entity.get(Keys.CUSTOM_NAME_VISIBLE).get();
+        return handle.get(Keys.CUSTOM_NAME_VISIBLE).orElse(false);
     }
 
     @Override
     public void setCustomName(String customName) {
-        entity.offer(Keys.DISPLAY_NAME, Text.of(customName));
+        handle.offer(Keys.DISPLAY_NAME, Text.of(customName));
     }
 
     @Override
     public void setCustomNameVisible(boolean visible) {
-        entity.offer(Keys.CUSTOM_NAME_VISIBLE, visible);
+        handle.offer(Keys.CUSTOM_NAME_VISIBLE, visible);
     }
 }

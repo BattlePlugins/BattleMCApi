@@ -20,8 +20,4 @@ public class NukkitCommand extends MCCommand {
     public NukkitCommand(String label, String description, String permission, List<String> aliases) {
         super(label, description, permission, aliases);
     }
-
-    public Command getNukkitCommand() {
-        return command;
-    }
 }

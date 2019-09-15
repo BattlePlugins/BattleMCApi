@@ -1,10 +1,10 @@
 package mc.alk.nukkit.command;
 
-import cn.nukkit.command.CommandSender;
+import cn.nukkit.command.ConsoleCommandSender;
 
 public class NukkitConsoleCommandSender extends NukkitCommandSender {
 
-    public NukkitConsoleCommandSender(CommandSender sender) {
+    public NukkitConsoleCommandSender(ConsoleCommandSender sender) {
         super(sender);
     }
 

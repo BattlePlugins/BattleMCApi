@@ -5,17 +5,16 @@ import cn.nukkit.item.Item;
 
 import mc.alk.mc.inventory.MCInventory;
 import mc.alk.mc.inventory.MCItemStack;
+import mc.alk.mc.util.MCWrapper;
 import mc.alk.nukkit.util.NukkitInventoryUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NukkitInventory implements MCInventory {
-
-	private Inventory inventory;
+public class NukkitInventory extends MCWrapper<Inventory> implements MCInventory {
 
 	public NukkitInventory(Inventory inventory) {
-		this.inventory = inventory;
+		super(inventory);
 	}
 
 	@Override
@@ -25,31 +24,30 @@ public class NukkitInventory implements MCInventory {
 	}
 
 	public void addItem(MCItemStack itemStack) {
-		if (itemStack != null || itemStack.getType().equals("0")) {
+		if (itemStack == null || itemStack.getType().equals("0")) {
 			return;
 		}
 
-		NukkitInventoryUtil.addItemToInventory(inventory, ((NukkitItemStack)itemStack).getNukkitItem(),itemStack.getQuantity());
+		NukkitInventoryUtil.addItemToInventory(handle, ((NukkitItemStack)itemStack).getHandle(),itemStack.getQuantity());
 	}
 
 	@Override
 	public void removeItem(MCItemStack itemStack) {
-		inventory.removeItem(((NukkitItemStack) itemStack).getNukkitItem());
+		handle.removeItem(((NukkitItemStack) itemStack).getHandle());
 	}
 
 	@Override
-	public void setItem(int slot, MCItemStack item) {
-		inventory.setItem(slot, ((NukkitItemStack) item).getNukkitItem());
+	public void setItem(int slot, MCItemStack item) { handle.setItem(slot, ((NukkitItemStack) item).getHandle());
 	}
 
 	@Override
-	public MCItemStack getItem(int slot) {
-		return new NukkitItemStack(inventory.getItem(slot));
+	public NukkitItemStack getItem(int slot) {
+		return new NukkitItemStack(handle.getItem(slot));
 	}
 
 	@Override
 	public int getItemAmount(MCItemStack itemStack) {
-		return NukkitInventoryUtil.getItemAmountFromInventory(inventory, ((NukkitItemStack) itemStack).getNukkitItem());
+		return NukkitInventoryUtil.getItemAmountFromInventory(handle, ((NukkitItemStack) itemStack).getHandle());
 	}
 
 	@Override
@@ -59,22 +57,18 @@ public class NukkitInventory implements MCInventory {
 
 	@Override
 	public int freeSpaceAfter(MCItemStack itemStack) {
-		return NukkitInventoryUtil.amountFreeSpace(inventory,
-				((NukkitItemStack) itemStack).getNukkitItem(), itemStack.getQuantity());
+		return NukkitInventoryUtil.amountFreeSpace(handle,
+				((NukkitItemStack) itemStack).getHandle(), itemStack.getQuantity());
 	}
 
 	@Override
-	public MCItemStack[] getContents() {
-		List<Item> items = new ArrayList<>(inventory.getContents().values());
-		MCItemStack[] mcItems = new MCItemStack[items.size()];
+	public NukkitItemStack[] getContents() {
+		List<Item> items = new ArrayList<>(handle.getContents().values());
+		NukkitItemStack[] mcItems = new NukkitItemStack[items.size()];
 		for (int i = 0; i < items.size(); i++){
 			mcItems[i] = new NukkitItemStack(items.get(i));
 		}
 
 		return mcItems;
-	}
-
-	public Inventory getNukkitInventory() {
-		return inventory;
 	}
 }

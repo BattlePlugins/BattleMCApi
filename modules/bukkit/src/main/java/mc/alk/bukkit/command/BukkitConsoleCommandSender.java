@@ -1,11 +1,15 @@
 package mc.alk.bukkit.command;
 
-import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 
 public class BukkitConsoleCommandSender extends BukkitCommandSender {
 
-    public BukkitConsoleCommandSender(CommandSender sender) {
+    private ConsoleCommandSender sender;
+
+    public BukkitConsoleCommandSender(ConsoleCommandSender sender) {
         super(sender);
+
+        this.sender = sender;
     }
 
     @Override

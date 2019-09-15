@@ -19,8 +19,4 @@ public class BukkitCommand extends MCCommand {
     public BukkitCommand(String label, String description, String permission, List<String> aliases) {
         super(label, description, permission, aliases);
     }
-
-    public Command getBukkitCommand() {
-        return command;
-    }
 }

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import mc.alk.bukkit.util.BukkitInventoryUtil;
 import mc.alk.mc.inventory.MCItemStack;
+import mc.alk.mc.util.MCWrapper;
 import mc.euro.bukkitadapter.enchant.BattleEnchant;
 import mc.euro.bukkitadapter.material.BattleMaterial;
 
@@ -12,48 +13,46 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
-public class BukkitItemStack implements MCItemStack {
-
-	private ItemStack itemStack;
+public class BukkitItemStack extends MCWrapper<ItemStack> implements MCItemStack {
 
 	public BukkitItemStack(ItemStack itemStack) {
-		this.itemStack = itemStack == null ? new ItemStack(Material.AIR): itemStack;
+		super(itemStack == null ? new ItemStack(Material.AIR): itemStack);
 	}
 
 	@Override
 	public void setType(String type) {
-		itemStack.setType(BattleMaterial.fromString(type).parseMaterial());
+		handle.setType(BattleMaterial.fromString(type).parseMaterial());
 	}
 
 	@Override
 	public String getType() {
-		return itemStack.getType().name();
+		return handle.getType().name();
 	}
 
 	@Override
 	public void setDataValue(short value) {
-		itemStack.setDurability(value);
+		handle.setDurability(value);
 	}
 
 	@Override
 	public short getDataValue() {
-		return itemStack.getDurability();
+		return handle.getDurability();
 	}
 
 	@Override
 	public void setQuantity(int quantity) {
-		itemStack.setAmount(quantity);
+		handle.setAmount(quantity);
 	}
 
 	@Override
 	public int getQuantity() {
-		return itemStack.getAmount();
+		return handle.getAmount();
 	}
 
 	@Override
 	public Map<String, Integer> getEnchantments() {
 		Map<String, Integer> encs = new HashMap<String,Integer>();
-		for (Map.Entry<Enchantment, Integer> entry : itemStack.getEnchantments().entrySet()) {
+		for (Map.Entry<Enchantment, Integer> entry : handle.getEnchantments().entrySet()) {
 			encs.put(entry.getKey().getName(), entry.getValue());
 		}
 		return encs;
@@ -61,37 +60,37 @@ public class BukkitItemStack implements MCItemStack {
 
 	@Override
 	public boolean hasMetaData() {
-		return itemStack.hasItemMeta();
+		return handle.hasItemMeta();
 	}
 
 	@Override
 	public String getCommonName() {
-		return itemStack.getType().name().toLowerCase();
+		return handle.getType().name().toLowerCase();
 	}
 
 	@Override
 	public String getFormattedCommonName() {
-		return BukkitInventoryUtil.getFormattedCommonName(itemStack);
+		return BukkitInventoryUtil.getFormattedCommonName(handle);
 	}
 
 	@Override
-	public MCItemStack clone(){
-		return new BukkitItemStack(itemStack.clone());
+	public BukkitItemStack clone(){
+		return new BukkitItemStack(handle.clone());
 	}
 
 	@Override
 	public String toString(){
-		return itemStack != null ? "["+ itemStack.getType() +":"+itemStack.getDurability() + " q="+
+		return handle != null ? "["+ handle.getType() +":"+handle.getDurability() + " q="+
 				getQuantity()+"]" : "null";
 	}
 
 	@Override
 	public void addEnchantment(String ench, int level) {
-		itemStack.addEnchantment(BattleEnchant.fromString(ench).parseEnchant(), level);
+		handle.addEnchantment(BattleEnchant.fromString(ench).parseEnchant(), level);
 	}
 
 	public void addEnchantment(Enchantment enc, int level) {
-		itemStack.addEnchantment(enc, level);
+		handle.addEnchantment(enc, level);
 	}
 
 	@Override
@@ -106,9 +105,5 @@ public class BukkitItemStack implements MCItemStack {
 //		}
 
 		return special;
-	}
-
-	public ItemStack getBukkitItemStack() {
-		return itemStack;
 	}
 }

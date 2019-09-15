@@ -1,6 +1,7 @@
 package mc.alk.sponge.inventory;
 
 import mc.alk.mc.inventory.MCItemStack;
+import mc.alk.mc.util.MCWrapper;
 import mc.alk.sponge.util.SpongeInventoryUtil;
 
 import org.spongepowered.api.Sponge;
@@ -16,12 +17,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class SpongeItemStack implements MCItemStack {
-
-    private ItemStack itemStack;
+public class SpongeItemStack extends MCWrapper<ItemStack> implements MCItemStack {
 
     public SpongeItemStack(ItemStack itemStack) {
-        this.itemStack = itemStack == null ? ItemStack.of(ItemTypes.AIR): itemStack;
+        super(itemStack == null ? ItemStack.of(ItemTypes.AIR): itemStack);
     }
 
     @Override
@@ -30,38 +29,38 @@ public class SpongeItemStack implements MCItemStack {
         if (!opItem.isPresent())
             return;
 
-        this.itemStack = ItemStack.builder().fromItemStack(itemStack).itemType(opItem.get()).build();
+        this.handle = ItemStack.builder().fromItemStack(handle).itemType(opItem.get()).build();
     }
 
     @Override
     public String getType() {
-        return itemStack.getType().getName();
+        return handle.getType().getName();
     }
 
     @Override
     public void setDataValue(short value) {
-        itemStack.offer(Keys.ITEM_DURABILITY, (int) value);
+        handle.offer(Keys.ITEM_DURABILITY, (int) value);
     }
 
     @Override
     public short getDataValue() {
-        return itemStack.get(Keys.ITEM_DURABILITY).get().shortValue();
+        return handle.get(Keys.ITEM_DURABILITY).orElse(0).shortValue();
     }
 
     @Override
     public void setQuantity(int quantity) {
-        this.itemStack = ItemStack.builder().fromItemStack(itemStack).quantity(quantity).build();
+        this.handle = ItemStack.builder().fromItemStack(handle).quantity(quantity).build();
     }
 
     @Override
     public int getQuantity() {
-        return itemStack.getQuantity();
+        return handle.getQuantity();
     }
 
     @Override
     public Map<String, Integer> getEnchantments() {
         Map<String, Integer> enchants = new HashMap<String, Integer>();
-        EnchantmentData data = itemStack.getOrCreate(EnchantmentData.class).get();
+        EnchantmentData data = handle.getOrCreate(EnchantmentData.class).get();
         for (Enchantment ench : data.enchantments()) {
             enchants.put(ench.getType().getName(), ench.getLevel());
         }
@@ -75,37 +74,33 @@ public class SpongeItemStack implements MCItemStack {
         if (!opEnchant.isPresent())
             return;
 
-        EnchantmentData data = itemStack.getOrCreate(EnchantmentData.class).get();
+        EnchantmentData data = handle.getOrCreate(EnchantmentData.class).get();
         data.set(data.enchantments().add(Enchantment.builder().type(opEnchant.get()).level(level).build()));
-        itemStack.offer(data);
+        handle.offer(data);
     }
 
     @Override
     public boolean hasMetaData() {
-        return !itemStack.getKeys().isEmpty();
+        return !handle.getKeys().isEmpty();
     }
 
     @Override
     public String getCommonName() {
-        return itemStack.getType().getName();
+        return handle.getType().getName();
     }
 
     @Override
     public String getFormattedCommonName() {
-        return SpongeInventoryUtil.getFormattedCommonName(itemStack);
+        return SpongeInventoryUtil.getFormattedCommonName(handle);
     }
 
     @Override
-    public MCItemStack clone() {
-        return new SpongeItemStack(itemStack);
+    public SpongeItemStack clone() {
+        return new SpongeItemStack(handle);
     }
 
     @Override
     public int isSpecial() {
         return 0;
-    }
-
-    public ItemStack getSpongeItemStack() {
-        return itemStack;
     }
 }

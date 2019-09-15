@@ -1,9 +1,8 @@
-package mc.alk.mc.inventory;
+package mc.alk.mc.entity;
 
-import mc.alk.mc.entity.MCLivingEntity;
+import mc.alk.mc.inventory.MCPlayerInventory;
 
 public interface MCHumanEntity extends MCLivingEntity {
 
     MCPlayerInventory getInventory();
-
 }

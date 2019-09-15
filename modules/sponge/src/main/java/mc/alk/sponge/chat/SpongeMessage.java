@@ -3,7 +3,9 @@ package mc.alk.sponge.chat;
 import mc.alk.mc.MCPlayer;
 import mc.alk.mc.chat.Message;
 import mc.alk.sponge.SpongePlayer;
+
 import org.spongepowered.api.Sponge;
+import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.item.ItemType;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.action.TextActions;
@@ -63,6 +65,6 @@ public class SpongeMessage extends Message {
         }
 
         SpongePlayer spongePlayer = (SpongePlayer) player;
-        spongePlayer.getSpongePlayer().sendMessage(builder.build());
+        ((Player) spongePlayer.getHandle()).sendMessage(builder.build());
     }
 }

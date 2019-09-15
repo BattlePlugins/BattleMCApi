@@ -28,122 +28,122 @@ import java.util.stream.Stream;
 
 public class BukkitPlatform extends MCPlatform {
 
-	@Override
-	public APIType getAPIType() {
-		return APIType.BUKKIT;
-	}
+    @Override
+    public APIType getAPIType() {
+        return APIType.BUKKIT;
+    }
 
-	@Override
-	public MCLocation getMCLocation(String world, double x, double y, double z) {
-		return new BukkitLocation(world, x, y, z);
-	}
+    @Override
+    public MCLocation getMCLocation(String world, double x, double y, double z) {
+        return new BukkitLocation(world, x, y, z);
+    }
 
-	@Override
-	public MCLocation getMCLocation(String world, double x, double y, double z, float pitch, float yaw) {
-		return new BukkitLocation(world, x, y, z, pitch, yaw);
-	}
+    @Override
+    public MCLocation getMCLocation(String world, double x, double y, double z, float pitch, float yaw) {
+        return new BukkitLocation(world, x, y, z, pitch, yaw);
+    }
 
-	@Override
-	public MCWorld getMCWorld(String world) {
-		return new BukkitWorld(Bukkit.getWorld(world));
-	}
+    @Override
+    public MCWorld getMCWorld(String world) {
+        return new BukkitWorld(Bukkit.getWorld(world));
+    }
 
-	@Override
-	public long scheduleSyncTask(PlatformPlugin plugin, Runnable runnable, long millis) {
-		return Bukkit.getScheduler().scheduleSyncDelayedTask((JavaPlugin) plugin, runnable,millis/50);
-	}
+    @Override
+    public long scheduleSyncTask(PlatformPlugin plugin, Runnable runnable, long millis) {
+        return Bukkit.getScheduler().scheduleSyncDelayedTask((JavaPlugin) plugin, runnable,millis/50);
+    }
 
-	@Override
-	public MCPlayer getMCPlayer(String name) {
-		Player p = Bukkit.getPlayer(name);
-		return p == null ? null : new BukkitPlayer(p);
-	}
+    @Override
+    public MCPlayer getMCPlayer(String name) {
+        Player p = Bukkit.getPlayer(name);
+        return p == null ? null : new BukkitPlayer(p);
+    }
 
-	@Override
-	public MCOfflinePlayer getMCOfflinePlayer(String name) {
-		return new BukkitOfflinePlayer(Bukkit.getOfflinePlayer(name));
-	}
+    @Override
+    public MCOfflinePlayer getMCOfflinePlayer(String name) {
+        return new BukkitOfflinePlayer(Bukkit.getOfflinePlayer(name));
+    }
 
-	@Override
-	public MCOfflinePlayer getMCOfflinePlayer(UUID uuid) {
-		return new BukkitOfflinePlayer(Bukkit.getOfflinePlayer(uuid));
-	}
+    @Override
+    public MCOfflinePlayer getMCOfflinePlayer(UUID uuid) {
+        return new BukkitOfflinePlayer(Bukkit.getOfflinePlayer(uuid));
+    }
 
-	@Override
-	public Collection<MCPlayer> getMCOnlinePlayers() {
-		return Bukkit.getOnlinePlayers().stream().map(BukkitPlayer::new)
-				.collect(Collectors.toList());
-	}
+    @Override
+    public Collection<MCPlayer> getMCOnlinePlayers() {
+        return Bukkit.getOnlinePlayers().stream().map(BukkitPlayer::new)
+                .collect(Collectors.toList());
+    }
 
-	@Override
-	public Collection<MCOfflinePlayer> getMCOfflinePlayers() {
-		return Stream.of(Bukkit.getOfflinePlayers())
-				.map(BukkitOfflinePlayer::new).collect(Collectors.toList());
-	}
+    @Override
+    public Collection<MCOfflinePlayer> getMCOfflinePlayers() {
+        return Stream.of(Bukkit.getOfflinePlayers())
+                .map(BukkitOfflinePlayer::new).collect(Collectors.toList());
+    }
 
-	@Override
-	public boolean isMCMainThread() {
-		return Bukkit.isPrimaryThread();
-	}
+    @Override
+    public boolean isMCMainThread() {
+        return Bukkit.isPrimaryThread();
+    }
 
-	@Override
-	public boolean isMCOnlineMode() {
-		return Bukkit.getOnlineMode();
-	}
+    @Override
+    public boolean isMCOnlineMode() {
+        return Bukkit.getOnlineMode();
+    }
 
-	@Override
-	public String getMCVersion() {
-		return "Java-" + Bukkit.getVersion();
-	}
+    @Override
+    public String getMCVersion() {
+        return "Java-" + Bukkit.getVersion();
+    }
 
-	@Override
-	public Message getMCMessage() {
-		if (isSpigot())
-			return new SpigotMessage();
+    @Override
+    public Message getMCMessage() {
+        if (isSpigot())
+            return new SpigotMessage();
 
-		return new BukkitMessage();
-	}
+        return new BukkitMessage();
+    }
 
-	@Override
-	public MCInventory createMCInventory(MCPlugin plugin, int slots, String title) {
-		return new BukkitInventory(Bukkit.createInventory(null, slots, title));
-	}
+    @Override
+    public MCInventory createMCInventory(MCPlugin plugin, int slots, String title) {
+        return new BukkitInventory(Bukkit.createInventory(null, slots, title));
+    }
 
-	@Override
-	public <T> void registerMCService(Class<T> clazz, T service, MCPlugin plugin, MCServicePriority priority) {
-		Bukkit.getServicesManager().register(clazz, service, (Plugin) plugin.getPlatformPlugin(), ServicePriority.values()[priority.ordinal()]);
-	}
+    @Override
+    public <T> void registerMCService(Class<T> clazz, T service, MCPlugin plugin, MCServicePriority priority) {
+        Bukkit.getServicesManager().register(clazz, service, (Plugin) plugin.getPlatformPlugin(), ServicePriority.values()[priority.ordinal()]);
+    }
 
-	@Override
-	public <T> T getMCService(Class<T> clazz) {
-		return Bukkit.getServicesManager().getRegistration(clazz).getProvider();
-	}
+    @Override
+    public <T> T getMCService(Class<T> clazz) {
+        return Bukkit.getServicesManager().getRegistration(clazz).getProvider();
+    }
 
-	@Override
-	public boolean cancelMCTask(long id) {
-		Bukkit.getScheduler().cancelTask((int)id);
-		return true;
-	}
+    @Override
+    public boolean cancelMCTask(long id) {
+        Bukkit.getScheduler().cancelTask((int)id);
+        return true;
+    }
 
-	public boolean isSpigot() {
-		try {
-			Class.forName("org.spigotmc.SpigotConfig");
-			return true;
-		} catch (Throwable ex) {
-			/* do nothing */
-		}
+    public boolean isSpigot() {
+        try {
+            Class.forName("org.spigotmc.SpigotConfig");
+            return true;
+        } catch (Throwable ex) {
+            /* do nothing */
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	public boolean isPaper() {
-		try {
-			Class.forName("com.destroystokyo.paper.PaperConfig");
-			return true;
-		} catch (Throwable ex) {
-			/* do nothing */
-		}
+    public boolean isPaper() {
+        try {
+            Class.forName("com.destroystokyo.paper.PaperConfig");
+            return true;
+        } catch (Throwable ex) {
+            /* do nothing */
+        }
 
-		return false;
-	}
+        return false;
+    }
 }

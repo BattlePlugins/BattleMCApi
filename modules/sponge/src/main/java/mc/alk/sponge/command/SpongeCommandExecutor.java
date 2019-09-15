@@ -2,9 +2,10 @@ package mc.alk.sponge.command;
 
 import mc.alk.mc.command.MCCommand;
 import mc.alk.mc.command.MCCommandExecutor;
-
 import mc.alk.mc.command.MCCommandSender;
+import mc.alk.mc.util.MCWrapper;
 import mc.alk.sponge.SpongePlayer;
+
 import org.spongepowered.api.command.CommandCallable;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
@@ -19,17 +20,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * This class is a bit more complex than the rest due to how
- * the Sponge API is written compared to Bukkit/Nukkit.
- */
-public class SpongeCommandExecutor implements CommandCallable {
+public class SpongeCommandExecutor extends MCWrapper<MCCommandExecutor> implements CommandCallable {
 
-    private MCCommandExecutor executor;
     private MCCommand command;
 
     public SpongeCommandExecutor(MCCommandExecutor executor, MCCommand command) {
-        this.executor = executor;
+        super(executor);
+
         this.command = command;
     }
 
@@ -41,7 +38,7 @@ public class SpongeCommandExecutor implements CommandCallable {
         else
             mcSender = new SpongeConsoleCommandSender(source);
 
-        executor.onCommand(mcSender, command, command.getLabel(), arguments.split(" "));
+        handle.onCommand(mcSender, command, command.getLabel(), arguments.split(" "));
         return CommandResult.success();
     }
 

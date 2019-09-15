@@ -1,49 +1,46 @@
 package mc.alk.sponge.block;
 
-import mc.alk.mc.MCLocation;
-import mc.alk.mc.MCWorld;
 import mc.alk.mc.block.MCBlock;
+import mc.alk.mc.util.MCWrapper;
 import mc.alk.sponge.SpongeLocation;
 import mc.alk.sponge.SpongeWorld;
 
 import org.spongepowered.api.block.BlockSnapshot;
 
-public class SpongeBlock implements MCBlock {
-
-    private BlockSnapshot block;
+public class SpongeBlock extends MCWrapper<BlockSnapshot> implements MCBlock {
 
     public SpongeBlock(BlockSnapshot block) {
-        this.block = block;
+        super(block);
     }
 
     @Override
-    public MCWorld getWorld() {
-        return new SpongeWorld(block.getLocation().get().getExtent());
+    public SpongeWorld getWorld() {
+        return new SpongeWorld(handle.getLocation().get().getExtent());
     }
 
     @Override
-    public MCLocation getLocation() {
-        return new SpongeLocation(block.getLocation().get());
+    public SpongeLocation getLocation() {
+        return new SpongeLocation(handle.getLocation().get());
     }
 
     @Override
     public int getX() {
-        return block.getLocation().get().getBlockX();
+        return handle.getLocation().get().getBlockX();
     }
 
     @Override
     public int getY() {
-        return block.getLocation().get().getBlockY();
+        return handle.getLocation().get().getBlockY();
     }
 
     @Override
     public int getZ() {
-        return block.getLocation().get().getBlockZ();
+        return handle.getLocation().get().getBlockZ();
     }
 
     @Override
     public String getType() {
-        return block.getState().getType().getName();
+        return handle.getState().getType().getName();
     }
 
     @Override
@@ -53,10 +50,6 @@ public class SpongeBlock implements MCBlock {
 
     @Override
     public SpongeBlock clone() {
-        return new SpongeBlock(block);
-    }
-
-    public BlockSnapshot getSpongeBlock() {
-        return block;
+        return new SpongeBlock(handle);
     }
 }

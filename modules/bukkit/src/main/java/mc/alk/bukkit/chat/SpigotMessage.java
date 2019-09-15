@@ -3,6 +3,7 @@ package mc.alk.bukkit.chat;
 import mc.alk.bukkit.BukkitPlayer;
 import mc.alk.mc.MCPlayer;
 import mc.alk.mc.chat.Message;
+
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -31,6 +32,6 @@ public class SpigotMessage extends Message {
         }
 
         BukkitPlayer bukkitPlayer = (BukkitPlayer) player;
-        bukkitPlayer.getBukkitPlayer().spigot().sendMessage(textComponent);
+        bukkitPlayer.getHandle().spigot().sendMessage(textComponent);
     }
 }

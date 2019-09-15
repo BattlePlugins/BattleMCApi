@@ -1,6 +1,5 @@
 package mc.alk.bukkit.inventory;
 
-import mc.alk.mc.inventory.MCItemStack;
 import mc.alk.mc.inventory.MCPlayerInventory;
 
 import org.bukkit.inventory.PlayerInventory;
@@ -16,37 +15,38 @@ public class BukkitPlayerInventory extends BukkitInventory implements MCPlayerIn
 	}
 
 	@Override
-	public MCItemStack getItemInMainHand() {
-		return new BukkitItemStack(inventory.getItemInMainHand());
+	public BukkitItemStack getItemInMainHand() {
+		try {
+			// 1.9+
+			return new BukkitItemStack(inventory.getItemInMainHand());
+		} catch (Throwable ex) {
+			// pre 1.9
+			return new BukkitItemStack(inventory.getItemInHand());
+		}
 	}
 
 	@Override
-	public MCItemStack getItemInOffHand() {
+	public BukkitItemStack getItemInOffHand() {
 		return new BukkitItemStack(inventory.getItemInOffHand());
 	}
 
 	@Override
-	public MCItemStack getHelmet() {
+	public BukkitItemStack getHelmet() {
 		return new BukkitItemStack(inventory.getHelmet());
 	}
 
 	@Override
-	public MCItemStack getChestplate() {
+	public BukkitItemStack getChestplate() {
 		return new BukkitItemStack(inventory.getChestplate());
 	}
 
 	@Override
-	public MCItemStack getLeggings() {
+	public BukkitItemStack getLeggings() {
 		return new BukkitItemStack(inventory.getLeggings());
 	}
 
 	@Override
-	public MCItemStack getBoots() {
+	public BukkitItemStack getBoots() {
 		return new BukkitItemStack(inventory.getBoots());
-	}
-
-	@Override
-	public PlayerInventory getBukkitInventory() {
-		return inventory;
 	}
 }

@@ -38,8 +38,4 @@ public class BukkitSign extends BukkitBlock implements MCSign {
 	public void update(boolean b){
 		sign.update(true);
 	}
-
-	public Sign getBukkitSign(){
-		return sign;
-	}
 }

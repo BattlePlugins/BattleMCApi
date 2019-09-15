@@ -3,8 +3,6 @@ package mc.alk.nukkit.block;
 import cn.nukkit.blockentity.BlockEntityChest;
 import cn.nukkit.item.Item;
 
-import mc.alk.mc.inventory.MCInventory;
-import mc.alk.mc.inventory.MCItemStack;
 import mc.alk.mc.block.MCChest;
 import mc.alk.nukkit.inventory.NukkitInventory;
 import mc.alk.nukkit.inventory.NukkitItemStack;
@@ -23,9 +21,9 @@ public class NukkitChest extends NukkitBlock implements MCChest {
 	}
 
 	@Override
-	public MCItemStack[] getItems() {
+	public NukkitItemStack[] getItems() {
 		List<Item> items = new ArrayList<>(chest.getInventory().getContents().values());
-		MCItemStack[] mcItems = new MCItemStack[items.size()];
+		NukkitItemStack[] mcItems = new NukkitItemStack[items.size()];
 		for (int i = 0; i < items.size(); i++){
 			mcItems[i] = new NukkitItemStack(items.get(i));
 		}
@@ -39,12 +37,12 @@ public class NukkitChest extends NukkitBlock implements MCChest {
 	}
 
 	@Override
-	public MCChest getNeighborChest() {
+	public NukkitChest getNeighborChest() {
 		return new NukkitChest(chest.getPair());
 	}
 
 	@Override
-	public MCInventory getInventory() {
+	public NukkitInventory getInventory() {
 		return new NukkitInventory(chest.getInventory());
 	}
 }

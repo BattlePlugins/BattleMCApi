@@ -1,79 +1,73 @@
 package mc.alk.bukkit;
 
 import mc.alk.mc.MCLocation;
-import mc.alk.mc.MCWorld;
+import mc.alk.mc.util.MCWrapper;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
-public class BukkitLocation implements MCLocation {
-
-	private Location loc;
+public class BukkitLocation extends MCWrapper<Location> implements MCLocation {
 
 	public BukkitLocation(Location loc){
-		this.loc = loc;
+		super(loc);
 	}
 
 	public BukkitLocation(String world, double x, double y, double z) {
-		this.loc = new Location(Bukkit.getWorld(world), x, y, z);
+		super(new Location(Bukkit.getWorld(world), x, y, z));
 	}
 
 	public BukkitLocation(String world, double x, double y, double z, float pitch, float yaw) {
-		this.loc = new Location(Bukkit.getWorld(world), x, y, z, pitch, yaw);
+		super(new Location(Bukkit.getWorld(world), x, y, z, pitch, yaw));
 	}
 
 	@Override
-	public MCWorld getWorld() {
-		return new BukkitWorld(loc.getWorld());
+	public BukkitWorld getWorld() {
+		return new BukkitWorld(handle.getWorld());
 	}
 
 	@Override
 	public double getX() {
-		return loc.getX();
+		return handle.getX();
 	}
 
 	@Override
 	public double getY() {
-		return loc.getY();
+		return handle.getY();
 	}
 
 	@Override
 	public double getZ() {
-		return loc.getZ();
+		return handle.getZ();
 	}
 
 	@Override
 	public float getPitch() {
-		return loc.getPitch();
+		return handle.getPitch();
 	}
 
 	@Override
 	public float getYaw() {
-		return loc.getYaw();
+		return handle.getYaw();
 	}
 
 	@Override
 	public int getBlockX() {
-		return loc.getBlockX();
+		return handle.getBlockX();
 	}
 
 	@Override
 	public int getBlockY() {
-		return loc.getBlockY();
+		return handle.getBlockY();
 	}
 
 	@Override
-	public int getBlockZ() {
-		return loc.getBlockZ();
-	}
-
-	public Location getBukkitLocation() {
-		return loc;
+    public int getBlockZ() {
+		return handle.getBlockZ();
 	}
 
 	@Override
 	public String toString(){
-		return loc == null ? "[Location null]" :  "[Location "+loc.getWorld()+" "+
-				loc.getBlockX() +":"+ loc.getBlockY()+":"+loc.getBlockZ()+"]";
+		return handle == null ? "[Location null]" :  "[Location "+ handle.getWorld()+" "+
+				handle.getBlockX() +":"+ handle.getBlockY()+":" + handle.getBlockZ()+"]";
 	}
 }

@@ -5,6 +5,8 @@ import mc.alk.mc.MCWorld;
 import mc.alk.mc.block.MCBlock;
 import mc.alk.mc.block.MCChest;
 import mc.alk.mc.block.MCSign;
+import mc.alk.mc.util.MCWrapper;
+import mc.alk.sponge.block.SpongeBlock;
 import mc.alk.sponge.block.SpongeChest;
 import mc.alk.sponge.block.SpongeSign;
 
@@ -14,22 +16,20 @@ import org.spongepowered.api.block.tileentity.carrier.Chest;
 import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
 
-public class SpongeWorld implements MCWorld {
-
-    private World world;
+public class SpongeWorld extends MCWrapper<World> implements MCWorld {
 
     public SpongeWorld(World world) {
-        this.world = world;
+        super(world);
     }
 
     @Override
     public String getName() {
-        return world.getName();
+        return handle.getName();
     }
 
     @Override
-    public MCBlock getBlockAt(int x, int y, int z) {
-        BlockState block = world.getBlock(x, y, z);
+    public SpongeBlock getBlockAt(int x, int y, int z) {
+        BlockState block = handle.getBlock(x, y, z);
         if (block.getType().getName().toLowerCase().contains("sign")) {
             // return sponge sign
         }
@@ -42,7 +42,7 @@ public class SpongeWorld implements MCWorld {
     }
 
     @Override
-    public MCBlock getBlockAt(MCLocation loc) {
+    public SpongeBlock getBlockAt(MCLocation loc) {
         return getBlockAt(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
     }
 
@@ -51,7 +51,7 @@ public class SpongeWorld implements MCWorld {
         if (clazz.isAssignableFrom(block.getClass()))
             return block;
 
-        Location loc = ((SpongeLocation) block.getLocation()).getSpongeLocation();
+        Location loc = ((SpongeLocation) block.getLocation()).getHandle();
         BlockState blockState = loc.getBlock();
         if (blockState == null)
             return null;
@@ -83,6 +83,6 @@ public class SpongeWorld implements MCWorld {
 
     @Override
     public String toString(){
-        return "[World " + world.getName() + "]";
+        return "[World " + handle.getName() + "]";
     }
 }
