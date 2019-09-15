@@ -12,7 +12,7 @@ import mc.alk.mc.plugin.platform.PlatformPlugin;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-public abstract class BukkitPlugin extends JavaPlugin implements PlatformPlugin {
+public class BukkitPlugin extends JavaPlugin implements PlatformPlugin {
 
     @Override
     public void onEnable() {

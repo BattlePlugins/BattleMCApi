@@ -11,7 +11,7 @@ import mc.alk.nukkit.NukkitPlatform;
 import mc.alk.nukkit.command.NukkitCommandExecutor;
 import mc.alk.nukkit.logger.NukkitLogger;
 
-public abstract class NukkitPlugin extends PluginBase implements PlatformPlugin {
+public class NukkitPlugin extends PluginBase implements PlatformPlugin {
 
     @Override
     public void onEnable() {
