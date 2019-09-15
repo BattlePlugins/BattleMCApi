@@ -4,7 +4,7 @@ import mc.alk.mc.chat.Message;
 import mc.alk.mc.inventory.MCInventory;
 import mc.alk.mc.plugin.MCPlugin;
 import mc.alk.mc.plugin.MCPluginManager;
-import mc.alk.mc.plugin.PlatformPlugin;
+import mc.alk.mc.plugin.platform.PlatformPlugin;
 
 import java.util.Collection;
 import java.util.UUID;

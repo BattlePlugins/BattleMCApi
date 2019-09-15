@@ -6,13 +6,13 @@ import mc.alk.bukkit.inventory.BukkitInventory;
 import mc.alk.mc.APIType;
 import mc.alk.mc.MCLocation;
 import mc.alk.mc.MCOfflinePlayer;
+import mc.alk.mc.MCPlatform;
 import mc.alk.mc.MCPlayer;
 import mc.alk.mc.chat.Message;
 import mc.alk.mc.inventory.MCInventory;
 import mc.alk.mc.plugin.MCPlugin;
-import mc.alk.mc.MCPlatform;
 import mc.alk.mc.MCWorld;
-import mc.alk.mc.plugin.PlatformPlugin;
+import mc.alk.mc.plugin.platform.PlatformPlugin;
 
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;

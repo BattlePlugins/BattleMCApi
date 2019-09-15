@@ -1,6 +1,7 @@
 package mc.alk.mc.plugin;
 
-import javax.tools.JavaFileObject;
+import mc.alk.mc.plugin.platform.PlatformPlugin;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,7 +26,6 @@ public class MCPluginManager {
                     if (!pluginClass.isAnnotationPresent(PluginProperties.class))
                         throw new RuntimeException("@PluginProperties annotation is not present!");
 
-                    PluginProperties annotation = pluginClass.getAnnotation(PluginProperties.class);
                     plugin.setPlatformPlugin(platformPlugin);
                 }
             }
@@ -35,16 +35,20 @@ public class MCPluginManager {
     }
 
     public void enablePlugin() {
-        if (plugin != null)
+        if (plugin != null) {
             plugin.onEnable();
-        else
+            plugin.getPlatformCode().onEnable();
+        } else {
             throw new RuntimeException("Plugin is not yet initialized!");
+        }
     }
 
     public void disablePlugin() {
-        if (plugin != null)
+        if (plugin != null) {
             plugin.onDisable();
-        else
+            plugin.getPlatformCode().onDisable();
+        } else {
             throw new RuntimeException("Plugin is not initialized!");
+        }
     }
 }

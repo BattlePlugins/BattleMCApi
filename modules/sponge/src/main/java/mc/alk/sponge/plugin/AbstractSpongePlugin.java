@@ -5,7 +5,7 @@ import mc.alk.mc.MCPlatform;
 import mc.alk.mc.command.MCCommand;
 import mc.alk.mc.command.MCCommandExecutor;
 import mc.alk.mc.logger.MCLogger;
-import mc.alk.mc.plugin.PlatformPlugin;
+import mc.alk.mc.plugin.platform.PlatformPlugin;
 import mc.alk.sponge.SpongePlatform;
 import mc.alk.sponge.command.SpongeCommandExecutor;
 import mc.alk.sponge.logger.SpongeLogger;
@@ -32,11 +32,11 @@ public class AbstractSpongePlugin implements PlatformPlugin {
     @Inject
     private PluginManager pluginManager;
 
-    private MCPlatform platform;
     private boolean enabled = false;
 
     @Listener
     public void onServerStart(GameStartedServerEvent event) {
+        MCPlatform.setInstance(new SpongePlatform());
         MCPlatform.getPluginManager().initializePlugin(this);
         MCPlatform.getPluginManager().enablePlugin();
         enabled = true;
@@ -53,30 +53,8 @@ public class AbstractSpongePlugin implements PlatformPlugin {
         return enabled;
     }
 
-    @Override
-    public MCPlatform getPlatform() {
-        if (platform == null) {
-            platform = new SpongePlatform();
-            MCPlatform.setInstance(platform);
-        }
-
-        return platform;
-    }
-
     public File getDataFolder() {
         return configDir;
-    }
-
-    public String getName() {
-        return pluginManager.fromInstance(this).get().getName();
-    }
-
-    public List<String> getAuthors() {
-        return pluginManager.fromInstance(this).get().getAuthors();
-    }
-
-    public String getVersion() {
-        return pluginManager.fromInstance(this).get().getVersion().get();
     }
 
     @Override
