@@ -109,6 +109,8 @@ public class PluginProcessor extends AbstractProcessor {
             writer.newLine();
             writer.write("version: " + plugin.version());
             writer.newLine();
+            writer.write("api-version: 1.13");
+            writer.newLine();
             if (plugin.authors().length > 0) {
                 writer.write("authors: " + Arrays.asList(plugin.authors()));
                 writer.newLine();
@@ -131,6 +133,8 @@ public class PluginProcessor extends AbstractProcessor {
             writer.write("name: " + plugin.name());
             writer.newLine();
             writer.write("version: " + plugin.version());
+            writer.newLine();
+            writer.write("api: [1.0.0]");
             writer.newLine();
             if (plugin.authors().length > 0) {
                 writer.write("authors: " + Arrays.asList(plugin.authors()));
