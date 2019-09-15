@@ -7,6 +7,7 @@ import cn.nukkit.Server;
 import cn.nukkit.inventory.Inventory;
 import cn.nukkit.plugin.Plugin;
 
+import cn.nukkit.plugin.service.ServicePriority;
 import mc.alk.mc.APIType;
 import mc.alk.mc.MCLocation;
 import mc.alk.mc.MCOfflinePlayer;
@@ -16,6 +17,7 @@ import mc.alk.mc.chat.Message;
 import mc.alk.mc.inventory.MCInventory;
 import mc.alk.mc.plugin.MCPlugin;
 import mc.alk.mc.MCWorld;
+import mc.alk.mc.plugin.MCServicePriority;
 import mc.alk.mc.plugin.platform.PlatformPlugin;
 import mc.alk.nukkit.chat.NukkitMessage;
 import mc.alk.nukkit.inventory.NukkitInventory;
@@ -26,7 +28,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class NukkitPlatform extends MCPlatform {
 
@@ -142,5 +143,15 @@ public class NukkitPlatform extends MCPlatform {
 		}
 
 		return new NukkitInventory(inventory);
+	}
+
+	@Override
+	public <T> void registerMCService(Class<T> clazz, T service, MCPlugin plugin, MCServicePriority priority) {
+		Server.getInstance().getServiceManager().register(clazz, service, (Plugin) plugin.getPlatformPlugin(), ServicePriority.values()[priority.ordinal()]);
+	}
+
+	@Override
+	public <T> T getMCService(Class<T> clazz) {
+		return Server.getInstance().getServiceManager().getProvider(clazz).getProvider();
 	}
 }

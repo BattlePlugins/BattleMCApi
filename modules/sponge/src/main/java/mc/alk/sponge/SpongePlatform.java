@@ -10,6 +10,7 @@ import mc.alk.mc.chat.Message;
 import mc.alk.mc.inventory.MCInventory;
 import mc.alk.mc.plugin.MCPlugin;
 
+import mc.alk.mc.plugin.MCServicePriority;
 import mc.alk.mc.plugin.platform.PlatformPlugin;
 import mc.alk.sponge.chat.SpongeMessage;
 import mc.alk.sponge.inventory.SpongeInventory;
@@ -19,6 +20,7 @@ import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.item.inventory.Inventory;
 import org.spongepowered.api.item.inventory.property.InventoryDimension;
 import org.spongepowered.api.item.inventory.property.InventoryTitle;
+import org.spongepowered.api.service.ProviderRegistration;
 import org.spongepowered.api.service.user.UserStorageService;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.world.Location;
@@ -132,5 +134,16 @@ public class SpongePlatform extends MCPlatform {
                 .property(InventoryDimension.PROPERTY_NAME, new InventoryDimension( 9, 6)).build(plugin);
 
         return new SpongeInventory(inventory);
+    }
+
+    @Override
+    public <T> void registerMCService(Class<T> clazz, T service, MCPlugin plugin, MCServicePriority priority) {
+        Sponge.getServiceManager().setProvider(plugin.getPlatformPlugin(), clazz, service);
+    }
+
+    @Override
+    public <T> T getMCService(Class<T> clazz) {
+        Optional<ProviderRegistration<T>> service = Sponge.getServiceManager().getRegistration(clazz);
+        return service.map(ProviderRegistration::getProvider).orElse(null);
     }
 }

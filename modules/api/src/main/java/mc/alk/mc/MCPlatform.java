@@ -4,6 +4,7 @@ import mc.alk.mc.chat.Message;
 import mc.alk.mc.inventory.MCInventory;
 import mc.alk.mc.plugin.MCPlugin;
 import mc.alk.mc.plugin.MCPluginManager;
+import mc.alk.mc.plugin.MCServicePriority;
 import mc.alk.mc.plugin.platform.PlatformPlugin;
 
 import java.util.Collection;
@@ -131,6 +132,18 @@ public abstract class MCPlatform {
 
 	public static MCInventory createInventory(MCPlugin plugin, int slots, String title) {
 		return INSTANCE.createMCInventory(plugin, slots, title);
+	}
+
+	public abstract <T> void registerMCService(Class<T> clazz, T service, MCPlugin plugin, MCServicePriority priority);
+
+	public static <T> void registerService(Class<T> clazz, T service, MCPlugin plugin, MCServicePriority priority) {
+		INSTANCE.registerMCService(clazz, service, plugin, priority);
+	}
+
+	public abstract <T> T getMCService(Class<T> clazz);
+
+	public static <T> T getService(Class<T> clazz) {
+		return INSTANCE.getMCService(clazz);
 	}
 
 	public static MCPluginManager getPluginManager() {

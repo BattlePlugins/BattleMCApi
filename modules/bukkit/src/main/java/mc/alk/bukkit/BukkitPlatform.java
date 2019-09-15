@@ -12,14 +12,15 @@ import mc.alk.mc.chat.Message;
 import mc.alk.mc.inventory.MCInventory;
 import mc.alk.mc.plugin.MCPlugin;
 import mc.alk.mc.MCWorld;
+import mc.alk.mc.plugin.MCServicePriority;
 import mc.alk.mc.plugin.platform.PlatformPlugin;
 
 import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -106,6 +107,16 @@ public class BukkitPlatform extends MCPlatform {
 	@Override
 	public MCInventory createMCInventory(MCPlugin plugin, int slots, String title) {
 		return new BukkitInventory(Bukkit.createInventory(null, slots, title));
+	}
+
+	@Override
+	public <T> void registerMCService(Class<T> clazz, T service, MCPlugin plugin, MCServicePriority priority) {
+		Bukkit.getServicesManager().register(clazz, service, (Plugin) plugin.getPlatformPlugin(), ServicePriority.values()[priority.ordinal()]);
+	}
+
+	@Override
+	public <T> T getMCService(Class<T> clazz) {
+		return Bukkit.getServicesManager().getRegistration(clazz).getProvider();
 	}
 
 	@Override
