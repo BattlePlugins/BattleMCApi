@@ -4,6 +4,7 @@ import mc.alk.bukkit.entity.BukkitHumanEntity;
 import mc.alk.mc.MCLocation;
 import mc.alk.mc.MCPlayer;
 
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 public class BukkitPlayer extends BukkitHumanEntity implements MCPlayer {
@@ -69,5 +70,10 @@ public class BukkitPlayer extends BukkitHumanEntity implements MCPlayer {
     @Override
     public boolean isOnline() {
         return player.isOnline();
+    }
+
+    @Override
+    public Player getHandle() {
+        return player;
     }
 }

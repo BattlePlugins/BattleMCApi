@@ -4,6 +4,7 @@ import mc.alk.mc.MCPlayer;
 import mc.alk.sponge.entity.SpongeHumanEntity;
 
 import org.spongepowered.api.data.key.Keys;
+import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.util.RespawnLocation;
@@ -80,5 +81,10 @@ public class SpongePlayer extends SpongeHumanEntity implements MCPlayer {
     @Override
     public boolean isOnline() {
         return player.isOnline();
+    }
+
+    @Override
+    public Player getHandle() {
+        return player;
     }
 }

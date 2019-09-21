@@ -1,8 +1,12 @@
 package mc.alk.nukkit.block;
 
+import cn.nukkit.blockentity.BlockEntity;
 import cn.nukkit.blockentity.BlockEntitySign;
 
+import cn.nukkit.nbt.tag.CompoundTag;
+import mc.alk.mc.MCPlayer;
 import mc.alk.mc.block.MCSign;
+import mc.alk.nukkit.NukkitPlayer;
 
 public class NukkitSign extends NukkitBlock implements MCSign {
 
@@ -21,6 +25,23 @@ public class NukkitSign extends NukkitBlock implements MCSign {
 
 		sign.setText(text);
 		sign.onUpdate();
+	}
+
+	@Override
+	public void sendSignChange(MCPlayer player, String[] lines) {
+		CompoundTag nbt = new CompoundTag()
+				.putString("id", BlockEntity.SIGN)
+				.putInt("x", (int) sign.getLocation().x)
+				.putInt("y", (int) sign.getLocation().y)
+				.putInt("z", (int) sign.getLocation().z)
+				.putString("Text1", "")
+				.putString("Text2", "")
+				.putString("Text3", "")
+				.putString("Text4", "");
+
+		BlockEntitySign sign = new BlockEntitySign(this.sign.getChunk(), nbt);
+		sign.setText(lines);
+		sign.spawnTo(((NukkitPlayer) player).getHandle());
 	}
 
 	@Override

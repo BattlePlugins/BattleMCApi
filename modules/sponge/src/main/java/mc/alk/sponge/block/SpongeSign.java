@@ -1,10 +1,13 @@
 package mc.alk.sponge.block;
 
+import mc.alk.mc.MCPlayer;
 import mc.alk.mc.block.MCSign;
 
+import mc.alk.sponge.SpongePlayer;
 import org.spongepowered.api.block.BlockSnapshot;
 import org.spongepowered.api.block.tileentity.Sign;
 import org.spongepowered.api.data.manipulator.mutable.tileentity.SignData;
+import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
 
 public class SpongeSign extends SpongeBlock implements MCSign {
@@ -37,5 +40,15 @@ public class SpongeSign extends SpongeBlock implements MCSign {
         SignData signData = sign.getOrCreate(SignData.class).get();
         signData.set(signData.lines().set(index, Text.of(msg)));
         sign.offer(signData);
+    }
+
+    @Override
+    public void sendSignChange(MCPlayer player, String[] lines) {
+        // This isn't possible at the moment, so instead we send the
+        // player a message of what is to be displayed.
+        Player sPlayer = ((SpongePlayer) player).getHandle();
+        for (String line : lines) {
+            sPlayer.sendMessage(Text.of(line));
+        }
     }
 }

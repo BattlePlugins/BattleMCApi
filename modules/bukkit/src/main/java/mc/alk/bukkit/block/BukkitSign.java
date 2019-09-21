@@ -1,5 +1,7 @@
 package mc.alk.bukkit.block;
 
+import mc.alk.bukkit.BukkitPlayer;
+import mc.alk.mc.MCPlayer;
 import mc.alk.mc.block.MCSign;
 
 import org.bukkit.block.Sign;
@@ -17,6 +19,11 @@ public class BukkitSign extends BukkitBlock implements MCSign {
 	@Override
 	public void setLine(int index, String line) {
 		sign.setLine(index, line);
+	}
+
+	@Override
+	public void sendSignChange(MCPlayer player, String[] lines) {
+		((BukkitPlayer) player).getHandle().sendSignChange(sign.getLocation(), lines);
 	}
 
 	@Override

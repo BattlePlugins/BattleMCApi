@@ -1,6 +1,7 @@
 package mc.alk.nukkit;
 
 import cn.nukkit.Player;
+import cn.nukkit.entity.Entity;
 import mc.alk.mc.MCLocation;
 import mc.alk.mc.MCPlayer;
 import mc.alk.nukkit.entity.NukkitHumanEntity;
@@ -69,5 +70,10 @@ public class NukkitPlayer extends NukkitHumanEntity implements MCPlayer {
     @Override
     public boolean isOnline() {
         return player.isOnline();
+    }
+
+    @Override
+    public Player getHandle() {
+        return player;
     }
 }
