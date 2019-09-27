@@ -13,7 +13,6 @@ import mc.alk.mc.inventory.MCInventory;
 import mc.alk.mc.plugin.MCPlugin;
 import mc.alk.mc.MCWorld;
 import mc.alk.mc.plugin.MCServicePriority;
-import mc.alk.mc.plugin.platform.PlatformPlugin;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -49,8 +48,13 @@ public class BukkitPlatform extends MCPlatform {
     }
 
     @Override
-    public long scheduleSyncTask(PlatformPlugin plugin, Runnable runnable, long millis) {
-        return Bukkit.getScheduler().scheduleSyncDelayedTask((JavaPlugin) plugin, runnable,millis/50);
+    public long scheduleSyncTask(MCPlugin plugin, Runnable runnable, long millis) {
+        return Bukkit.getScheduler().scheduleSyncDelayedTask((JavaPlugin) plugin.getPlatformPlugin(), runnable,millis/50);
+    }
+
+    @Override
+    public long scheduleRepeatingTask(MCPlugin plugin, Runnable runnable, long millis) {
+        return Bukkit.getScheduler().scheduleSyncRepeatingTask((JavaPlugin) plugin.getPlatformPlugin(), runnable, millis/50, millis/50);
     }
 
     @Override

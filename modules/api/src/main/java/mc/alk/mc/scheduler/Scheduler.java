@@ -1,4 +1,4 @@
-package mc.alk.mc;
+package mc.alk.mc.scheduler;
 
 import java.util.Map;
 import java.util.Timer;

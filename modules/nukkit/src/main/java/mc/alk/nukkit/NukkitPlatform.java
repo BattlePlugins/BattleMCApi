@@ -6,8 +6,8 @@ import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.inventory.Inventory;
 import cn.nukkit.plugin.Plugin;
-
 import cn.nukkit.plugin.service.ServicePriority;
+
 import mc.alk.mc.APIType;
 import mc.alk.mc.MCLocation;
 import mc.alk.mc.MCOfflinePlayer;
@@ -18,7 +18,6 @@ import mc.alk.mc.inventory.MCInventory;
 import mc.alk.mc.plugin.MCPlugin;
 import mc.alk.mc.MCWorld;
 import mc.alk.mc.plugin.MCServicePriority;
-import mc.alk.mc.plugin.platform.PlatformPlugin;
 import mc.alk.nukkit.chat.NukkitMessage;
 import mc.alk.nukkit.inventory.NukkitInventory;
 import mc.alk.nukkit.inventory.fakeinventory.VirtualChestInventory;
@@ -52,8 +51,13 @@ public class NukkitPlatform extends MCPlatform {
     }
 
     @Override
-    public long scheduleSyncTask(PlatformPlugin plugin, Runnable runnable, long millis) {
-        return Server.getInstance().getScheduler().scheduleDelayedTask((Plugin) plugin, runnable, (int) millis/50).getTaskId();
+    public long scheduleSyncTask(MCPlugin plugin, Runnable runnable, long millis) {
+        return Server.getInstance().getScheduler().scheduleDelayedTask((Plugin) plugin.getPlatformPlugin(), runnable, (int) millis/50).getTaskId();
+    }
+
+    @Override
+    public long scheduleRepeatingTask(MCPlugin plugin, Runnable runnable, long millis) {
+        return Server.getInstance().getScheduler().scheduleRepeatingTask((Plugin) plugin, runnable, (int) millis/50).getTaskId();
     }
 
     @Override

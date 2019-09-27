@@ -5,7 +5,7 @@ import mc.alk.mc.inventory.MCInventory;
 import mc.alk.mc.plugin.MCPlugin;
 import mc.alk.mc.plugin.MCPluginManager;
 import mc.alk.mc.plugin.MCServicePriority;
-import mc.alk.mc.plugin.platform.PlatformPlugin;
+import mc.alk.mc.scheduler.Scheduler;
 
 import java.util.Collection;
 import java.util.UUID;
@@ -36,12 +36,16 @@ public abstract class MCPlatform {
         return INSTANCE.getMCWorld(world);
     }
 
-    public static long scheduleSyncDelayedTask(PlatformPlugin plugin, Runnable runnable){
+    public static long scheduleSyncDelayedTask(MCPlugin plugin, Runnable runnable){
         return scheduleSyncDelayedTask(plugin, runnable,0L);
     }
 
-    public static long scheduleSyncDelayedTask(PlatformPlugin plugin, Runnable runnable, long millis) {
+    public static long scheduleSyncDelayedTask(MCPlugin plugin, Runnable runnable, long millis) {
         return INSTANCE.scheduleSyncTask(plugin, runnable, millis);
+    }
+
+    public static long scheduleSyncRepeatingTask(MCPlugin plugin, Runnable runnable, long millis) {
+        return INSTANCE.scheduleSyncRepeatingTask(plugin, runnable, millis);
     }
 
     public abstract MCLocation getMCLocation(String world, double x, double y, double z);
@@ -51,14 +55,16 @@ public abstract class MCPlatform {
 
     public abstract APIType getAPIType();
 
-    public abstract long scheduleSyncTask(PlatformPlugin plugin, Runnable runnable, long millis);
+    public abstract long scheduleSyncTask(MCPlugin plugin, Runnable runnable, long millis);
+    public abstract long scheduleRepeatingTask(MCPlugin plugin, Runnable runnable, long millis);
+
     public abstract boolean cancelMCTask(long id);
 
-    public static int scheduleAsynchrounousTask(MCPlugin plugin, Runnable task) {
-        return scheduleAsynchrounousTask(plugin, task, 0);
+    public static int scheduleAsynchrounousTask(Runnable task) {
+        return scheduleAsynchrounousTask(task, 0);
     }
 
-    public static int scheduleAsynchrounousTask(MCPlugin plugin, Runnable task, long millis) {
+    public static int scheduleAsynchrounousTask(Runnable task, long millis) {
         return Scheduler.scheduleAsynchrounousTask(task, millis);
     }
 

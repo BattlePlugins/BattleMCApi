@@ -9,9 +9,7 @@ import mc.alk.mc.MCWorld;
 import mc.alk.mc.chat.Message;
 import mc.alk.mc.inventory.MCInventory;
 import mc.alk.mc.plugin.MCPlugin;
-
 import mc.alk.mc.plugin.MCServicePriority;
-import mc.alk.mc.plugin.platform.PlatformPlugin;
 import mc.alk.sponge.chat.SpongeMessage;
 import mc.alk.sponge.inventory.SpongeInventory;
 
@@ -55,9 +53,15 @@ public class SpongePlatform extends MCPlatform {
     }
 
     @Override
-    public long scheduleSyncTask(PlatformPlugin plugin, Runnable runnable, long millis) {
-        Sponge.getScheduler().createTaskBuilder().interval(millis, TimeUnit.MILLISECONDS).execute(runnable).submit(plugin);
-        return 0; // No support for sponge task ids
+    public long scheduleSyncTask(MCPlugin plugin, Runnable runnable, long millis) {
+        Sponge.getScheduler().createTaskBuilder().delay(millis, TimeUnit.MILLISECONDS).execute(runnable).submit(plugin.getPlatformPlugin());
+        return Sponge.getScheduler().getScheduledTasks().size(); // Should work for now....
+    }
+
+    @Override
+    public long scheduleRepeatingTask(MCPlugin plugin, Runnable runnable, long millis) {
+        Sponge.getScheduler().createTaskBuilder().interval(millis, TimeUnit.MILLISECONDS).execute(runnable).submit(plugin.getPlatformPlugin());
+        return Sponge.getScheduler().getScheduledTasks().size(); // Should work for now....
     }
 
     @Override
