@@ -44,6 +44,11 @@ public class SpongeBlock extends MCWrapper<BlockSnapshot> implements MCBlock {
     }
 
     @Override
+    public void update() {
+        // TODO: Add API here
+    }
+
+    @Override
     public void update(boolean b) {
         // TODO: Add API here
     }

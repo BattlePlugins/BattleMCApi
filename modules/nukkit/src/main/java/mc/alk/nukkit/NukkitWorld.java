@@ -49,9 +49,10 @@ public class NukkitWorld implements MCWorld {
     }
 
     @Override
-    public MCBlock toType(MCBlock block, Class<? extends MCBlock> clazz) throws ClassCastException{
+    public <T extends MCBlock> T toType(MCBlock block, Class<T> clazz) throws ClassCastException {
         if (clazz.isAssignableFrom(block.getClass()))
-            return block;
+            return (T) block;
+
         Location loc = ((NukkitLocation) block.getLocation()).getHandle();
         Block b = loc.getLevelBlock();
         if (b == null)
@@ -59,11 +60,11 @@ public class NukkitWorld implements MCWorld {
 
         if (clazz == MCSign.class){
             if (loc.getLevel().getBlockEntity(loc) instanceof BlockEntitySign)
-                return new NukkitSign((BlockEntitySign) loc.getLevel().getBlockEntity(loc));
+                return (T) new NukkitSign((BlockEntitySign) loc.getLevel().getBlockEntity(loc));
 
         } else if (clazz == MCChest.class){
             if (loc.getLevel().getBlockEntity(loc) instanceof BlockEntityChest)
-                return new NukkitChest((BlockEntityChest) loc.getLevel().getBlockEntity(loc));
+                return (T) new NukkitChest((BlockEntityChest) loc.getLevel().getBlockEntity(loc));
 
         } else {
             throw new ClassCastException("Block can not be cast to " + clazz.getSimpleName());

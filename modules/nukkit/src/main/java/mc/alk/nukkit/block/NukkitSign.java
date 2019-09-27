@@ -2,8 +2,8 @@ package mc.alk.nukkit.block;
 
 import cn.nukkit.blockentity.BlockEntity;
 import cn.nukkit.blockentity.BlockEntitySign;
-
 import cn.nukkit.nbt.tag.CompoundTag;
+
 import mc.alk.mc.MCPlayer;
 import mc.alk.mc.block.MCSign;
 import mc.alk.nukkit.NukkitPlayer;
@@ -60,7 +60,13 @@ public class NukkitSign extends NukkitBlock implements MCSign {
 	}
 
 	@Override
-	public void update(boolean b){
+	public void update() {
+		sign.onUpdate();
+		sign.getBlock().onUpdate(0);
+	}
+
+	@Override
+	public void update(boolean force){
 		sign.onUpdate();
 		sign.getBlock().onUpdate(1);
 	}

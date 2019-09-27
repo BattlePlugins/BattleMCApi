@@ -42,7 +42,12 @@ public class BukkitSign extends BukkitBlock implements MCSign {
 	}
 
 	@Override
-	public void update(boolean b){
-		sign.update(true);
+	public void update() {
+		sign.update();
+	}
+
+	@Override
+	public void update(boolean force){
+		sign.update(force);
 	}
 }

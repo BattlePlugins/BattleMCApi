@@ -14,5 +14,6 @@ public interface MCBlock {
 
 	String getType();
 
+	void update();
 	void update(boolean b);
 }

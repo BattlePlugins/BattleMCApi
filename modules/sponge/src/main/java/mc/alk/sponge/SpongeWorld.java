@@ -47,24 +47,24 @@ public class SpongeWorld extends MCWrapper<World> implements MCWorld {
     }
 
     @Override
-    public MCBlock toType(MCBlock block, Class<? extends MCBlock> clazz) throws ClassCastException {
+    public <T extends MCBlock> T toType(MCBlock block, Class<T> clazz) throws ClassCastException {
         if (clazz.isAssignableFrom(block.getClass()))
-            return block;
+            return (T) block;
 
-        Location loc = ((SpongeLocation) block.getLocation()).getHandle();
+        Location<World> loc = ((SpongeLocation) block.getLocation()).getHandle();
         BlockState blockState = loc.getBlock();
         if (blockState == null)
             return null;
 
         if (clazz == MCSign.class) {
             if (blockState.getType().getName().toLowerCase().contains("sign")) {
-                return new SpongeSign((Sign) loc.getTileEntity().get());
+                return (T) new SpongeSign((Sign) loc.getTileEntity().get());
             }
         }
 
         if (clazz == MCChest.class) {
             if (blockState.getType().getName().toLowerCase().contains("chest")) {
-                return new SpongeChest((Chest) loc.getTileEntity().get());
+                return (T) new SpongeChest((Chest) loc.getTileEntity().get());
             }
         }
 

@@ -44,8 +44,13 @@ public class BukkitBlock extends MCWrapper<Block> implements MCBlock {
 	}
 
 	@Override
-	public void update(boolean b) {
+	public void update() {
 		handle.getState().update();
+	}
+
+	@Override
+	public void update(boolean force) {
+		handle.getState().update(force);
 	}
 
 	@Override

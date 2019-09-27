@@ -10,5 +10,5 @@ public interface MCWorld {
 	MCBlock getBlockAt(MCLocation loc);
 
 	boolean isType(MCBlock block, Class<? extends MCBlock> clazz);
-	MCBlock toType(MCBlock block, Class<? extends MCBlock> clazz) throws ClassCastException;
+	<T extends MCBlock> T toType(MCBlock block, Class<T> clazz) throws ClassCastException;
 }

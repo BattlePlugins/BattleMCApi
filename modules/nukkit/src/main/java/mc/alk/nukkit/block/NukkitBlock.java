@@ -44,7 +44,12 @@ public class NukkitBlock extends MCWrapper<Block> implements MCBlock {
 	}
 
 	@Override
-	public void update(boolean b) {
+	public void update() {
+		handle.onUpdate(0);
+	}
+
+	@Override
+	public void update(boolean force) {
 		handle.onUpdate(1); // Not sure if this works..
 	}
 

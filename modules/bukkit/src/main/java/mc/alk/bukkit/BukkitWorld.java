@@ -59,27 +59,6 @@ public class BukkitWorld extends MCWrapper<World> implements MCWorld {
     }
 
     @Override
-    public MCBlock toType(MCBlock block, Class<? extends MCBlock> clazz) throws ClassCastException{
-        if (clazz.isAssignableFrom(block.getClass()))
-            return block;
-        Location loc = ((BukkitLocation) block.getLocation()).getHandle();
-        Block b = loc.getBlock();
-
-        if (clazz == MCSign.class){
-            if (b.getState() instanceof Sign)
-                return new BukkitSign((Sign)b.getState());
-
-        } else if (clazz == MCChest.class){
-            if (b.getState() instanceof Chest)
-                return new BukkitChest((Chest) b.getState());
-
-        } else {
-            throw new ClassCastException("Block can not be cast to " + clazz.getSimpleName());
-        }
-        return null;
-    }
-
-    @Override
     public boolean isType(MCBlock block, Class<? extends MCBlock> clazz) {
         try {
             MCBlock b = toType(block,clazz);
@@ -87,6 +66,28 @@ public class BukkitWorld extends MCWrapper<World> implements MCWorld {
         } catch (ClassCastException e){
             return false;
         }
+    }
+
+    @Override
+    public <T extends MCBlock> T toType(MCBlock block, Class<T> clazz) throws ClassCastException {
+        if (clazz.isAssignableFrom(block.getClass()))
+            return (T) block;
+
+        Location loc = ((BukkitLocation) block.getLocation()).getHandle();
+        Block b = loc.getBlock();
+
+        if (clazz == MCSign.class){
+            if (b.getState() instanceof Sign)
+                return (T) new BukkitSign((Sign)b.getState());
+
+        } else if (clazz == MCChest.class){
+            if (b.getState() instanceof Chest)
+                return (T) new BukkitChest((Chest) b.getState());
+
+        } else {
+            throw new ClassCastException("Block can not be cast to " + clazz.getSimpleName());
+        }
+        return null;
     }
 
     @Override
