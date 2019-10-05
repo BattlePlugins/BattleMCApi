@@ -1,10 +1,11 @@
 package mc.alk.sponge;
 
 import mc.alk.mc.MCPlayer;
+import mc.alk.mc.inventory.MCInventory;
 import mc.alk.sponge.entity.SpongeHumanEntity;
 
+import mc.alk.sponge.inventory.SpongeInventory;
 import org.spongepowered.api.data.key.Keys;
-import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.util.RespawnLocation;
@@ -56,6 +57,11 @@ public class SpongePlayer extends SpongeHumanEntity implements MCPlayer {
     @Override
     public String getDisplayName() {
         return player.getName();
+    }
+
+    @Override
+    public void openInventory(MCInventory inventory) {
+        player.openInventory(((SpongeInventory) inventory).getHandle());
     }
 
     @Override

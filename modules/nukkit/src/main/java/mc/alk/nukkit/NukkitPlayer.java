@@ -4,7 +4,9 @@ import cn.nukkit.Player;
 import cn.nukkit.entity.Entity;
 import mc.alk.mc.MCLocation;
 import mc.alk.mc.MCPlayer;
+import mc.alk.mc.inventory.MCInventory;
 import mc.alk.nukkit.entity.NukkitHumanEntity;
+import mc.alk.nukkit.inventory.NukkitInventory;
 
 public class NukkitPlayer extends NukkitHumanEntity implements MCPlayer {
 
@@ -45,6 +47,11 @@ public class NukkitPlayer extends NukkitHumanEntity implements MCPlayer {
     @Override
     public String getDisplayName() {
         return player.getDisplayName();
+    }
+
+    @Override
+    public void openInventory(MCInventory inventory) {
+        (((NukkitInventory) inventory)).getHandle().open(player);
     }
 
     @Override

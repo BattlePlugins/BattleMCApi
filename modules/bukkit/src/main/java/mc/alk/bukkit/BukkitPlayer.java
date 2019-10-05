@@ -1,9 +1,11 @@
 package mc.alk.bukkit;
 
 import mc.alk.bukkit.entity.BukkitHumanEntity;
+import mc.alk.bukkit.inventory.BukkitInventory;
 import mc.alk.mc.MCLocation;
 import mc.alk.mc.MCPlayer;
 
+import mc.alk.mc.inventory.MCInventory;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
@@ -45,6 +47,11 @@ public class BukkitPlayer extends BukkitHumanEntity implements MCPlayer {
     @Override
     public String getDisplayName() {
         return player.getDisplayName();
+    }
+
+    @Override
+    public void openInventory(MCInventory inventory) {
+        player.openInventory(((BukkitInventory) inventory).getHandle());
     }
 
     @Override
