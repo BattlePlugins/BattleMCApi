@@ -1,5 +1,6 @@
 package mc.alk.sponge.entity;
 
+import mc.alk.mc.MCLocation;
 import mc.alk.mc.entity.MCEntity;
 import mc.alk.mc.util.MCWrapper;
 import mc.alk.sponge.SpongeLocation;
@@ -41,6 +42,21 @@ public class SpongeEntity extends MCWrapper<Entity> implements MCEntity {
     @Override
     public SpongeWorld getWorld() {
         return new SpongeWorld(handle.getWorld());
+    }
+
+    @Override
+    public boolean teleport(MCLocation location) {
+        return handle.setLocation(((SpongeLocation) location).getHandle());
+    }
+
+    @Override
+    public boolean isDead() {
+        return handle.isRemoved();
+    }
+
+    @Override
+    public boolean isValid() {
+        return handle.isLoaded() && !handle.isRemoved();
     }
 
     @Override

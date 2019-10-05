@@ -2,6 +2,7 @@ package mc.alk.nukkit.entity;
 
 import cn.nukkit.entity.Entity;
 
+import mc.alk.mc.MCLocation;
 import mc.alk.mc.entity.MCEntity;
 import mc.alk.mc.util.MCWrapper;
 import mc.alk.nukkit.NukkitLocation;
@@ -37,6 +38,21 @@ public class NukkitEntity extends MCWrapper<Entity> implements MCEntity {
     @Override
     public NukkitWorld getWorld() {
         return new NukkitWorld(handle.getLevel());
+    }
+
+    @Override
+    public boolean teleport(MCLocation location) {
+        return handle.teleport(((NukkitLocation) location).getHandle());
+    }
+
+    @Override
+    public boolean isDead() {
+        return !handle.isValid();
+    }
+
+    @Override
+    public boolean isValid() {
+        return handle.isValid();
     }
 
     @Override

@@ -2,6 +2,7 @@ package mc.alk.bukkit.entity;
 
 import mc.alk.bukkit.BukkitLocation;
 import mc.alk.bukkit.BukkitWorld;
+import mc.alk.mc.MCLocation;
 import mc.alk.mc.entity.MCEntity;
 import mc.alk.mc.util.MCWrapper;
 
@@ -35,6 +36,21 @@ public class BukkitEntity extends MCWrapper<Entity> implements MCEntity {
     @Override
     public BukkitWorld getWorld() {
         return new BukkitWorld(handle.getWorld());
+    }
+
+    @Override
+    public boolean teleport(MCLocation location) {
+        return handle.teleport(((BukkitLocation) location).getHandle());
+    }
+
+    @Override
+    public boolean isDead() {
+        return handle.isDead();
+    }
+
+    @Override
+    public boolean isValid() {
+        return handle.isValid();
     }
 
     @Override

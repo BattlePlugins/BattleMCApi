@@ -14,6 +14,15 @@ public interface MCEntity {
     MCLocation getLocation();
     MCWorld getWorld();
 
+    boolean teleport(MCLocation location);
+
+    default boolean teleport(MCEntity entity) {
+        return teleport(entity.getLocation());
+    }
+
+    boolean isDead();
+    boolean isValid();
+
     List<? extends MCEntity> getNearbyEntities(double x, double y, double z);
 
     String getCustomName();
