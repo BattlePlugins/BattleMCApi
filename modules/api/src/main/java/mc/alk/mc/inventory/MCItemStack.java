@@ -28,6 +28,6 @@ public interface MCItemStack {
     MCItemMeta getItemMeta();
 
     static MCItemStack getDefaultPlatformItemStack() {
-        return MCPlatform.getDefaultPlatformItemStack();
+        return MCPlatform.getPlatform().getDefaultPlatformItemStack();
     }
 }

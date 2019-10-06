@@ -42,17 +42,17 @@ public class SpongePlatform extends MCPlatform {
     }
 
     @Override
-    public MCLocation getMCLocation(String world, double x, double y, double z) {
+    public MCLocation getLocation(String world, double x, double y, double z) {
         return new SpongeLocation(new Location<>(Sponge.getServer().getWorld(world).get(), x, y, z));
     }
 
     @Override
-    public MCLocation getMCLocation(String world, double x, double y, double z, float pitch, float yaw) {
+    public MCLocation getLocation(String world, double x, double y, double z, float pitch, float yaw) {
         return new SpongeLocation(world, x, y, z, pitch, yaw);
     }
 
     @Override
-    public MCWorld getMCWorld(String world) {
+    public MCWorld getWorld(String world) {
         return new SpongeWorld(Sponge.getServer().getWorld(world).get());
     }
 
@@ -69,18 +69,18 @@ public class SpongePlatform extends MCPlatform {
     }
 
     @Override
-    public boolean cancelMCTask(long id) {
+    public boolean cancelTask(long id) {
         return false; // No support for sponge task ids
     }
 
     @Override
-    public MCPlayer getMCPlayer(String name) {
+    public MCPlayer getPlayer(String name) {
         Optional<Player> player = Sponge.getServer().getPlayer(name);
         return player.map(SpongePlayer::new).orElse(null);
     }
 
     @Override
-    public MCOfflinePlayer getMCOfflinePlayer(String name) {
+    public MCOfflinePlayer getOfflinePlayer(String name) {
         Optional<UserStorageService> userStorageService = Sponge.getServiceManager().provide(UserStorageService.class);
         if (!userStorageService.isPresent())
             return null;
@@ -92,7 +92,7 @@ public class SpongePlatform extends MCPlatform {
     }
 
     @Override
-    public MCOfflinePlayer getMCOfflinePlayer(UUID uuid) {
+    public MCOfflinePlayer getOfflinePlayer(UUID uuid) {
         Optional<UserStorageService> userStorageService = Sponge.getServiceManager().provide(UserStorageService.class);
         if (!userStorageService.isPresent())
             return null;
@@ -104,58 +104,58 @@ public class SpongePlatform extends MCPlatform {
     }
 
     @Override
-    public Collection<MCPlayer> getMCOnlinePlayers() {
+    public Collection<MCPlayer> getOnlinePlayers() {
         return Sponge.getServer().getOnlinePlayers().stream()
                 .map(SpongePlayer::new).collect(Collectors.toList());
     }
 
     @Override
-    public Collection<MCOfflinePlayer> getMCOfflinePlayers() {
+    public Collection<MCOfflinePlayer> getOfflinePlayers() {
         Collection<MCOfflinePlayer> players = new ArrayList<>();
         // TODO: Find a way to do this
         return players;
     }
 
     @Override
-    public boolean isMCMainThread() {
+    public boolean isMainThread() {
         return Sponge.getServer().isMainThread();
     }
 
     @Override
-    public boolean isMCOnlineMode() {
+    public boolean isOnlineMode() {
         return Sponge.getServer().getOnlineMode();
     }
 
     @Override
-    public String getMCVersion() {
-        return "Java-" + Sponge.getGame().getPlatform().getMinecraftVersion().getName();
+    public String getVersion() {
+        return Sponge.getGame().getPlatform().getMinecraftVersion().getName();
     }
 
     @Override
-    public Message getDefaultMCMessage() {
+    public Message getDefaultPlatformMessage() {
         return new SpongeMessage();
     }
 
     @Override
-    public MCItemStack getDefaultMCItemStack() {
+    public MCItemStack getDefaultPlatformItemStack() {
         return new SpongeItemStack(ItemStack.of(ItemTypes.AIR));
     }
 
     @Override
-    public MCInventory createMCInventory(MCPlugin plugin, int slots, String title) {
+    public MCInventory createInventory(MCPlugin plugin, int slots, String title) {
         Inventory inventory = Inventory.builder().property(InventoryTitle.PROPERTY_NAME, InventoryTitle.of(Text.of(title)))
-                .property(InventoryDimension.PROPERTY_NAME, new InventoryDimension( 9, 6)).build(plugin);
+                .property(InventoryDimension.PROPERTY_NAME, new InventoryDimension( 9, slots / 9)).build(plugin);
 
         return new SpongeInventory(inventory);
     }
 
     @Override
-    public <T> void registerMCService(Class<T> clazz, T service, MCPlugin plugin, MCServicePriority priority) {
+    public <T> void registerService(Class<T> clazz, T service, MCPlugin plugin, MCServicePriority priority) {
         Sponge.getServiceManager().setProvider(plugin.getPlatformPlugin(), clazz, service);
     }
 
     @Override
-    public <T> T getMCService(Class<T> clazz) {
+    public <T> T getService(Class<T> clazz) {
         Optional<ProviderRegistration<T>> service = Sponge.getServiceManager().getRegistration(clazz);
         return service.map(ProviderRegistration::getProvider).orElse(null);
     }

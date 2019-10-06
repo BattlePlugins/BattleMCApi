@@ -341,7 +341,7 @@ public class BukkitInventoryUtil {
 	public static String decolorChat(String string) {
 		/// Remove all the color codes, first the user defined &[0-9a-fA-F]
 		string = string.replaceAll("&[0-9a-fA-F]", "");
-		/// Remove the server color codes
+		/// Remove the implementation color codes
 		string = ChatColor.stripColor(string);
 		return string;
 	}

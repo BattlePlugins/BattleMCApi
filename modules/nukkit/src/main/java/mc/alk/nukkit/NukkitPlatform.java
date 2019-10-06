@@ -39,17 +39,17 @@ public class NukkitPlatform extends MCPlatform {
     }
 
     @Override
-    public MCLocation getMCLocation(String world, double x, double y, double z) {
+    public MCLocation getLocation(String world, double x, double y, double z) {
         return new NukkitLocation(world, x, y, z);
     }
 
     @Override
-    public MCLocation getMCLocation(String world, double x, double y, double z, float pitch, float yaw) {
+    public MCLocation getLocation(String world, double x, double y, double z, float pitch, float yaw) {
         return new NukkitLocation(world, x, y, z, pitch, yaw);
     }
 
     @Override
-    public MCWorld getMCWorld(String world) {
+    public MCWorld getWorld(String world) {
         return new NukkitWorld(Server.getInstance().getLevelByName(world));
     }
 
@@ -64,7 +64,7 @@ public class NukkitPlatform extends MCPlatform {
     }
 
     @Override
-    public MCPlayer getMCPlayer(String name) {
+    public MCPlayer getPlayer(String name) {
         Player player = Server.getInstance().getPlayer(name);
         if (player == null)
             return null;
@@ -73,7 +73,7 @@ public class NukkitPlatform extends MCPlatform {
     }
 
     @Override
-    public MCOfflinePlayer getMCOfflinePlayer(String name) {
+    public MCOfflinePlayer getOfflinePlayer(String name) {
         IPlayer player = Server.getInstance().getOfflinePlayer(name);
         if (player == null)
             return null;
@@ -87,7 +87,7 @@ public class NukkitPlatform extends MCPlatform {
     }
 
     @Override
-    public MCOfflinePlayer getMCOfflinePlayer(UUID uuid) {
+    public MCOfflinePlayer getOfflinePlayer(UUID uuid) {
         IPlayer player = Server.getInstance().getOfflinePlayer(uuid);
         if (player == null)
             return null;
@@ -101,51 +101,51 @@ public class NukkitPlatform extends MCPlatform {
     }
 
     @Override
-    public Collection<MCPlayer> getMCOnlinePlayers() {
+    public Collection<MCPlayer> getOnlinePlayers() {
         return Server.getInstance().getOnlinePlayers().values()
                 .stream().map(NukkitPlayer::new).collect(Collectors.toList());
     }
 
     @Override
-    public Collection<MCOfflinePlayer> getMCOfflinePlayers() {
+    public Collection<MCOfflinePlayer> getOfflinePlayers() {
         Collection<MCOfflinePlayer> players = new ArrayList<>();
         // TODO: Find a way to do this
         return players;
     }
 
     @Override
-    public boolean isMCMainThread() {
+    public boolean isMainThread() {
         return Server.getInstance().isPrimaryThread();
     }
 
     @Override
-    public boolean isMCOnlineMode() {
+    public boolean isOnlineMode() {
         return Server.getInstance().getProperties().getBoolean("xbox-auth");
     }
 
     @Override
-    public String getMCVersion() {
-        return "Bedrock-" + Server.getInstance().getVersion();
+    public String getVersion() {
+        return Server.getInstance().getVersion();
     }
 
     @Override
-    public Message getDefaultMCMessage() {
+    public Message getDefaultPlatformMessage() {
         return new NukkitMessage();
     }
 
     @Override
-    public MCItemStack getDefaultMCItemStack() {
+    public MCItemStack getDefaultPlatformItemStack() {
         return new NukkitItemStack(Item.get(0));
     }
 
     @Override
-    public boolean cancelMCTask(long id) {
+    public boolean cancelTask(long id) {
         Server.getInstance().getScheduler().cancelTask((int) id);
         return true;
     }
 
     @Override
-    public MCInventory createMCInventory(MCPlugin plugin, int slots, String title) {
+    public MCInventory createInventory(MCPlugin plugin, int slots, String title) {
         // Nukkit on its own does not have support for virtual inventories
         // So instead, we have to use some hacky methods and packets to create this
         // However, they can only be 27 slots (3 rows) or 54 slots (6 rows) in size
@@ -158,12 +158,12 @@ public class NukkitPlatform extends MCPlatform {
     }
 
     @Override
-    public <T> void registerMCService(Class<T> clazz, T service, MCPlugin plugin, MCServicePriority priority) {
+    public <T> void registerService(Class<T> clazz, T service, MCPlugin plugin, MCServicePriority priority) {
         Server.getInstance().getServiceManager().register(clazz, service, (Plugin) plugin.getPlatformPlugin(), ServicePriority.values()[priority.ordinal()]);
     }
 
     @Override
-    public <T> T getMCService(Class<T> clazz) {
+    public <T> T getService(Class<T> clazz) {
         return Server.getInstance().getServiceManager().getProvider(clazz).getProvider();
     }
 }

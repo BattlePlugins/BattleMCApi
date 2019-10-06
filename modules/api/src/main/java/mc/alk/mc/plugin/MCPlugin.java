@@ -56,6 +56,10 @@ public abstract class MCPlugin {
 	}
 
 	public PlatformCodeHandler getPlatformCode() {
-		return platformCode.get(MCPlatform.getType());
+		return platformCode.get(MCPlatform.getAPI());
+	}
+
+	public MCPlatform getPlatform() {
+		return MCPlatform.getPlatform();
 	}
 }

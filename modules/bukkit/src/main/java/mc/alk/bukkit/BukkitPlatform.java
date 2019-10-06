@@ -37,17 +37,17 @@ public class BukkitPlatform extends MCPlatform {
     }
 
     @Override
-    public MCLocation getMCLocation(String world, double x, double y, double z) {
+    public MCLocation getLocation(String world, double x, double y, double z) {
         return new BukkitLocation(world, x, y, z);
     }
 
     @Override
-    public MCLocation getMCLocation(String world, double x, double y, double z, float pitch, float yaw) {
+    public MCLocation getLocation(String world, double x, double y, double z, float pitch, float yaw) {
         return new BukkitLocation(world, x, y, z, pitch, yaw);
     }
 
     @Override
-    public MCWorld getMCWorld(String world) {
+    public MCWorld getWorld(String world) {
         return new BukkitWorld(Bukkit.getWorld(world));
     }
 
@@ -62,50 +62,50 @@ public class BukkitPlatform extends MCPlatform {
     }
 
     @Override
-    public MCPlayer getMCPlayer(String name) {
+    public MCPlayer getPlayer(String name) {
         Player p = Bukkit.getPlayer(name);
         return p == null ? null : new BukkitPlayer(p);
     }
 
     @Override
-    public MCOfflinePlayer getMCOfflinePlayer(String name) {
+    public MCOfflinePlayer getOfflinePlayer(String name) {
         return new BukkitOfflinePlayer(Bukkit.getOfflinePlayer(name));
     }
 
     @Override
-    public MCOfflinePlayer getMCOfflinePlayer(UUID uuid) {
+    public MCOfflinePlayer getOfflinePlayer(UUID uuid) {
         return new BukkitOfflinePlayer(Bukkit.getOfflinePlayer(uuid));
     }
 
     @Override
-    public Collection<MCPlayer> getMCOnlinePlayers() {
+    public Collection<MCPlayer> getOnlinePlayers() {
         return Bukkit.getOnlinePlayers().stream().map(BukkitPlayer::new)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Collection<MCOfflinePlayer> getMCOfflinePlayers() {
+    public Collection<MCOfflinePlayer> getOfflinePlayers() {
         return Stream.of(Bukkit.getOfflinePlayers())
                 .map(BukkitOfflinePlayer::new).collect(Collectors.toList());
     }
 
     @Override
-    public boolean isMCMainThread() {
+    public boolean isMainThread() {
         return Bukkit.isPrimaryThread();
     }
 
     @Override
-    public boolean isMCOnlineMode() {
+    public boolean isOnlineMode() {
         return Bukkit.getOnlineMode();
     }
 
     @Override
-    public String getMCVersion() {
-        return "Java-" + Bukkit.getVersion();
+    public String getVersion() {
+        return Bukkit.getVersion();
     }
 
     @Override
-    public Message getDefaultMCMessage() {
+    public Message getDefaultPlatformMessage() {
         if (isSpigot())
             return new SpigotMessage();
 
@@ -113,27 +113,27 @@ public class BukkitPlatform extends MCPlatform {
     }
 
     @Override
-    public MCItemStack getDefaultMCItemStack() {
+    public MCItemStack getDefaultPlatformItemStack() {
         return new BukkitItemStack(new ItemStack(Material.AIR));
     }
 
     @Override
-    public MCInventory createMCInventory(MCPlugin plugin, int slots, String title) {
+    public MCInventory createInventory(MCPlugin plugin, int slots, String title) {
         return new BukkitInventory(Bukkit.createInventory(null, slots, title));
     }
 
     @Override
-    public <T> void registerMCService(Class<T> clazz, T service, MCPlugin plugin, MCServicePriority priority) {
+    public <T> void registerService(Class<T> clazz, T service, MCPlugin plugin, MCServicePriority priority) {
         Bukkit.getServicesManager().register(clazz, service, (Plugin) plugin.getPlatformPlugin(), ServicePriority.values()[priority.ordinal()]);
     }
 
     @Override
-    public <T> T getMCService(Class<T> clazz) {
+    public <T> T getService(Class<T> clazz) {
         return Bukkit.getServicesManager().getRegistration(clazz).getProvider();
     }
 
     @Override
-    public boolean cancelMCTask(long id) {
+    public boolean cancelTask(long id) {
         Bukkit.getScheduler().cancelTask((int)id);
         return true;
     }
