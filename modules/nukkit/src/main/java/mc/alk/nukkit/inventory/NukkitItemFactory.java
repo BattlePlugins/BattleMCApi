@@ -1,11 +1,11 @@
 package mc.alk.nukkit.inventory;
 
 import cn.nukkit.item.Item;
-import mc.alk.nukkit.util.NukkitInventoryUtil;
-import mc.alk.mc.inventory.MCItemStack;
-import mc.alk.mc.inventory.ItemFactory;
 
-public class NukkitItemFactory extends ItemFactory {
+import mc.alk.mc.inventory.MCItemStack;
+import mc.alk.mc.inventory.MCItemFactory;
+
+public class NukkitItemFactory extends MCItemFactory {
 
 	@Override
 	public MCItemStack createMCItem(String text) {

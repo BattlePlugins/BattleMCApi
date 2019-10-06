@@ -8,14 +8,18 @@ import mc.alk.mc.MCPlayer;
 import mc.alk.mc.MCWorld;
 import mc.alk.mc.chat.Message;
 import mc.alk.mc.inventory.MCInventory;
+import mc.alk.mc.inventory.MCItemStack;
 import mc.alk.mc.plugin.MCPlugin;
 import mc.alk.mc.plugin.MCServicePriority;
 import mc.alk.sponge.chat.SpongeMessage;
 import mc.alk.sponge.inventory.SpongeInventory;
+import mc.alk.sponge.inventory.SpongeItemStack;
 
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.item.ItemTypes;
 import org.spongepowered.api.item.inventory.Inventory;
+import org.spongepowered.api.item.inventory.ItemStack;
 import org.spongepowered.api.item.inventory.property.InventoryDimension;
 import org.spongepowered.api.item.inventory.property.InventoryTitle;
 import org.spongepowered.api.service.ProviderRegistration;
@@ -128,8 +132,13 @@ public class SpongePlatform extends MCPlatform {
     }
 
     @Override
-    public Message getMCMessage() {
+    public Message getDefaultMCMessage() {
         return new SpongeMessage();
+    }
+
+    @Override
+    public MCItemStack getDefaultMCItemStack() {
+        return new SpongeItemStack(ItemStack.of(ItemTypes.AIR));
     }
 
     @Override

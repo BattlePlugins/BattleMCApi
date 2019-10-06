@@ -59,11 +59,6 @@ public class BukkitItemStack extends MCWrapper<ItemStack> implements MCItemStack
 	}
 
 	@Override
-	public boolean hasMetaData() {
-		return handle.hasItemMeta();
-	}
-
-	@Override
 	public String getCommonName() {
 		return handle.getType().name().toLowerCase();
 	}
@@ -105,5 +100,15 @@ public class BukkitItemStack extends MCWrapper<ItemStack> implements MCItemStack
 //		}
 
 		return special;
+	}
+
+	@Override
+	public boolean hasItemMeta() {
+		return handle.getItemMeta() != null;
+	}
+
+	@Override
+	public BukkitItemMeta getItemMeta() {
+		return new BukkitItemMeta(handle.getItemMeta());
 	}
 }

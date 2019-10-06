@@ -2,12 +2,12 @@ package mc.alk.bukkit.inventory;
 
 import mc.alk.bukkit.util.BukkitInventoryUtil;
 import mc.alk.mc.inventory.MCItemStack;
-import mc.alk.mc.inventory.ItemFactory;
+import mc.alk.mc.inventory.MCItemFactory;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-public class BukkitItemFactory extends ItemFactory {
+public class BukkitItemFactory extends MCItemFactory {
 
 	@Override
 	public MCItemStack createMCItem(String type, short value, int quantity) {

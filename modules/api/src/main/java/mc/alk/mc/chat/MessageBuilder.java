@@ -1,17 +1,15 @@
 package mc.alk.mc.chat;
 
-import mc.alk.mc.MCPlatform;
-
 public class MessageBuilder {
 
     private Message message;
 
     public MessageBuilder() {
-        this.message = MCPlatform.getPlatformMessage();
+        this.message = Message.getDefaultPlatformMessage();
     }
 
     public MessageBuilder(String message) {
-        this.message = MCPlatform.getPlatformMessage();
+        this();
         this.message.message = message;
     }
 

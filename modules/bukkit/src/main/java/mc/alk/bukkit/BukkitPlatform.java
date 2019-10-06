@@ -3,6 +3,7 @@ package mc.alk.bukkit;
 import mc.alk.bukkit.chat.BukkitMessage;
 import mc.alk.bukkit.chat.SpigotMessage;
 import mc.alk.bukkit.inventory.BukkitInventory;
+import mc.alk.bukkit.inventory.BukkitItemStack;
 import mc.alk.mc.APIType;
 import mc.alk.mc.MCLocation;
 import mc.alk.mc.MCOfflinePlayer;
@@ -10,12 +11,15 @@ import mc.alk.mc.MCPlatform;
 import mc.alk.mc.MCPlayer;
 import mc.alk.mc.chat.Message;
 import mc.alk.mc.inventory.MCInventory;
+import mc.alk.mc.inventory.MCItemStack;
 import mc.alk.mc.plugin.MCPlugin;
 import mc.alk.mc.MCWorld;
 import mc.alk.mc.plugin.MCServicePriority;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -101,11 +105,16 @@ public class BukkitPlatform extends MCPlatform {
     }
 
     @Override
-    public Message getMCMessage() {
+    public Message getDefaultMCMessage() {
         if (isSpigot())
             return new SpigotMessage();
 
         return new BukkitMessage();
+    }
+
+    @Override
+    public MCItemStack getDefaultMCItemStack() {
+        return new BukkitItemStack(new ItemStack(Material.AIR));
     }
 
     @Override

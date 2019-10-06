@@ -2,6 +2,7 @@ package mc.alk.mc;
 
 import mc.alk.mc.chat.Message;
 import mc.alk.mc.inventory.MCInventory;
+import mc.alk.mc.inventory.MCItemStack;
 import mc.alk.mc.plugin.MCPlugin;
 import mc.alk.mc.plugin.MCPluginManager;
 import mc.alk.mc.plugin.MCServicePriority;
@@ -124,10 +125,16 @@ public abstract class MCPlatform {
         return INSTANCE.getMCVersion();
     }
 
-    public abstract Message getMCMessage();
+    public abstract Message getDefaultMCMessage();
 
-    public static Message getPlatformMessage() {
-        return INSTANCE.getMCMessage();
+    public static Message getDefaultPlatformMessage() {
+        return INSTANCE.getDefaultMCMessage();
+    }
+
+    public abstract MCItemStack getDefaultMCItemStack();
+
+    public static MCItemStack getDefaultPlatformItemStack() {
+        return INSTANCE.getDefaultMCItemStack();
     }
 
     public static void broadcastMessage(Message message) {

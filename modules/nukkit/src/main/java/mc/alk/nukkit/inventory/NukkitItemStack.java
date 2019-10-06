@@ -3,6 +3,7 @@ package mc.alk.nukkit.inventory;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
 
+import mc.alk.mc.inventory.MCItemMeta;
 import mc.alk.mc.inventory.MCItemStack;
 import mc.alk.mc.util.MCWrapper;
 import mc.alk.nukkit.util.NukkitInventoryUtil;
@@ -66,11 +67,6 @@ public class NukkitItemStack extends MCWrapper<Item> implements MCItemStack {
 	}
 
 	@Override
-	public boolean hasMetaData() {
-		return handle.hasMeta();
-	}
-
-	@Override
 	public String getCommonName() {
 		return handle.getName();
 	}
@@ -114,5 +110,15 @@ public class NukkitItemStack extends MCWrapper<Item> implements MCItemStack {
 //		}
 
 		return special;
+	}
+
+	@Override
+	public boolean hasItemMeta() {
+		return true;
+	}
+
+	@Override
+	public MCItemMeta getItemMeta() {
+		return new NukkitItemMeta(handle);
 	}
 }

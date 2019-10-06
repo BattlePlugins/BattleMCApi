@@ -1,5 +1,6 @@
 package mc.alk.mc.chat;
 
+import mc.alk.mc.MCPlatform;
 import mc.alk.mc.MCPlayer;
 
 public abstract class Message {
@@ -56,4 +57,8 @@ public abstract class Message {
     }
 
     public abstract void sendMessage(MCPlayer player);
+
+    public static Message getDefaultPlatformMessage() {
+        return MCPlatform.getDefaultPlatformMessage();
+    }
 }

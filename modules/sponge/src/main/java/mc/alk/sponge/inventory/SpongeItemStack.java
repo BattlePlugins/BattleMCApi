@@ -1,5 +1,6 @@
 package mc.alk.sponge.inventory;
 
+import mc.alk.mc.inventory.MCItemMeta;
 import mc.alk.mc.inventory.MCItemStack;
 import mc.alk.mc.util.MCWrapper;
 import mc.alk.sponge.util.SpongeInventoryUtil;
@@ -80,11 +81,6 @@ public class SpongeItemStack extends MCWrapper<ItemStack> implements MCItemStack
     }
 
     @Override
-    public boolean hasMetaData() {
-        return !handle.getKeys().isEmpty();
-    }
-
-    @Override
     public String getCommonName() {
         return handle.getType().getName();
     }
@@ -102,5 +98,15 @@ public class SpongeItemStack extends MCWrapper<ItemStack> implements MCItemStack
     @Override
     public int isSpecial() {
         return 0;
+    }
+
+    @Override
+    public boolean hasItemMeta() {
+        return true;
+    }
+
+    @Override
+    public MCItemMeta getItemMeta() {
+        return new SpongeItemMeta(handle);
     }
 }
