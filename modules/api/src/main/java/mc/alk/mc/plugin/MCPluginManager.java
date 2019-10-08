@@ -40,7 +40,12 @@ public class MCPluginManager {
 
     public void enablePlugin() {
         if (plugin != null) {
-            plugin.onEnable();
+            try {
+                plugin.onEnable();
+            } catch (Throwable ex) {
+                System.err.println("Could not enable plugin " + plugin.getDescription().getName() + "!");
+                return;
+            }
             plugin.getPlatformCode().onEnable();
         } else {
             throw new RuntimeException("Plugin is not yet initialized!");
@@ -49,7 +54,11 @@ public class MCPluginManager {
 
     public void disablePlugin() {
         if (plugin != null) {
-            plugin.onDisable();
+            try {
+                plugin.onDisable();
+            } catch (Throwable ex) {
+                System.err.println("Could not disable plugin " + plugin.getDescription().getName() + "!");
+            }
             plugin.getPlatformCode().onDisable();
         } else {
             throw new RuntimeException("Plugin is not initialized!");
