@@ -84,10 +84,6 @@ public class BukkitItemStack extends MCWrapper<ItemStack> implements MCItemStack
 		handle.addEnchantment(BattleEnchant.fromString(ench).parseEnchant(), level);
 	}
 
-	public void addEnchantment(Enchantment enc, int level) {
-		handle.addEnchantment(enc, level);
-	}
-
 	@Override
 	public int isSpecial() {
 		int special = 0;
@@ -109,6 +105,6 @@ public class BukkitItemStack extends MCWrapper<ItemStack> implements MCItemStack
 
 	@Override
 	public BukkitItemMeta getItemMeta() {
-		return new BukkitItemMeta(handle.getItemMeta());
+		return new BukkitItemMeta(handle, handle.getItemMeta());
 	}
 }
