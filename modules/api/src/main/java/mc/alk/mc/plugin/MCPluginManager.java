@@ -44,6 +44,7 @@ public class MCPluginManager {
                 plugin.onEnable();
             } catch (Throwable ex) {
                 System.err.println("Could not enable plugin " + plugin.getDescription().getName() + "!");
+                ex.printStackTrace();
                 return;
             }
             plugin.getPlatformCode().onEnable();
@@ -58,6 +59,7 @@ public class MCPluginManager {
                 plugin.onDisable();
             } catch (Throwable ex) {
                 System.err.println("Could not disable plugin " + plugin.getDescription().getName() + "!");
+                ex.printStackTrace();
             }
             plugin.getPlatformCode().onDisable();
         } else {
