@@ -4,7 +4,10 @@ import mc.alk.mc.inventory.MCInventory;
 import mc.alk.mc.inventory.MCItemStack;
 import mc.alk.mc.util.MCWrapper;
 
+import org.spongepowered.api.item.ItemTypes;
 import org.spongepowered.api.item.inventory.Inventory;
+import org.spongepowered.api.item.inventory.ItemStack;
+import org.spongepowered.api.item.inventory.property.SlotIndex;
 import org.spongepowered.api.item.inventory.property.SlotPos;
 import org.spongepowered.api.item.inventory.query.QueryOperationTypes;
 
@@ -28,12 +31,12 @@ public class SpongeInventory extends MCWrapper<Inventory> implements MCInventory
 
     @Override
     public void setItem(int slot, MCItemStack item) {
-        handle.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(slot))).offer(((SpongeItemStack) item).getHandle());
+        handle.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotIndex.of(slot))).offer(((SpongeItemStack) item).getHandle());
     }
 
     @Override
     public SpongeItemStack getItem(int slot) {
-        return new SpongeItemStack(handle.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(slot))).peek().get());
+        return new SpongeItemStack(handle.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(slot))).peek().orElse(ItemStack.builder().itemType(ItemTypes.AIR).build()));
     }
 
     @Override
@@ -58,7 +61,7 @@ public class SpongeInventory extends MCWrapper<Inventory> implements MCInventory
         // Inventory for slots... what..? okay sure, whatever works ig
         int i = 0;
         for (Inventory inventory : handle.slots()) {
-            itemStacks[i] = new SpongeItemStack(inventory.peek().get());
+            itemStacks[i] = new SpongeItemStack(inventory.peek().orElse(ItemStack.builder().itemType(ItemTypes.AIR).build()));
             i++;
         }
         return itemStacks;

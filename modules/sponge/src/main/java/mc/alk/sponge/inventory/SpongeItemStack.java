@@ -26,11 +26,11 @@ public class SpongeItemStack extends MCWrapper<ItemStack> implements MCItemStack
 
     @Override
     public void setType(String type) {
-        Optional<ItemType> opItem = Sponge.getGame().getRegistry().getType(ItemType.class, type);
+        Optional<ItemType> opItem = Sponge.getGame().getRegistry().getType(ItemType.class, "minecraft:" + type);
         if (!opItem.isPresent())
             return;
 
-        this.handle = ItemStack.builder().fromItemStack(handle).itemType(opItem.get()).build();
+        this.handle = ItemStack.builder().itemType(opItem.get()).build();
     }
 
     @Override
@@ -92,7 +92,7 @@ public class SpongeItemStack extends MCWrapper<ItemStack> implements MCItemStack
 
     @Override
     public SpongeItemStack clone() {
-        return new SpongeItemStack(handle);
+        return new SpongeItemStack(handle.copy());
     }
 
     @Override

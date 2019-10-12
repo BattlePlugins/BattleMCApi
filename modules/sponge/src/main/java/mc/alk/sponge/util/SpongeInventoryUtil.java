@@ -7,7 +7,7 @@ import org.spongepowered.api.item.inventory.ItemStack;
 public class SpongeInventoryUtil {
 
     public static String getFormattedCommonName(ItemStack is) {
-        short datavalue = is.get(Keys.ITEM_DURABILITY).get().shortValue();
+        short datavalue = is.get(Keys.ITEM_DURABILITY).orElse(0).shortValue();
 
         String iname = "";
         try {
