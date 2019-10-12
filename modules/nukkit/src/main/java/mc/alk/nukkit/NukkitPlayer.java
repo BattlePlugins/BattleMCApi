@@ -51,7 +51,7 @@ public class NukkitPlayer extends NukkitHumanEntity implements MCPlayer {
 
     @Override
     public void openInventory(MCInventory inventory) {
-        (((NukkitInventory) inventory)).getHandle().open(player);
+        player.addWindow(((NukkitInventory) inventory).getHandle());
     }
 
     @Override

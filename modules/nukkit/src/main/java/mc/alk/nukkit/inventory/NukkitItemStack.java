@@ -24,10 +24,18 @@ public class NukkitItemStack extends MCWrapper<Item> implements MCItemStack {
 		item.setCount(handle.getCount());
 		item.setCompoundTag(handle.getCompoundTag());
 		item.setCustomName(handle.getCustomName());
-		item.setCustomBlockData(handle.getCustomBlockData());
-		item.setDamage(handle.getDamage());
-		item.setLore(handle.getLore());
-		item.setNamedTag(handle.getNamedTag());
+
+		if (handle.hasCustomBlockData())
+			item.setCustomBlockData(handle.getCustomBlockData());
+
+		if (handle.hasMeta())
+			item.setDamage(handle.getDamage());
+
+		if (handle.getLore() != null)
+			item.setLore(handle.getLore());
+
+		if (handle.getNamedTag() != null)
+			item.setNamedTag(handle.getNamedTag());
 
 		this.handle = item;
 	}
