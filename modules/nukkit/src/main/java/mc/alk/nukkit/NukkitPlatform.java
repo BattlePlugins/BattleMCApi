@@ -28,6 +28,7 @@ import mc.alk.nukkit.inventory.fakeinventory.VirtualDoubleChestInventory;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -70,6 +71,11 @@ public class NukkitPlatform extends MCPlatform {
             return null;
 
         return new NukkitPlayer(Server.getInstance().getPlayer(name));
+    }
+
+    @Override
+    public MCPlayer getPlayer(UUID uuid) {
+        return Server.getInstance().getPlayer(uuid).map(NukkitPlayer::new).orElse(null);
     }
 
     @Override

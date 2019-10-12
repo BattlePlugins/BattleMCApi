@@ -68,6 +68,12 @@ public class BukkitPlatform extends MCPlatform {
     }
 
     @Override
+    public MCPlayer getPlayer(UUID uuid) {
+        Player p = Bukkit.getPlayer(uuid);
+        return p == null ? null : new BukkitPlayer(p);
+    }
+
+    @Override
     public MCOfflinePlayer getOfflinePlayer(String name) {
         return new BukkitOfflinePlayer(Bukkit.getOfflinePlayer(name));
     }

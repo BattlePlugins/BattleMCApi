@@ -80,6 +80,12 @@ public class SpongePlatform extends MCPlatform {
     }
 
     @Override
+    public MCPlayer getPlayer(UUID uuid) {
+        Optional<Player> player = Sponge.getServer().getPlayer(uuid);
+        return player.map(SpongePlayer::new).orElse(null);
+    }
+
+    @Override
     public MCOfflinePlayer getOfflinePlayer(String name) {
         Optional<UserStorageService> userStorageService = Sponge.getServiceManager().provide(UserStorageService.class);
         if (!userStorageService.isPresent())

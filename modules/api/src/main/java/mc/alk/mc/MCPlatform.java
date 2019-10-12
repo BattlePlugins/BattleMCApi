@@ -35,6 +35,7 @@ public abstract class MCPlatform {
     public abstract boolean cancelTask(long id);
 
     public abstract MCPlayer getPlayer(String name);
+    public abstract MCPlayer getPlayer(UUID uuid);
 
     public abstract MCOfflinePlayer getOfflinePlayer(String name);
 
