@@ -150,7 +150,7 @@ public class SpongePlatform extends MCPlatform {
     @Override
     public MCInventory createInventory(MCPlugin plugin, int slots, String title) {
         Inventory inventory = Inventory.builder().property(InventoryTitle.PROPERTY_NAME, InventoryTitle.of(Text.of(title)))
-                .property(InventoryDimension.PROPERTY_NAME, new InventoryDimension( 9, slots / 9)).build(plugin);
+                .property(InventoryDimension.PROPERTY_NAME, new InventoryDimension( 9, slots / 9)).build(plugin.getPlatformPlugin());
 
         return new SpongeInventory(inventory);
     }
