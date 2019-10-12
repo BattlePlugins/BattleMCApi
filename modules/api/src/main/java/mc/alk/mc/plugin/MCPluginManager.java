@@ -66,4 +66,8 @@ public class MCPluginManager {
             throw new RuntimeException("Plugin is not initialized!");
         }
     }
+
+    public MCPlugin getPlugin() {
+        return plugin;
+    }
 }

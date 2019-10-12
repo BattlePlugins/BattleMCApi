@@ -14,4 +14,10 @@ public interface MCInventory {
 	boolean canFit(MCItemStack itemStack);
 
 	MCItemStack[] getContents();
+
+	default void setContents(MCItemStack[] contents) {
+		for (int i = 0; i < contents.length; i++) {
+			setItem(i, contents[i]);
+		}
+	}
 }

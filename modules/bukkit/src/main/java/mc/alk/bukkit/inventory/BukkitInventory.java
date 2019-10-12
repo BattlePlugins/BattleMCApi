@@ -68,7 +68,7 @@ public class BukkitInventory extends MCWrapper<Inventory> implements MCInventory
 	public BukkitItemStack[] getContents() {
 		ItemStack[] is = handle.getContents();
 		BukkitItemStack[] items = new BukkitItemStack[is.length];
-		for (int i=0;i< is.length;i++){
+		for (int i = 0; i < is.length; i++){
 			items[i] = new BukkitItemStack(is[i]);
 		}
 		return items;
