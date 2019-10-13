@@ -9,12 +9,15 @@ import mc.alk.mc.logger.MCLogger;
 import mc.alk.mc.plugin.platform.PlatformPlugin;
 import mc.alk.nukkit.NukkitPlatform;
 import mc.alk.nukkit.command.NukkitCommandExecutor;
+import mc.alk.nukkit.inventory.fakeinventory.VirtualInventoryListener;
 import mc.alk.nukkit.logger.NukkitLogger;
 
 public class NukkitPlugin extends PluginBase implements PlatformPlugin {
 
     @Override
     public void onEnable() {
+        getServer().getPluginManager().registerEvents(new VirtualInventoryListener(this), this);
+
         MCPlatform.setInstance(new NukkitPlatform());
         MCPlatform.getPluginManager().initializePlugin(this);
         MCPlatform.getPluginManager().enablePlugin();

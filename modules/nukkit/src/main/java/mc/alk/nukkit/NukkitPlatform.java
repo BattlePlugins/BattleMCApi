@@ -5,6 +5,7 @@ import cn.nukkit.OfflinePlayer;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.inventory.Inventory;
+import cn.nukkit.inventory.InventoryType;
 import cn.nukkit.item.Item;
 import cn.nukkit.plugin.Plugin;
 import cn.nukkit.plugin.service.ServicePriority;
@@ -25,6 +26,8 @@ import mc.alk.nukkit.inventory.NukkitInventory;
 import mc.alk.nukkit.inventory.NukkitItemStack;
 import mc.alk.nukkit.inventory.fakeinventory.VirtualChestInventory;
 import mc.alk.nukkit.inventory.fakeinventory.VirtualDoubleChestInventory;
+import mc.alk.nukkit.inventory.fakeinventory.VirtualInventoryClickHandler;
+import mc.alk.nukkit.inventory.fakeinventory.VirtualSlotChangeEvent;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -150,15 +153,21 @@ public class NukkitPlatform extends MCPlatform {
         return true;
     }
 
-    @Override
     public MCInventory createInventory(MCPlugin plugin, int slots, String title) {
+        return createInventory(slots, title, true);
+    }
+
+    public MCInventory createInventory(int slots, String title, boolean cancelled) {
         // Nukkit on its own does not have support for virtual inventories
         // So instead, we have to use some hacky methods and packets to create this
         // However, they can only be 27 slots (3 rows) or 54 slots (6 rows) in size
-        Inventory inventory = new VirtualChestInventory();
+        VirtualChestInventory inventory = new VirtualChestInventory(null, title);
         if (slots > 27) {
-            inventory = new VirtualDoubleChestInventory();
+            inventory = new VirtualDoubleChestInventory(null, title);
         }
+
+        // We just cancel this event for now :)
+        inventory.addListener(event -> event.setCancelled(cancelled));
 
         return new NukkitInventory(inventory);
     }

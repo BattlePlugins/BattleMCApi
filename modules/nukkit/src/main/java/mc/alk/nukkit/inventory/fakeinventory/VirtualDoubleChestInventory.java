@@ -66,7 +66,7 @@ public class VirtualDoubleChestInventory extends VirtualChestInventory {
         blockEntityData.x = pos1.x;
         blockEntityData.y = pos1.y;
         blockEntityData.z = pos1.z;
-        blockEntityData.namedTag = getDoubleNbt(pos1, pos2, getName());
+        blockEntityData.namedTag = getDoubleNbt(pos1, pos2, getTitle());
 
         who.dataPacket(blockEntityData);
     }

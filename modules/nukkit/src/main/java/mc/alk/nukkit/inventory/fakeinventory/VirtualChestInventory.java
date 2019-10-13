@@ -24,8 +24,6 @@ import java.util.List;
  */
 public class VirtualChestInventory extends VirtualInventory {
 
-    private String name;
-
     public VirtualChestInventory() {
         this(null);
     }
@@ -51,14 +49,6 @@ public class VirtualChestInventory extends VirtualInventory {
         return Collections.singletonList(blockPosition);
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     protected void placeChest(Player who, BlockVector3 pos) {
         UpdateBlockPacket updateBlock = new UpdateBlockPacket();
         updateBlock.blockRuntimeId = GlobalBlockPalette.getOrCreateRuntimeId(BlockID.CHEST, 0);
@@ -73,7 +63,7 @@ public class VirtualChestInventory extends VirtualInventory {
         blockEntityData.x = pos.x;
         blockEntityData.y = pos.y;
         blockEntityData.z = pos.z;
-        blockEntityData.namedTag = getNbt(pos, getName());
+        blockEntityData.namedTag = getNbt(pos, getTitle());
 
         who.dataPacket(blockEntityData);
     }
