@@ -25,6 +25,7 @@ public class SpongeInventoryUtil {
 
     private static String formatCommonName(String name) {
         name = name.toLowerCase().replace("_", " ");
+        name = name.replace("minecraft:", "");
 
         String[] words = name.split(" ");
         for (int i = 0; i < words.length; i++) {
