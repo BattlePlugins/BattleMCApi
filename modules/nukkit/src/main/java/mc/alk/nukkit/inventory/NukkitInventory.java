@@ -71,4 +71,9 @@ public class NukkitInventory extends MCWrapper<Inventory> implements MCInventory
 
 		return mcItems;
 	}
+
+	@Override
+	public void clear() {
+		handle.clearAll();
+	}
 }

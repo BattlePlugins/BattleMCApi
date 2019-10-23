@@ -20,4 +20,6 @@ public interface MCInventory {
 			setItem(i, contents[i]);
 		}
 	}
+
+	void clear();
 }

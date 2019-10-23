@@ -66,4 +66,9 @@ public class SpongeInventory extends MCWrapper<Inventory> implements MCInventory
         }
         return itemStacks;
     }
+
+    @Override
+    public void clear() {
+        handle.clear();
+    }
 }

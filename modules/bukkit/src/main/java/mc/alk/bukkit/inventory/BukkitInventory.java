@@ -73,4 +73,9 @@ public class BukkitInventory extends MCWrapper<Inventory> implements MCInventory
 		}
 		return items;
 	}
+
+	@Override
+	public void clear() {
+		handle.clear();
+	}
 }
