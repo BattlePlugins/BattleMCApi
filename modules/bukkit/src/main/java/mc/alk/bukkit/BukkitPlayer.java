@@ -2,11 +2,11 @@ package mc.alk.bukkit;
 
 import mc.alk.bukkit.entity.BukkitHumanEntity;
 import mc.alk.bukkit.inventory.BukkitInventory;
-import mc.alk.mc.MCLocation;
 import mc.alk.mc.MCPlayer;
-
+import mc.alk.mc.entity.player.MCGameMode;
 import mc.alk.mc.inventory.MCInventory;
-import org.bukkit.entity.Entity;
+
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
 public class BukkitPlayer extends BukkitHumanEntity implements MCPlayer {
@@ -77,6 +77,16 @@ public class BukkitPlayer extends BukkitHumanEntity implements MCPlayer {
     @Override
     public boolean isOnline() {
         return player.isOnline();
+    }
+
+    @Override
+    public MCGameMode getGameMode() {
+        return MCGameMode.values()[player.getGameMode().ordinal()];
+    }
+
+    @Override
+    public void setGameMode(MCGameMode gameMode) {
+        player.setGameMode(GameMode.values()[gameMode.ordinal()]);
     }
 
     @Override

@@ -1,12 +1,16 @@
 package mc.alk.sponge;
 
 import mc.alk.mc.MCPlayer;
+import mc.alk.mc.entity.player.MCGameMode;
 import mc.alk.mc.inventory.MCInventory;
 import mc.alk.sponge.entity.SpongeHumanEntity;
-
 import mc.alk.sponge.inventory.SpongeInventory;
+
+import org.spongepowered.api.Sponge;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.entity.living.player.gamemode.GameMode;
+import org.spongepowered.api.entity.living.player.gamemode.GameModes;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.util.RespawnLocation;
 
@@ -87,6 +91,16 @@ public class SpongePlayer extends SpongeHumanEntity implements MCPlayer {
     @Override
     public boolean isOnline() {
         return player.isOnline();
+    }
+
+    @Override
+    public MCGameMode getGameMode() {
+        return MCGameMode.valueOf(player.getGameModeData().type().get().getId().toUpperCase());
+    }
+
+    @Override
+    public void setGameMode(MCGameMode gameMode) {
+        player.getGameModeData().type().set(Sponge.getRegistry().getType(GameMode.class, gameMode.name().toUpperCase()).orElse(GameModes.SURVIVAL));
     }
 
     @Override

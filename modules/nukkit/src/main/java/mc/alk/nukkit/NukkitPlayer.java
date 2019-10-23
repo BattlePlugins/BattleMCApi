@@ -1,9 +1,9 @@
 package mc.alk.nukkit;
 
 import cn.nukkit.Player;
-import cn.nukkit.entity.Entity;
-import mc.alk.mc.MCLocation;
+
 import mc.alk.mc.MCPlayer;
+import mc.alk.mc.entity.player.MCGameMode;
 import mc.alk.mc.inventory.MCInventory;
 import mc.alk.nukkit.entity.NukkitHumanEntity;
 import mc.alk.nukkit.inventory.NukkitInventory;
@@ -77,6 +77,16 @@ public class NukkitPlayer extends NukkitHumanEntity implements MCPlayer {
     @Override
     public boolean isOnline() {
         return player.isOnline();
+    }
+
+    @Override
+    public MCGameMode getGameMode() {
+        return MCGameMode.values()[player.getGamemode()];
+    }
+
+    @Override
+    public void setGameMode(MCGameMode gameMode) {
+        player.setGamemode(gameMode.getId());
     }
 
     @Override
