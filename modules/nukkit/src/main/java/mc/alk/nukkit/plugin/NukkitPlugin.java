@@ -38,10 +38,6 @@ public class NukkitPlugin extends PluginBase implements PlatformPlugin {
         getServer().getCommandMap().register(command.getLabel(),nukkitExecutor);
     }
 
-    public void setNothing() {
-
-    }
-
     @Override
     public MCLogger getMCLogger() {
         return new NukkitLogger(getLogger());

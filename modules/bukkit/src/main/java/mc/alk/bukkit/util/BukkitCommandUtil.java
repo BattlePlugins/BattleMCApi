@@ -1,6 +1,7 @@
 package mc.alk.bukkit.util;
 
 import mc.alk.mc.command.MCCommand;
+
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

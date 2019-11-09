@@ -1,6 +1,5 @@
 package mc.alk.nukkit.entity;
 
-import cn.nukkit.entity.Entity;
 import cn.nukkit.entity.EntityLiving;
 
 import mc.alk.mc.entity.MCEntity;

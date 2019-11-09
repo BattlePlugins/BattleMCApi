@@ -4,8 +4,6 @@ import cn.nukkit.IPlayer;
 import cn.nukkit.OfflinePlayer;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
-import cn.nukkit.inventory.Inventory;
-import cn.nukkit.inventory.InventoryType;
 import cn.nukkit.item.Item;
 import cn.nukkit.plugin.Plugin;
 import cn.nukkit.plugin.service.ServicePriority;
@@ -26,12 +24,9 @@ import mc.alk.nukkit.inventory.NukkitInventory;
 import mc.alk.nukkit.inventory.NukkitItemStack;
 import mc.alk.nukkit.inventory.fakeinventory.VirtualChestInventory;
 import mc.alk.nukkit.inventory.fakeinventory.VirtualDoubleChestInventory;
-import mc.alk.nukkit.inventory.fakeinventory.VirtualInventoryClickHandler;
-import mc.alk.nukkit.inventory.fakeinventory.VirtualSlotChangeEvent;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 

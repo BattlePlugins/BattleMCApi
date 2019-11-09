@@ -32,7 +32,7 @@ public class SpongeCommandExecutor extends MCWrapper<MCCommandExecutor> implemen
 
     @Override
     public CommandResult process(CommandSource source, String arguments) {
-        MCCommandSender mcSender = null;
+        MCCommandSender mcSender;
         if (source instanceof Player)
             mcSender = new SpongePlayer((Player) source);
         else

@@ -3,8 +3,8 @@ package mc.alk.bukkit.inventory;
 import mc.alk.bukkit.util.BukkitInventoryUtil;
 import mc.alk.mc.inventory.MCInventory;
 import mc.alk.mc.inventory.MCItemStack;
-
 import mc.alk.mc.util.MCWrapper;
+
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;

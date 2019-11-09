@@ -12,41 +12,4 @@
     <version>parent</version>
     <packaging>jar</packaging>
     <name>McAPI-api</name>
-    <dependencies>
-        <dependency>
-            <groupId>javassist</groupId>
-            <artifactId>javassist</artifactId>
-            <version>3.12.1.GA</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
-    <build>
-        <resources>
-            <resource>
-                <targetPath>.</targetPath>
-                <filtering>true</filtering>
-                <directory>${basedir}/src/main/resources</directory>
-                <includes>
-                    <include>META-INF/</include>
-                </includes>
-            </resource>
-        </resources>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <compilerArgument>-proc:none</compilerArgument>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>UTF-8</encoding>
-                    <generatedSourcesDirectory>${project.build.directory}/generated-sources/</generatedSourcesDirectory>
-                    <annotationProcessors>
-                        <annotationProcessor>mc.alk.mc.plugin.PluginProcessor</annotationProcessor>
-                    </annotationProcessors>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>

@@ -8,12 +8,8 @@ import java.util.List;
 
 public class BukkitCommand extends MCCommand {
 
-    private Command command;
-
     public BukkitCommand(Command command) {
         this(command.getLabel(), command.getDescription(), command.getPermission(), command.getAliases());
-
-        this.command = command;
     }
 
     public BukkitCommand(String label, String description, String permission, List<String> aliases) {

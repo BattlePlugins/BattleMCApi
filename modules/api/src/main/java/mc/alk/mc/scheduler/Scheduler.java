@@ -1,5 +1,7 @@
 package mc.alk.mc.scheduler;
 
+import lombok.AllArgsConstructor;
+
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -7,23 +9,21 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class Scheduler {
 
-	static int count = 0; /// count of current async timers
+	private static int count = 0; // count of current async timers
 
 	/** Our current async timers */
-	static Map<Integer,Timer> timers = new ConcurrentHashMap<Integer,Timer>();
+	private static final Map<Integer, Timer> timers = new ConcurrentHashMap<>();
 
+	@AllArgsConstructor
 	static class CompletedTask extends TimerTask{
-		final Runnable r;
-		final int id;
-		public CompletedTask(Runnable r, int id) {
-			this.r = r;
-			this.id = id;
-		}
+
+		private Runnable runnable;
+		private int id;
 
 		@Override
 		public void run() {
 			timers.remove(id);
-			r.run();
+			runnable.run();
 		}
 	}
 
@@ -34,9 +34,9 @@ public class Scheduler {
 	public static int scheduleAsynchrounousTask(Runnable task, long millis) {
 		int tid = count++;
 		synchronized(timers){
-			Timer t = new Timer();
-			t.schedule(new CompletedTask(task,tid), millis);
-			timers.put(tid, t);
+			Timer timer = new Timer();
+			timer.schedule(new CompletedTask(task, tid), millis);
+			timers.put(tid, timer);
 		}
 		return tid;
 	}

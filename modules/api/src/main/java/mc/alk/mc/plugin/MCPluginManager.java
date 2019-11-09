@@ -1,5 +1,7 @@
 package mc.alk.mc.plugin;
 
+import lombok.Getter;
+
 import mc.alk.mc.plugin.platform.PlatformPlugin;
 
 import java.io.BufferedReader;
@@ -8,6 +10,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 
+@Getter
 public class MCPluginManager {
 
     private MCPlugin plugin;
@@ -65,9 +68,5 @@ public class MCPluginManager {
         } else {
             throw new RuntimeException("Plugin is not initialized!");
         }
-    }
-
-    public MCPlugin getPlugin() {
-        return plugin;
     }
 }
