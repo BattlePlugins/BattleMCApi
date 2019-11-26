@@ -10,6 +10,7 @@ import mc.alk.nukkit.util.NukkitInventoryUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class NukkitInventory extends MCWrapper<Inventory> implements MCInventory {
 
@@ -41,8 +42,8 @@ public class NukkitInventory extends MCWrapper<Inventory> implements MCInventory
 	}
 
 	@Override
-	public NukkitItemStack getItem(int slot) {
-		return new NukkitItemStack(handle.getItem(slot));
+	public Optional<NukkitItemStack> getItem(int slot) {
+		return Optional.ofNullable(handle.getItem(slot)).map(NukkitItemStack::new);
 	}
 
 	@Override

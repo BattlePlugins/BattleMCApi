@@ -15,7 +15,7 @@ public class NukkitMessage extends Message {
 
     @Override
     public void sendMessage(MCPlayer player) {
-        // Nukkit has no support for clickable/hoverable messages
+        // Nukkit (bedrock edition) has no support for clickable/hoverable messages
         player.sendMessage(message);
     }
 }

@@ -2,7 +2,10 @@ package mc.alk.bukkit.inventory;
 
 import mc.alk.mc.inventory.MCPlayerInventory;
 
+import org.bukkit.Material;
 import org.bukkit.inventory.PlayerInventory;
+
+import java.util.Optional;
 
 public class BukkitPlayerInventory extends BukkitInventory implements MCPlayerInventory {
 
@@ -15,38 +18,38 @@ public class BukkitPlayerInventory extends BukkitInventory implements MCPlayerIn
 	}
 
 	@Override
-	public BukkitItemStack getItemInMainHand() {
+	public Optional<BukkitItemStack> getItemInMainHand() {
 		try {
 			// 1.9+
-			return new BukkitItemStack(inventory.getItemInMainHand());
+			return Optional.ofNullable(inventory.getItemInMainHand()).map(BukkitItemStack::new);
 		} catch (Throwable ex) {
 			// pre 1.9
-			return new BukkitItemStack(inventory.getItemInHand());
+			return Optional.ofNullable(inventory.getItemInHand()).map(BukkitItemStack::new);
 		}
 	}
 
 	@Override
-	public BukkitItemStack getItemInOffHand() {
-		return new BukkitItemStack(inventory.getItemInOffHand());
+	public Optional<BukkitItemStack> getItemInOffHand() {
+		return Optional.ofNullable(inventory.getItemInOffHand()).map(BukkitItemStack::new);
 	}
 
 	@Override
-	public BukkitItemStack getHelmet() {
-		return new BukkitItemStack(inventory.getHelmet());
+	public Optional<BukkitItemStack> getHelmet() {
+		return Optional.ofNullable(inventory.getHelmet()).map(BukkitItemStack::new);
 	}
 
 	@Override
-	public BukkitItemStack getChestplate() {
-		return new BukkitItemStack(inventory.getChestplate());
+	public Optional<BukkitItemStack> getChestplate() {
+		return Optional.ofNullable(inventory.getChestplate()).map(BukkitItemStack::new);
 	}
 
 	@Override
-	public BukkitItemStack getLeggings() {
-		return new BukkitItemStack(inventory.getLeggings());
+	public Optional<BukkitItemStack> getLeggings() {
+		return Optional.ofNullable(inventory.getLeggings()).map(BukkitItemStack::new);
 	}
 
 	@Override
-	public BukkitItemStack getBoots() {
-		return new BukkitItemStack(inventory.getBoots());
+	public Optional<BukkitItemStack> getBoots() {
+		return Optional.ofNullable(inventory.getBoots()).map(BukkitItemStack::new);
 	}
 }

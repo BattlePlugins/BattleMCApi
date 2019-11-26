@@ -23,38 +23,32 @@ public class SpongePlayerInventory extends SpongeInventory implements MCPlayerIn
     }
 
     @Override
-    public SpongeItemStack getItemInMainHand() {
-        Optional<Player> player = (Optional<Player>) inventory.getCarrier();
-        return player.map(value -> new SpongeItemStack(value.getItemInHand(HandTypes.MAIN_HAND).get())).orElse(null);
+    public Optional<SpongeItemStack> getItemInMainHand() {
+        return inventory.getCarrier().map(carrier -> new SpongeItemStack(carrier.getItemInHand(HandTypes.MAIN_HAND).orElse(null)));
     }
 
     @Override
-    public SpongeItemStack getItemInOffHand() {
-        Optional<Player> player = (Optional<Player>) inventory.getCarrier();
-        return player.map(value -> new SpongeItemStack(value.getItemInHand(HandTypes.OFF_HAND).get())).orElse(null);
+    public Optional<SpongeItemStack> getItemInOffHand() {
+        return inventory.getCarrier().map(carrier -> new SpongeItemStack(carrier.getItemInHand(HandTypes.OFF_HAND).orElse(null)));
     }
 
     @Override
-    public SpongeItemStack getHelmet() {
-        Optional<Player> player = (Optional<Player>) inventory.getCarrier();
-        return player.map(value -> new SpongeItemStack(value.getHelmet().get())).orElse(null);
+    public Optional<SpongeItemStack> getHelmet() {
+        return inventory.getCarrier().map(carrier -> new SpongeItemStack(carrier.getHelmet().orElse(null)));
     }
 
     @Override
-    public SpongeItemStack getChestplate() {
-        Optional<Player> player = (Optional<Player>) inventory.getCarrier();
-        return player.map(value -> new SpongeItemStack(value.getChestplate().get())).orElse(null);
+    public Optional<SpongeItemStack> getChestplate() {
+        return inventory.getCarrier().map(carrier -> new SpongeItemStack(carrier.getChestplate().orElse(null)));
     }
 
     @Override
-    public SpongeItemStack getLeggings() {
-        Optional<Player> player = (Optional<Player>) inventory.getCarrier();
-        return player.map(value -> new SpongeItemStack(value.getLeggings().get())).orElse(null);
+    public Optional<SpongeItemStack> getLeggings() {
+        return inventory.getCarrier().map(carrier -> new SpongeItemStack(carrier.getLeggings().orElse(null)));
     }
 
     @Override
-    public SpongeItemStack getBoots() {
-        Optional<Player> player = (Optional<Player>) inventory.getCarrier();
-        return player.map(value -> new SpongeItemStack(value.getBoots().get())).orElse(null);
+    public Optional<SpongeItemStack> getBoots() {
+        return inventory.getCarrier().map(carrier -> new SpongeItemStack(carrier.getBoots().orElse(null)));
     }
 }

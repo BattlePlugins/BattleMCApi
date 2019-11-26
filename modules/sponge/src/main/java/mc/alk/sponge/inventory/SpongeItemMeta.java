@@ -25,9 +25,8 @@ public class SpongeItemMeta implements MCItemMeta {
     }
 
     @Override
-    public String getDisplayName() {
-        Optional<DisplayNameData> nameData = itemStack.getOrCreate(DisplayNameData.class);
-        return nameData.map(displayNameData -> displayNameData.displayName().get().toPlain()).orElse(null);
+    public Optional<String> getDisplayName() {
+        return itemStack.getOrCreate(DisplayNameData.class).map(data -> data.displayName().get().toPlain());
     }
 
     @Override
@@ -36,9 +35,8 @@ public class SpongeItemMeta implements MCItemMeta {
     }
 
     @Override
-    public List<String> getLore() {
-        Optional<LoreData> loreData = itemStack.getOrCreate(LoreData.class);
-        return loreData.map(data -> data.lore().get().stream().map(Text::toPlain).collect(Collectors.toList())).orElse(null);
+    public Optional<List<String>> getLore() {
+        return itemStack.getOrCreate(LoreData.class).map(data -> data.lore().get().stream().map(Text::toPlain).collect(Collectors.toList()));
     }
 
     @Override

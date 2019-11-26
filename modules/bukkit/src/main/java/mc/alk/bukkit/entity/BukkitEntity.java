@@ -9,6 +9,7 @@ import mc.alk.mc.util.MCWrapper;
 import org.bukkit.entity.Entity;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -59,8 +60,8 @@ public class BukkitEntity extends MCWrapper<Entity> implements MCEntity {
     }
 
     @Override
-    public String getCustomName() {
-        return handle.getCustomName();
+    public Optional<String> getCustomName() {
+        return Optional.ofNullable(handle.getCustomName());
     }
 
     @Override

@@ -9,7 +9,7 @@ import mc.alk.mc.logger.MCLogger;
 import mc.alk.mc.plugin.platform.PlatformPlugin;
 import mc.alk.nukkit.NukkitPlatform;
 import mc.alk.nukkit.command.NukkitCommandExecutor;
-import mc.alk.nukkit.inventory.fakeinventory.VirtualInventoryListener;
+import mc.alk.nukkit.inventory.virtual.VirtualInventoryListener;
 import mc.alk.nukkit.logger.NukkitLogger;
 
 public class NukkitPlugin extends PluginBase implements PlatformPlugin {

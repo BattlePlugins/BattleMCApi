@@ -6,6 +6,8 @@ import cn.nukkit.item.Item;
 import mc.alk.mc.inventory.MCItemStack;
 import mc.alk.mc.inventory.MCPlayerInventory;
 
+import java.util.Optional;
+
 public class NukkitPlayerInventory extends NukkitInventory implements MCPlayerInventory {
 
 	private PlayerInventory inventory;
@@ -17,32 +19,32 @@ public class NukkitPlayerInventory extends NukkitInventory implements MCPlayerIn
 	}
 
 	@Override
-	public NukkitItemStack getItemInMainHand() {
-		return new NukkitItemStack(inventory.getItemInHand());
+	public Optional<NukkitItemStack> getItemInMainHand() {
+		return Optional.ofNullable(inventory.getItemInHand()).map(NukkitItemStack::new);
 	}
 
 	@Override
-	public NukkitItemStack getItemInOffHand() {
-		return new NukkitItemStack(Item.get(Item.AIR));
+	public Optional<NukkitItemStack> getItemInOffHand() {
+		return Optional.empty(); // no support... yet (open PR atm)
 	}
 
 	@Override
-	public NukkitItemStack getHelmet() {
-		return new NukkitItemStack(inventory.getHelmet());
+	public Optional<NukkitItemStack> getHelmet() {
+		return Optional.ofNullable(inventory.getHelmet()).map(NukkitItemStack::new);
 	}
 
 	@Override
-	public NukkitItemStack getChestplate() {
-		return new NukkitItemStack(inventory.getChestplate());
+	public Optional<NukkitItemStack> getChestplate() {
+		return Optional.ofNullable(inventory.getChestplate()).map(NukkitItemStack::new);
 	}
 
 	@Override
-	public NukkitItemStack getLeggings() {
-		return new NukkitItemStack(inventory.getLeggings());
+	public Optional<NukkitItemStack> getLeggings() {
+		return Optional.ofNullable(inventory.getLeggings()).map(NukkitItemStack::new);
 	}
 
 	@Override
-	public NukkitItemStack getBoots() {
-		return new NukkitItemStack(inventory.getBoots());
+	public Optional<NukkitItemStack> getBoots() {
+		return Optional.ofNullable(inventory.getBoots()).map(NukkitItemStack::new);
 	}
 }

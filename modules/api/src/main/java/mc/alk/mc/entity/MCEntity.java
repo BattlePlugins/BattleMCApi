@@ -4,6 +4,7 @@ import mc.alk.mc.MCLocation;
 import mc.alk.mc.MCWorld;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface MCEntity {
@@ -25,8 +26,12 @@ public interface MCEntity {
 
     List<? extends MCEntity> getNearbyEntities(double x, double y, double z);
 
-    String getCustomName();
+    default boolean hasCustomName() {
+        return getCustomName().isPresent();
+    }
+
     boolean isCustomNameVisible();
+    Optional<String> getCustomName();
 
     void setCustomName(String customName);
     void setCustomNameVisible(boolean visible);

@@ -48,25 +48,25 @@ public class SpongeChest extends SpongeBlock implements MCChest {
         return items;
     }
     @Override
-    public SpongeChest getNeighborChest() {
+    public Optional<SpongeChest> getNeighborChest() {
         Location<World> loc = handle.getLocation().get();
         if (loc.getRelative(Direction.NORTH).getBlock().getType() == BlockTypes.CHEST)
-            return new SpongeChest((Chest) loc.getRelative(Direction.NORTH).getTileEntity().get());
+            return loc.getRelative(Direction.NORTH).getTileEntity().map(chest -> new SpongeChest((Chest) chest));
 
         else if (loc.getRelative(Direction.SOUTH).getBlock().getType() == BlockTypes.CHEST)
-            return new SpongeChest((Chest) loc.getRelative(Direction.SOUTH).getTileEntity().get());
+            return loc.getRelative(Direction.SOUTH).getTileEntity().map(chest -> new SpongeChest((Chest) chest));
 
         else if (loc.getRelative(Direction.EAST).getBlock().getType() == BlockTypes.CHEST)
-            return new SpongeChest((Chest) loc.getRelative(Direction.EAST).getTileEntity().get());
+            return loc.getRelative(Direction.EAST).getTileEntity().map(chest -> new SpongeChest((Chest) chest));
 
         else if (loc.getRelative(Direction.WEST).getBlock().getType() == BlockTypes.CHEST)
-            return new SpongeChest((Chest) loc.getRelative(Direction.WEST).getTileEntity().get());
+            return loc.getRelative(Direction.WEST).getTileEntity().map(chest -> new SpongeChest((Chest) chest));
 
-        return null;
+        return Optional.empty();
     }
 
     @Override
     public SpongeInventory getInventory() {
-        return null;
+        return new SpongeInventory(chest.getInventory());
     }
 }

@@ -10,6 +10,8 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.block.Chest;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Optional;
+
 public class BukkitChest extends BukkitBlock implements MCChest {
 
 	private Chest chest;
@@ -40,20 +42,20 @@ public class BukkitChest extends BukkitBlock implements MCChest {
 	}
 
 	@Override
-	public BukkitChest getNeighborChest() {
+	public Optional<BukkitChest> getNeighborChest() {
 		if (handle.getRelative(BlockFace.NORTH).getType() == Material.CHEST)
-			return new BukkitChest((Chest) handle.getRelative(BlockFace.NORTH).getState());
+			return Optional.of(new BukkitChest((Chest) handle.getRelative(BlockFace.NORTH).getState()));
 
 		else if (handle.getRelative(BlockFace.SOUTH).getType() == Material.CHEST)
-			return new BukkitChest((Chest) handle.getRelative(BlockFace.SOUTH).getState());
+			return Optional.of(new BukkitChest((Chest) handle.getRelative(BlockFace.SOUTH).getState()));
 
 		else if (handle.getRelative(BlockFace.EAST).getType() == Material.CHEST)
-			return new BukkitChest((Chest) handle.getRelative(BlockFace.EAST).getState());
+			return Optional.of(new BukkitChest((Chest) handle.getRelative(BlockFace.EAST).getState()));
 
 		else if (handle.getRelative(BlockFace.WEST).getType() == Material.CHEST)
-			return new BukkitChest((Chest) handle.getRelative(BlockFace.WEST).getState());
+			return Optional.of(new BukkitChest((Chest) handle.getRelative(BlockFace.WEST).getState()));
 
-		return null;
+		return Optional.empty();
 	}
 
 	@Override

@@ -21,7 +21,7 @@ public class NukkitCommandExecutor extends Command {
 
     @Override
     public boolean execute(CommandSender sender, String label, String[] args) {
-        MCCommandSender mcSender = null;
+        MCCommandSender mcSender;
         if (sender instanceof ConsoleCommandSender)
             mcSender = new NukkitConsoleCommandSender((ConsoleCommandSender) sender);
         else

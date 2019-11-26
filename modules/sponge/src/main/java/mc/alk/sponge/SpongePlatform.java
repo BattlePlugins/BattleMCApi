@@ -1,14 +1,8 @@
 package mc.alk.sponge;
 
 import mc.alk.mc.APIType;
-import mc.alk.mc.MCLocation;
-import mc.alk.mc.MCOfflinePlayer;
 import mc.alk.mc.MCPlatform;
-import mc.alk.mc.MCPlayer;
-import mc.alk.mc.MCWorld;
 import mc.alk.mc.chat.Message;
-import mc.alk.mc.inventory.MCInventory;
-import mc.alk.mc.inventory.MCItemStack;
 import mc.alk.mc.plugin.MCPlugin;
 import mc.alk.mc.plugin.MCServicePriority;
 import mc.alk.sponge.chat.SpongeMessage;
@@ -16,7 +10,6 @@ import mc.alk.sponge.inventory.SpongeInventory;
 import mc.alk.sponge.inventory.SpongeItemStack;
 
 import org.spongepowered.api.Sponge;
-import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.item.ItemTypes;
 import org.spongepowered.api.item.inventory.Inventory;
 import org.spongepowered.api.item.inventory.ItemStack;
@@ -42,18 +35,18 @@ public class SpongePlatform extends MCPlatform {
     }
 
     @Override
-    public MCLocation getLocation(String world, double x, double y, double z) {
+    public SpongeLocation getLocation(String world, double x, double y, double z) {
         return new SpongeLocation(new Location<>(Sponge.getServer().getWorld(world).get(), x, y, z));
     }
 
     @Override
-    public MCLocation getLocation(String world, double x, double y, double z, float pitch, float yaw) {
+    public SpongeLocation getLocation(String world, double x, double y, double z, float pitch, float yaw) {
         return new SpongeLocation(world, x, y, z, pitch, yaw);
     }
 
     @Override
-    public MCWorld getWorld(String world) {
-        return new SpongeWorld(Sponge.getServer().getWorld(world).get());
+    public Optional<SpongeWorld> getWorld(String world) {
+        return Sponge.getServer().getWorld(world).map(SpongeWorld::new);
     }
 
     @Override
@@ -74,50 +67,42 @@ public class SpongePlatform extends MCPlatform {
     }
 
     @Override
-    public MCPlayer getPlayer(String name) {
-        Optional<Player> player = Sponge.getServer().getPlayer(name);
-        return player.map(SpongePlayer::new).orElse(null);
+    public Optional<SpongePlayer> getPlayer(String name) {
+        return Sponge.getServer().getPlayer(name).map(SpongePlayer::new);
     }
 
     @Override
-    public MCPlayer getPlayer(UUID uuid) {
-        Optional<Player> player = Sponge.getServer().getPlayer(uuid);
-        return player.map(SpongePlayer::new).orElse(null);
+    public Optional<SpongePlayer> getPlayer(UUID uuid) {
+        return Sponge.getServer().getPlayer(uuid).map(SpongePlayer::new);
     }
 
     @Override
-    public MCOfflinePlayer getOfflinePlayer(String name) {
+    public Optional<SpongeOfflinePlayer> getOfflinePlayer(String name) {
         Optional<UserStorageService> userStorageService = Sponge.getServiceManager().provide(UserStorageService.class);
         if (!userStorageService.isPresent())
-            return null;
+            return Optional.empty();
 
-        if (!userStorageService.get().get(name).isPresent())
-            return null;
-
-        return new SpongeOfflinePlayer(userStorageService.get().get(name).get());
+        return userStorageService.get().get(name).map(SpongeOfflinePlayer::new);
     }
 
     @Override
-    public MCOfflinePlayer getOfflinePlayer(UUID uuid) {
+    public Optional<SpongeOfflinePlayer> getOfflinePlayer(UUID uuid) {
         Optional<UserStorageService> userStorageService = Sponge.getServiceManager().provide(UserStorageService.class);
         if (!userStorageService.isPresent())
-            return null;
+            return Optional.empty();
 
-        if (!userStorageService.get().get(uuid).isPresent())
-            return null;
-
-        return new SpongeOfflinePlayer(userStorageService.get().get(uuid).get());
+        return userStorageService.get().get(uuid).map(SpongeOfflinePlayer::new);
     }
 
     @Override
-    public Collection<MCPlayer> getOnlinePlayers() {
+    public Collection<SpongePlayer> getOnlinePlayers() {
         return Sponge.getServer().getOnlinePlayers().stream()
                 .map(SpongePlayer::new).collect(Collectors.toList());
     }
 
     @Override
-    public Collection<MCOfflinePlayer> getOfflinePlayers() {
-        Collection<MCOfflinePlayer> players = new ArrayList<>();
+    public Collection<SpongeOfflinePlayer> getOfflinePlayers() {
+        Collection<SpongeOfflinePlayer> players = new ArrayList<>();
         // TODO: Find a way to do this
         return players;
     }
@@ -143,12 +128,12 @@ public class SpongePlatform extends MCPlatform {
     }
 
     @Override
-    public MCItemStack getDefaultPlatformItemStack() {
+    public SpongeItemStack getDefaultPlatformItemStack() {
         return new SpongeItemStack(ItemStack.of(ItemTypes.AIR));
     }
 
     @Override
-    public MCInventory createInventory(MCPlugin plugin, int slots, String title) {
+    public SpongeInventory createInventory(MCPlugin plugin, int slots, String title) {
         Inventory inventory = Inventory.builder().property(InventoryTitle.PROPERTY_NAME, InventoryTitle.of(Text.of(title)))
                 .property(InventoryDimension.PROPERTY_NAME, new InventoryDimension( 9, slots / 9)).build(plugin.getPlatformPlugin());
 
@@ -161,8 +146,7 @@ public class SpongePlatform extends MCPlatform {
     }
 
     @Override
-    public <T> T getService(Class<T> clazz) {
-        Optional<ProviderRegistration<T>> service = Sponge.getServiceManager().getRegistration(clazz);
-        return service.map(ProviderRegistration::getProvider).orElse(null);
+    public <T> Optional<T> getService(Class<T> clazz) {
+        return Sponge.getServiceManager().getRegistration(clazz).map(ProviderRegistration::getProvider);
     }
 }

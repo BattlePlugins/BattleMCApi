@@ -10,6 +10,7 @@ import mc.alk.nukkit.NukkitWorld;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -62,8 +63,8 @@ public class NukkitEntity extends MCWrapper<Entity> implements MCEntity {
     }
 
     @Override
-    public String getCustomName() {
-        return handle.getNameTag();
+    public Optional<String> getCustomName() {
+        return Optional.ofNullable(handle.getNameTag());
     }
 
     @Override

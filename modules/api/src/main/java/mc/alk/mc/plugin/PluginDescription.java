@@ -8,7 +8,7 @@ public class PluginDescription {
         this.properties = properties;
     }
 
-    public String getID() {
+    public String getId() {
         return properties.id();
     }
 

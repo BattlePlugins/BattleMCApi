@@ -9,6 +9,7 @@ import mc.alk.nukkit.inventory.NukkitItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class NukkitChest extends NukkitBlock implements MCChest {
 
@@ -37,8 +38,8 @@ public class NukkitChest extends NukkitBlock implements MCChest {
 	}
 
 	@Override
-	public NukkitChest getNeighborChest() {
-		return new NukkitChest(chest.getPair());
+	public Optional<NukkitChest> getNeighborChest() {
+		return Optional.ofNullable(chest.getPair()).map(NukkitChest::new);
 	}
 
 	@Override

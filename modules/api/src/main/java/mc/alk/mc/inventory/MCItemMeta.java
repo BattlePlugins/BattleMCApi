@@ -1,17 +1,22 @@
 package mc.alk.mc.inventory;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface MCItemMeta {
 
     default boolean hasDisplayName() {
-        return getDisplayName() != null ;
+        return getDisplayName().isPresent();
     }
 
-    String getDisplayName();
+    Optional<String> getDisplayName();
     void setDisplayName(String displayName);
 
-    List<String> getLore();
+    default boolean hasLore() {
+        return getLore().isPresent();
+    }
+
+    Optional<List<String>> getLore();
     void setLore(List<String> lore);
 
     int getCustomModelData();

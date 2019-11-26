@@ -8,6 +8,7 @@ import mc.alk.mc.plugin.MCPluginManager;
 import mc.alk.mc.plugin.MCServicePriority;
 
 import java.util.Collection;
+import java.util.Optional;
 import java.util.UUID;
 
 public abstract class MCPlatform {
@@ -25,7 +26,7 @@ public abstract class MCPlatform {
     public abstract MCLocation getLocation(String world, double x, double y, double z);
     public abstract MCLocation getLocation(String world, double x, double y, double z, float pitch, float yaw);
 
-    public abstract MCWorld getWorld(String world);
+    public abstract Optional<? extends MCWorld> getWorld(String world);
 
     public abstract APIType getAPIType();
 
@@ -34,16 +35,16 @@ public abstract class MCPlatform {
 
     public abstract boolean cancelTask(long id);
 
-    public abstract MCPlayer getPlayer(String name);
-    public abstract MCPlayer getPlayer(UUID uuid);
+    public abstract Optional<? extends MCPlayer> getPlayer(String name);
+    public abstract Optional<? extends MCPlayer> getPlayer(UUID uuid);
 
-    public abstract MCOfflinePlayer getOfflinePlayer(String name);
+    public abstract Optional<? extends MCOfflinePlayer> getOfflinePlayer(String name);
 
-    public abstract MCOfflinePlayer getOfflinePlayer(UUID uuid);
+    public abstract Optional<? extends MCOfflinePlayer> getOfflinePlayer(UUID uuid);
 
-    public abstract Collection<MCPlayer> getOnlinePlayers();
+    public abstract Collection<? extends MCPlayer> getOnlinePlayers();
 
-    public abstract Collection<MCOfflinePlayer> getOfflinePlayers();
+    public abstract Collection<? extends MCOfflinePlayer> getOfflinePlayers();
 
     public abstract boolean isMainThread();
 
@@ -63,7 +64,7 @@ public abstract class MCPlatform {
 
     public abstract <T> void registerService(Class<T> clazz, T service, MCPlugin plugin, MCServicePriority priority);
 
-    public abstract <T> T getService(Class<T> clazz);
+    public abstract <T> Optional<T> getService(Class<T> clazz);
 
     public static MCPluginManager getPluginManager() {
         return pluginManager;

@@ -1,4 +1,4 @@
-package mc.alk.nukkit.inventory.fakeinventory;
+package mc.alk.nukkit.inventory.virtual;
 
 import cn.nukkit.Player;
 import cn.nukkit.block.BlockID;

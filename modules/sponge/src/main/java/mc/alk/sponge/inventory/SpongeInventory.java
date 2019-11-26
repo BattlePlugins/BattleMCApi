@@ -11,6 +11,8 @@ import org.spongepowered.api.item.inventory.property.SlotIndex;
 import org.spongepowered.api.item.inventory.property.SlotPos;
 import org.spongepowered.api.item.inventory.query.QueryOperationTypes;
 
+import java.util.Optional;
+
 public class SpongeInventory extends MCWrapper<Inventory> implements MCInventory {
 
     public SpongeInventory(Inventory inventory) {
@@ -35,8 +37,8 @@ public class SpongeInventory extends MCWrapper<Inventory> implements MCInventory
     }
 
     @Override
-    public SpongeItemStack getItem(int slot) {
-        return new SpongeItemStack(handle.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(slot))).peek().orElse(ItemStack.builder().itemType(ItemTypes.AIR).build()));
+    public Optional<SpongeItemStack> getItem(int slot) {
+        return handle.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(slot))).peek().map(SpongeItemStack::new);
     }
 
     @Override

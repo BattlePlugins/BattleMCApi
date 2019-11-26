@@ -5,26 +5,21 @@ import mc.alk.bukkit.chat.SpigotMessage;
 import mc.alk.bukkit.inventory.BukkitInventory;
 import mc.alk.bukkit.inventory.BukkitItemStack;
 import mc.alk.mc.APIType;
-import mc.alk.mc.MCLocation;
-import mc.alk.mc.MCOfflinePlayer;
 import mc.alk.mc.MCPlatform;
-import mc.alk.mc.MCPlayer;
 import mc.alk.mc.chat.Message;
-import mc.alk.mc.inventory.MCInventory;
-import mc.alk.mc.inventory.MCItemStack;
 import mc.alk.mc.plugin.MCPlugin;
-import mc.alk.mc.MCWorld;
 import mc.alk.mc.plugin.MCServicePriority;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Collection;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -37,18 +32,18 @@ public class BukkitPlatform extends MCPlatform {
     }
 
     @Override
-    public MCLocation getLocation(String world, double x, double y, double z) {
+    public BukkitLocation getLocation(String world, double x, double y, double z) {
         return new BukkitLocation(world, x, y, z);
     }
 
     @Override
-    public MCLocation getLocation(String world, double x, double y, double z, float pitch, float yaw) {
+    public BukkitLocation getLocation(String world, double x, double y, double z, float pitch, float yaw) {
         return new BukkitLocation(world, x, y, z, pitch, yaw);
     }
 
     @Override
-    public MCWorld getWorld(String world) {
-        return new BukkitWorld(Bukkit.getWorld(world));
+    public Optional<BukkitWorld> getWorld(String world) {
+        return Optional.ofNullable(Bukkit.getWorld(world)).map(BukkitWorld::new);
     }
 
     @Override
@@ -62,35 +57,33 @@ public class BukkitPlatform extends MCPlatform {
     }
 
     @Override
-    public MCPlayer getPlayer(String name) {
-        Player p = Bukkit.getPlayer(name);
-        return p == null ? null : new BukkitPlayer(p);
+    public Optional<BukkitPlayer> getPlayer(String name) {
+        return Optional.ofNullable(Bukkit.getPlayer(name)).map(BukkitPlayer::new);
     }
 
     @Override
-    public MCPlayer getPlayer(UUID uuid) {
-        Player p = Bukkit.getPlayer(uuid);
-        return p == null ? null : new BukkitPlayer(p);
+    public Optional<BukkitPlayer> getPlayer(UUID uuid) {
+        return Optional.ofNullable(Bukkit.getPlayer(uuid)).map(BukkitPlayer::new);
     }
 
     @Override
-    public MCOfflinePlayer getOfflinePlayer(String name) {
-        return new BukkitOfflinePlayer(Bukkit.getOfflinePlayer(name));
+    public Optional<BukkitOfflinePlayer> getOfflinePlayer(String name) {
+        return Optional.ofNullable(Bukkit.getOfflinePlayer(name)).map(BukkitOfflinePlayer::new);
     }
 
     @Override
-    public MCOfflinePlayer getOfflinePlayer(UUID uuid) {
-        return new BukkitOfflinePlayer(Bukkit.getOfflinePlayer(uuid));
+    public Optional<BukkitOfflinePlayer> getOfflinePlayer(UUID uuid) {
+        return Optional.ofNullable(Bukkit.getOfflinePlayer(uuid)).map(BukkitOfflinePlayer::new);
     }
 
     @Override
-    public Collection<MCPlayer> getOnlinePlayers() {
+    public Collection<BukkitPlayer> getOnlinePlayers() {
         return Bukkit.getOnlinePlayers().stream().map(BukkitPlayer::new)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Collection<MCOfflinePlayer> getOfflinePlayers() {
+    public Collection<BukkitOfflinePlayer> getOfflinePlayers() {
         return Stream.of(Bukkit.getOfflinePlayers())
                 .map(BukkitOfflinePlayer::new).collect(Collectors.toList());
     }
@@ -119,12 +112,12 @@ public class BukkitPlatform extends MCPlatform {
     }
 
     @Override
-    public MCItemStack getDefaultPlatformItemStack() {
+    public BukkitItemStack getDefaultPlatformItemStack() {
         return new BukkitItemStack(new ItemStack(Material.AIR));
     }
 
     @Override
-    public MCInventory createInventory(MCPlugin plugin, int slots, String title) {
+    public BukkitInventory createInventory(MCPlugin plugin, int slots, String title) {
         return new BukkitInventory(Bukkit.createInventory(null, slots, title));
     }
 
@@ -134,8 +127,8 @@ public class BukkitPlatform extends MCPlatform {
     }
 
     @Override
-    public <T> T getService(Class<T> clazz) {
-        return Bukkit.getServicesManager().getRegistration(clazz).getProvider();
+    public <T> Optional<T> getService(Class<T> clazz) {
+        return Optional.ofNullable(Bukkit.getServicesManager().getRegistration(clazz)).map(RegisteredServiceProvider::getProvider);
     }
 
     @Override

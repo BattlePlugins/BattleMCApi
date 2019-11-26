@@ -66,8 +66,8 @@ public class SpongeEntity extends MCWrapper<Entity> implements MCEntity {
     }
 
     @Override
-    public String getCustomName() {
-        return handle.get(Keys.DISPLAY_NAME).map(Text::toPlain).orElseGet(() -> handle.getType().getName());
+    public Optional<String> getCustomName() {
+        return handle.get(Keys.DISPLAY_NAME).map(Text::toPlain);
     }
 
     @Override

@@ -7,6 +7,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
+import java.util.Optional;
 
 public class BukkitItemMeta extends MCWrapper<ItemMeta> implements MCItemMeta {
 
@@ -19,8 +20,8 @@ public class BukkitItemMeta extends MCWrapper<ItemMeta> implements MCItemMeta {
     }
 
     @Override
-    public String getDisplayName() {
-        return handle.getDisplayName();
+    public Optional<String> getDisplayName() {
+        return Optional.ofNullable(handle.getDisplayName());
     }
 
     @Override
@@ -30,8 +31,8 @@ public class BukkitItemMeta extends MCWrapper<ItemMeta> implements MCItemMeta {
     }
 
     @Override
-    public List<String> getLore() {
-        return handle.getLore();
+    public Optional<List<String>> getLore() {
+        return Optional.ofNullable(handle.getLore());
     }
 
     @Override

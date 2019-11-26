@@ -6,6 +6,7 @@ import mc.alk.mc.inventory.MCItemMeta;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Due to how Nukkit handles item metadata, we instead
@@ -20,8 +21,11 @@ public class NukkitItemMeta implements MCItemMeta {
     }
 
     @Override
-    public String getDisplayName() {
-        return item.getCustomName();
+    public Optional<String> getDisplayName() {
+        if (!item.hasCustomName())
+            return Optional.empty();
+
+        return Optional.of(item.getCustomName());
     }
 
     @Override
@@ -30,13 +34,16 @@ public class NukkitItemMeta implements MCItemMeta {
     }
 
     @Override
-    public List<String> getLore() {
-        return Arrays.asList(item.getLore());
+    public Optional<List<String>> getLore() {
+        if (item.getLore().length == 0)
+            return Optional.empty();
+
+        return Optional.of(Arrays.asList(item.getLore()));
     }
 
     @Override
     public void setLore(List<String> lore) {
-        item.setLore(lore.toArray(new String[lore.size()]));
+        item.setLore(lore.toArray(new String[0]));
     }
 
     @Override

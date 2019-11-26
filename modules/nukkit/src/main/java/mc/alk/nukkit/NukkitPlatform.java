@@ -1,32 +1,25 @@
 package mc.alk.nukkit;
 
-import cn.nukkit.IPlayer;
-import cn.nukkit.OfflinePlayer;
-import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.item.Item;
 import cn.nukkit.plugin.Plugin;
+import cn.nukkit.plugin.service.RegisteredServiceProvider;
 import cn.nukkit.plugin.service.ServicePriority;
 
 import mc.alk.mc.APIType;
-import mc.alk.mc.MCLocation;
-import mc.alk.mc.MCOfflinePlayer;
 import mc.alk.mc.MCPlatform;
-import mc.alk.mc.MCPlayer;
 import mc.alk.mc.chat.Message;
-import mc.alk.mc.inventory.MCInventory;
-import mc.alk.mc.inventory.MCItemStack;
 import mc.alk.mc.plugin.MCPlugin;
-import mc.alk.mc.MCWorld;
 import mc.alk.mc.plugin.MCServicePriority;
 import mc.alk.nukkit.chat.NukkitMessage;
 import mc.alk.nukkit.inventory.NukkitInventory;
 import mc.alk.nukkit.inventory.NukkitItemStack;
-import mc.alk.nukkit.inventory.fakeinventory.VirtualChestInventory;
-import mc.alk.nukkit.inventory.fakeinventory.VirtualDoubleChestInventory;
+import mc.alk.nukkit.inventory.virtual.VirtualChestInventory;
+import mc.alk.nukkit.inventory.virtual.VirtualDoubleChestInventory;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -38,18 +31,18 @@ public class NukkitPlatform extends MCPlatform {
     }
 
     @Override
-    public MCLocation getLocation(String world, double x, double y, double z) {
+    public NukkitLocation getLocation(String world, double x, double y, double z) {
         return new NukkitLocation(world, x, y, z);
     }
 
     @Override
-    public MCLocation getLocation(String world, double x, double y, double z, float pitch, float yaw) {
+    public NukkitLocation getLocation(String world, double x, double y, double z, float pitch, float yaw) {
         return new NukkitLocation(world, x, y, z, pitch, yaw);
     }
 
     @Override
-    public MCWorld getWorld(String world) {
-        return new NukkitWorld(Server.getInstance().getLevelByName(world));
+    public Optional<NukkitWorld> getWorld(String world) {
+        return Optional.ofNullable(Server.getInstance().getLevelByName(world)).map(NukkitWorld::new);
     }
 
     @Override
@@ -63,56 +56,34 @@ public class NukkitPlatform extends MCPlatform {
     }
 
     @Override
-    public MCPlayer getPlayer(String name) {
-        Player player = Server.getInstance().getPlayer(name);
-        if (player == null)
-            return null;
-
-        return new NukkitPlayer(Server.getInstance().getPlayer(name));
+    public Optional<NukkitPlayer> getPlayer(String name) {
+        return Optional.ofNullable(Server.getInstance().getPlayer(name)).map(NukkitPlayer::new);
     }
 
     @Override
-    public MCPlayer getPlayer(UUID uuid) {
-        return Server.getInstance().getPlayer(uuid).map(NukkitPlayer::new).orElse(null);
+    public Optional<NukkitPlayer> getPlayer(UUID uuid) {
+        return Server.getInstance().getPlayer(uuid).map(NukkitPlayer::new);
     }
 
     @Override
-    public MCOfflinePlayer getOfflinePlayer(String name) {
-        IPlayer player = Server.getInstance().getOfflinePlayer(name);
-        if (player == null)
-            return null;
-
-        if (player instanceof OfflinePlayer)
-            return new NukkitOfflinePlayer((OfflinePlayer) player);
-        else if (player instanceof Player)
-            return new NukkitPlayer((Player) player);
-
-        return null;
+    public Optional<NukkitOfflinePlayer> getOfflinePlayer(String name) {
+        return Optional.ofNullable(Server.getInstance().getOfflinePlayer(name)).map(NukkitOfflinePlayer::new);
     }
 
     @Override
-    public MCOfflinePlayer getOfflinePlayer(UUID uuid) {
-        IPlayer player = Server.getInstance().getOfflinePlayer(uuid);
-        if (player == null)
-            return null;
-
-        if (player instanceof OfflinePlayer)
-            return new NukkitOfflinePlayer((OfflinePlayer) player);
-        else if (player instanceof Player)
-            return new NukkitPlayer((Player) player);
-
-        return null;
+    public Optional<NukkitOfflinePlayer> getOfflinePlayer(UUID uuid) {
+        return Optional.ofNullable(Server.getInstance().getOfflinePlayer(uuid)).map(NukkitOfflinePlayer::new);
     }
 
     @Override
-    public Collection<MCPlayer> getOnlinePlayers() {
+    public Collection<NukkitPlayer> getOnlinePlayers() {
         return Server.getInstance().getOnlinePlayers().values()
                 .stream().map(NukkitPlayer::new).collect(Collectors.toList());
     }
 
     @Override
-    public Collection<MCOfflinePlayer> getOfflinePlayers() {
-        Collection<MCOfflinePlayer> players = new ArrayList<>();
+    public Collection<NukkitOfflinePlayer> getOfflinePlayers() {
+        Collection<NukkitOfflinePlayer> players = new ArrayList<>();
         // TODO: Find a way to do this
         return players;
     }
@@ -138,7 +109,7 @@ public class NukkitPlatform extends MCPlatform {
     }
 
     @Override
-    public MCItemStack getDefaultPlatformItemStack() {
+    public NukkitItemStack getDefaultPlatformItemStack() {
         return new NukkitItemStack(Item.get(0));
     }
 
@@ -148,11 +119,11 @@ public class NukkitPlatform extends MCPlatform {
         return true;
     }
 
-    public MCInventory createInventory(MCPlugin plugin, int slots, String title) {
+    public NukkitInventory createInventory(MCPlugin plugin, int slots, String title) {
         return createInventory(slots, title, true);
     }
 
-    public MCInventory createInventory(int slots, String title, boolean cancelled) {
+    public NukkitInventory createInventory(int slots, String title, boolean cancelled) {
         // Nukkit on its own does not have support for virtual inventories
         // So instead, we have to use some hacky methods and packets to create this
         // However, they can only be 27 slots (3 rows) or 54 slots (6 rows) in size
@@ -173,7 +144,7 @@ public class NukkitPlatform extends MCPlatform {
     }
 
     @Override
-    public <T> T getService(Class<T> clazz) {
-        return Server.getInstance().getServiceManager().getProvider(clazz).getProvider();
+    public <T> Optional<T> getService(Class<T> clazz) {
+        return Optional.ofNullable(Server.getInstance().getServiceManager().getProvider(clazz)).map(RegisteredServiceProvider::getProvider);
     }
 }

@@ -68,6 +68,6 @@ public class NukkitSign extends NukkitBlock implements MCSign {
 	@Override
 	public void update(boolean force){
 		sign.onUpdate();
-		sign.getBlock().onUpdate(1);
+		sign.getBlock().onUpdate(force ? 1 : 0);
 	}
 }

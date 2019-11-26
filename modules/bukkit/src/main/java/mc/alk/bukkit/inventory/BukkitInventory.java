@@ -9,6 +9,8 @@ import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Optional;
+
 public class BukkitInventory extends MCWrapper<Inventory> implements MCInventory {
 
 	public BukkitInventory(Inventory inventory) {
@@ -41,8 +43,8 @@ public class BukkitInventory extends MCWrapper<Inventory> implements MCInventory
 	}
 
 	@Override
-	public BukkitItemStack getItem(int slot) {
-		return new BukkitItemStack(handle.getItem(slot));
+	public Optional<BukkitItemStack> getItem(int slot) {
+		return Optional.ofNullable(handle.getItem(slot)).map(BukkitItemStack::new);
 	}
 
 	@Override

@@ -1,15 +1,15 @@
 package mc.alk.nukkit;
 
-import cn.nukkit.OfflinePlayer;
+import cn.nukkit.IPlayer;
 
 import mc.alk.mc.MCOfflinePlayer;
 import mc.alk.mc.util.MCWrapper;
 
 import java.util.UUID;
 
-public class NukkitOfflinePlayer extends MCWrapper<OfflinePlayer> implements MCOfflinePlayer {
+public class NukkitOfflinePlayer extends MCWrapper<IPlayer> implements MCOfflinePlayer {
 
-    public NukkitOfflinePlayer(OfflinePlayer offlinePlayer) {
+    public NukkitOfflinePlayer(IPlayer offlinePlayer) {
        super(offlinePlayer);
     }
 
