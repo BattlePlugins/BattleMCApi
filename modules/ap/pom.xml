@@ -2,12 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>mc.alk</groupId>
+        <groupId>org.battleplugins</groupId>
         <artifactId>McAPI-parent</artifactId>
         <version>parent</version>
         <relativePath>../../</relativePath>
     </parent>
-    <groupId>mc.alk</groupId>
+    <groupId>org.battleplugins</groupId>
     <artifactId>McAPI-ap</artifactId>
     <version>parent</version>
     <packaging>jar</packaging>
@@ -20,7 +20,7 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>mc.alk</groupId>
+            <groupId>org.battleplugins</groupId>
             <artifactId>McAPI-api</artifactId>
             <version>parent</version>
             <scope>compile</scope>
@@ -49,7 +49,7 @@
                     <compilerArgument>-proc:none</compilerArgument>
                     <generatedSourcesDirectory>${project.build.directory}/generated-sources/</generatedSourcesDirectory>
                     <annotationProcessors>
-                        <annotationProcessor>mc.alk.mc.plugin.PluginProcessor</annotationProcessor>
+                        <annotationProcessor>org.battleplugins.plugin.PluginProcessor</annotationProcessor>
                     </annotationProcessors>
                 </configuration>
             </plugin>

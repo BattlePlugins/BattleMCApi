@@ -2,12 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>mc.alk</groupId>
+        <groupId>org.battleplugins</groupId>
         <artifactId>McAPI-parent</artifactId>
         <version>parent</version>
         <relativePath>../../</relativePath>
     </parent>
-    <groupId>mc.alk</groupId>
+    <groupId>org.battleplugins</groupId>
     <artifactId>McAPI</artifactId>
     <version>3.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -15,31 +15,31 @@
     <url>https://github.com/BattlePlugins/BattleMcAPI/</url>
     <dependencies>
         <dependency>
-            <groupId>mc.alk</groupId>
+            <groupId>org.battleplugins</groupId>
             <artifactId>McAPI-ap</artifactId>
             <version>parent</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>mc.alk</groupId>
+            <groupId>org.battleplugins</groupId>
             <artifactId>McAPI-api</artifactId>
             <version>parent</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>mc.alk</groupId>
+            <groupId>org.battleplugins</groupId>
             <artifactId>McAPI-bukkit</artifactId>
             <version>parent</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>mc.alk</groupId>
+            <groupId>org.battleplugins</groupId>
             <artifactId>McAPI-nukkit</artifactId>
             <version>parent</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>mc.alk</groupId>
+            <groupId>org.battleplugins</groupId>
             <artifactId>McAPI-sponge</artifactId>
             <version>parent</version>
             <scope>compile</scope>
@@ -69,7 +69,7 @@
                         <configuration>
                             <artifactSet>
                                 <includes>
-                                    <include>mc.alk:McAPI-*</include>
+                                    <include>org.battleplugins:McAPI-*</include>
                                     <include>mc.euro:BukkitAdapter</include>
                                     <include>javassist:javassist</include>
                                 </includes>
@@ -77,11 +77,11 @@
                             <relocations>
                                 <relocation>
                                     <pattern>mc.euro.bukkitadapter</pattern>
-                                    <shadedPattern>mc.alk.bukkit.adapter</shadedPattern>
+                                    <shadedPattern>org.battleplugins.bukkit.adapter</shadedPattern>
                                 </relocation>
                                 <relocation>
                                     <pattern>javassist</pattern>
-                                    <shadedPattern>mc.alk.mc.alib.javassist</shadedPattern>
+                                    <shadedPattern>org.battleplugins.alib.javassist</shadedPattern>
                                 </relocation>
                             </relocations>
                         </configuration>
