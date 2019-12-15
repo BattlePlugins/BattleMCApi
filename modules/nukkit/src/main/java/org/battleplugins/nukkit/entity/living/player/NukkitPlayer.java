@@ -5,9 +5,9 @@ import cn.nukkit.Player;
 import org.battleplugins.entity.living.player.gamemode.GameMode;
 import org.battleplugins.entity.living.player.gamemode.GameModes;
 import org.battleplugins.inventory.Inventory;
-import org.battleplugins.nukkit.world.NukkitLocation;
 import org.battleplugins.nukkit.entity.living.NukkitHumanEntity;
 import org.battleplugins.nukkit.inventory.NukkitInventory;
+import org.battleplugins.world.Location;
 
 import java.util.Optional;
 import java.util.OptionalLong;
@@ -42,7 +42,7 @@ public class NukkitPlayer extends NukkitHumanEntity<Player> implements org.battl
     }
 
     @Override
-    public Optional<NukkitLocation> getBedSpawnLocation() {
+    public Optional<Location> getBedSpawnLocation() {
         // TODO: Add API here
         return Optional.empty();
     }

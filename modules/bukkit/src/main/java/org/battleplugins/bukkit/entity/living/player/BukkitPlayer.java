@@ -1,12 +1,13 @@
 package org.battleplugins.bukkit.entity.living.player;
 
-import org.battleplugins.bukkit.world.BukkitLocation;
 import org.battleplugins.bukkit.entity.living.BukkitHumanEntity;
 import org.battleplugins.bukkit.inventory.BukkitInventory;
 
+import org.battleplugins.bukkit.util.BukkitUtil;
 import org.battleplugins.entity.living.player.gamemode.GameMode;
 import org.battleplugins.entity.living.player.gamemode.GameModes;
 import org.battleplugins.inventory.Inventory;
+import org.battleplugins.world.Location;
 import org.bukkit.entity.Player;
 
 import java.util.Optional;
@@ -42,8 +43,8 @@ public class BukkitPlayer extends BukkitHumanEntity<Player> implements org.battl
     }
 
     @Override
-    public Optional<BukkitLocation> getBedSpawnLocation() {
-        return Optional.ofNullable(handle.getBedSpawnLocation()).map(BukkitLocation::new);
+    public Optional<Location> getBedSpawnLocation() {
+        return Optional.ofNullable(handle.getBedSpawnLocation()).map(BukkitUtil::fromBukkitLocation);
     }
 
     @Override

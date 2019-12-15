@@ -3,11 +3,12 @@ package org.battleplugins.nukkit.world;
 import cn.nukkit.blockentity.BlockEntityChest;
 import cn.nukkit.blockentity.BlockEntitySign;
 import cn.nukkit.level.Level;
-
 import cn.nukkit.nbt.tag.CompoundTag;
 import cn.nukkit.network.protocol.UpdateBlockPacket;
+
 import org.battleplugins.entity.living.player.Player;
 import org.battleplugins.nukkit.entity.living.player.NukkitPlayer;
+import org.battleplugins.nukkit.util.NukkitUtil;
 import org.battleplugins.nukkit.world.block.NukkitBlock;
 import org.battleplugins.nukkit.world.block.entity.NukkitBlockEntity;
 import org.battleplugins.nukkit.world.block.entity.NukkitChest;
@@ -33,7 +34,7 @@ public class NukkitWorld extends MCWrapper<Level> implements org.battleplugins.w
 
     @Override
     public Optional<NukkitBlockEntity> getBlockEntityAt(org.battleplugins.world.Location loc) {
-        cn.nukkit.blockentity.BlockEntity blockEntity = handle.getBlockEntity(((NukkitLocation) loc).getHandle());
+        cn.nukkit.blockentity.BlockEntity blockEntity = handle.getBlockEntity(NukkitUtil.toNukkitLocation(loc));
         if (blockEntity instanceof BlockEntityChest)
             return Optional.of(new NukkitChest((BlockEntityChest) blockEntity));
 
@@ -45,7 +46,7 @@ public class NukkitWorld extends MCWrapper<Level> implements org.battleplugins.w
 
     @Override
     public NukkitBlock getBlockAt(org.battleplugins.world.Location loc) {
-        return new NukkitBlock(handle.getBlock(((NukkitLocation) loc).getHandle()));
+        return new NukkitBlock(handle.getBlock(NukkitUtil.toNukkitLocation(loc)));
     }
 
     @Override
@@ -100,7 +101,7 @@ public class NukkitWorld extends MCWrapper<Level> implements org.battleplugins.w
                     .putString("Text3", "")
                     .putString("Text4", "");
 
-            BlockEntitySign nukkitSign = new BlockEntitySign(((NukkitLocation) location).getHandle().getChunk(), nbt);
+            BlockEntitySign nukkitSign = new BlockEntitySign(NukkitUtil.toNukkitLocation(location).getChunk(), nbt);
             nukkitSign.setText(sign.getLines());
             nukkitSign.spawnTo(((NukkitPlayer) player).getHandle());
         }

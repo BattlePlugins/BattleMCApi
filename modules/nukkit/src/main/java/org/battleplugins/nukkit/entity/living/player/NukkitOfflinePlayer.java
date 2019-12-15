@@ -3,8 +3,8 @@ package org.battleplugins.nukkit.entity.living.player;
 import cn.nukkit.IPlayer;
 
 import org.battleplugins.entity.living.player.OfflinePlayer;
-import org.battleplugins.nukkit.world.NukkitLocation;
 import org.battleplugins.util.MCWrapper;
+import org.battleplugins.world.Location;
 
 import java.util.Optional;
 import java.util.OptionalLong;
@@ -55,7 +55,7 @@ public class NukkitOfflinePlayer extends MCWrapper<IPlayer> implements OfflinePl
     }
 
     @Override
-    public Optional<NukkitLocation> getBedSpawnLocation() {
+    public Optional<Location> getBedSpawnLocation() {
         // TODO: Add API here
         return Optional.empty();
     }

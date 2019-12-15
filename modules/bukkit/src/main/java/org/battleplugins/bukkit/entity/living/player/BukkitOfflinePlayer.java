@@ -1,7 +1,8 @@
 package org.battleplugins.bukkit.entity.living.player;
 
-import org.battleplugins.bukkit.world.BukkitLocation;
+import org.battleplugins.bukkit.util.BukkitUtil;
 import org.battleplugins.util.MCWrapper;
+import org.battleplugins.world.Location;
 import org.bukkit.OfflinePlayer;
 
 import java.util.Optional;
@@ -50,7 +51,7 @@ public class BukkitOfflinePlayer extends MCWrapper<OfflinePlayer> implements org
     }
 
     @Override
-    public Optional<BukkitLocation> getBedSpawnLocation() {
-        return Optional.ofNullable(handle.getBedSpawnLocation()).map(BukkitLocation::new);
+    public Optional<Location> getBedSpawnLocation() {
+        return Optional.ofNullable(handle.getBedSpawnLocation()).map(BukkitUtil::fromBukkitLocation);
     }
 }

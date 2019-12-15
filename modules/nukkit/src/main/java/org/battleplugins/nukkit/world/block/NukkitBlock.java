@@ -2,9 +2,10 @@ package org.battleplugins.nukkit.world.block;
 
 import cn.nukkit.block.Block;
 
-import org.battleplugins.nukkit.world.NukkitLocation;
+import org.battleplugins.nukkit.util.NukkitUtil;
 import org.battleplugins.nukkit.world.NukkitWorld;
 import org.battleplugins.util.MCWrapper;
+import org.battleplugins.world.Location;
 import org.battleplugins.world.block.BlockRegistry;
 import org.battleplugins.world.block.BlockType;
 
@@ -20,8 +21,8 @@ public class NukkitBlock extends MCWrapper<Block> implements org.battleplugins.w
 	}
 
 	@Override
-	public NukkitLocation getLocation() {
-		return new NukkitLocation(handle.getLocation());
+	public Location getLocation() {
+		return NukkitUtil.fromNukkitLocation(handle.getLocation());
 	}
 
 	@Override

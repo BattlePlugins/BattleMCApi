@@ -3,9 +3,10 @@ package org.battleplugins.sponge.entity.living.player;
 import org.battleplugins.entity.living.player.gamemode.GameMode;
 import org.battleplugins.entity.living.player.gamemode.GameModes;
 import org.battleplugins.inventory.Inventory;
-import org.battleplugins.sponge.world.SpongeLocation;
 import org.battleplugins.sponge.entity.living.SpongeHumanEntity;
 import org.battleplugins.sponge.inventory.SpongeInventory;
+import org.battleplugins.sponge.util.SpongeUtil;
+import org.battleplugins.world.Location;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.living.player.Player;
@@ -54,10 +55,10 @@ public class SpongePlayer extends SpongeHumanEntity<Player> implements org.battl
     }
 
     @Override
-    public Optional<SpongeLocation> getBedSpawnLocation() {
+    public Optional<Location> getBedSpawnLocation() {
         RespawnLocation respawnLoc = handle.get(Keys.RESPAWN_LOCATIONS).orElse(new HashMap<>()).get(handle.getWorldUniqueId().orElse(null));
         if (respawnLoc != null && respawnLoc.isForced()) {
-            return respawnLoc.asLocation().map(SpongeLocation::new);
+            return respawnLoc.asLocation().map(SpongeUtil::fromSpongeLocation);
         }
         return Optional.empty();
     }

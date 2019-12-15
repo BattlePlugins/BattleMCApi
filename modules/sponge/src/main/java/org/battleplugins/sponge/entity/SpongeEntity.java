@@ -1,6 +1,5 @@
 package org.battleplugins.sponge.entity;
 
-import org.battleplugins.sponge.world.SpongeLocation;
 import org.battleplugins.sponge.world.SpongeWorld;
 import org.battleplugins.sponge.util.SpongeUtil;
 import org.battleplugins.util.MCWrapper;
@@ -8,9 +7,6 @@ import org.battleplugins.util.NamespacedKey;
 import org.battleplugins.world.Location;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.Entity;
-import org.spongepowered.api.entity.EntityType;
-import org.spongepowered.api.entity.EntityTypes;
-import org.spongepowered.api.entity.living.animal.Pig;
 import org.spongepowered.api.text.Text;
 
 import java.util.ArrayList;
@@ -40,8 +36,8 @@ public class SpongeEntity<T extends Entity> extends MCWrapper<T> implements org.
     }
 
     @Override
-    public SpongeLocation getLocation() {
-        return new SpongeLocation(handle.getLocation());
+    public Location getLocation() {
+        return SpongeUtil.fromSpongeLocation(handle.getLocation());
     }
 
     @Override
@@ -51,7 +47,7 @@ public class SpongeEntity<T extends Entity> extends MCWrapper<T> implements org.
 
     @Override
     public boolean teleport(Location location) {
-        return handle.setLocation(((SpongeLocation) location).getHandle());
+        return handle.setLocation(SpongeUtil.toSpongeLocation(location));
     }
 
     @Override

@@ -2,6 +2,7 @@ package org.battleplugins.sponge.world;
 
 import org.battleplugins.entity.living.player.Player;
 import org.battleplugins.sponge.entity.living.player.SpongePlayer;
+import org.battleplugins.sponge.util.SpongeUtil;
 import org.battleplugins.sponge.world.block.SpongeBlock;
 import org.battleplugins.sponge.world.block.entity.SpongeBlockEntity;
 import org.battleplugins.sponge.world.block.entity.SpongeChest;
@@ -31,7 +32,7 @@ public class SpongeWorld extends MCWrapper<World> implements org.battleplugins.w
     @Override
     public Optional<SpongeBlockEntity> getBlockEntityAt(org.battleplugins.world.Location loc) {
         // instanceof returns false if null, so no need to check isPresent
-        TileEntity blockEntity = handle.getTileEntity(((SpongeLocation) loc).getHandle().getBlockPosition()).orElse(null);
+        TileEntity blockEntity = handle.getTileEntity(SpongeUtil.toSpongeLocation(loc).getBlockPosition()).orElse(null);
         if (blockEntity instanceof Chest)
             return Optional.of((new SpongeChest((Chest) blockEntity)));
 
@@ -43,7 +44,8 @@ public class SpongeWorld extends MCWrapper<World> implements org.battleplugins.w
 
     @Override
     public SpongeBlock getBlockAt(org.battleplugins.world.Location loc) {
-        return new SpongeBlock(handle.getBlock(((SpongeLocation) loc).getHandle().getBlockPosition()).snapshotFor(((SpongeLocation) loc).getHandle()));
+        return new SpongeBlock(handle.getBlock(SpongeUtil.toSpongeLocation(loc).getBlockPosition())
+                .snapshotFor(SpongeUtil.toSpongeLocation(loc)));
     }
 
     @Override
@@ -78,7 +80,7 @@ public class SpongeWorld extends MCWrapper<World> implements org.battleplugins.w
 
     @Override
     public void sendBlockUpdate(Player player, Location location, Block block) {
-        ((SpongePlayer) player).getHandle().sendBlockChange(((SpongeLocation) location).getHandle().getBlockPosition(),
+        ((SpongePlayer) player).getHandle().sendBlockChange(SpongeUtil.toSpongeLocation(location).getBlockPosition(),
                 ((SpongeBlock) block).getHandle().getState());
     }
 

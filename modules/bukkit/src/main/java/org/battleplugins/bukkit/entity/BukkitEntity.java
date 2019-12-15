@@ -1,6 +1,6 @@
 package org.battleplugins.bukkit.entity;
 
-import org.battleplugins.bukkit.world.BukkitLocation;
+import org.battleplugins.bukkit.util.BukkitUtil;
 import org.battleplugins.bukkit.world.BukkitWorld;
 import org.battleplugins.util.MCWrapper;
 import org.battleplugins.util.NamespacedKey;
@@ -34,8 +34,8 @@ public class BukkitEntity<T extends Entity> extends MCWrapper<T> implements org.
     }
 
     @Override
-    public BukkitLocation getLocation() {
-        return new BukkitLocation(handle.getLocation());
+    public Location getLocation() {
+        return BukkitUtil.fromBukkitLocation(handle.getLocation());
     }
 
     @Override
@@ -45,7 +45,7 @@ public class BukkitEntity<T extends Entity> extends MCWrapper<T> implements org.
 
     @Override
     public boolean teleport(Location location) {
-        return handle.teleport(((BukkitLocation) location).getHandle());
+        return handle.teleport(BukkitUtil.toBukkitLocation(location));
     }
 
     @Override

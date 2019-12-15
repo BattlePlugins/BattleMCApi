@@ -1,6 +1,7 @@
 package org.battleplugins.sponge;
 
 import mc.euro.version.Version;
+
 import org.battleplugins.PlatformType;
 import org.battleplugins.Platform;
 import org.battleplugins.message.Message;
@@ -10,15 +11,12 @@ import org.battleplugins.sponge.entity.living.player.SpongeOfflinePlayer;
 import org.battleplugins.sponge.entity.living.player.SpongePlayer;
 import org.battleplugins.sponge.message.SpongeMessage;
 import org.battleplugins.sponge.inventory.item.SpongeItemStack;
-import org.battleplugins.sponge.world.SpongeLocation;
 import org.battleplugins.sponge.world.SpongeWorld;
-import org.battleplugins.world.World;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.item.ItemTypes;
 import org.spongepowered.api.item.inventory.ItemStack;
 import org.spongepowered.api.service.ProviderRegistration;
 import org.spongepowered.api.service.user.UserStorageService;
-import org.spongepowered.api.world.Location;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -38,11 +36,6 @@ public class SpongePlatform extends Platform {
     @Override
     public PlatformType getType() {
         return PlatformType.SPONGE;
-    }
-
-    @Override
-    public SpongeLocation getLocation(World world, double x, double y, double z, float pitch, float yaw) {
-        return new SpongeLocation(new Location<>(((SpongeWorld) world).getHandle(), x, y, z));
     }
 
     @Override

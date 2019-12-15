@@ -1,9 +1,16 @@
 package org.battleplugins.world;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
 /**
  * Represents a location in the world.
  */
-public interface Location {
+@Getter
+@AllArgsConstructor
+@RequiredArgsConstructor
+public class Location {
 
 	/**
 	 * The world the location is in.
@@ -11,50 +18,50 @@ public interface Location {
 	 * @return the world the location is in
 	 *
 	 */
-	World getWorld();
+	private final World world;
 
 	/**
 	 * The x coordinate of the location
 	 *
 	 * @return the x coordinate of the location
 	 */
-	double getX();
+	private final double x;
 
 	/**
 	 * The y coordinate of the location
 	 *
 	 * @return the y coordinate of the location
 	 */
-	double getY();
+	private final double y;
 
 	/**
 	 * The z coordinate of the location
 	 *
 	 * @return the z coordinate of the location
 	 */
-	double getZ();
+	private final double z;
 
 	/**
 	 * The pitch of the location
 	 *
 	 * @return the pitch of the location
 	 */
-	float getPitch();
+	private float pitch;
 
 	/**
 	 * The yaw of the location
 	 *
 	 * @return the yaw of the location
 	 */
-	float getYaw();
+	private float yaw;
 
 	/**
 	 * The block x coordinate of the location
 	 *
 	 * @return the block x coordinate of the location
 	 */
-	default int getBlockX() {
-		return (int) Math.floor(getX());
+	public int getBlockX() {
+		return (int) Math.floor(x);
 	}
 
 	/**
@@ -62,8 +69,8 @@ public interface Location {
 	 *
 	 * @return the block y coordinate of the location
 	 */
-	default int getBlockY() {
-		return (int) Math.floor(getY());
+	public int getBlockY() {
+		return (int) Math.floor(y);
 	}
 
 	/**
@@ -71,7 +78,7 @@ public interface Location {
 	 *
 	 * @return the block z coordinate of the location
 	 */
-	default int getBlockZ() {
-		return (int) Math.floor(getZ());
+	public int getBlockZ() {
+		return (int) Math.floor(z);
 	}
 }

@@ -1,8 +1,9 @@
 package org.battleplugins.sponge.entity.living.player;
 
 import org.battleplugins.entity.living.player.OfflinePlayer;
-import org.battleplugins.sponge.world.SpongeLocation;
+import org.battleplugins.sponge.util.SpongeUtil;
 import org.battleplugins.util.MCWrapper;
+import org.battleplugins.world.Location;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.living.player.User;
 import org.spongepowered.api.util.RespawnLocation;
@@ -56,10 +57,10 @@ public class SpongeOfflinePlayer extends MCWrapper<User> implements OfflinePlaye
     }
 
     @Override
-    public Optional<SpongeLocation> getBedSpawnLocation() {
+    public Optional<Location> getBedSpawnLocation() {
         RespawnLocation respawnLoc = handle.get(Keys.RESPAWN_LOCATIONS).orElse(new HashMap<>()).get(handle.getWorldUniqueId().orElse(null));
         if (respawnLoc != null && respawnLoc.isForced()) {
-            return respawnLoc.asLocation().map(SpongeLocation::new);
+            return respawnLoc.asLocation().map(SpongeUtil::fromSpongeLocation);
         }
         return Optional.empty();
     }

@@ -2,7 +2,7 @@ package org.battleplugins.nukkit.entity;
 
 import cn.nukkit.entity.Entity;
 
-import org.battleplugins.nukkit.world.NukkitLocation;
+import org.battleplugins.nukkit.util.NukkitUtil;
 import org.battleplugins.nukkit.world.NukkitWorld;
 import org.battleplugins.util.MCWrapper;
 import org.battleplugins.util.NamespacedKey;
@@ -35,8 +35,8 @@ public class NukkitEntity<T extends Entity> extends MCWrapper<T> implements org.
     }
 
     @Override
-    public NukkitLocation getLocation() {
-        return new NukkitLocation(handle.getLocation());
+    public Location getLocation() {
+        return NukkitUtil.fromNukkitLocation(handle.getLocation());
     }
 
     @Override
@@ -46,7 +46,7 @@ public class NukkitEntity<T extends Entity> extends MCWrapper<T> implements org.
 
     @Override
     public boolean teleport(Location location) {
-        return handle.teleport(((NukkitLocation) location).getHandle());
+        return handle.teleport(NukkitUtil.toNukkitLocation(location));
     }
 
     @Override

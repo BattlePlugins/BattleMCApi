@@ -1,8 +1,9 @@
 package org.battleplugins.bukkit.world.block;
 
-import org.battleplugins.bukkit.world.BukkitLocation;
+import org.battleplugins.bukkit.util.BukkitUtil;
 import org.battleplugins.bukkit.world.BukkitWorld;
 import org.battleplugins.util.MCWrapper;
+import org.battleplugins.world.Location;
 import org.battleplugins.world.block.BlockRegistry;
 import org.battleplugins.world.block.BlockType;
 import org.bukkit.block.Block;
@@ -19,8 +20,8 @@ public class BukkitBlock extends MCWrapper<Block> implements org.battleplugins.w
 	}
 
 	@Override
-	public BukkitLocation getLocation() {
-		return new BukkitLocation(handle.getLocation());
+	public Location getLocation() {
+		return BukkitUtil.fromBukkitLocation(handle.getLocation());
 	}
 
 	@Override

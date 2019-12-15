@@ -70,5 +70,5 @@ public interface OfflinePlayer {
      *
      * @return the bed spawn location of the player
      */
-    Optional<? extends Location> getBedSpawnLocation();
+    Optional<Location> getBedSpawnLocation();
 }

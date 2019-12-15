@@ -9,14 +9,11 @@ import org.battleplugins.bukkit.entity.living.player.BukkitPlayer;
 import org.battleplugins.bukkit.message.BukkitMessage;
 import org.battleplugins.bukkit.message.SpigotMessage;
 import org.battleplugins.bukkit.inventory.item.BukkitItemStack;
-import org.battleplugins.bukkit.world.BukkitLocation;
 import org.battleplugins.bukkit.world.BukkitWorld;
 import org.battleplugins.plugin.Plugin;
 import org.battleplugins.message.Message;
 import org.battleplugins.plugin.service.ServicePriority;
-import org.battleplugins.world.World;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -39,11 +36,6 @@ public class BukkitPlatform extends Platform {
     @Override
     public PlatformType getType() {
         return PlatformType.BUKKIT;
-    }
-
-    @Override
-    public BukkitLocation getLocation(World world, double x, double y, double z, float pitch, float yaw) {
-        return new BukkitLocation(new Location(((BukkitWorld) world).getHandle(), x, y, z, pitch, yaw));
     }
 
     @Override

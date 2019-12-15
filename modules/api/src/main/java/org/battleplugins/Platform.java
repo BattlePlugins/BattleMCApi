@@ -9,7 +9,6 @@ import org.battleplugins.inventory.item.ItemStack;
 import org.battleplugins.plugin.Plugin;
 import org.battleplugins.plugin.PluginManager;
 import org.battleplugins.plugin.service.ServicePriority;
-import org.battleplugins.world.Location;
 import org.battleplugins.world.World;
 
 import java.util.Collection;
@@ -36,34 +35,6 @@ public abstract class Platform {
             INSTANCE = platform;
         }
     }
-
-    /**
-     * Gets the location with the given {@link World}, x, y, and z
-     * parameters
-     *
-     * @param world the world of the location
-     * @param x the x coordinate
-     * @param y the y coordinate
-     * @param z the z coordinate
-     * @return the location with the given parameters
-     */
-    public Location getLocation(World world, double x, double y, double z) {
-        return getLocation(world, x, y, z, 0, 0);
-    }
-
-    /**
-     * Gets the location with the given {@link World}, x, y, z,
-     * pitch and yaw parameters
-     *
-     * @param world the world of the location
-     * @param x the x coordinate
-     * @param y the y coordinate
-     * @param z the z coordinate
-     * @param pitch the pitch of the location
-     * @param yaw the yaw of the location
-     * @return the location with the given parameters
-     */
-    public abstract Location getLocation(World world, double x, double y, double z, float pitch, float yaw);
 
     /**
      * Gets the {@link World} from the given string. Will not be

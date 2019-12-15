@@ -1,6 +1,7 @@
 package org.battleplugins.bukkit.world;
 
 import org.battleplugins.bukkit.entity.living.player.BukkitPlayer;
+import org.battleplugins.bukkit.util.BukkitUtil;
 import org.battleplugins.bukkit.world.block.BukkitBlock;
 import org.battleplugins.bukkit.world.block.entity.BukkitBlockEntity;
 import org.battleplugins.bukkit.world.block.entity.BukkitChest;
@@ -30,7 +31,7 @@ public class BukkitWorld extends MCWrapper<World> implements org.battleplugins.w
 
     @Override
     public Optional<BukkitBlockEntity> getBlockEntityAt(Location loc) {
-        BlockState state = handle.getBlockAt(((BukkitLocation) loc).getHandle()).getState();
+        BlockState state = handle.getBlockAt(BukkitUtil.toBukkitLocation(loc)).getState();
         if (handle instanceof Chest)
             return Optional.of(new BukkitChest((Chest) state));
 
@@ -42,7 +43,7 @@ public class BukkitWorld extends MCWrapper<World> implements org.battleplugins.w
 
     @Override
     public BukkitBlock getBlockAt(Location loc) {
-        return new BukkitBlock(handle.getBlockAt(((BukkitLocation) loc).getHandle()));
+        return new BukkitBlock(handle.getBlockAt(BukkitUtil.toBukkitLocation(loc)));
     }
 
     @Override
@@ -79,14 +80,14 @@ public class BukkitWorld extends MCWrapper<World> implements org.battleplugins.w
     public void sendBlockUpdate(Player player, Location location, Block block) {
         org.bukkit.entity.Player bukkitPlayer = ((BukkitPlayer) player).getHandle();
         org.bukkit.block.Block bukkitBlock = ((BukkitBlock) block).getHandle();
-        bukkitPlayer.sendBlockChange(((BukkitLocation) location).getHandle(), bukkitBlock.getType(), bukkitBlock.getData());
+        bukkitPlayer.sendBlockChange(BukkitUtil.toBukkitLocation(location), bukkitBlock.getType(), bukkitBlock.getData());
     }
 
     @Override
     public void sendBlockEntityUpdate(Player player, Location location, BlockEntity blockEntity) {
         org.bukkit.entity.Player bukkitPlayer = ((BukkitPlayer) player).getHandle();
         if (blockEntity instanceof Sign) {
-            bukkitPlayer.sendSignChange(((BukkitLocation) location).getHandle(), ((Sign) blockEntity).getLines());
+            bukkitPlayer.sendSignChange(BukkitUtil.toBukkitLocation(location), ((Sign) blockEntity).getLines());
         }
     }
 }

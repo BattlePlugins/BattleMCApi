@@ -2,7 +2,6 @@ package org.battleplugins.nukkit;
 
 import cn.nukkit.Server;
 import cn.nukkit.item.Item;
-import cn.nukkit.level.Location;
 import cn.nukkit.plugin.service.RegisteredServiceProvider;
 
 import mc.euro.version.Version;
@@ -14,11 +13,9 @@ import org.battleplugins.nukkit.entity.living.player.NukkitOfflinePlayer;
 import org.battleplugins.nukkit.entity.living.player.NukkitPlayer;
 import org.battleplugins.nukkit.message.NukkitMessage;
 import org.battleplugins.nukkit.inventory.item.NukkitItemStack;
-import org.battleplugins.nukkit.world.NukkitLocation;
 import org.battleplugins.nukkit.world.NukkitWorld;
 import org.battleplugins.plugin.Plugin;
 import org.battleplugins.plugin.service.ServicePriority;
-import org.battleplugins.world.World;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -37,11 +34,6 @@ public class NukkitPlatform extends Platform {
     @Override
     public PlatformType getType() {
         return PlatformType.NUKKIT;
-    }
-
-    @Override
-    public NukkitLocation getLocation(World world, double x, double y, double z, float pitch, float yaw) {
-        return new NukkitLocation(new Location(x, y, z, pitch, yaw, ((NukkitWorld) world).getHandle()));
     }
 
     @Override

@@ -1,8 +1,9 @@
 package org.battleplugins.sponge.world.block;
 
-import org.battleplugins.sponge.world.SpongeLocation;
+import org.battleplugins.sponge.util.SpongeUtil;
 import org.battleplugins.sponge.world.SpongeWorld;
 import org.battleplugins.util.MCWrapper;
+import org.battleplugins.world.Location;
 import org.battleplugins.world.block.BlockType;
 import org.spongepowered.api.block.BlockSnapshot;
 
@@ -18,8 +19,8 @@ public class SpongeBlock extends MCWrapper<BlockSnapshot> implements org.battlep
     }
 
     @Override
-    public SpongeLocation getLocation() {
-        return new SpongeLocation(handle.getLocation().get());
+    public Location getLocation() {
+        return SpongeUtil.fromSpongeLocation(handle.getLocation().get());
     }
 
     @Override
