@@ -19,13 +19,8 @@ public class NukkitInventory<T extends Inventory> extends MCWrapper<T> implement
 	}
 
 	@Override
-	public void addItem(ItemStack... itemStacks) {
-		for (ItemStack item : itemStacks)
-			addItem(item);
-	}
-
 	public void addItem(ItemStack itemStack) {
-		if (itemStack == null || itemStack.getType().equals("0")) {
+		if (itemStack == null || itemStack.getType().getKey().getKey().equals("air")) {
 			return;
 		}
 
@@ -38,7 +33,8 @@ public class NukkitInventory<T extends Inventory> extends MCWrapper<T> implement
 	}
 
 	@Override
-	public void setItem(int slot, ItemStack item) { handle.setItem(slot, ((NukkitItemStack) item).getHandle());
+	public void setItem(int slot, ItemStack item) {
+		handle.setItem(slot, ((NukkitItemStack) item).getHandle());
 	}
 
 	@Override
@@ -49,11 +45,6 @@ public class NukkitInventory<T extends Inventory> extends MCWrapper<T> implement
 	@Override
 	public int getItemAmount(ItemStack itemStack) {
 		return NukkitInventoryUtil.getItemAmountFromInventory(handle, ((NukkitItemStack) itemStack).getHandle());
-	}
-
-	@Override
-	public boolean canFit(ItemStack itemStack) {
-		return freeSpaceAfter(itemStack) >= 0;
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package org.battleplugins.nukkit.inventory.entity;
 
 import cn.nukkit.inventory.PlayerInventory;
 
+import org.battleplugins.entity.living.HumanEntity;
 import org.battleplugins.nukkit.inventory.NukkitInventory;
 import org.battleplugins.nukkit.inventory.item.NukkitItemStack;
 
@@ -9,8 +10,12 @@ import java.util.Optional;
 
 public class NukkitPlayerInventory extends NukkitInventory<PlayerInventory> implements org.battleplugins.inventory.entity.PlayerInventory {
 
-	public NukkitPlayerInventory(PlayerInventory inventory) {
+	private HumanEntity carrier;
+
+	public NukkitPlayerInventory(HumanEntity carrier, PlayerInventory inventory) {
 		super(inventory);
+
+		this.carrier = carrier;
 	}
 
 	@Override
@@ -41,5 +46,10 @@ public class NukkitPlayerInventory extends NukkitInventory<PlayerInventory> impl
 	@Override
 	public Optional<NukkitItemStack> getBoots() {
 		return Optional.ofNullable(handle.getBoots()).map(NukkitItemStack::new);
+	}
+
+	@Override
+	public HumanEntity getCarrier() {
+		return carrier;
 	}
 }

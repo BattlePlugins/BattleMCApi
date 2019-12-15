@@ -3,10 +3,9 @@ package org.battleplugins.bukkit.inventory.item;
 import java.util.HashMap;
 import java.util.Map;
 
-import mc.euro.bukkitadapter.enchant.BattleEnchant;
-import mc.euro.bukkitadapter.material.BattleMaterial;
-
-import org.battleplugins.bukkit.util.BukkitInventoryUtil;
+import org.battleplugins.bukkit.util.BukkitMaterialAdapter;
+import org.battleplugins.inventory.item.ItemRegistry;
+import org.battleplugins.inventory.item.ItemType;
 import org.battleplugins.util.MCWrapper;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -19,23 +18,13 @@ public class BukkitItemStack extends MCWrapper<ItemStack> implements org.battlep
 	}
 
 	@Override
-	public void setType(String type) {
-		handle.setType(BattleMaterial.fromString(type).parseMaterial());
+	public void setType(ItemType type) {
+		handle.setType(BukkitMaterialAdapter.getMaterial(type.getIdentifier()).orElse(Material.AIR));
 	}
 
 	@Override
-	public String getType() {
-		return handle.getType().name();
-	}
-
-	@Override
-	public void setDataValue(short value) {
-		handle.setDurability(value);
-	}
-
-	@Override
-	public short getDataValue() {
-		return handle.getDurability();
+	public ItemType getType() {
+		return ((BukkitItemRegistry) ItemRegistry.REGISTRY).fromPlatformItem(handle.getType());
 	}
 
 	@Override
@@ -56,54 +45,13 @@ public class BukkitItemStack extends MCWrapper<ItemStack> implements org.battlep
 		}
 		return encs;
 	}
-
 	@Override
-	public String getCommonName() {
-		return handle.getType().name().toLowerCase();
-	}
-
-	@Override
-	public String getFormattedCommonName() {
-		return BukkitInventoryUtil.getFormattedCommonName(handle);
+	public void addEnchantment(String ench, int level) {
+		handle.addEnchantment(Enchantment.getByName(ench), level);
 	}
 
 	@Override
 	public BukkitItemStack clone(){
 		return new BukkitItemStack(handle.clone());
-	}
-
-	@Override
-	public String toString(){
-		return handle != null ? "["+ handle.getType() +":"+handle.getDurability() + " q="+
-				getQuantity()+"]" : "null";
-	}
-
-	@Override
-	public void addEnchantment(String ench, int level) {
-		handle.addEnchantment(BattleEnchant.fromString(ench).parseEnchant(), level);
-	}
-
-	@Override
-	public int isSpecial() {
-		int special = 0;
-//		ItemMeta im = itemStack.getItemMeta();
-//		Map<Enchantment,Integer> map = itemStack.getEnchantments();
-//		if (map != null){
-//			for (Entry<Enchantment,Integer> entry : map.entrySet()){
-////				entry.getKey().getId()
-//			}
-//		}
-
-		return special;
-	}
-
-	@Override
-	public boolean hasItemMeta() {
-		return handle.getItemMeta() != null;
-	}
-
-	@Override
-	public BukkitItemMeta getItemMeta() {
-		return new BukkitItemMeta(handle, handle.getItemMeta());
 	}
 }

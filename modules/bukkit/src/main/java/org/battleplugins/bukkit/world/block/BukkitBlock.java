@@ -3,6 +3,8 @@ package org.battleplugins.bukkit.world.block;
 import org.battleplugins.bukkit.world.BukkitLocation;
 import org.battleplugins.bukkit.world.BukkitWorld;
 import org.battleplugins.util.MCWrapper;
+import org.battleplugins.world.block.BlockRegistry;
+import org.battleplugins.world.block.BlockType;
 import org.bukkit.block.Block;
 
 public class BukkitBlock extends MCWrapper<Block> implements org.battleplugins.world.block.Block {
@@ -22,23 +24,8 @@ public class BukkitBlock extends MCWrapper<Block> implements org.battleplugins.w
 	}
 
 	@Override
-	public int getX() {
-		return handle.getX();
-	}
-
-	@Override
-	public int getY() {
-		return handle.getY();
-	}
-
-	@Override
-	public int getZ() {
-		return handle.getZ();
-	}
-
-	@Override
-	public String getType() {
-		return handle.getType().name();
+	public BlockType getType() {
+		return ((BukkitBlockRegistry) BlockRegistry.REGISTRY).fromPlatformBlock(handle.getType());
 	}
 
 	@Override

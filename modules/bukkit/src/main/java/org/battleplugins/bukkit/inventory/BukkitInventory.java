@@ -16,22 +16,17 @@ public class BukkitInventory<T extends Inventory> extends MCWrapper<T> implement
 	}
 
 	@Override
-	public void addItem(ItemStack... itemStacks) {
-		for (ItemStack item : itemStacks)
-			addItem(item);
-	}
-
 	public void addItem(ItemStack itemStack) {
-		if (itemStack == null || itemStack.getType().equals(Material.AIR.name())) {
+		if (itemStack == null || itemStack.getType().getKey().getKey().equalsIgnoreCase(Material.AIR.name())) {
 			return;
 		}
 
-		BukkitInventoryUtil.addItemToInventory(handle, ((BukkitItemStack) itemStack).getHandle(), itemStack.getQuantity());
+		handle.addItem(((BukkitItemStack) itemStack).getHandle());
 	}
 
 	@Override
 	public void removeItem(ItemStack itemStack) {
-		BukkitInventoryUtil.removeItem(handle, ((BukkitItemStack) itemStack).getHandle()) ;
+		handle.removeItem(((BukkitItemStack) itemStack).getHandle());
 	}
 
 	@Override
@@ -48,13 +43,6 @@ public class BukkitInventory<T extends Inventory> extends MCWrapper<T> implement
 	public int getItemAmount(ItemStack itemStack) {
 		return BukkitInventoryUtil.getItemAmountFromInventory(handle,
 				((BukkitItemStack) itemStack).getHandle());
-	}
-
-	@Override
-	public boolean canFit(ItemStack itemStack) {
-		int space = BukkitInventoryUtil.amountFreeSpace(handle,
-				((BukkitItemStack) itemStack).getHandle(), itemStack.getQuantity());
-		return space >= 0;
 	}
 
 	@Override

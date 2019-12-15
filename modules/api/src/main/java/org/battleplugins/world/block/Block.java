@@ -3,14 +3,31 @@ package org.battleplugins.world.block;
 import org.battleplugins.world.Location;
 import org.battleplugins.world.World;
 
+/**
+ * Represents a block in the world.
+ */
 public interface Block {
 
-	World getWorld();
+	/**
+	 * The {@link World} this block is located in
+	 *
+	 * @return the world this block is located in
+	 */
+	default World getWorld() {
+		return getLocation().getWorld();
+	}
+
+	/**
+	 * The location of the block
+	 *
+	 * @return the location of the block
+	 */
 	Location getLocation();
 
-	int getX();
-	int getY();
-	int getZ();
-
-	String getType();
+	/**
+	 * The {@link BlockType} of this block
+	 *
+	 * @return the block type of this block
+	 */
+	BlockType getType();
 }

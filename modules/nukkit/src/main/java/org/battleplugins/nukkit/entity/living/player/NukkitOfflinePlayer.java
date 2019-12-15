@@ -7,6 +7,7 @@ import org.battleplugins.nukkit.world.NukkitLocation;
 import org.battleplugins.util.MCWrapper;
 
 import java.util.Optional;
+import java.util.OptionalLong;
 import java.util.UUID;
 
 public class NukkitOfflinePlayer extends MCWrapper<IPlayer> implements OfflinePlayer {
@@ -39,13 +40,13 @@ public class NukkitOfflinePlayer extends MCWrapper<IPlayer> implements OfflinePl
     }
 
     @Override
-    public long getFirstPlayed() {
-        return handle.getFirstPlayed();
+    public OptionalLong getFirstPlayed() {
+        return OptionalLong.of(handle.getFirstPlayed());
     }
 
     @Override
-    public long getLastPlayed() {
-        return handle.getLastPlayed();
+    public OptionalLong getLastPlayed() {
+        return OptionalLong.of(handle.getLastPlayed());
     }
 
     @Override

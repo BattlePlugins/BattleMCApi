@@ -1,7 +1,5 @@
 package org.battleplugins.bukkit.world.block.entity;
 
-import org.battleplugins.entity.living.player.Player;
-import org.battleplugins.bukkit.entity.living.player.BukkitPlayer;
 import org.bukkit.block.Sign;
 
 public class BukkitSign extends BukkitBlockEntity<Sign> implements org.battleplugins.world.block.entity.Sign {
@@ -17,11 +15,6 @@ public class BukkitSign extends BukkitBlockEntity<Sign> implements org.battleplu
 	@Override
 	public void setLine(int index, String line) {
 		sign.setLine(index, line);
-	}
-
-	@Override
-	public void sendSignChange(Player player, String[] lines) {
-		((BukkitPlayer) player).getHandle().sendSignChange(sign.getLocation(), lines);
 	}
 
 	@Override

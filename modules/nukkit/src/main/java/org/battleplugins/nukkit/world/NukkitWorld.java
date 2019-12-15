@@ -3,14 +3,20 @@ package org.battleplugins.nukkit.world;
 import cn.nukkit.blockentity.BlockEntityChest;
 import cn.nukkit.blockentity.BlockEntitySign;
 import cn.nukkit.level.Level;
-import cn.nukkit.level.Location;
 
+import cn.nukkit.nbt.tag.CompoundTag;
+import cn.nukkit.network.protocol.UpdateBlockPacket;
+import org.battleplugins.entity.living.player.Player;
+import org.battleplugins.nukkit.entity.living.player.NukkitPlayer;
 import org.battleplugins.nukkit.world.block.NukkitBlock;
 import org.battleplugins.nukkit.world.block.entity.NukkitBlockEntity;
 import org.battleplugins.nukkit.world.block.entity.NukkitChest;
 import org.battleplugins.nukkit.world.block.entity.NukkitSign;
 import org.battleplugins.util.MCWrapper;
+import org.battleplugins.world.Location;
+import org.battleplugins.world.block.Block;
 import org.battleplugins.world.block.entity.BlockEntity;
+import org.battleplugins.world.block.entity.Sign;
 
 import java.util.Optional;
 
@@ -70,5 +76,33 @@ public class NukkitWorld extends MCWrapper<Level> implements org.battleplugins.w
             throw new ClassCastException("Block can not be cast to " + clazz.getSimpleName());
         }
         return null;
+    }
+
+    @Override
+    public void sendBlockUpdate(Player player, Location location, Block block) {
+        cn.nukkit.block.Block nukkitBlock = ((NukkitBlock) block).getHandle();
+        nukkitBlock.getLevel().sendBlocks(new cn.nukkit.Player[]{((NukkitPlayer) player).getHandle()},
+                new cn.nukkit.block.Block[] {((NukkitBlock) block).getHandle()},
+                UpdateBlockPacket.FLAG_ALL_PRIORITY);
+    }
+
+    @Override
+    public void sendBlockEntityUpdate(Player player, Location location, BlockEntity blockEntity) {
+        if (blockEntity instanceof Sign) {
+            Sign sign = (Sign) blockEntity;
+            CompoundTag nbt = new CompoundTag()
+                    .putString("id", cn.nukkit.blockentity.BlockEntity.SIGN)
+                    .putInt("x", location.getBlockX())
+                    .putInt("y", location.getBlockY())
+                    .putInt("z", location.getBlockZ())
+                    .putString("Text1", "")
+                    .putString("Text2", "")
+                    .putString("Text3", "")
+                    .putString("Text4", "");
+
+            BlockEntitySign nukkitSign = new BlockEntitySign(((NukkitLocation) location).getHandle().getChunk(), nbt);
+            nukkitSign.setText(sign.getLines());
+            nukkitSign.spawnTo(((NukkitPlayer) player).getHandle());
+        }
     }
 }

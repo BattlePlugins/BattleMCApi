@@ -5,20 +5,20 @@ import cn.nukkit.item.Item;
 import cn.nukkit.level.Location;
 import cn.nukkit.plugin.service.RegisteredServiceProvider;
 
-import org.battleplugins.APIType;
+import mc.euro.version.Version;
+
+import org.battleplugins.PlatformType;
 import org.battleplugins.Platform;
 import org.battleplugins.message.Message;
 import org.battleplugins.nukkit.entity.living.player.NukkitOfflinePlayer;
 import org.battleplugins.nukkit.entity.living.player.NukkitPlayer;
 import org.battleplugins.nukkit.message.NukkitMessage;
-import org.battleplugins.nukkit.inventory.NukkitInventory;
 import org.battleplugins.nukkit.inventory.item.NukkitItemStack;
-import org.battleplugins.nukkit.inventory.virtual.VirtualChestInventory;
-import org.battleplugins.nukkit.inventory.virtual.VirtualDoubleChestInventory;
 import org.battleplugins.nukkit.world.NukkitLocation;
 import org.battleplugins.nukkit.world.NukkitWorld;
 import org.battleplugins.plugin.Plugin;
-import org.battleplugins.plugin.ServicePriority;
+import org.battleplugins.plugin.service.ServicePriority;
+import org.battleplugins.world.World;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,14 +28,20 @@ import java.util.UUID;
 
 public class NukkitPlatform extends Platform {
 
-    @Override
-    public APIType getAPIType() {
-        return APIType.NUKKIT;
+    private NukkitRegistry registry;
+
+    public NukkitPlatform() {
+        registry = new NukkitRegistry();
     }
 
     @Override
-    public NukkitLocation getLocation(String world, double x, double y, double z, float pitch, float yaw) {
-        return new NukkitLocation(new Location(x, y, z, pitch, yaw, Server.getInstance().getLevelByName(world)));
+    public PlatformType getType() {
+        return PlatformType.NUKKIT;
+    }
+
+    @Override
+    public NukkitLocation getLocation(World world, double x, double y, double z, float pitch, float yaw) {
+        return new NukkitLocation(new Location(x, y, z, pitch, yaw, ((NukkitWorld) world).getHandle()));
     }
 
     @Override
@@ -101,8 +107,8 @@ public class NukkitPlatform extends Platform {
     }
 
     @Override
-    public String getVersion() {
-        return Server.getInstance().getVersion();
+    public Version<NukkitPlatform> getVersion() {
+        return new Version<>(Server.getInstance().getVersion());
     }
 
     @Override
@@ -121,25 +127,6 @@ public class NukkitPlatform extends Platform {
         return true;
     }
 
-    public NukkitInventory createInventory(Plugin plugin, int slots, String title) {
-        return createInventory(slots, title, true);
-    }
-
-    public NukkitInventory createInventory(int slots, String title, boolean cancelled) {
-        // Nukkit on its own does not have support for virtual inventories
-        // So instead, we have to use some hacky methods and packets to create this
-        // However, they can only be 27 slots (3 rows) or 54 slots (6 rows) in size
-        VirtualChestInventory inventory = new VirtualChestInventory(null, title);
-        if (slots > 27) {
-            inventory = new VirtualDoubleChestInventory(null, title);
-        }
-
-        // We just cancel this event for now :)
-        inventory.addListener(event -> event.setCancelled(cancelled));
-
-        return new NukkitInventory<>(inventory);
-    }
-
     @Override
     public <T> void registerService(Class<T> clazz, T service, Plugin plugin, ServicePriority priority) {
         Server.getInstance().getServiceManager().register(clazz, service, (cn.nukkit.plugin.Plugin) plugin.getPlatformPlugin(), cn.nukkit.plugin.service.ServicePriority.values()[priority.ordinal()]);
@@ -148,5 +135,10 @@ public class NukkitPlatform extends Platform {
     @Override
     public <T> Optional<T> getService(Class<T> clazz) {
         return Optional.ofNullable(Server.getInstance().getServiceManager().getProvider(clazz)).map(RegisteredServiceProvider::getProvider);
+    }
+
+    @Override
+    public NukkitRegistry getRegistry() {
+        return registry;
     }
 }

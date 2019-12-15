@@ -15,7 +15,7 @@ public class NukkitHumanEntity<T extends EntityHuman> extends NukkitLivingEntity
 
     @Override
     public NukkitPlayerInventory getInventory() {
-        return new NukkitPlayerInventory(handle.getInventory());
+        return new NukkitPlayerInventory(this, handle.getInventory());
     }
 
     @Override

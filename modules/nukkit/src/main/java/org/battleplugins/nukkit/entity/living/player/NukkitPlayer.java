@@ -2,13 +2,15 @@ package org.battleplugins.nukkit.entity.living.player;
 
 import cn.nukkit.Player;
 
-import org.battleplugins.entity.living.player.GameMode;
+import org.battleplugins.entity.living.player.gamemode.GameMode;
+import org.battleplugins.entity.living.player.gamemode.GameModes;
 import org.battleplugins.inventory.Inventory;
 import org.battleplugins.nukkit.world.NukkitLocation;
 import org.battleplugins.nukkit.entity.living.NukkitHumanEntity;
 import org.battleplugins.nukkit.inventory.NukkitInventory;
 
 import java.util.Optional;
+import java.util.OptionalLong;
 
 public class NukkitPlayer extends NukkitHumanEntity<Player> implements org.battleplugins.entity.living.player.Player {
 
@@ -25,13 +27,13 @@ public class NukkitPlayer extends NukkitHumanEntity<Player> implements org.battl
     }
 
     @Override
-    public long getFirstPlayed() {
-        return handle.getFirstPlayed();
+    public OptionalLong getFirstPlayed() {
+        return OptionalLong.of(handle.getFirstPlayed());
     }
 
     @Override
-    public long getLastPlayed() {
-        return handle.getLastPlayed();
+    public OptionalLong getLastPlayed() {
+        return OptionalLong.of(handle.getLastPlayed());
     }
 
     @Override
@@ -82,7 +84,7 @@ public class NukkitPlayer extends NukkitHumanEntity<Player> implements org.battl
 
     @Override
     public GameMode getGameMode() {
-        return GameMode.values()[handle.getGamemode()];
+        return GameModes.values()[handle.getGamemode()];
     }
 
     @Override

@@ -4,107 +4,143 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+/**
+ * A color utility mainly used in chat.
+ */
 public enum ChatColor {
 
-    BLACK('0', 0x00),
-    DARK_BLUE('1', 0x1),
-    DARK_GREEN('2', 0x2),
-    DARK_AQUA('3', 0x3),
-    DARK_RED('4', 0x4),
-    DARK_PURPLE('5', 0x5),
-    GOLD('6', 0x6),
-    GRAY('7', 0x7),
-    DARK_GRAY('8', 0x8),
-    BLUE('9', 0x9),
-    GREEN('a', 0xA),
-    AQUA('b', 0xB),
-    RED('c', 0xC),
-    LIGHT_PURPLE('d', 0xD),
-    YELLOW('e', 0xE),
-    WHITE('f', 0xF),
-    MAGIC('k', 0x10, true),
-    BOLD('l', 0x11, true),
-    STRIKETHROUGH('m', 0x12, true),
-    UNDERLINE('n', 0x13, true),
-    ITALIC('o', 0x14, true),
-    RESET('r', 0x15);
+    BLACK('0'),
+    DARK_BLUE('1'),
+    DARK_GREEN('2'),
+    DARK_AQUA('3'),
+    DARK_RED('4'),
+    DARK_PURPLE('5'),
+    GOLD('6'),
+    GRAY('7'),
+    DARK_GRAY('8'),
+    BLUE('9'),
+    GREEN('a'),
+    AQUA('b'),
+    RED('c'),
+    LIGHT_PURPLE('d'),
+    YELLOW('e'),
+    WHITE('f'),
+    MAGIC('k', true),
+    BOLD('l', true),
+    STRIKETHROUGH('m', true),
+    UNDERLINE('n', true),
+    ITALIC('o', true),
+    RESET('r'),
+    NONE(Character.MIN_VALUE);
 
     public static final char COLOR_CHAR = '\u00A7';
-    private static final Pattern STRIP_COLOR_PATTERN = Pattern.compile("(?i)" + String.valueOf(COLOR_CHAR) + "[0-9A-FK-OR]");
+    private static final Pattern STRIP_COLOR_PATTERN = Pattern.compile("(?i)" + COLOR_CHAR + "[0-9A-FK-OR]");
 
-    private final int intCode;
     private final char code;
     private final boolean isFormat;
     private final String toString;
-    private static final Map<Integer, ChatColor> BY_ID = new HashMap<>();
     private static final Map<Character, ChatColor> BY_CHAR = new HashMap<>();
 
-    ChatColor(char code, int intCode) {
-        this(code, intCode, false);
+    static {
+        for (ChatColor color : values()) {
+            BY_CHAR.put(color.code, color);
+        }
     }
 
-    ChatColor(char code, int intCode, boolean isFormat) {
+    ChatColor(char code) {
+        this(code, false);
+    }
+
+    ChatColor(char code, boolean isFormat) {
         this.code = code;
-        this.intCode = intCode;
         this.isFormat = isFormat;
         this.toString = new String(new char[] {COLOR_CHAR, code});
     }
 
+    /**
+     * The color character
+     *
+     * @return the color character
+     */
     public char getChar() {
         return code;
     }
 
-    @Override
-    public String toString() {
-        return toString;
-    }
-
+    /**
+     * If the ChatColor is a format
+     *
+     * @return if the ChatColor is a format
+     */
     public boolean isFormat() {
         return isFormat;
     }
 
+    /**
+     * If the ChatColor is a color
+     *
+     * @return the ChatColor is a format
+     */
     public boolean isColor() {
-        return !isFormat && this != RESET;
+        return !isFormat && (this != RESET && this != NONE);
     }
 
-    public static ChatColor getByChar(char code) {
-        return BY_CHAR.get(code);
+    /**
+     * Gets the ChatColor from the given character
+     *
+     * @param character the given character
+     * @return the ChatColor from the given character
+     */
+    public static ChatColor getByChar(char character) {
+        return getByChar(String.valueOf(character));
     }
 
-    public static ChatColor getByChar(String code) {
-        if (code == null)
-            throw new NullPointerException("Code cannot be null");
-
-        return BY_CHAR.get(code.charAt(0));
+    /**
+     * Gets the ChatColor from the given String
+     *
+     * @param str the given String
+     * @return the ChatColor from the given String
+     */
+    public static ChatColor getByChar(String str) {
+        return BY_CHAR.getOrDefault(str.charAt(0), ChatColor.NONE);
     }
 
-    public static String stripColor(final String input) {
-        if (input == null) {
-            return null;
-        }
-
+    /**
+     * Strips the given string from all colors and formats
+     *
+     * @param input the string to strip
+     * @return the given string without colors and formats
+     */
+    public static String stripColor(String input) {
         return STRIP_COLOR_PATTERN.matcher(input).replaceAll("");
     }
 
+    /**
+     * Does a string replacement replacing the color character
+     * with the given character
+     *
+     * @param altColorChar the alternative color code symbol
+     * @param textToTranslate the text to do a replacement on
+     * @return the string with the color and formatting replacements
+     */
     public static String translateAlternateColorCodes(char altColorChar, String textToTranslate) {
-        if (textToTranslate == null)
-            throw new NullPointerException("Cannot translate null text");
-
         char[] b = textToTranslate.toCharArray();
         for (int i = 0; i < b.length - 1; i++) {
-            if (b[i] == altColorChar && "0123456789AaBbCcDdEeFfKkLlMmNnOoRr".indexOf(b[i+1]) > -1) {
+            if (b[i] == altColorChar && "0123456789AaBbCcDdEeFfKkLlMmNnOoRr".indexOf(b[i + 1]) > -1) {
                 b[i] = ChatColor.COLOR_CHAR;
-                b[i+1] = Character.toLowerCase(b[i+1]);
+                b[i + 1] = Character.toLowerCase(b[i + 1]);
             }
         }
         return new String(b);
     }
 
+    /**
+     * Gets the last colors in a string
+     *
+     * @param input the string to get the last colors of
+     * @return the last colors in a string
+     */
     public static String getLastColors(String input) {
-        if (input == null)
-            throw new NullPointerException("Cannot get last colors from null text");
-
-        String result = "";
+        StringBuilder result = new StringBuilder();
         int length = input.length();
 
         // Search backwards from the end as it is faster
@@ -114,8 +150,8 @@ public enum ChatColor {
                 char c = input.charAt(index + 1);
                 ChatColor color = getByChar(c);
 
-                if (color != null) {
-                    result = color.toString() + result;
+                if (color != null && color != ChatColor.NONE) {
+                    result.insert(0, color.toString());
 
                     // Once we find a color or reset we can stop searching
                     if (color.isColor() || color.equals(RESET)) {
@@ -125,13 +161,11 @@ public enum ChatColor {
             }
         }
 
-        return result;
+        return result.toString();
     }
 
-    static {
-        for (ChatColor color : values()) {
-            BY_ID.put(color.intCode, color);
-            BY_CHAR.put(color.code, color);
-        }
+    @Override
+    public String toString() {
+        return toString;
     }
 }

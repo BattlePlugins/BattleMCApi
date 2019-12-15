@@ -3,6 +3,7 @@ package org.battleplugins.sponge.world.block;
 import org.battleplugins.sponge.world.SpongeLocation;
 import org.battleplugins.sponge.world.SpongeWorld;
 import org.battleplugins.util.MCWrapper;
+import org.battleplugins.world.block.BlockType;
 import org.spongepowered.api.block.BlockSnapshot;
 
 public class SpongeBlock extends MCWrapper<BlockSnapshot> implements org.battleplugins.world.block.Block {
@@ -22,23 +23,8 @@ public class SpongeBlock extends MCWrapper<BlockSnapshot> implements org.battlep
     }
 
     @Override
-    public int getX() {
-        return handle.getLocation().get().getBlockX();
-    }
-
-    @Override
-    public int getY() {
-        return handle.getLocation().get().getBlockY();
-    }
-
-    @Override
-    public int getZ() {
-        return handle.getLocation().get().getBlockZ();
-    }
-
-    @Override
-    public String getType() {
-        return handle.getState().getType().getName();
+    public BlockType getType() {
+        return new SpongeBlockType(handle.getState().getType());
     }
 
     @Override

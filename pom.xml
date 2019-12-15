@@ -54,6 +54,12 @@
             <version>1.18.4</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>mc.euro</groupId>
+            <artifactId>Version</artifactId>
+            <version>4.1.1</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
     <build>
         <defaultGoal>install</defaultGoal>

@@ -1,10 +1,7 @@
 package org.battleplugins.sponge.inventory.item;
 
-import org.battleplugins.inventory.item.ItemMeta;
-import org.battleplugins.sponge.util.SpongeInventoryUtil;
 import org.battleplugins.util.MCWrapper;
 import org.spongepowered.api.Sponge;
-import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.data.manipulator.mutable.item.EnchantmentData;
 import org.spongepowered.api.item.ItemType;
 import org.spongepowered.api.item.ItemTypes;
@@ -23,7 +20,7 @@ public class SpongeItemStack extends MCWrapper<ItemStack> implements org.battlep
     }
 
     @Override
-    public void setType(String type) {
+    public void setType(org.battleplugins.inventory.item.ItemType type) {
         Optional<ItemType> opItem = Sponge.getGame().getRegistry().getType(ItemType.class, "minecraft:" + type);
         if (!opItem.isPresent())
             return;
@@ -32,18 +29,8 @@ public class SpongeItemStack extends MCWrapper<ItemStack> implements org.battlep
     }
 
     @Override
-    public String getType() {
-        return handle.getType().getName();
-    }
-
-    @Override
-    public void setDataValue(short value) {
-        handle.offer(Keys.ITEM_DURABILITY, (int) value);
-    }
-
-    @Override
-    public short getDataValue() {
-        return handle.get(Keys.ITEM_DURABILITY).orElse(0).shortValue();
+    public org.battleplugins.inventory.item.ItemType getType() {
+        return new SpongeItemType(handle.getType());
     }
 
     @Override
@@ -58,7 +45,7 @@ public class SpongeItemStack extends MCWrapper<ItemStack> implements org.battlep
 
     @Override
     public Map<String, Integer> getEnchantments() {
-        Map<String, Integer> enchants = new HashMap<String, Integer>();
+        Map<String, Integer> enchants = new HashMap<>();
         EnchantmentData data = handle.getOrCreate(EnchantmentData.class).get();
         for (Enchantment ench : data.enchantments()) {
             enchants.put(ench.getType().getName(), ench.getLevel());
@@ -79,32 +66,7 @@ public class SpongeItemStack extends MCWrapper<ItemStack> implements org.battlep
     }
 
     @Override
-    public String getCommonName() {
-        return handle.getType().getName();
-    }
-
-    @Override
-    public String getFormattedCommonName() {
-        return SpongeInventoryUtil.getFormattedCommonName(handle);
-    }
-
-    @Override
     public SpongeItemStack clone() {
         return new SpongeItemStack(handle.copy());
-    }
-
-    @Override
-    public int isSpecial() {
-        return 0;
-    }
-
-    @Override
-    public boolean hasItemMeta() {
-        return true;
-    }
-
-    @Override
-    public ItemMeta getItemMeta() {
-        return new SpongeItemMeta(handle);
     }
 }

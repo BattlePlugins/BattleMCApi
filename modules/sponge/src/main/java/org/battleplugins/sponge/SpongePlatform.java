@@ -1,26 +1,23 @@
 package org.battleplugins.sponge;
 
-import org.battleplugins.APIType;
+import mc.euro.version.Version;
+import org.battleplugins.PlatformType;
 import org.battleplugins.Platform;
 import org.battleplugins.message.Message;
 import org.battleplugins.plugin.Plugin;
-import org.battleplugins.plugin.ServicePriority;
+import org.battleplugins.plugin.service.ServicePriority;
 import org.battleplugins.sponge.entity.living.player.SpongeOfflinePlayer;
 import org.battleplugins.sponge.entity.living.player.SpongePlayer;
 import org.battleplugins.sponge.message.SpongeMessage;
-import org.battleplugins.sponge.inventory.SpongeInventory;
 import org.battleplugins.sponge.inventory.item.SpongeItemStack;
 import org.battleplugins.sponge.world.SpongeLocation;
 import org.battleplugins.sponge.world.SpongeWorld;
+import org.battleplugins.world.World;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.item.ItemTypes;
-import org.spongepowered.api.item.inventory.Inventory;
 import org.spongepowered.api.item.inventory.ItemStack;
-import org.spongepowered.api.item.inventory.property.InventoryDimension;
-import org.spongepowered.api.item.inventory.property.InventoryTitle;
 import org.spongepowered.api.service.ProviderRegistration;
 import org.spongepowered.api.service.user.UserStorageService;
-import org.spongepowered.api.text.Text;
 import org.spongepowered.api.world.Location;
 
 import java.util.ArrayList;
@@ -32,14 +29,20 @@ import java.util.concurrent.TimeUnit;
 
 public class SpongePlatform extends Platform {
 
-    @Override
-    public APIType getAPIType() {
-        return APIType.SPONGE;
+    private SpongeRegistry registry;
+
+    public SpongePlatform() {
+        this.registry = new SpongeRegistry();
     }
 
     @Override
-    public SpongeLocation getLocation(String world, double x, double y, double z, float pitch, float yaw) {
-        return new SpongeLocation(new Location<>(Sponge.getServer().getWorld(world).get(), x, y, z));
+    public PlatformType getType() {
+        return PlatformType.SPONGE;
+    }
+
+    @Override
+    public SpongeLocation getLocation(World world, double x, double y, double z, float pitch, float yaw) {
+        return new SpongeLocation(new Location<>(((SpongeWorld) world).getHandle(), x, y, z));
     }
 
     @Override
@@ -120,8 +123,8 @@ public class SpongePlatform extends Platform {
     }
 
     @Override
-    public String getVersion() {
-        return Sponge.getGame().getPlatform().getMinecraftVersion().getName();
+    public Version<SpongePlatform> getVersion() {
+        return new Version<>(Sponge.getGame().getPlatform().getMinecraftVersion().getName());
     }
 
     @Override
@@ -135,14 +138,6 @@ public class SpongePlatform extends Platform {
     }
 
     @Override
-    public SpongeInventory createInventory(Plugin plugin, int slots, String title) {
-        Inventory inventory = Inventory.builder().property(InventoryTitle.PROPERTY_NAME, InventoryTitle.of(Text.of(title)))
-                .property(InventoryDimension.PROPERTY_NAME, new InventoryDimension( 9, slots / 9)).build(plugin.getPlatformPlugin());
-
-        return new SpongeInventory<>(inventory);
-    }
-
-    @Override
     public <T> void registerService(Class<T> clazz, T service, Plugin plugin, ServicePriority priority) {
         Sponge.getServiceManager().setProvider(plugin.getPlatformPlugin(), clazz, service);
     }
@@ -150,5 +145,10 @@ public class SpongePlatform extends Platform {
     @Override
     public <T> Optional<T> getService(Class<T> clazz) {
         return Sponge.getServiceManager().getRegistration(clazz).map(ProviderRegistration::getProvider);
+    }
+
+    @Override
+    public SpongeRegistry getRegistry() {
+        return registry;
     }
 }

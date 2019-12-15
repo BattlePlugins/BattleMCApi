@@ -4,9 +4,13 @@ import org.battleplugins.sponge.world.SpongeLocation;
 import org.battleplugins.sponge.world.SpongeWorld;
 import org.battleplugins.sponge.util.SpongeUtil;
 import org.battleplugins.util.MCWrapper;
+import org.battleplugins.util.NamespacedKey;
 import org.battleplugins.world.Location;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.Entity;
+import org.spongepowered.api.entity.EntityType;
+import org.spongepowered.api.entity.EntityTypes;
+import org.spongepowered.api.entity.living.animal.Pig;
 import org.spongepowered.api.text.Text;
 
 import java.util.ArrayList;
@@ -23,6 +27,11 @@ public class SpongeEntity<T extends Entity> extends MCWrapper<T> implements org.
     @Override
     public String getName() {
         return handle.getType().getName();
+    }
+
+    @Override
+    public NamespacedKey getKey() {
+        return NamespacedKey.minecraft(handle.getType().getId());
     }
 
     @Override
@@ -59,7 +68,7 @@ public class SpongeEntity<T extends Entity> extends MCWrapper<T> implements org.
     public List<SpongeEntity> getNearbyEntities(double x, double y, double z) {
         List<SpongeEntity> entities = new ArrayList<>();
         for (Entity entity : SpongeUtil.getNearbyEntities(handle, x, y, z)) {
-            entities.add(new SpongeEntity(entity));
+            entities.add(new SpongeEntity<>(entity));
         }
         return entities;
     }

@@ -2,17 +2,20 @@ package org.battleplugins.bukkit.inventory.entity;
 
 import org.battleplugins.bukkit.inventory.BukkitInventory;
 import org.battleplugins.bukkit.inventory.item.BukkitItemStack;
+import org.battleplugins.entity.living.HumanEntity;
 import org.bukkit.inventory.PlayerInventory;
 
 import java.util.Optional;
 
 public class BukkitPlayerInventory extends BukkitInventory<PlayerInventory> implements org.battleplugins.inventory.entity.PlayerInventory {
 
+	private HumanEntity carrier;
 	private PlayerInventory inventory;
 
-	public BukkitPlayerInventory(PlayerInventory inventory) {
+	public BukkitPlayerInventory(HumanEntity carrier, PlayerInventory inventory) {
 		super(inventory);
 
+		this.carrier = carrier;
 		this.inventory = inventory;
 	}
 
@@ -50,5 +53,10 @@ public class BukkitPlayerInventory extends BukkitInventory<PlayerInventory> impl
 	@Override
 	public Optional<BukkitItemStack> getBoots() {
 		return Optional.ofNullable(inventory.getBoots()).map(BukkitItemStack::new);
+	}
+
+	@Override
+	public HumanEntity getCarrier() {
+		return carrier;
 	}
 }

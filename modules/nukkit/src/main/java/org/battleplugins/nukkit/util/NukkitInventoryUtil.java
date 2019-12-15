@@ -1,11 +1,9 @@
 package org.battleplugins.nukkit.util;
 
-import cn.nukkit.Player;
 import cn.nukkit.inventory.Inventory;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -47,48 +45,6 @@ public class NukkitInventoryUtil {
         return count;
     }
 
-    public static String getFormattedCommonName(Item is) {
-        int datavalue = is.getDamage();
-
-        String iname = "";
-        try {
-            int maxDurability = is.getMaxDurability();
-
-            iname = formatCommonName(is.getName().toLowerCase()) + " (" + (maxDurability - datavalue) + "/" + maxDurability + ")";
-        } catch (Exception e){
-            System.err.println("Error getting commonName type=" + is + "   iname=" + iname + "   datavalue=" + datavalue);
-            e.printStackTrace();
-        }
-        return iname;
-    }
-
-    /// Checks if there is enough free space in inventory
-    public static boolean checkFreeSpace(Inventory inv, Item is, int left) {
-        return checkFreeSpace(inv.getContents().values(), is, left);
-    }
-
-    public static boolean checkFreeSpace(Collection<Item> contents, Item is, int left) {
-        int maxStack = is.getMaxStackSize();
-        for (Item curitem : contents) {
-            if (left <= 0) {
-                return true;
-            }
-            if (curitem == null || curitem.getId() == 0) {
-                left = left - maxStack;
-                continue;
-            }
-
-            if (!sameItem(curitem, is, true))
-                continue;
-
-            int amount = curitem.getCount();
-            if (amount < maxStack) {
-                left = left - (maxStack - amount);
-            }
-        }
-        return left <= 0;
-    }
-
     public static int amountFreeSpace(Collection<Item> contents, Item is, int left) {
         int maxStack = is.getMaxStackSize();
         for (Item curitem : contents) {
@@ -109,10 +65,6 @@ public class NukkitInventoryUtil {
     //Checks if there is enough free space in inventory
     public static int amountFreeSpace(Inventory inv, Item is, int left) {
         return amountFreeSpace(inv.getContents().values(), is, left);
-    }
-
-    public static void addItemToInventory(Player player, Item itemStack, int stockAmount) {
-        addItemToInventory(player.getInventory(), itemStack, stockAmount);
     }
 
     ///Adds item to inventory
@@ -143,35 +95,5 @@ public class NukkitInventoryUtil {
         } else {
             inv.addItem(is);
         }
-    }
-
-    public static String getTypeFromId(int id) {
-        // This is a hacky method, but Nukkit materials are terribly coded..
-        // so what else can you do?
-        try {
-            for (Field field : Item.class.getFields()) {
-                Item item = Item.fromString(field.getName());
-                if (item == null)
-                    continue;
-
-                if (id == item.getId())
-                    return field.getName();
-            }
-        } catch (Exception ex) {
-            /* do nothing */
-        }
-
-        return String.valueOf(id);
-    }
-
-    private static String formatCommonName(String name) {
-        name = name.toLowerCase().replace("_", " ");
-
-        String[] words = name.split(" ");
-        for (int i = 0; i < words.length; i++) {
-            words[i] = words[i].substring(0, 1).toUpperCase() + words[i].substring(1).toLowerCase();
-        }
-
-        return String.join(" ", words);
     }
 }

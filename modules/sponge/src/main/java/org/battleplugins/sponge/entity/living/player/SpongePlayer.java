@@ -1,6 +1,7 @@
 package org.battleplugins.sponge.entity.living.player;
 
-import org.battleplugins.entity.living.player.GameMode;
+import org.battleplugins.entity.living.player.gamemode.GameMode;
+import org.battleplugins.entity.living.player.gamemode.GameModes;
 import org.battleplugins.inventory.Inventory;
 import org.battleplugins.sponge.world.SpongeLocation;
 import org.battleplugins.sponge.entity.living.SpongeHumanEntity;
@@ -8,13 +9,13 @@ import org.battleplugins.sponge.inventory.SpongeInventory;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.living.player.Player;
-import org.spongepowered.api.entity.living.player.gamemode.GameModes;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.util.RespawnLocation;
 
-import java.time.Instant;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Optional;
+import java.util.OptionalLong;
 
 public class SpongePlayer extends SpongeHumanEntity<Player> implements org.battleplugins.entity.living.player.Player {
 
@@ -36,13 +37,15 @@ public class SpongePlayer extends SpongeHumanEntity<Player> implements org.battl
     }
 
     @Override
-    public long getFirstPlayed() {
-        return handle.get(Keys.FIRST_DATE_PLAYED).orElse(Instant.now()).toEpochMilli();
+    public OptionalLong getFirstPlayed() {
+        return handle.get(Keys.FIRST_DATE_PLAYED).map(value -> OptionalLong.of(value.toEpochMilli()))
+                .orElse(OptionalLong.empty());
     }
 
     @Override
-    public long getLastPlayed() {
-        return handle.get(Keys.LAST_DATE_PLAYED).orElse(Instant.now()).toEpochMilli();
+    public OptionalLong getLastPlayed() {
+        return handle.get(Keys.LAST_DATE_PLAYED).map(value -> OptionalLong.of(value.toEpochMilli()))
+                .orElse(OptionalLong.empty());
     }
 
     @Override
@@ -96,11 +99,15 @@ public class SpongePlayer extends SpongeHumanEntity<Player> implements org.battl
 
     @Override
     public GameMode getGameMode() {
-        return GameMode.valueOf(handle.getGameModeData().type().get().getId().toUpperCase());
+        org.spongepowered.api.entity.living.player.gamemode.GameMode spongeGamemode = handle.gameMode().get();
+        return Arrays.stream(GameModes.values())
+                .filter(mode -> mode.getKey().getKey().equals(spongeGamemode.getId()))
+                .findFirst().orElse(GameModes.SURVIVAL);
     }
 
     @Override
     public void setGameMode(GameMode gameMode) {
-        handle.getGameModeData().type().set(Sponge.getRegistry().getType(org.spongepowered.api.entity.living.player.gamemode.GameMode.class, gameMode.name().toUpperCase()).orElse(GameModes.SURVIVAL));
+        handle.offer(Keys.GAME_MODE, Sponge.getRegistry().getType(org.spongepowered.api.entity.living.player.gamemode.GameMode.class,
+                gameMode.getKey().getKey().toUpperCase()).orElse(org.spongepowered.api.entity.living.player.gamemode.GameModes.SURVIVAL));
     }
 }

@@ -3,8 +3,8 @@ package org.battleplugins.nukkit.inventory.item;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
 
-import org.battleplugins.inventory.item.ItemMeta;
-import org.battleplugins.nukkit.util.NukkitInventoryUtil;
+import org.battleplugins.inventory.item.ItemRegistry;
+import org.battleplugins.inventory.item.ItemType;
 import org.battleplugins.util.MCWrapper;
 
 import java.util.HashMap;
@@ -17,9 +17,9 @@ public class NukkitItemStack extends MCWrapper<Item> implements org.battleplugin
 	}
 
 	@Override
-	public void setType(String type) {
+	public void setType(ItemType type) {
 		// Nukkit doesn't have a setter for items.. so get from string instead
-		Item item = Item.fromString(type);
+		Item item = ((NukkitItemType) type).getHandle();
 		item.setCount(handle.getCount());
 		item.setCompoundTag(handle.getCompoundTag());
 		item.setCustomName(handle.getCustomName());
@@ -40,18 +40,8 @@ public class NukkitItemStack extends MCWrapper<Item> implements org.battleplugin
 	}
 
 	@Override
-	public String getType() {
-		return NukkitInventoryUtil.getTypeFromId(handle.getId());
-	}
-
-	@Override
-	public void setDataValue(short value) {
-		handle.setDamage((int) value);
-	}
-
-	@Override
-	public short getDataValue() {
-		return (short) handle.getDamage();
+	public ItemType getType() {
+		return ((NukkitItemRegistry) ItemRegistry.REGISTRY).fromPlatformItem(handle);
 	}
 
 	@Override
@@ -66,21 +56,11 @@ public class NukkitItemStack extends MCWrapper<Item> implements org.battleplugin
 
 	@Override
 	public Map<String, Integer> getEnchantments() {
-		Map<String, Integer> encs = new HashMap<String,Integer>();
+		Map<String, Integer> encs = new HashMap<>();
 		for (Enchantment enchant : handle.getEnchantments()) {
 			encs.put(enchant.getName(), enchant.getId());
 		}
 		return encs;
-	}
-
-	@Override
-	public String getCommonName() {
-		return handle.getName();
-	}
-
-	@Override
-	public String getFormattedCommonName() {
-		return NukkitInventoryUtil.getFormattedCommonName(handle);
 	}
 
 	@Override
@@ -97,29 +77,5 @@ public class NukkitItemStack extends MCWrapper<Item> implements org.battleplugin
 			handle.addEnchantment(enchant);
 			return;
 		}
-	}
-
-	@Override
-	public int isSpecial() {
-		int special = 0;
-//		ItemMeta im = itemStack.getItemMeta();
-//		Map<Enchantment,Integer> map = itemStack.getEnchantments();
-//		if (map != null){
-//			for (Entry<Enchantment,Integer> entry : map.entrySet()){
-////				entry.getKey().getId()
-//			}
-//		}
-
-		return special;
-	}
-
-	@Override
-	public boolean hasItemMeta() {
-		return true;
-	}
-
-	@Override
-	public ItemMeta getItemMeta() {
-		return new NukkitItemMeta(handle);
 	}
 }

@@ -1,54 +1,98 @@
 package org.battleplugins.inventory.item;
 
 import org.battleplugins.Platform;
+import org.battleplugins.inventory.item.component.ItemComponent;
 
-import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
+/**
+ * Represents items in inventories.
+ */
 public interface ItemStack {
 
-    void setType(String type);
+    /**
+     * The {@link ItemType} for this itemstack
+     *
+     * @return the itemtype to set
+     */
+    ItemType getType();
 
-    String getType();
+    /**
+     * Sets the {@link ItemType} for this itemstack
+     *
+     * @param type the itemtype to set
+     */
+    void setType(ItemType type);
 
-    void setDataValue(short value);
-
-    short getDataValue();
-
-    void setQuantity(int quantity);
-
+    /**
+     * The quantity of items in this itemstack
+     *
+     * @return the quantity of items in this itemstack
+     */
     int getQuantity();
 
+    /**
+     * Sets the quantity of items in this itemstack
+     *
+     * @param quantity the quantity of items in this itemstack
+     */
+    void setQuantity(int quantity);
+
+    /**
+     * The enchantments applied to this itemstack
+     *
+     * @return the enchantments applied to this itemstack
+     */
     Map<String, Integer> getEnchantments();
 
-    void addEnchantment(String ench, int level);
+    /**
+     * Adds an enchantment to this itemstack
+     *
+     * @param enchantment the enchantment to apply
+     * @param level the level to set for the itemstack
+     */
+    void addEnchantment(String enchantment, int level);
 
-    String getCommonName();
-
-    String getFormattedCommonName();
-
-    ItemStack clone();
-
-    int isSpecial();
-
-    boolean hasItemMeta();
-
-    ItemMeta getItemMeta();
-
-    static ItemStack getDefaultPlatformItemStack() {
-        return Platform.getPlatform().getDefaultPlatformItemStack();
+    /**
+     * Applies the given component to the itemstack
+     *
+     * @param componentClass the component to apply
+     * @param value the value of the component
+     * @param <T> the value
+     */
+    default <T> void applyComponent(Class<? extends ItemComponent<T>> componentClass, T value) {
+        Platform.getPlatform().getRegistry().getItemComponent(componentClass).applyComponent(this, value);
     }
 
+    /**
+     * Gets the value of the given component class
+     *
+     * @param componentClass the class of the component
+     * @param <T> the value
+     * @return the value of the given component class
+     */
+    default <T> Optional<T> getValue(Class<? extends ItemComponent<T>> componentClass) {
+        return Platform.getPlatform().getRegistry().getItemComponent(componentClass).getValue(this);
+    }
+
+    /**
+     * The itemstack builder
+     *
+     * @return a new itemstack builder
+     */
     static Builder builder() {
         return new Builder();
     }
+
+    ItemStack clone();
 
     class Builder {
 
         private ItemStack itemStack;
 
         Builder() {
-            this.itemStack = ItemStack.getDefaultPlatformItemStack();
+            this.itemStack = Platform.getPlatform().getDefaultPlatformItemStack();
         }
 
         public Builder fromItemStack(ItemStack itemStack) {
@@ -56,13 +100,8 @@ public interface ItemStack {
             return this;
         }
 
-        public Builder type(String type) {
+        public Builder type(ItemType type) {
             itemStack.setType(type);
-            return this;
-        }
-
-        public Builder data(short value) {
-            itemStack.setDataValue(value);
             return this;
         }
 
@@ -76,35 +115,8 @@ public interface ItemStack {
             return this;
         }
 
-        public Builder displayName(String displayName) {
-            if (!itemStack.hasItemMeta())
-                return this;
-
-            itemStack.getItemMeta().setDisplayName(displayName);
-            return this;
-        }
-
-        public Builder lore(List<String> lore) {
-            if (!itemStack.hasItemMeta())
-                return this;
-
-            itemStack.getItemMeta().setLore(lore);
-            return this;
-        }
-
-        public Builder unbreakable(boolean unbreakable) {
-            if (!itemStack.hasItemMeta())
-                return this;
-
-            itemStack.getItemMeta().setUnbreakable(unbreakable);
-            return this;
-        }
-
-        public Builder customModelData(int modelData) {
-            if (!itemStack.hasItemMeta())
-                return this;
-
-            itemStack.getItemMeta().setCustomModelData(modelData);
+        public <T> Builder component(Class<ItemComponent<T>> component, T value) {
+            itemStack.applyComponent(component, value);
             return this;
         }
 

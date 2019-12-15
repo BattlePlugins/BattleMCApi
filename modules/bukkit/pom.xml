@@ -16,19 +16,13 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.14-R0.1-SNAPSHOT</version>
+            <version>1.15-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.battleplugins</groupId>
             <artifactId>McAPI-api</artifactId>
             <version>parent</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>mc.euro</groupId>
-            <artifactId>BukkitAdapter</artifactId>
-            <version>1.2.8</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

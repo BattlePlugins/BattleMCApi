@@ -5,6 +5,7 @@ import cn.nukkit.entity.Entity;
 import org.battleplugins.nukkit.world.NukkitLocation;
 import org.battleplugins.nukkit.world.NukkitWorld;
 import org.battleplugins.util.MCWrapper;
+import org.battleplugins.util.NamespacedKey;
 import org.battleplugins.world.Location;
 
 import java.util.ArrayList;
@@ -21,6 +22,11 @@ public class NukkitEntity<T extends Entity> extends MCWrapper<T> implements org.
     @Override
     public String getName() {
         return handle.getName();
+    }
+
+    @Override
+    public NamespacedKey getKey() {
+        return NamespacedKey.minecraft(handle.getSaveId().replace("Entity", ""));
     }
 
     @Override

@@ -3,6 +3,7 @@ package org.battleplugins.bukkit.entity;
 import org.battleplugins.bukkit.world.BukkitLocation;
 import org.battleplugins.bukkit.world.BukkitWorld;
 import org.battleplugins.util.MCWrapper;
+import org.battleplugins.util.NamespacedKey;
 import org.battleplugins.world.Location;
 import org.bukkit.entity.Entity;
 
@@ -20,6 +21,11 @@ public class BukkitEntity<T extends Entity> extends MCWrapper<T> implements org.
     @Override
     public String getName() {
         return handle.getName();
+    }
+
+    @Override
+    public NamespacedKey getKey() {
+        return NamespacedKey.minecraft(handle.getType().getName());
     }
 
     @Override
@@ -56,7 +62,7 @@ public class BukkitEntity<T extends Entity> extends MCWrapper<T> implements org.
     public List<BukkitEntity> getNearbyEntities(double x, double y, double z) {
         List<BukkitEntity> entities = new ArrayList<>();
         for (org.bukkit.entity.Entity entity : handle.getNearbyEntities(x, y, z)) {
-            entities.add(new BukkitEntity(entity));
+            entities.add(new BukkitEntity<>(entity));
         }
         return entities;
     }

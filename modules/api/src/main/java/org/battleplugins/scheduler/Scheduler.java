@@ -7,6 +7,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * TODO: Redo scheduler API.
+ */
 public class Scheduler {
 
 	private static int count = 0; // count of current async timers

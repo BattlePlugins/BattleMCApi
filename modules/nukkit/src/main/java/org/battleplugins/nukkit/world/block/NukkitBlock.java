@@ -5,6 +5,8 @@ import cn.nukkit.block.Block;
 import org.battleplugins.nukkit.world.NukkitLocation;
 import org.battleplugins.nukkit.world.NukkitWorld;
 import org.battleplugins.util.MCWrapper;
+import org.battleplugins.world.block.BlockRegistry;
+import org.battleplugins.world.block.BlockType;
 
 public class NukkitBlock extends MCWrapper<Block> implements org.battleplugins.world.block.Block {
 
@@ -23,23 +25,8 @@ public class NukkitBlock extends MCWrapper<Block> implements org.battleplugins.w
 	}
 
 	@Override
-	public int getX() {
-		return (int) handle.x;
-	}
-
-	@Override
-	public int getY() {
-		return (int) handle.y;
-	}
-
-	@Override
-	public int getZ() {
-		return (int) handle.z;
-	}
-
-	@Override
-	public String getType() {
-		return String.valueOf(handle.getId());
+	public BlockType getType() {
+		return ((NukkitBlockRegistry) BlockRegistry.REGISTRY).fromPlatformBlock(handle);
 	}
 
 	@Override

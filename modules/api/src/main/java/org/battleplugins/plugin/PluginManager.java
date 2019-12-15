@@ -10,11 +10,20 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 
+/**
+ * The plugin manager for managing plugins built against
+ * this API (not to be confused with the platform plugin manager).
+ */
 @Getter
 public class PluginManager {
 
     private Plugin plugin;
 
+    /**
+     * Initializes the given plugin
+     *
+     * @param platformPlugin the plugin to initialize
+     */
     public void initializePlugin(PlatformPlugin platformPlugin) {
         InputStream propertyStream = getClass().getResourceAsStream("/plugin.properties");
         BufferedReader reader = new BufferedReader(new InputStreamReader(propertyStream));
@@ -41,6 +50,9 @@ public class PluginManager {
         }
     }
 
+    /**
+     * Enables the plugin
+     */
     public void enablePlugin() {
         if (plugin != null) {
             try {
@@ -56,6 +68,9 @@ public class PluginManager {
         }
     }
 
+    /**
+     * Disables the plugin
+     */
     public void disablePlugin() {
         if (plugin != null) {
             try {

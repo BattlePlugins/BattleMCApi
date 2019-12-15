@@ -4,11 +4,13 @@ import org.battleplugins.bukkit.world.BukkitLocation;
 import org.battleplugins.bukkit.entity.living.BukkitHumanEntity;
 import org.battleplugins.bukkit.inventory.BukkitInventory;
 
-import org.battleplugins.entity.living.player.GameMode;
+import org.battleplugins.entity.living.player.gamemode.GameMode;
+import org.battleplugins.entity.living.player.gamemode.GameModes;
 import org.battleplugins.inventory.Inventory;
 import org.bukkit.entity.Player;
 
 import java.util.Optional;
+import java.util.OptionalLong;
 
 public class BukkitPlayer extends BukkitHumanEntity<Player> implements org.battleplugins.entity.living.player.Player {
 
@@ -25,13 +27,13 @@ public class BukkitPlayer extends BukkitHumanEntity<Player> implements org.battl
     }
 
     @Override
-    public long getFirstPlayed() {
-        return handle.getFirstPlayed();
+    public OptionalLong getFirstPlayed() {
+        return OptionalLong.of(handle.getFirstPlayed());
     }
 
     @Override
-    public long getLastPlayed() {
-        return handle.getLastPlayed();
+    public OptionalLong getLastPlayed() {
+        return OptionalLong.of(handle.getLastPlayed());
     }
 
     @Override
@@ -81,11 +83,11 @@ public class BukkitPlayer extends BukkitHumanEntity<Player> implements org.battl
 
     @Override
     public GameMode getGameMode() {
-        return GameMode.values()[handle.getGameMode().ordinal()];
+        return GameModes.values()[handle.getGameMode().ordinal()];
     }
 
     @Override
     public void setGameMode(GameMode gameMode) {
-        handle.setGameMode(org.bukkit.GameMode.values()[gameMode.ordinal()]);
+        handle.setGameMode(org.bukkit.GameMode.values()[gameMode.getId()]);
     }
 }

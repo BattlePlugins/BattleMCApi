@@ -11,7 +11,7 @@ public class BukkitHumanEntity<T extends HumanEntity> extends BukkitLivingEntity
 
     @Override
     public BukkitPlayerInventory getInventory() {
-        return new BukkitPlayerInventory(handle.getInventory());
+        return new BukkitPlayerInventory(this, handle.getInventory());
     }
 
     @Override

@@ -1,10 +1,14 @@
 package org.battleplugins.sponge.world;
 
+import org.battleplugins.entity.living.player.Player;
+import org.battleplugins.sponge.entity.living.player.SpongePlayer;
 import org.battleplugins.sponge.world.block.SpongeBlock;
 import org.battleplugins.sponge.world.block.entity.SpongeBlockEntity;
 import org.battleplugins.sponge.world.block.entity.SpongeChest;
 import org.battleplugins.sponge.world.block.entity.SpongeSign;
 import org.battleplugins.util.MCWrapper;
+import org.battleplugins.world.Location;
+import org.battleplugins.world.block.Block;
 import org.battleplugins.world.block.entity.BlockEntity;
 import org.spongepowered.api.block.tileentity.Sign;
 import org.spongepowered.api.block.tileentity.TileEntity;
@@ -70,5 +74,16 @@ public class SpongeWorld extends MCWrapper<World> implements org.battleplugins.w
             throw new ClassCastException("Block can not be cast to " + clazz.getSimpleName());
         }
         return null;
+    }
+
+    @Override
+    public void sendBlockUpdate(Player player, Location location, Block block) {
+        ((SpongePlayer) player).getHandle().sendBlockChange(((SpongeLocation) location).getHandle().getBlockPosition(),
+                ((SpongeBlock) block).getHandle().getState());
+    }
+
+    @Override
+    public void sendBlockEntityUpdate(Player player, Location location, BlockEntity blockEntity) {
+        // oof
     }
 }

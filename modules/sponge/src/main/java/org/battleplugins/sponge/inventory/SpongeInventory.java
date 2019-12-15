@@ -18,10 +18,8 @@ public class SpongeInventory<T extends Inventory> extends MCWrapper<T> implement
     }
 
     @Override
-    public void addItem(ItemStack... itemStacks) {
-        for (ItemStack itemStack : itemStacks) {
-            handle.set(((SpongeItemStack) itemStack).getHandle());
-        }
+    public void addItem(ItemStack itemStack) {
+        handle.set(((SpongeItemStack) itemStack).getHandle());
     }
 
     @Override

@@ -7,9 +7,9 @@ import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.living.player.User;
 import org.spongepowered.api.util.RespawnLocation;
 
-import java.time.Instant;
 import java.util.HashMap;
 import java.util.Optional;
+import java.util.OptionalLong;
 import java.util.UUID;
 
 public class SpongeOfflinePlayer extends MCWrapper<User> implements OfflinePlayer {
@@ -39,13 +39,15 @@ public class SpongeOfflinePlayer extends MCWrapper<User> implements OfflinePlaye
     }
 
     @Override
-    public long getFirstPlayed() {
-        return handle.get(Keys.FIRST_DATE_PLAYED).orElse(Instant.now()).toEpochMilli();
+    public OptionalLong getFirstPlayed() {
+        return handle.get(Keys.FIRST_DATE_PLAYED).map(value -> OptionalLong.of(value.toEpochMilli()))
+                .orElse(OptionalLong.empty());
     }
 
     @Override
-    public long getLastPlayed() {
-        return handle.get(Keys.LAST_DATE_PLAYED).orElse(Instant.now()).toEpochMilli();
+    public OptionalLong getLastPlayed() {
+        return handle.get(Keys.LAST_DATE_PLAYED).map(value -> OptionalLong.of(value.toEpochMilli()))
+                .orElse(OptionalLong.empty());
     }
 
     @Override

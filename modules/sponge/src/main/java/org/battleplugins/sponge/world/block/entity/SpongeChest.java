@@ -1,5 +1,8 @@
 package org.battleplugins.sponge.world.block.entity;
 
+import org.battleplugins.inventory.CarriedInventory;
+import org.battleplugins.inventory.carrier.Carrier;
+import org.battleplugins.sponge.inventory.SpongeCarriedInventory;
 import org.battleplugins.sponge.inventory.SpongeInventory;
 import org.battleplugins.sponge.inventory.item.SpongeItemStack;
 import org.spongepowered.api.block.BlockTypes;
@@ -19,28 +22,6 @@ public class SpongeChest extends SpongeBlockEntity<Chest> implements org.battlep
     }
 
     @Override
-    public boolean isDoubleChest() {
-        return handle.getConnectedChests().size() > 0;
-    }
-
-    @Override
-    public SpongeItemStack[] getItems() {
-        SpongeItemStack[] items = new SpongeItemStack[handle.getInventory(Direction.NONE).totalItems()];
-
-        int i = 0;
-        for (Inventory slot : handle.getInventory(Direction.NONE)) {
-            Optional<ItemStack> opStack = slot.peek();
-            if (!opStack.isPresent())
-                continue;
-
-            ItemStack stack = opStack.get();
-            items[i] = new SpongeItemStack(stack);
-            i++;
-        }
-
-        return items;
-    }
-    @Override
     public Optional<SpongeChest> getNeighborChest() {
         Location<World> loc = handle.getLocation();
         if (loc.getRelative(Direction.NORTH).getBlock().getType() == BlockTypes.CHEST)
@@ -59,7 +40,7 @@ public class SpongeChest extends SpongeBlockEntity<Chest> implements org.battlep
     }
 
     @Override
-    public SpongeInventory getInventory() {
-        return new SpongeInventory<>(handle.getInventory());
+    public CarriedInventory<SpongeChest> getInventory() {
+        return new SpongeCarriedInventory<>(handle.getInventory(), this);
     }
 }

@@ -1,6 +1,5 @@
 package org.battleplugins.sponge.world.block.entity;
 
-import org.battleplugins.entity.living.player.Player;
 import org.spongepowered.api.block.tileentity.Sign;
 import org.spongepowered.api.data.manipulator.mutable.tileentity.SignData;
 import org.spongepowered.api.text.Text;
@@ -27,18 +26,9 @@ public class SpongeSign extends SpongeBlockEntity<Sign> implements org.battleplu
     }
 
     @Override
-    public void setLine(int index, String msg) {
+    public void setLine(int index, String line) {
         SignData signData = handle.getOrCreate(SignData.class).get();
-        signData.set(signData.lines().set(index, Text.of(msg)));
+        signData.set(signData.lines().set(index, Text.of(line)));
         handle.offer(signData);
-    }
-
-    @Override
-    public void sendSignChange(Player player, String[] lines) {
-        // This isn't possible at the moment, so instead we send the
-        // player a message of what is to be displayed.
-        for (String line : lines) {
-            player.sendMessage(line);
-        }
     }
 }

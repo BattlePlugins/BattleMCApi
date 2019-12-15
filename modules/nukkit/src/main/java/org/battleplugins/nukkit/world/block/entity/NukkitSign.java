@@ -23,23 +23,6 @@ public class NukkitSign extends NukkitBlockEntity<BlockEntitySign> implements or
 	}
 
 	@Override
-	public void sendSignChange(Player player, String[] lines) {
-		CompoundTag nbt = new CompoundTag()
-				.putString("id", BlockEntity.SIGN)
-				.putInt("x", (int) handle.getLocation().x)
-				.putInt("y", (int) handle.getLocation().y)
-				.putInt("z", (int) handle.getLocation().z)
-				.putString("Text1", "")
-				.putString("Text2", "")
-				.putString("Text3", "")
-				.putString("Text4", "");
-
-		BlockEntitySign sign = new BlockEntitySign(handle.getChunk(), nbt);
-		sign.setText(lines);
-		sign.spawnTo(((NukkitPlayer) player).getHandle());
-	}
-
-	@Override
 	public String getLine(int index) {
 		return handle.getText()[index];
 	}

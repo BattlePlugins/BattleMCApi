@@ -70,18 +70,18 @@
                             <artifactSet>
                                 <includes>
                                     <include>org.battleplugins:McAPI-*</include>
-                                    <include>mc.euro:BukkitAdapter</include>
+                                    <include>mc.euro:Version</include>
                                     <include>javassist:javassist</include>
                                 </includes>
                             </artifactSet>
                             <relocations>
                                 <relocation>
-                                    <pattern>mc.euro.bukkitadapter</pattern>
-                                    <shadedPattern>org.battleplugins.bukkit.adapter</shadedPattern>
-                                </relocation>
-                                <relocation>
                                     <pattern>javassist</pattern>
                                     <shadedPattern>org.battleplugins.alib.javassist</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>mc.euro.version</pattern>
+                                    <shadedPattern>org.battleplugins.util.version</shadedPattern>
                                 </relocation>
                             </relocations>
                         </configuration>

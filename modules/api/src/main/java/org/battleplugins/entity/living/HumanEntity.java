@@ -1,8 +1,10 @@
 package org.battleplugins.entity.living;
 
-import org.battleplugins.inventory.entity.PlayerInventory;
+import org.battleplugins.inventory.carrier.Carrier;
 
-public interface HumanEntity extends LivingEntity {
+/**
+ * Represents a human entity.
+ */
+public interface HumanEntity extends LivingEntity, Carrier {
 
-    PlayerInventory getInventory();
 }

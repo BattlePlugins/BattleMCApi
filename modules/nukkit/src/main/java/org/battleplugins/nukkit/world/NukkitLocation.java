@@ -39,19 +39,4 @@ public class NukkitLocation extends MCWrapper<Location> implements org.battleplu
     public float getYaw() {
         return (float) handle.getYaw();
     }
-
-    @Override
-    public int getBlockX() {
-        return handle.getFloorX();
-    }
-
-    @Override
-    public int getBlockY() {
-        return handle.getFloorY();
-    }
-
-    @Override
-    public int getBlockZ() {
-        return handle.getFloorZ();
-    }
 }

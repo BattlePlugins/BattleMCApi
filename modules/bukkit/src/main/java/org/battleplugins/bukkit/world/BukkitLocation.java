@@ -38,19 +38,4 @@ public class BukkitLocation extends MCWrapper<Location> implements org.battleplu
 	public float getYaw() {
 		return handle.getYaw();
 	}
-
-	@Override
-	public int getBlockX() {
-		return handle.getBlockX();
-	}
-
-	@Override
-	public int getBlockY() {
-		return handle.getBlockY();
-	}
-
-	@Override
-    public int getBlockZ() {
-		return handle.getBlockZ();
-	}
 }

@@ -5,6 +5,7 @@ import org.battleplugins.util.MCWrapper;
 import org.bukkit.OfflinePlayer;
 
 import java.util.Optional;
+import java.util.OptionalLong;
 import java.util.UUID;
 
 public class BukkitOfflinePlayer extends MCWrapper<OfflinePlayer> implements org.battleplugins.entity.living.player.OfflinePlayer {
@@ -34,13 +35,13 @@ public class BukkitOfflinePlayer extends MCWrapper<OfflinePlayer> implements org
     }
 
     @Override
-    public long getFirstPlayed() {
-        return handle.getFirstPlayed();
+    public OptionalLong getFirstPlayed() {
+        return OptionalLong.of(handle.getFirstPlayed());
     }
 
     @Override
-    public long getLastPlayed() {
-        return handle.getLastPlayed();
+    public OptionalLong getLastPlayed() {
+        return OptionalLong.of(handle.getLastPlayed());
     }
 
     @Override
