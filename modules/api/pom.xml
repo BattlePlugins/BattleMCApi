@@ -12,4 +12,7 @@
     <version>parent</version>
     <packaging>jar</packaging>
     <name>McAPI-api</name>
+    <build>
+        <sourceDirectory>${basedir}/delombok/main</sourceDirectory>
+    </build>
 </project>
