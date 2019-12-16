@@ -14,7 +14,7 @@ While (as of now) it doesn't completely eliminate the need for using the actual 
 - [BattleTracker](https://github.com/BattlePlugins/BattleTracker)
 
 ## API Documentation
-As of right now, there isn't much documentation for BattleMcAPI, but contributions are always accepted :)
+All of the API classes within this project contain documentation explaining what they do. If you're familiar with Bukkit, Sponge or Nukkit already, converting over or using this API should not be far too difficult. More documentation on the [wiki](https://github.com/BattlePlugins/BattleMcAPI/wiki) will be coming soon.
 
 Links
 ------------
