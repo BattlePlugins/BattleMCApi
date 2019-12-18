@@ -1038,20 +1038,20 @@ public enum SpongeCompatItemType {
         return isDamageable(mat) && this.parseMaterial() == comp.getType();
     }
 
-    public static SpongeCompatItemType fromMaterial(ItemType mat) {
+    public static Optional<SpongeCompatItemType> fromMaterial(ItemType mat) {
         try {
-            return SpongeCompatItemType.valueOf(mat.toString());
+            return Optional.of(SpongeCompatItemType.valueOf(mat.toString()));
         } catch (IllegalArgumentException ex) {
             for (SpongeCompatItemType spongeItem : SpongeCompatItemType.values()) {
                 for (String test : spongeItem.materials) {
                     if (test.equalsIgnoreCase(mat.toString()))
-                        return spongeItem;
+                        return Optional.of(spongeItem);
                 }
             }
         }
 
-        // in theory, we should never get here
-        throw new IllegalArgumentException("Could not find Sponge Compat material from " + mat);
+        // may return empty due to modded items
+        return Optional.empty();
     }
 
     public static Optional<SpongeCompatItemType> fromString(String key) {

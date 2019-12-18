@@ -13,8 +13,9 @@ public class SpongeItemType extends MCWrapper<org.spongepowered.api.item.ItemTyp
 
     @Override
     public NamespacedKey getKey() {
-        SpongeCompatItemType spongeItemType = SpongeCompatItemType.fromMaterial(handle);
-        return NamespacedKey.minecraft(spongeItemType.name().toLowerCase());
+        org.spongepowered.api.item.ItemType spongeItemType = SpongeCompatItemType.fromMaterial(handle)
+                .map(item -> item.parseItem().getType()).orElse(handle);
+        return NamespacedKey.of(spongeItemType.getId().split(":")[0], spongeItemType.getId().split(":")[1]);
     }
 
     @Override

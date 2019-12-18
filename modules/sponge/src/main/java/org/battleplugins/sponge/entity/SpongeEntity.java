@@ -27,7 +27,7 @@ public class SpongeEntity<T extends Entity> extends MCWrapper<T> implements org.
 
     @Override
     public NamespacedKey getKey() {
-        return NamespacedKey.minecraft(handle.getType().getId());
+        return NamespacedKey.of(handle.getType().getId().split(":")[0], handle.getType().getId().split(":")[1]);
     }
 
     @Override

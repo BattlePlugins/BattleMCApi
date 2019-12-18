@@ -52,7 +52,14 @@ public class NamespacedKey {
         return of(plugin.getDescription().getName(), key);
     }
 
-    private static NamespacedKey of(String namespace, String key) {
+    /**
+     * Creates a namespace with the given namespace
+     *
+     * @param namespace the namespace
+     * @param key the key
+     * @return a namespace with the given plugin
+     */
+    public static NamespacedKey of(String namespace, String key) {
         namespace = namespace.toLowerCase();
         key = key.toLowerCase();
 
