@@ -1034,7 +1034,10 @@ public enum SpongeCompatItemType {
         if (comp.getType() == this.parseMaterial() && comp.get(Keys.ITEM_DURABILITY).orElse(0) == (short) this.data)
             return true;
 
-        SpongeCompatItemType mat = fromMaterial(comp.getType());
+        if (!fromMaterial(comp.getType()).isPresent())
+            return false;
+
+        SpongeCompatItemType mat = fromMaterial(comp.getType()).get();
         return isDamageable(mat) && this.parseMaterial() == comp.getType();
     }
 
