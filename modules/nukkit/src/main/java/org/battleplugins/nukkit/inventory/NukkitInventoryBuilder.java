@@ -4,6 +4,7 @@ import org.battleplugins.inventory.Inventory;
 import org.battleplugins.inventory.item.ItemStack;
 import org.battleplugins.nukkit.inventory.virtual.VirtualChestInventory;
 import org.battleplugins.nukkit.inventory.virtual.VirtualDoubleChestInventory;
+import org.battleplugins.plugin.Plugin;
 
 public class NukkitInventoryBuilder implements Inventory.Builder {
 
@@ -56,7 +57,7 @@ public class NukkitInventoryBuilder implements Inventory.Builder {
     }
 
     @Override
-    public NukkitInventory build() {
+    public NukkitInventory build(Plugin plugin) {
         return build(true);
     }
 

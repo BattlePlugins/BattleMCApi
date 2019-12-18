@@ -2,6 +2,7 @@ package org.battleplugins.inventory;
 
 import org.battleplugins.Platform;
 import org.battleplugins.inventory.item.ItemStack;
+import org.battleplugins.plugin.Plugin;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -125,6 +126,6 @@ public interface Inventory {
 
 		Builder contents(ItemStack[] contents);
 
-		Inventory build();
+		Inventory build(Plugin plugin);
 	}
 }

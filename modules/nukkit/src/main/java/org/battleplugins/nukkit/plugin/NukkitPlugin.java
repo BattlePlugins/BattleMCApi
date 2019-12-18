@@ -10,22 +10,25 @@ import org.battleplugins.nukkit.NukkitPlatform;
 import org.battleplugins.nukkit.command.NukkitCommandExecutor;
 import org.battleplugins.nukkit.inventory.virtual.VirtualInventoryListener;
 import org.battleplugins.nukkit.logger.NukkitLogger;
+import org.battleplugins.plugin.Plugin;
 import org.battleplugins.plugin.platform.PlatformPlugin;
 
 public class NukkitPlugin extends PluginBase implements PlatformPlugin {
+
+    private Plugin plugin;
 
     @Override
     public void onEnable() {
         getServer().getPluginManager().registerEvents(new VirtualInventoryListener(this), this);
 
         Platform.setInstance(new NukkitPlatform());
-        Platform.getPluginManager().initializePlugin(this);
-        Platform.getPluginManager().enablePlugin();
+        this.plugin = Platform.getPluginManager().initializePlugin(this);
+        Platform.getPluginManager().enablePlugin(this.plugin);
     }
 
     @Override
     public void onDisable() {
-        Platform.getPluginManager().disablePlugin();
+        Platform.getPluginManager().disablePlugin(this.plugin);
     }
 
     @Override

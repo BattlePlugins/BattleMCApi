@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 /**
  * The plugin manager for managing plugins built against
@@ -17,14 +18,19 @@ import java.lang.reflect.InvocationTargetException;
 @Getter
 public class PluginManager {
 
-    private Plugin plugin;
+    /**
+     * The plugins loaded into this API
+     *
+     * @return the plugins loaded into this API
+     */
+    private List<Plugin> plugins;
 
     /**
      * Initializes the given plugin
      *
      * @param platformPlugin the plugin to initialize
      */
-    public void initializePlugin(PlatformPlugin platformPlugin) {
+    public Plugin initializePlugin(PlatformPlugin platformPlugin) {
         InputStream propertyStream = getClass().getResourceAsStream("/plugin.properties");
         BufferedReader reader = new BufferedReader(new InputStreamReader(propertyStream));
         try {
@@ -34,26 +40,33 @@ public class PluginManager {
                     String className = line.replace("main=", "");
                     Class<?>[] args = {};
                     Class<?> pluginClass = Class.forName(className, true, Plugin.class.getClassLoader());
-                    if (Plugin.class.isAssignableFrom(pluginClass))
-                        this.plugin = (Plugin) pluginClass.getConstructor(args).newInstance((Object[]) args);
-                    else
-                        throw new RuntimeException("Could not initialize " + className + " because it did not extend MCPlugin.");
-
                     if (!pluginClass.isAnnotationPresent(PluginProperties.class))
                         throw new RuntimeException("@PluginProperties annotation is not present!");
 
-                    plugin.setPlatformPlugin(platformPlugin);
+                    if (Plugin.class.isAssignableFrom(pluginClass)) {
+                        Plugin plugin = (Plugin) pluginClass.getConstructor(args).newInstance((Object[]) args);
+                        this.plugins.add(plugin);
+
+                        plugin.setPlatformPlugin(platformPlugin);
+                        return plugin;
+                    } else {
+                        throw new RuntimeException("Could not initialize " + className + " because it did not extend MCPlugin.");
+                    }
                 }
             }
         } catch (IOException | ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException ex) {
             ex.printStackTrace();
         }
+
+        return null;
     }
 
     /**
      * Enables the plugin
+     *
+     * @param plugin the plugin to enable
      */
-    public void enablePlugin() {
+    public void enablePlugin(Plugin plugin) {
         if (plugin != null) {
             try {
                 plugin.onEnable();
@@ -70,8 +83,10 @@ public class PluginManager {
 
     /**
      * Disables the plugin
+     *
+     * @param plugin the plugin to disable
      */
-    public void disablePlugin() {
+    public void disablePlugin(Plugin plugin) {
         if (plugin != null) {
             try {
                 plugin.onDisable();

@@ -1,8 +1,8 @@
 package org.battleplugins.sponge.inventory;
 
-import org.battleplugins.Platform;
 import org.battleplugins.inventory.Inventory;
 import org.battleplugins.inventory.item.ItemStack;
+import org.battleplugins.plugin.Plugin;
 import org.spongepowered.api.item.inventory.property.InventoryDimension;
 import org.spongepowered.api.item.inventory.property.InventoryTitle;
 import org.spongepowered.api.text.Text;
@@ -58,12 +58,12 @@ public class SpongeInventoryBuilder implements Inventory.Builder {
     }
 
     @Override
-    public SpongeInventory build() {
+    public SpongeInventory build(Plugin plugin) {
         SpongeInventory inventory = new SpongeInventory<>(org.spongepowered.api.item.inventory.Inventory
                 .builder()
                 .property(InventoryTitle.PROPERTY_NAME, InventoryTitle.of(Text.of(name)))
                 .property(InventoryDimension.PROPERTY_NAME, new InventoryDimension( 9, size / 9))
-                .build(Platform.getPluginManager().getPlugin()));
+                .build(plugin));
         inventory.setContents(this.contents);
         return inventory;
     }

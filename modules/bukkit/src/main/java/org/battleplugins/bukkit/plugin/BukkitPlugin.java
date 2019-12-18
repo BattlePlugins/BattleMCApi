@@ -8,21 +8,24 @@ import org.battleplugins.bukkit.util.BukkitCommandUtil;
 import org.battleplugins.command.Command;
 import org.battleplugins.command.CommandExecutor;
 import org.battleplugins.logger.Logger;
+import org.battleplugins.plugin.Plugin;
 import org.battleplugins.plugin.platform.PlatformPlugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class BukkitPlugin extends JavaPlugin implements PlatformPlugin {
 
+    private Plugin plugin;
+
     @Override
     public void onEnable() {
         Platform.setInstance(new BukkitPlatform());
-        Platform.getPluginManager().initializePlugin(this);
-        Platform.getPluginManager().enablePlugin();
+        this.plugin = Platform.getPluginManager().initializePlugin(this);
+        Platform.getPluginManager().enablePlugin(this.plugin);
     }
 
     @Override
     public void onDisable() {
-        Platform.getPluginManager().disablePlugin();
+        Platform.getPluginManager().disablePlugin(this.plugin);
     }
 
     @Override

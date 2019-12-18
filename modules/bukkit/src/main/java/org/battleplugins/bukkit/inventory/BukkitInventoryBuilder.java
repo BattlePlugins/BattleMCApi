@@ -2,6 +2,7 @@ package org.battleplugins.bukkit.inventory;
 
 import org.battleplugins.inventory.Inventory;
 import org.battleplugins.inventory.item.ItemStack;
+import org.battleplugins.plugin.Plugin;
 import org.bukkit.Bukkit;
 
 public class BukkitInventoryBuilder implements Inventory.Builder {
@@ -55,7 +56,7 @@ public class BukkitInventoryBuilder implements Inventory.Builder {
     }
 
     @Override
-    public BukkitInventory build() {
+    public BukkitInventory build(Plugin plugin) {
         BukkitInventory inventory = new BukkitInventory<>(Bukkit.createInventory(null, size, name));
         inventory.setContents(this.contents);
         return inventory;
