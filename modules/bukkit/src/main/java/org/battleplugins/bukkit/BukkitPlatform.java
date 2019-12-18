@@ -1,5 +1,6 @@
 package org.battleplugins.bukkit;
 
+import io.papermc.lib.PaperLib;
 import mc.euro.version.Version;
 
 import org.battleplugins.PlatformType;
@@ -110,7 +111,7 @@ public class BukkitPlatform extends Platform {
 
     @Override
     public Message getDefaultPlatformMessage() {
-        if (isSpigot())
+        if (PaperLib.isSpigot() || PaperLib.isPaper())
             return new SpigotMessage();
 
         return new BukkitMessage();
@@ -140,27 +141,5 @@ public class BukkitPlatform extends Platform {
     public boolean cancelTask(long id) {
         Bukkit.getScheduler().cancelTask((int)id);
         return true;
-    }
-
-    public boolean isSpigot() {
-        try {
-            Class.forName("org.spigotmc.SpigotConfig");
-            return true;
-        } catch (Throwable ex) {
-            /* do nothing */
-        }
-
-        return false;
-    }
-
-    public boolean isPaper() {
-        try {
-            Class.forName("com.destroystokyo.paper.PaperConfig");
-            return true;
-        } catch (Throwable ex) {
-            /* do nothing */
-        }
-
-        return false;
     }
 }

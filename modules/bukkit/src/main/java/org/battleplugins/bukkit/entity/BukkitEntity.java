@@ -1,5 +1,7 @@
 package org.battleplugins.bukkit.entity;
 
+import io.papermc.lib.PaperLib;
+
 import org.battleplugins.bukkit.util.BukkitUtil;
 import org.battleplugins.bukkit.world.BukkitWorld;
 import org.battleplugins.util.MCWrapper;
@@ -45,7 +47,7 @@ public class BukkitEntity<T extends Entity> extends MCWrapper<T> implements org.
 
     @Override
     public boolean teleport(Location location) {
-        return handle.teleport(BukkitUtil.toBukkitLocation(location));
+        return PaperLib.teleportAsync(handle, BukkitUtil.toBukkitLocation(location)).getNow(true);
     }
 
     @Override
