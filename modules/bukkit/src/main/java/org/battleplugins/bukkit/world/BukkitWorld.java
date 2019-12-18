@@ -1,5 +1,7 @@
 package org.battleplugins.bukkit.world;
 
+import io.papermc.lib.PaperLib;
+
 import org.battleplugins.bukkit.entity.living.player.BukkitPlayer;
 import org.battleplugins.bukkit.util.BukkitUtil;
 import org.battleplugins.bukkit.world.block.BukkitBlock;
@@ -17,6 +19,7 @@ import org.bukkit.block.Chest;
 import org.bukkit.block.Sign;
 
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 public class BukkitWorld extends MCWrapper<World> implements org.battleplugins.world.World {
 
@@ -89,5 +92,15 @@ public class BukkitWorld extends MCWrapper<World> implements org.battleplugins.w
         if (blockEntity instanceof Sign) {
             bukkitPlayer.sendSignChange(BukkitUtil.toBukkitLocation(location), ((Sign) blockEntity).getLines());
         }
+    }
+
+    @Override
+    public CompletableFuture<BukkitChunk> getChunkAt(int x, int z, boolean generate) {
+        return PaperLib.getChunkAtAsync(handle, x, z, generate).thenApply(BukkitChunk::new);
+    }
+
+    @Override
+    public Optional<BukkitChunk> getChunkIfLoaded(int x, int z) {
+        return handle.isChunkLoaded(x, z) ? Optional.of(new BukkitChunk(handle.getChunkAt(x, z))) : Optional.empty();
     }
 }

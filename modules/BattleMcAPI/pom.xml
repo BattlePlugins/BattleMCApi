@@ -71,6 +71,7 @@
                                 <includes>
                                     <include>org.battleplugins:McAPI-*</include>
                                     <include>mc.euro:Version</include>
+                                    <include>io.papermc:paperlib</include>
                                     <include>javassist:javassist</include>
                                 </includes>
                             </artifactSet>
@@ -78,6 +79,10 @@
                                 <relocation>
                                     <pattern>javassist</pattern>
                                     <shadedPattern>org.battleplugins.alib.javassist</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>io.papermc.lib</pattern>
+                                    <shadedPattern>org.battleplugins.alib.paperlib</shadedPattern>
                                 </relocation>
                                 <relocation>
                                     <pattern>mc.euro.version</pattern>

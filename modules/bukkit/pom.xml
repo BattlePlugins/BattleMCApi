@@ -12,6 +12,12 @@
     <version>parent</version>
     <packaging>jar</packaging>
     <name>McAPI-bukkit</name>
+    <repositories>
+        <repository>
+            <id>paper-repo</id>
+            <url>https://papermc.io/repo/repository/maven-public/</url>
+        </repository>
+    </repositories>
     <dependencies>
         <dependency>
             <groupId>org.spigotmc</groupId>
@@ -23,6 +29,12 @@
             <groupId>org.battleplugins</groupId>
             <artifactId>McAPI-api</artifactId>
             <version>parent</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.papermc</groupId>
+            <artifactId>paperlib</artifactId>
+            <version>1.0.2</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

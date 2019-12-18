@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Optional;
+
 /**
  * Represents a location in the world.
  */
@@ -16,7 +18,6 @@ public class Location implements Cloneable {
      * The world the location is in.
      *
      * @return the world the location is in
-     *
      */
     private final World world;
 
@@ -80,6 +81,16 @@ public class Location implements Cloneable {
      */
     public int getBlockZ() {
         return (int) Math.floor(z);
+    }
+
+    /**
+     * The chunk at this given location. Returns
+     * empty if the chunk is not loaded
+     *
+     * @return the chunk at this location
+     */
+    public Optional<? extends Chunk> getChunk() {
+        return world.getChunkIfLoaded(this);
     }
 
     @Override

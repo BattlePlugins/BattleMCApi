@@ -17,6 +17,7 @@ import org.spongepowered.api.block.tileentity.carrier.Chest;
 import org.spongepowered.api.world.World;
 
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 public class SpongeWorld extends MCWrapper<World> implements org.battleplugins.world.World {
 
@@ -87,5 +88,15 @@ public class SpongeWorld extends MCWrapper<World> implements org.battleplugins.w
     @Override
     public void sendBlockEntityUpdate(Player player, Location location, BlockEntity blockEntity) {
         // oof
+    }
+
+    @Override
+    public CompletableFuture<SpongeChunk> getChunkAt(int x, int z, boolean generate) {
+        return handle.loadChunkAsync(x >> 4, 0, z >> 4, generate).thenApply(val -> val.map(SpongeChunk::new).get());
+    }
+
+    @Override
+    public Optional<SpongeChunk> getChunkIfLoaded(int x, int z) {
+        return handle.getChunkAtBlock(x >> 4, 0, z >> 4).map(SpongeChunk::new);
     }
 }

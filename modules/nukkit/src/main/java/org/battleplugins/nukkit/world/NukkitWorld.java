@@ -20,6 +20,7 @@ import org.battleplugins.world.block.entity.BlockEntity;
 import org.battleplugins.world.block.entity.Sign;
 
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 public class NukkitWorld extends MCWrapper<Level> implements org.battleplugins.world.World {
 
@@ -105,5 +106,15 @@ public class NukkitWorld extends MCWrapper<Level> implements org.battleplugins.w
             nukkitSign.setText(sign.getLines());
             nukkitSign.spawnTo(((NukkitPlayer) player).getHandle());
         }
+    }
+
+    @Override
+    public CompletableFuture<NukkitChunk> getChunkAt(int x, int z, boolean generate) {
+        return CompletableFuture.completedFuture(new NukkitChunk(handle.getChunk(x, z, generate)));
+    }
+
+    @Override
+    public Optional<NukkitChunk> getChunkIfLoaded(int x, int z) {
+        return Optional.ofNullable(handle.getChunkIfLoaded(x >> 4, z >> 4)).map(NukkitChunk::new);
     }
 }
