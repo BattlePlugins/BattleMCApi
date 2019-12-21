@@ -1,23 +1,37 @@
 package org.battleplugins;
 
+import lombok.Builder;
+import lombok.Getter;
+
+import mc.euro.version.Version;
+
 /**
- * Represents all the available platform types.
+ * Represents a platform implementation supported
+ * by this API.
  */
-public enum PlatformType {
+@Builder
+@Getter
+public class PlatformType {
 
 	/**
-	 * The Bukkit Platform: https://bukkit.org
+	 * The name of the platform type
+	 *
+	 * @return the name of the platform type
 	 */
-	BUKKIT,
+	private String name;
 
 	/**
-	 * The Nukkit Platform: https://nukkitx.com
+	 * The minimum supported {@link Version} of
+	 * this platform type
+	 *
+	 * @return the minimum supported version
 	 */
-	NUKKIT,
+	private Version minimumVersion;
 
-	/**
-	 * The Sponge Platform: https://spongepowered.org
-	 */
-	SPONGE,
-	// SPOUT,
+	PlatformType(String name, Version minimumVersion) {
+		this.name = name;
+		this.minimumVersion = minimumVersion;
+
+		PlatformTypes.platformTypes.add(this);
+	}
 }

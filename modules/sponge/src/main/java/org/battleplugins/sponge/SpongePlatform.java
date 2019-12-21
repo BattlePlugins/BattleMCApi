@@ -2,8 +2,9 @@ package org.battleplugins.sponge;
 
 import mc.euro.version.Version;
 
-import org.battleplugins.PlatformType;
 import org.battleplugins.Platform;
+import org.battleplugins.PlatformType;
+import org.battleplugins.PlatformTypes;
 import org.battleplugins.message.Message;
 import org.battleplugins.plugin.Plugin;
 import org.battleplugins.plugin.service.ServicePriority;
@@ -35,7 +36,7 @@ public class SpongePlatform extends Platform {
 
     @Override
     public PlatformType getType() {
-        return PlatformType.SPONGE;
+        return PlatformTypes.SPONGE;
     }
 
     @Override

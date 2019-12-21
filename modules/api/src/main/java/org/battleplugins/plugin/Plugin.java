@@ -1,7 +1,8 @@
 package org.battleplugins.plugin;
 
-import org.battleplugins.PlatformType;
 import org.battleplugins.Platform;
+import org.battleplugins.PlatformType;
+import org.battleplugins.PlatformTypes;
 import org.battleplugins.command.Command;
 import org.battleplugins.command.CommandExecutor;
 import org.battleplugins.logger.Logger;
@@ -32,7 +33,7 @@ public abstract class Plugin {
 
 	public Plugin() {
 		this.platformCode = new HashMap<>();
-		for (PlatformType type : PlatformType.values()) {
+		for (PlatformType type : PlatformTypes.values()) {
 			platformCode.put(type, new PlatformCodeHandler());
 		}
 	}

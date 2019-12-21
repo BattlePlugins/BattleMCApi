@@ -3,8 +3,9 @@ package org.battleplugins.bukkit;
 import io.papermc.lib.PaperLib;
 import mc.euro.version.Version;
 
-import org.battleplugins.PlatformType;
 import org.battleplugins.Platform;
+import org.battleplugins.PlatformType;
+import org.battleplugins.PlatformTypes;
 import org.battleplugins.bukkit.entity.living.player.BukkitOfflinePlayer;
 import org.battleplugins.bukkit.entity.living.player.BukkitPlayer;
 import org.battleplugins.bukkit.message.BukkitMessage;
@@ -36,7 +37,7 @@ public class BukkitPlatform extends Platform {
 
     @Override
     public PlatformType getType() {
-        return PlatformType.BUKKIT;
+        return PlatformTypes.BUKKIT;
     }
 
     @Override

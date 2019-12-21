@@ -6,8 +6,9 @@ import cn.nukkit.plugin.service.RegisteredServiceProvider;
 
 import mc.euro.version.Version;
 
-import org.battleplugins.PlatformType;
 import org.battleplugins.Platform;
+import org.battleplugins.PlatformType;
+import org.battleplugins.PlatformTypes;
 import org.battleplugins.message.Message;
 import org.battleplugins.nukkit.entity.living.player.NukkitOfflinePlayer;
 import org.battleplugins.nukkit.entity.living.player.NukkitPlayer;
@@ -33,7 +34,7 @@ public class NukkitPlatform extends Platform {
 
     @Override
     public PlatformType getType() {
-        return PlatformType.NUKKIT;
+        return PlatformTypes.NUKKIT;
     }
 
     @Override
