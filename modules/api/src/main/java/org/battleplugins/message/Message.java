@@ -1,10 +1,6 @@
 package org.battleplugins.message;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import org.battleplugins.Platform;
 import org.battleplugins.entity.living.player.Player;
@@ -14,8 +10,7 @@ import java.util.Optional;
 /**
  * Represents a customizable message able to be sent to players.
  */
-@Getter
-@Setter
+@Builder
 @NoArgsConstructor
 @RequiredArgsConstructor
 public abstract class Message {
@@ -23,38 +18,30 @@ public abstract class Message {
     /**
      * The message to send
      *
-     * @param message the message to send
-     * @return the message to send
      */
     @NonNull
     protected String message;
 
     /**
      * The {@link ClickAction} of the message
-     *
-     * @param clickAction the click action of the message
      */
     protected ClickAction clickAction;
 
     /**
      * The {@link HoverAction} of the message
      *
-     * @param hoverAction the hover action of the message
      */
     protected HoverAction hoverAction;
 
     /**
      * The hover message
-     *
-     * @param hoverMessage the hover message
+
      */
     protected String hoverMessage;
 
     /**
      * The click value
-     *
-     * @param clickValue the click value
-     * @return the click value
+
      */
     protected String clickValue;
 
@@ -66,55 +53,12 @@ public abstract class Message {
     public abstract void sendMessage(Player player);
 
     /**
-     * The message builder
+     * The plain text of the message
      *
-     * @return a new message builder
+     * @return the plain text of the message
      */
-    public static Builder builder() {
-        return new Builder();
-    }
-
-    public static class Builder {
-
-        private Message message;
-
-        Builder() {
-            this.message = Platform.getPlatform().getDefaultPlatformMessage();
-        }
-
-        public Builder fromMessage(Message message) {
-            this.message = message;
-            return this;
-        }
-
-        public Builder message(String message) {
-            this.message.setMessage(message);
-            return this;
-        }
-
-        public Builder clickAction(ClickAction clickAction) {
-            this.message.setClickAction(clickAction);
-            return this;
-        }
-
-        public Builder clickValue(String clickValue) {
-            this.message.setClickValue(clickValue);
-            return this;
-        }
-
-        public Builder hoverAction(HoverAction hoverAction) {
-            this.message.setHoverAction(hoverAction);
-            return this;
-        }
-
-        public Builder hoverMessage(String hoverMessage) {
-            this.message.setHoverMessage(hoverMessage);
-            return this;
-        }
-
-        public Message build() {
-            return message;
-        }
+    public String getPlainText() {
+        return message;
     }
 
     /**

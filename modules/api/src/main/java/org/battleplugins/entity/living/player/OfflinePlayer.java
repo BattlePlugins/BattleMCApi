@@ -36,7 +36,7 @@ public interface OfflinePlayer {
      * The {@link Player} object of the offline player.
      * Will not be present if {@link #isOnline()} is false
      *
-     * @return
+     * @return the player object of this offline player
      */
     Optional<? extends Player> getPlayer();
 

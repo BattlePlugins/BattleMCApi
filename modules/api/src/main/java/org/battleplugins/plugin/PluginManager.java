@@ -26,9 +26,10 @@ public class PluginManager {
     private List<Plugin> plugins;
 
     /**
-     * Initializes the given plugin
+     * Initializes the given {@link PlatformPlugin}
      *
      * @param platformPlugin the plugin to initialize
+     * @return the {@link Plugin} from this platform plugin
      */
     public Plugin initializePlugin(PlatformPlugin platformPlugin) {
         InputStream propertyStream = getClass().getResourceAsStream("/plugin.properties");
