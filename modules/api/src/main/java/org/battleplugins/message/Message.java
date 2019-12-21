@@ -1,6 +1,8 @@
 package org.battleplugins.message;
 
-import lombok.*;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 import org.battleplugins.Platform;
 import org.battleplugins.entity.living.player.Player;
@@ -10,7 +12,6 @@ import java.util.Optional;
 /**
  * Represents a customizable message able to be sent to players.
  */
-@Builder
 @NoArgsConstructor
 @RequiredArgsConstructor
 public abstract class Message {
@@ -51,6 +52,58 @@ public abstract class Message {
      * @param player the player to send the message to
      */
     public abstract void sendMessage(Player player);
+
+    /**
+     * The message builder
+     *
+     * @return a new message builder
+     */
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+
+        private Message message;
+
+        Builder() {
+            this.message = Platform.getPlatform().getDefaultPlatformMessage();
+        }
+
+        public Builder fromMessage(Message message) {
+            this.message = message;
+            return this;
+        }
+
+        public Builder message(String message) {
+            this.message.message = message;
+            return this;
+        }
+
+        public Builder clickAction(ClickAction clickAction) {
+            this.message.clickAction = clickAction;
+            return this;
+        }
+
+        public Builder clickValue(String clickValue) {
+            this.message.clickValue = clickValue;
+            return this;
+        }
+
+        public Builder hoverAction(HoverAction hoverAction) {
+            this.message.hoverAction = hoverAction;
+            return this;
+        }
+
+        public Builder hoverMessage(String hoverMessage) {
+            this.message.hoverMessage = hoverMessage;
+            return this;
+        }
+
+        public Message build() {
+            return message;
+        }
+    }
 
     /**
      * The plain text of the message
