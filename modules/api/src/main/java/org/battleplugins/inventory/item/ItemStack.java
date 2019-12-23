@@ -115,7 +115,7 @@ public interface ItemStack {
             return this;
         }
 
-        public <T> Builder component(Class<ItemComponent<T>> component, T value) {
+        public <T> Builder component(Class<? extends ItemComponent<T>> component, T value) {
             itemStack.applyComponent(component, value);
             return this;
         }
