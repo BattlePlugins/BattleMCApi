@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,7 +24,7 @@ public class PluginManager {
      *
      * @return the plugins loaded into this API
      */
-    private List<Plugin> plugins;
+    private List<Plugin> plugins = new ArrayList<>();
 
     /**
      * Initializes the given {@link PlatformPlugin}
