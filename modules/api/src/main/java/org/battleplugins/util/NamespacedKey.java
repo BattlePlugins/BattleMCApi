@@ -53,6 +53,22 @@ public class NamespacedKey {
     }
 
     /**
+     * Creates a namespace from the given string.
+     * Defaults to {@link #minecraft(String)} if
+     * a valid namespace is not provided
+     *
+     * @param string the string to get the namespace from
+     * @return a namespace from the given string
+     */
+    public static NamespacedKey of(String string) {
+        String[] split = string.split(":");
+        if (split.length < 2)
+            return minecraft(string);
+
+        return NamespacedKey.of(split[0], split[1]);
+    }
+
+    /**
      * Creates a namespace with the given namespace
      *
      * @param namespace the namespace
