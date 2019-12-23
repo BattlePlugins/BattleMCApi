@@ -75,6 +75,19 @@ public class ConfigurationNode {
     }
 
     /**
+     * If a node is present at the given path
+     *
+     * @param path the configuration path
+     * @return if a node is present at the given path
+     */
+    public boolean hasNode(String path) {
+        if (!hasChildNodes())
+            return false;
+
+        return ((LinkedHashMap) value).containsKey(path);
+    }
+
+    /**
      * Gets the {@link ConfigurationNode} from the
      * given path
      *

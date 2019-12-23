@@ -30,6 +30,16 @@ public class Configuration {
     }
 
     /**
+     * If a node is present at the given path
+     *
+     * @param path the configuration path
+     * @return if a node is present at the given path
+     */
+    public boolean hasNode(String path) {
+        return provider.configContents.containsKey(path);
+    }
+
+    /**
      * Gets the {@link ConfigurationNode} from the
      * given path
      *
