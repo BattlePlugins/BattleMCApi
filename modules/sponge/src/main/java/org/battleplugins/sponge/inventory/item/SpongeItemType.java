@@ -7,7 +7,7 @@ import org.battleplugins.util.NamespacedKey;
 
 public class SpongeItemType extends MCWrapper<org.spongepowered.api.item.ItemType> implements ItemType {
 
-    protected SpongeItemType(org.spongepowered.api.item.ItemType handle) {
+    SpongeItemType(org.spongepowered.api.item.ItemType handle) {
         super(handle);
     }
 

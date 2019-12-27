@@ -8,7 +8,7 @@ import org.bukkit.Material;
 
 public class BukkitItemType extends MCWrapper<Material> implements ItemType {
 
-    protected BukkitItemType(Material handle) {
+    BukkitItemType(Material handle) {
         super(handle);
     }
 

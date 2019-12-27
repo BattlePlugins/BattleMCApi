@@ -18,7 +18,7 @@ public interface Block {
 	}
 
 	/**
-	 * The location of the block
+	 * The {@link Location} of the block
 	 *
 	 * @return the location of the block
 	 */

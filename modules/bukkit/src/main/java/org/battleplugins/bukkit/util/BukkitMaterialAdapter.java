@@ -12,6 +12,9 @@ public class BukkitMaterialAdapter {
         try {
             material = BukkitCompatMaterial.fromString(mat).map(BukkitCompatMaterial::parseMaterial);
             if (!material.isPresent()) {
+                material = Optional.ofNullable(Material.matchMaterial(mat.toUpperCase()));
+            }
+            if (!material.isPresent()) {
                 material = Optional.ofNullable(Material.matchMaterial("LEGACY_" + mat.toUpperCase()));
             }
         } catch (NullPointerException ignored) {

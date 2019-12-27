@@ -27,7 +27,7 @@ public abstract class Registry {
      */
     public <T> T getItemComponent(Class<T> componentClass) throws IllegalArgumentException {
         for (Class<? extends ItemComponent> componentClazz : itemComponents) {
-            if (!componentClazz.isAssignableFrom(componentClass))
+            if (!componentClass.isAssignableFrom(componentClazz))
                 continue;
 
             try {
