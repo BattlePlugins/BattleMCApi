@@ -1,13 +1,13 @@
-package org.battleplugins.api;
+package org.battleplugins.api.message;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
- * A color utility mainly used in chat.
+ * A color utility responsible for styling text.
  */
-public enum ChatColor {
+public enum MessageStyle {
 
     BLACK('0'),
     DARK_BLUE('1'),
@@ -39,19 +39,19 @@ public enum ChatColor {
     private final char code;
     private final boolean isFormat;
     private final String toString;
-    private static final Map<Character, ChatColor> BY_CHAR = new HashMap<>();
+    private static final Map<Character, MessageStyle> BY_CHAR = new HashMap<>();
 
     static {
-        for (ChatColor color : values()) {
+        for (MessageStyle color : values()) {
             BY_CHAR.put(color.code, color);
         }
     }
 
-    ChatColor(char code) {
+    MessageStyle(char code) {
         this(code, false);
     }
 
-    ChatColor(char code, boolean isFormat) {
+    MessageStyle(char code, boolean isFormat) {
         this.code = code;
         this.isFormat = isFormat;
         this.toString = new String(new char[] {COLOR_CHAR, code});
@@ -67,41 +67,41 @@ public enum ChatColor {
     }
 
     /**
-     * If the ChatColor is a format
+     * If the message style is a format
      *
-     * @return if the ChatColor is a format
+     * @return if the message style is a format
      */
     public boolean isFormat() {
         return isFormat;
     }
 
     /**
-     * If the ChatColor is a color
+     * If the message style is a color
      *
-     * @return the ChatColor is a format
+     * @return the message style is a color
      */
     public boolean isColor() {
         return !isFormat && (this != RESET && this != NONE);
     }
 
     /**
-     * Gets the ChatColor from the given character
+     * Gets the message style from the given character
      *
      * @param character the given character
-     * @return the ChatColor from the given character
+     * @return the message style from the given character
      */
-    public static ChatColor getByChar(char character) {
+    public static MessageStyle getByChar(char character) {
         return getByChar(String.valueOf(character));
     }
 
     /**
-     * Gets the ChatColor from the given String
+     * Gets the message style from the given String
      *
      * @param str the given String
-     * @return the ChatColor from the given String
+     * @return the message style from the given String
      */
-    public static ChatColor getByChar(String str) {
-        return BY_CHAR.getOrDefault(str.charAt(0), ChatColor.NONE);
+    public static MessageStyle getByChar(String str) {
+        return BY_CHAR.getOrDefault(str.charAt(0), MessageStyle.NONE);
     }
 
     /**
@@ -126,7 +126,7 @@ public enum ChatColor {
         char[] b = textToTranslate.toCharArray();
         for (int i = 0; i < b.length - 1; i++) {
             if (b[i] == altColorChar && "0123456789AaBbCcDdEeFfKkLlMmNnOoRr".indexOf(b[i + 1]) > -1) {
-                b[i] = ChatColor.COLOR_CHAR;
+                b[i] = MessageStyle.COLOR_CHAR;
                 b[i + 1] = Character.toLowerCase(b[i + 1]);
             }
         }
@@ -148,9 +148,9 @@ public enum ChatColor {
             char section = input.charAt(index);
             if (section == COLOR_CHAR && index < length - 1) {
                 char c = input.charAt(index + 1);
-                ChatColor color = getByChar(c);
+                MessageStyle color = getByChar(c);
 
-                if (color != null && color != ChatColor.NONE) {
+                if (color != null && color != MessageStyle.NONE) {
                     result.insert(0, color.toString());
 
                     // Once we find a color or reset we can stop searching
