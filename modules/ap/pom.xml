@@ -49,7 +49,7 @@
                     <compilerArgument>-proc:none</compilerArgument>
                     <generatedSourcesDirectory>${project.build.directory}/generated-sources/</generatedSourcesDirectory>
                     <annotationProcessors>
-                        <annotationProcessor>org.battleplugins.plugin.PluginProcessor</annotationProcessor>
+                        <annotationProcessor>org.battleplugins.api.plugin.PluginProcessor</annotationProcessor>
                     </annotationProcessors>
                 </configuration>
             </plugin>
