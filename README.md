@@ -5,6 +5,8 @@ Instead of maintaining two or three separate codebases for cross-compatibility o
 
 While (as of now) it doesn't completely eliminate the need for using the actual API's, BattleMcAPI should allow you to consildate those modules/extra projects into one and make it a whole lot easier to maintain. With this being said, the only caveat is that you have to completely update the whole project to use BattleMcAPI. We tried to make this as easy as possible by writing BattleMcAPI in a way that is familiar with most all developers.
 
+# NOTE: This API as-is is still being developed and not ready for production use yet. It's quite volatile as of now.
+
 ## Server Softwares Currently Supported
 - [Bukkit/Spigot](http://spigotmc.org)
 - [Sponge](https://www.spongepowered.org/)
@@ -12,6 +14,7 @@ While (as of now) it doesn't completely eliminate the need for using the actual 
 
 ## Plugins Using This Project
 - [BattleTracker](https://github.com/BattlePlugins/BattleTracker)
+- [BattleArena](https://github.com/BattlePlugins/BattleArena-4.0)
 
 ## API Documentation
 All of the API classes within this project contain documentation explaining what they do. If you're familiar with Bukkit, Sponge or Nukkit already, converting over or using this API should not be far too difficult. More documentation on the [wiki](https://github.com/BattlePlugins/BattleMcAPI/wiki) will be coming soon.
