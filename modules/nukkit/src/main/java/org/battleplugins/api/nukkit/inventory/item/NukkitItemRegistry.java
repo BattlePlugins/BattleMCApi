@@ -6,8 +6,10 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.battleplugins.api.inventory.item.ItemRegistry;
-import org.battleplugins.api.nukkit.NukkitPlatform;
 import org.battleplugins.api.inventory.item.ItemType;
+import org.battleplugins.api.inventory.item.component.*;
+import org.battleplugins.api.nukkit.NukkitPlatform;
+import org.battleplugins.api.nukkit.inventory.item.component.*;
 import org.battleplugins.api.util.NamespacedKey;
 
 import java.io.InputStream;
@@ -17,7 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class NukkitItemRegistry implements ItemRegistry<Item> {
+public class NukkitItemRegistry extends ItemRegistry<Item> {
 
     private static final Map<ItemEntry, NukkitItemType> ITEM_ENTRIES = new HashMap<>();
     private static final Map<String, ItemEntry> IDENTIFIER_TO_ENTRY = new HashMap<>();
@@ -35,6 +37,14 @@ public class NukkitItemRegistry implements ItemRegistry<Item> {
                     Item.get(itemEntry.getValue().getBedrockId(), itemEntry.getValue().getBedrockData())));
             IDENTIFIER_TO_ENTRY.put(itemEntry.getKey(), itemEntry.getValue());
         }
+
+        registerComponent(ColorComponent.class, NukkitColorComponent.class);
+        registerComponent(CustomModelDataComponent.class, NukkitCustomModelDataComponent.class);
+        registerComponent(DamageComponent.class, NukkitDamageComponent.class);
+        registerComponent(DisplayNameComponent.class, NukkitDisplayNameComponent.class);
+        registerComponent(ItemFlagComponent.class, NukkitItemFlagComponent.class);
+        registerComponent(LoreComponent.class, NukkitLoreComponent.class);
+        registerComponent(UnbreakableComponent.class, NukkitUnbreakableComponent.class);
     }
 
     @Override

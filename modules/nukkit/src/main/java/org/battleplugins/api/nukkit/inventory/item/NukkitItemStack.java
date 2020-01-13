@@ -3,6 +3,7 @@ package org.battleplugins.api.nukkit.inventory.item;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
 
+import org.battleplugins.api.Platform;
 import org.battleplugins.api.inventory.item.ItemRegistry;
 import org.battleplugins.api.inventory.item.ItemStack;
 import org.battleplugins.api.inventory.item.ItemType;
@@ -42,7 +43,7 @@ public class NukkitItemStack extends MCWrapper<Item> implements ItemStack {
 
 	@Override
 	public ItemType getType() {
-		return ((NukkitItemRegistry) ItemRegistry.REGISTRY).fromPlatformItem(handle);
+		return ((NukkitItemRegistry) Platform.getPlatform().getRegistry().getItemRegistry()).fromPlatformItem(handle);
 	}
 
 	@Override

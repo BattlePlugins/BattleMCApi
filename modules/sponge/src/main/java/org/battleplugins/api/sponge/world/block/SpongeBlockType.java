@@ -1,6 +1,6 @@
 package org.battleplugins.api.sponge.world.block;
 
-import org.battleplugins.api.inventory.item.ItemRegistry;
+import org.battleplugins.api.Platform;
 import org.battleplugins.api.inventory.item.ItemType;
 import org.battleplugins.api.sponge.inventory.item.SpongeItemRegistry;
 import org.battleplugins.api.util.MCWrapper;
@@ -16,7 +16,7 @@ public class SpongeBlockType extends MCWrapper<org.spongepowered.api.block.Block
 
     @Override
     public ItemType toItemType() {
-        return ((SpongeItemRegistry) ItemRegistry.REGISTRY).fromPlatformItem(handle.getItem().orElse(ItemTypes.AIR));
+        return ((SpongeItemRegistry) Platform.getPlatform().getRegistry().getBlockRegistry()).fromPlatformItem(handle.getItem().orElse(ItemTypes.AIR));
     }
 
     @Override

@@ -166,7 +166,7 @@ public interface Entity {
      * @param <T> the value
      */
     default <T> void applyComponent(Class<? extends EntityComponent<T>> componentClass, T value) {
-        Platform.getPlatform().getRegistry().getEntityComponent(componentClass).applyComponent(this, value);
+        Platform.getPlatform().getRegistry().getEntityRegistry().getEntityComponent(componentClass).applyComponent(this, value);
     }
 
     /**
@@ -177,6 +177,6 @@ public interface Entity {
      * @return the value of the given component class
      */
     default <T> Optional<T> getValue(Class<? extends EntityComponent<T>> componentClass) {
-        return Platform.getPlatform().getRegistry().getEntityComponent(componentClass).getValue(this);
+        return Platform.getPlatform().getRegistry().getEntityRegistry().getEntityComponent(componentClass).getValue(this);
     }
 }

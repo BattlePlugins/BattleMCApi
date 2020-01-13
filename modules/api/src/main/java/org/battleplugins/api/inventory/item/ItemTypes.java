@@ -1,5 +1,6 @@
 package org.battleplugins.api.inventory.item;
 
+import org.battleplugins.api.Platform;
 import org.battleplugins.api.util.NamespacedKey;
 
 import java.util.Optional;
@@ -992,7 +993,7 @@ public class ItemTypes {
      * @return an item type from the given namespaced key
      */
     public static Optional<ItemType> getItemFromKey(NamespacedKey key) {
-        return ItemRegistry.REGISTRY.fromKey(key);
+        return Platform.getPlatform().getRegistry().getItemRegistry().fromKey(key);
     }
 
     private static ItemType getOrDefault(String name) {

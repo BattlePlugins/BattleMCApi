@@ -2,14 +2,9 @@ package org.battleplugins.api.entity;
 
 import org.battleplugins.api.Platform;
 import org.battleplugins.api.entity.component.EntityComponent;
-import org.battleplugins.api.entity.component.ageable.BabyComponent;
 import org.battleplugins.api.util.NamespacedKey;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 /**
  * A registry containing all the registered entities.
@@ -20,7 +15,8 @@ public abstract class EntityRegistry<T> {
 
     public static final EntityRegistry<?> REGISTRY = Platform.getPlatform().getRegistry().getEntityRegistry();
 
-    private static Map<EntityType, Set<Class<? extends EntityComponent>>> validComponents = new HashMap<>();
+    private Map<EntityType, Set<Class<? extends EntityComponent>>> validComponents = new HashMap<>();
+    private Map<Class<? extends EntityComponent>, Class<? extends EntityComponent>> entityComponents = new HashMap<>();
 
     /**
      * Gets the given {@link EntityType} from the platform
@@ -48,16 +44,41 @@ public abstract class EntityRegistry<T> {
         return validComponents.computeIfAbsent(type, set -> new HashSet<>());
     }
 
-    static {
-        registerComponent(BabyComponent.class);
+    /**
+     * Returns an entity component instance from
+     * the given component class
+     *
+     * @param componentClass the component class
+     * @param <U> the value
+     * @return an entity component instance
+     * @throws IllegalArgumentException if the class is not registered
+     */
+    <U> U getEntityComponent(Class<U> componentClass) throws IllegalArgumentException {
+        if (!entityComponents.containsKey(componentClass))
+            throw new IllegalArgumentException("Component class " + componentClass + " not registered!");
+
+        try {
+            return componentClass.cast(entityComponents.get(componentClass).newInstance());
+        } catch (InstantiationException | IllegalAccessException ex) {
+            throw new IllegalArgumentException("Component class " + componentClass + " was unable to be instantiated!");
+        }
     }
 
-    private static void registerComponent(Class<? extends EntityComponent> componentClass) {
-        EntityComponent<?> component = Platform.getPlatform().getRegistry().getEntityComponent(componentClass);
-        for (EntityType type : component.getValidEntityTypes()) {
-            Set<Class<? extends EntityComponent>> components = validComponents.getOrDefault(type, new HashSet<>());
-            components.add(componentClass);
-            validComponents.put(type, components);
+    protected <U extends EntityComponent> void registerComponent(Class<U> component, Class<? extends U> componentImpl) {
+        try {
+            EntityComponent<?> comp = componentImpl.newInstance();
+            for (EntityType type : comp.getValidEntityTypes()) {
+                Set<Class<? extends EntityComponent>> components = validComponents.getOrDefault(type, new HashSet<>());
+                components.add(component);
+                validComponents.put(type, components);
+            }
+
+        } catch (InstantiationException | IllegalAccessException ex) {
+            System.err.println("Failed to register component " + component + " with impl " + componentImpl);
+            ex.printStackTrace();
+            return;
         }
+
+        entityComponents.put(component, componentImpl);
     }
 }

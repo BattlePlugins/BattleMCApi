@@ -15,57 +15,7 @@ import java.util.List;
  */
 public abstract class Registry {
 
-    protected List<Class<? extends ItemComponent>> itemComponents = new ArrayList<>();
-    protected List<Class<? extends EntityComponent>> entityComponents = new ArrayList<>();
     protected List<Class<?>> builders = new ArrayList<>();
-
-    /**
-     * Returns an item component instance from
-     * the given component class
-     *
-     * @param componentClass the component class
-     * @param <T> the value
-     * @return an item component instance
-     * @throws IllegalArgumentException if the class is not registered
-     */
-    public <T> T getItemComponent(Class<T> componentClass) throws IllegalArgumentException {
-        for (Class<? extends ItemComponent> componentClazz : itemComponents) {
-            if (!componentClass.isAssignableFrom(componentClazz))
-                continue;
-
-            try {
-                return componentClass.cast(componentClazz.newInstance());
-            } catch (InstantiationException | IllegalAccessException ex) {
-                throw new IllegalArgumentException("Component class " + componentClass + " was unable to be instantiated!");
-            }
-        }
-
-        throw new IllegalArgumentException("Component class " + componentClass + " not registered!");
-    }
-
-    /**
-     * Returns an entity component instance from
-     * the given component class
-     *
-     * @param componentClass the component class
-     * @param <T> the value
-     * @return an entity component instance
-     * @throws IllegalArgumentException if the class is not registered
-     */
-    public <T> T getEntityComponent(Class<T> componentClass) throws IllegalArgumentException {
-        for (Class<? extends EntityComponent> componentClazz : entityComponents) {
-            if (!componentClass.isAssignableFrom(componentClazz))
-                continue;
-
-            try {
-                return componentClass.cast(componentClazz.newInstance());
-            } catch (InstantiationException | IllegalAccessException ex) {
-                throw new IllegalArgumentException("Component class " + componentClass + " was unable to be instantiated!");
-            }
-        }
-
-        throw new IllegalArgumentException("Component class " + componentClass + " not registered!");
-    }
 
     /**
      * Returns a builder from the

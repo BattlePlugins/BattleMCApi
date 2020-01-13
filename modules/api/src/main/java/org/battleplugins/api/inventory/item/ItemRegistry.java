@@ -1,9 +1,10 @@
 package org.battleplugins.api.inventory.item;
 
 import org.battleplugins.api.Platform;
+import org.battleplugins.api.inventory.item.component.ItemComponent;
 import org.battleplugins.api.util.NamespacedKey;
 
-import java.util.Optional;
+import java.util.*;
 
 /**
  * A registry containing all the items based on various
@@ -17,9 +18,9 @@ import java.util.Optional;
  *
  * @param <T> the platform implementation
  */
-public interface ItemRegistry<T> {
+public abstract class ItemRegistry<T> {
 
-    ItemRegistry<?> REGISTRY = Platform.getPlatform().getRegistry().getItemRegistry();
+    private Map<Class<? extends ItemComponent>, Class<? extends ItemComponent>> itemComponents = new HashMap<>();
 
     /**
      * Gets the given item type from the platform
@@ -28,7 +29,7 @@ public interface ItemRegistry<T> {
      * @param item the platform item
      * @return the given item type
      */
-    ItemType fromPlatformItem(T item);
+    public abstract ItemType fromPlatformItem(T item);
 
     /**
      * Gets the item type from the given
@@ -41,5 +42,29 @@ public interface ItemRegistry<T> {
      * @param namespacedKey the given {@link NamespacedKey}
      * @return the item type from the given namespaced key
      */
-    Optional<ItemType> fromKey(NamespacedKey namespacedKey);
+    public abstract Optional<ItemType> fromKey(NamespacedKey namespacedKey);
+
+    /**
+     * Returns an item component instance from
+     * the given component class
+     *
+     * @param componentClass the component class
+     * @param <U> the value
+     * @return an item component instance
+     * @throws IllegalArgumentException if the class is not registered
+     */
+    <U> U getItemComponent(Class<U> componentClass) throws IllegalArgumentException {
+        if (!itemComponents.containsKey(componentClass))
+            throw new IllegalArgumentException("Component class " + componentClass + " not registered!");
+
+        try {
+            return componentClass.cast(itemComponents.get(componentClass).newInstance());
+        } catch (InstantiationException | IllegalAccessException ex) {
+            throw new IllegalArgumentException("Component class " + componentClass + " was unable to be instantiated!");
+        }
+    }
+
+    protected <U extends ItemComponent> void registerComponent(Class<U> component, Class<? extends U> componentImpl) {
+        itemComponents.put(component, componentImpl);
+    }
 }
