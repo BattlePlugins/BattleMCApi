@@ -9,6 +9,8 @@ import mc.euro.version.Version;
 import org.battleplugins.api.Platform;
 import org.battleplugins.api.PlatformType;
 import org.battleplugins.api.PlatformTypes;
+import org.battleplugins.api.entity.living.player.OfflinePlayer;
+import org.battleplugins.api.entity.living.player.Player;
 import org.battleplugins.api.message.Message;
 import org.battleplugins.api.nukkit.entity.living.player.NukkitOfflinePlayer;
 import org.battleplugins.api.nukkit.entity.living.player.NukkitPlayer;
@@ -17,6 +19,7 @@ import org.battleplugins.api.nukkit.inventory.item.NukkitItemStack;
 import org.battleplugins.api.nukkit.world.NukkitWorld;
 import org.battleplugins.api.plugin.Plugin;
 import org.battleplugins.api.plugin.service.ServicePriority;
+import org.battleplugins.api.world.World;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -38,7 +41,7 @@ public class NukkitPlatform extends Platform {
     }
 
     @Override
-    public Optional<NukkitWorld> getWorld(String world) {
+    public Optional<World> getWorld(String world) {
         return Optional.ofNullable(Server.getInstance().getLevelByName(world)).map(NukkitWorld::new);
     }
 
@@ -53,28 +56,28 @@ public class NukkitPlatform extends Platform {
     }
 
     @Override
-    public Optional<NukkitPlayer> getPlayer(String name) {
+    public Optional<Player> getPlayer(String name) {
         return Optional.ofNullable(Server.getInstance().getPlayer(name)).map(NukkitPlayer::new);
     }
 
     @Override
-    public Optional<NukkitPlayer> getPlayer(UUID uuid) {
+    public Optional<Player> getPlayer(UUID uuid) {
         return Server.getInstance().getPlayer(uuid).map(NukkitPlayer::new);
     }
 
     @Override
-    public Optional<NukkitOfflinePlayer> getOfflinePlayer(String name) {
+    public Optional<OfflinePlayer> getOfflinePlayer(String name) {
         return Optional.ofNullable(Server.getInstance().getOfflinePlayer(name)).map(NukkitOfflinePlayer::new);
     }
 
     @Override
-    public Optional<NukkitOfflinePlayer> getOfflinePlayer(UUID uuid) {
+    public Optional<OfflinePlayer> getOfflinePlayer(UUID uuid) {
         return Optional.ofNullable(Server.getInstance().getOfflinePlayer(uuid)).map(NukkitOfflinePlayer::new);
     }
 
     @Override
-    public Collection<NukkitPlayer> getOnlinePlayers() {
-        List<NukkitPlayer> playerList = new ArrayList<>();
+    public Collection<Player> getOnlinePlayers() {
+        List<Player> playerList = new ArrayList<>();
         for (cn.nukkit.Player player : Server.getInstance().getOnlinePlayers().values()) {
             playerList.add(new NukkitPlayer(player));
         }
@@ -83,8 +86,8 @@ public class NukkitPlatform extends Platform {
     }
 
     @Override
-    public Collection<NukkitOfflinePlayer> getOfflinePlayers() {
-        Collection<NukkitOfflinePlayer> players = new ArrayList<>();
+    public Collection<OfflinePlayer> getOfflinePlayers() {
+        Collection<OfflinePlayer> players = new ArrayList<>();
         // TODO: Find a way to do this
         return players;
     }
@@ -100,7 +103,7 @@ public class NukkitPlatform extends Platform {
     }
 
     @Override
-    public Version<NukkitPlatform> getVersion() {
+    public Version<Platform> getVersion() {
         return new Version<>(Server.getInstance().getVersion());
     }
 

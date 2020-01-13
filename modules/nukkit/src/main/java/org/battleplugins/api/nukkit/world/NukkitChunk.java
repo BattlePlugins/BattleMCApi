@@ -4,10 +4,10 @@ import cn.nukkit.blockentity.BlockEntity;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.level.format.FullChunk;
 
-import org.battleplugins.api.util.MCWrapper;
-import org.battleplugins.api.world.Chunk;
 import org.battleplugins.api.nukkit.entity.NukkitEntity;
 import org.battleplugins.api.nukkit.world.block.entity.NukkitBlockEntity;
+import org.battleplugins.api.util.MCWrapper;
+import org.battleplugins.api.world.Chunk;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,8 +40,8 @@ public class NukkitChunk extends MCWrapper<FullChunk> implements Chunk {
     }
 
     @Override
-    public List<NukkitEntity> getEntities() {
-        List<NukkitEntity> entities = new ArrayList<>();
+    public List<org.battleplugins.api.entity.Entity> getEntities() {
+        List<org.battleplugins.api.entity.Entity> entities = new ArrayList<>();
         for (Entity entity : handle.getEntities().values()) {
             entities.add(new NukkitEntity<>(entity));
         }

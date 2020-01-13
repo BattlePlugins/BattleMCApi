@@ -30,7 +30,7 @@ public class SpongePlayer extends SpongeHuman<Player> implements org.battleplugi
     }
 
     @Override
-    public Optional<SpongePlayer> getPlayer() {
+    public Optional<org.battleplugins.api.entity.living.player.Player> getPlayer() {
         if (!handle.isOnline())
             return Optional.empty();
 

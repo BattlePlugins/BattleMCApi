@@ -109,7 +109,7 @@ public interface Entity {
      * @param z the radius to search in the z axis
      * @return a list of all the nearby entities
      */
-    List<? extends Entity> getNearbyEntities(double x, double y, double z);
+    List<Entity> getNearbyEntities(double x, double y, double z);
 
     /**
      * If the entity has a custom name

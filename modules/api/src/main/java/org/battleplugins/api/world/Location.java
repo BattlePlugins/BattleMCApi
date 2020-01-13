@@ -89,7 +89,7 @@ public class Location implements Cloneable {
      *
      * @return the chunk at this location
      */
-    public Optional<? extends Chunk> getChunk() {
+    public Optional<Chunk> getChunk() {
         return world.getChunkIfLoaded(this);
     }
 

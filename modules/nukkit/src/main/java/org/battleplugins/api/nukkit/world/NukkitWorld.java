@@ -14,6 +14,7 @@ import org.battleplugins.api.nukkit.world.block.entity.NukkitBlockEntity;
 import org.battleplugins.api.nukkit.world.block.entity.NukkitChest;
 import org.battleplugins.api.nukkit.world.block.entity.NukkitSign;
 import org.battleplugins.api.util.MCWrapper;
+import org.battleplugins.api.world.Chunk;
 import org.battleplugins.api.world.Location;
 import org.battleplugins.api.world.World;
 import org.battleplugins.api.world.block.Block;
@@ -36,7 +37,7 @@ public class NukkitWorld extends MCWrapper<Level> implements World {
     }
 
     @Override
-    public Optional<NukkitBlockEntity> getBlockEntityAt(Location loc) {
+    public Optional<BlockEntity> getBlockEntityAt(Location loc) {
         cn.nukkit.blockentity.BlockEntity blockEntity = handle.getBlockEntity(NukkitUtil.toNukkitLocation(loc));
         if (blockEntity instanceof BlockEntityChest)
             return Optional.of(new NukkitChest((BlockEntityChest) blockEntity));
@@ -111,12 +112,12 @@ public class NukkitWorld extends MCWrapper<Level> implements World {
     }
 
     @Override
-    public CompletableFuture<NukkitChunk> getChunkAt(int x, int z, boolean generate) {
+    public CompletableFuture<Chunk> getChunkAt(int x, int z, boolean generate) {
         return CompletableFuture.completedFuture(new NukkitChunk(handle.getChunk(x, z, generate)));
     }
 
     @Override
-    public Optional<NukkitChunk> getChunkIfLoaded(int x, int z) {
+    public Optional<Chunk> getChunkIfLoaded(int x, int z) {
         return Optional.ofNullable(handle.getChunkIfLoaded(x >> 4, z >> 4)).map(NukkitChunk::new);
     }
 }

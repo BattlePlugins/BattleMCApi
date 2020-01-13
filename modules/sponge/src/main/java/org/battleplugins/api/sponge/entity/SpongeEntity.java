@@ -61,8 +61,8 @@ public class SpongeEntity<T extends Entity> extends MCWrapper<T> implements org.
     }
 
     @Override
-    public List<SpongeEntity> getNearbyEntities(double x, double y, double z) {
-        List<SpongeEntity> entities = new ArrayList<>();
+    public List<org.battleplugins.api.entity.Entity> getNearbyEntities(double x, double y, double z) {
+        List<org.battleplugins.api.entity.Entity> entities = new ArrayList<>();
         for (Entity entity : SpongeUtil.getNearbyEntities(handle, x, y, z)) {
             entities.add(new SpongeEntity<>(entity));
         }

@@ -19,7 +19,7 @@ public class NukkitPlayer extends NukkitHuman<Player> implements org.battleplugi
     }
 
     @Override
-    public Optional<NukkitPlayer> getPlayer() {
+    public Optional<org.battleplugins.api.entity.living.player.Player> getPlayer() {
         if (!isOnline())
             return Optional.empty();
 

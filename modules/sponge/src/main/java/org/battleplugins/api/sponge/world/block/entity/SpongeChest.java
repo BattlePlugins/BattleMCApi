@@ -17,7 +17,7 @@ public class SpongeChest extends SpongeBlockEntity<Chest> implements org.battlep
     }
 
     @Override
-    public Optional<SpongeChest> getNeighborChest() {
+    public Optional<org.battleplugins.api.world.block.entity.Chest> getNeighborChest() {
         Location<World> loc = handle.getLocation();
         if (loc.getRelative(Direction.NORTH).getBlock().getType() == BlockTypes.CHEST)
             return loc.getRelative(Direction.NORTH).getTileEntity().map(chest -> new SpongeChest((Chest) chest));

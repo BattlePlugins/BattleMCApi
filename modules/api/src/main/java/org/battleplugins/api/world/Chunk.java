@@ -45,7 +45,7 @@ public interface Chunk {
      *
      * @return all of the entities in this chunk
      */
-    List<? extends Entity> getEntities();
+    List<Entity> getEntities();
 
     /**
      * All of the {@link BlockEntity}'s in this chunk

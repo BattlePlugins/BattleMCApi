@@ -3,6 +3,7 @@ package org.battleplugins.api.nukkit.entity.living.player;
 import cn.nukkit.IPlayer;
 
 import org.battleplugins.api.entity.living.player.OfflinePlayer;
+import org.battleplugins.api.entity.living.player.Player;
 import org.battleplugins.api.util.MCWrapper;
 import org.battleplugins.api.world.Location;
 
@@ -32,7 +33,7 @@ public class NukkitOfflinePlayer extends MCWrapper<IPlayer> implements OfflinePl
     }
 
     @Override
-    public Optional<NukkitPlayer> getPlayer() {
+    public Optional<Player> getPlayer() {
         if (!handle.isOnline())
             return Optional.empty();
 

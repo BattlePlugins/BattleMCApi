@@ -7,6 +7,7 @@ import org.battleplugins.api.sponge.world.block.entity.SpongeBlockEntity;
 import org.battleplugins.api.sponge.world.block.entity.SpongeChest;
 import org.battleplugins.api.sponge.world.block.entity.SpongeSign;
 import org.battleplugins.api.util.MCWrapper;
+import org.battleplugins.api.world.Chunk;
 import org.battleplugins.api.world.Location;
 import org.battleplugins.api.world.block.Block;
 import org.battleplugins.api.world.block.entity.BlockEntity;
@@ -31,7 +32,7 @@ public class SpongeWorld extends MCWrapper<World> implements org.battleplugins.a
     }
 
     @Override
-    public Optional<SpongeBlockEntity> getBlockEntityAt(Location loc) {
+    public Optional<BlockEntity> getBlockEntityAt(Location loc) {
         // instanceof returns false if null, so no need to check isPresent
         TileEntity blockEntity = handle.getTileEntity(SpongeUtil.toSpongeLocation(loc).getBlockPosition()).orElse(null);
         if (blockEntity instanceof Chest)
@@ -91,12 +92,12 @@ public class SpongeWorld extends MCWrapper<World> implements org.battleplugins.a
     }
 
     @Override
-    public CompletableFuture<SpongeChunk> getChunkAt(int x, int z, boolean generate) {
+    public CompletableFuture<Chunk> getChunkAt(int x, int z, boolean generate) {
         return handle.loadChunkAsync(x >> 4, 0, z >> 4, generate).thenApply(val -> val.map(SpongeChunk::new).get());
     }
 
     @Override
-    public Optional<SpongeChunk> getChunkIfLoaded(int x, int z) {
+    public Optional<Chunk> getChunkIfLoaded(int x, int z) {
         return handle.getChunkAtBlock(x >> 4, 0, z >> 4).map(SpongeChunk::new);
     }
 }

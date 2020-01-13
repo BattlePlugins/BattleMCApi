@@ -2,6 +2,7 @@ package org.battleplugins.api.sponge.inventory.entity;
 
 import org.battleplugins.api.entity.living.Human;
 import org.battleplugins.api.inventory.entity.PlayerInventory;
+import org.battleplugins.api.inventory.item.ItemStack;
 import org.battleplugins.api.sponge.entity.living.SpongeHuman;
 import org.battleplugins.api.sponge.inventory.SpongeInventory;
 import org.battleplugins.api.sponge.inventory.item.SpongeItemStack;
@@ -26,32 +27,32 @@ public class SpongePlayerInventory extends SpongeInventory<CarriedInventory<? ex
     }
 
     @Override
-    public Optional<SpongeItemStack> getItemInMainHand() {
+    public Optional<ItemStack> getItemInMainHand() {
         return inventory.getCarrier().get().getItemInHand(HandTypes.MAIN_HAND).map(SpongeItemStack::new);
     }
 
     @Override
-    public Optional<SpongeItemStack> getItemInOffHand() {
+    public Optional<ItemStack> getItemInOffHand() {
         return inventory.getCarrier().get().getItemInHand(HandTypes.OFF_HAND).map(SpongeItemStack::new);
     }
 
     @Override
-    public Optional<SpongeItemStack> getHelmet() {
+    public Optional<ItemStack> getHelmet() {
         return inventory.getCarrier().get().getHelmet().map(SpongeItemStack::new);
     }
 
     @Override
-    public Optional<SpongeItemStack> getChestplate() {
+    public Optional<ItemStack> getChestplate() {
         return inventory.getCarrier().get().getChestplate().map(SpongeItemStack::new);
     }
 
     @Override
-    public Optional<SpongeItemStack> getLeggings() {
+    public Optional<ItemStack> getLeggings() {
         return inventory.getCarrier().get().getLeggings().map(SpongeItemStack::new);
     }
 
     @Override
-    public Optional<SpongeItemStack> getBoots() {
+    public Optional<ItemStack> getBoots() {
         return inventory.getCarrier().get().getBoots().map(SpongeItemStack::new);
     }
 

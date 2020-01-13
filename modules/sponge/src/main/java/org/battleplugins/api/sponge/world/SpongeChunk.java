@@ -37,8 +37,8 @@ public class SpongeChunk extends MCWrapper<Chunk> implements org.battleplugins.a
     }
 
     @Override
-    public List<SpongeEntity> getEntities() {
-        List<SpongeEntity> entities = new ArrayList<>();
+    public List<org.battleplugins.api.entity.Entity> getEntities() {
+        List<org.battleplugins.api.entity.Entity> entities = new ArrayList<>();
         for (Entity entity : handle.getEntities()) {
             entities.add(new SpongeEntity<>(entity));
         }

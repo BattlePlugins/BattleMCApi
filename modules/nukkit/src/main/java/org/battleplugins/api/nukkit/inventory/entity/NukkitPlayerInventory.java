@@ -3,6 +3,7 @@ package org.battleplugins.api.nukkit.inventory.entity;
 import cn.nukkit.inventory.PlayerInventory;
 
 import org.battleplugins.api.entity.living.Human;
+import org.battleplugins.api.inventory.item.ItemStack;
 import org.battleplugins.api.nukkit.inventory.NukkitInventory;
 import org.battleplugins.api.nukkit.inventory.item.NukkitItemStack;
 
@@ -19,32 +20,32 @@ public class NukkitPlayerInventory extends NukkitInventory<PlayerInventory> impl
 	}
 
 	@Override
-	public Optional<NukkitItemStack> getItemInMainHand() {
+	public Optional<ItemStack> getItemInMainHand() {
 		return Optional.ofNullable(handle.getItemInHand()).map(NukkitItemStack::new);
 	}
 
 	@Override
-	public Optional<NukkitItemStack> getItemInOffHand() {
+	public Optional<ItemStack> getItemInOffHand() {
 		return Optional.empty(); // no support... yet (open PR atm)
 	}
 
 	@Override
-	public Optional<NukkitItemStack> getHelmet() {
+	public Optional<ItemStack> getHelmet() {
 		return Optional.ofNullable(handle.getHelmet()).map(NukkitItemStack::new);
 	}
 
 	@Override
-	public Optional<NukkitItemStack> getChestplate() {
+	public Optional<ItemStack> getChestplate() {
 		return Optional.ofNullable(handle.getChestplate()).map(NukkitItemStack::new);
 	}
 
 	@Override
-	public Optional<NukkitItemStack> getLeggings() {
+	public Optional<ItemStack> getLeggings() {
 		return Optional.ofNullable(handle.getLeggings()).map(NukkitItemStack::new);
 	}
 
 	@Override
-	public Optional<NukkitItemStack> getBoots() {
+	public Optional<ItemStack> getBoots() {
 		return Optional.ofNullable(handle.getBoots()).map(NukkitItemStack::new);
 	}
 

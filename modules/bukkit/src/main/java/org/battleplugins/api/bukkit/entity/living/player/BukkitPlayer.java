@@ -20,7 +20,7 @@ public class BukkitPlayer extends BukkitHuman<Player> implements org.battleplugi
     }
 
     @Override
-    public Optional<BukkitPlayer> getPlayer() {
+    public Optional<org.battleplugins.api.entity.living.player.Player> getPlayer() {
         if (!isOnline())
             return Optional.empty();
 

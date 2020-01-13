@@ -28,7 +28,7 @@ public interface World {
      * @param loc the location to get the block entity at
      * @return the block entity at the given location
      */
-    Optional<? extends BlockEntity> getBlockEntityAt(Location loc);
+    Optional<BlockEntity> getBlockEntityAt(Location loc);
 
     /**
      * Gets the {@link Block} at the given location
@@ -110,7 +110,7 @@ public interface World {
      * @param location the location of the chunk
      * @return the chunk at the given location
      */
-    default CompletableFuture<? extends Chunk> getChunkAt(Location location) {
+    default CompletableFuture<Chunk> getChunkAt(Location location) {
         return getChunkAt(location.getBlockX(), location.getBlockZ());
     }
 
@@ -121,7 +121,7 @@ public interface World {
      * @param z the X coordinate
      * @return the chunk at the given X and Z coordinates
      */
-    default CompletableFuture<? extends Chunk> getChunkAt(int x, int z) {
+    default CompletableFuture<Chunk> getChunkAt(int x, int z) {
         return getChunkAt(x, z, true);
     }
 
@@ -132,7 +132,7 @@ public interface World {
      * @param generate if the chunk should generate
      * @return the chunk at the given location
      */
-    default CompletableFuture<? extends Chunk> getChunkAt(Location location, boolean generate) {
+    default CompletableFuture<Chunk> getChunkAt(Location location, boolean generate) {
         return getChunkAt(location.getBlockX(), location.getBlockZ(), generate);
     }
 
@@ -144,7 +144,7 @@ public interface World {
      * @param generate if the chunk should generate
      * @return the chunk at the given X and Z coordinates
      */
-    CompletableFuture<? extends Chunk> getChunkAt(int x, int z, boolean generate);
+    CompletableFuture<Chunk> getChunkAt(int x, int z, boolean generate);
 
     /**
      * Gets the {@link Chunk} at the given location.
@@ -153,7 +153,7 @@ public interface World {
      * @param location the location of the chunk
      * @return the chunk at the given location if loaded
      */
-    default Optional<? extends Chunk> getChunkIfLoaded(Location location) {
+    default Optional<Chunk> getChunkIfLoaded(Location location) {
         return getChunkIfLoaded(location.getBlockX(), location.getBlockZ());
     }
 
@@ -165,5 +165,5 @@ public interface World {
      * @param z the X coordinate
      * @return the chunk at the given X and Z coordinates if loaded
      */
-    Optional<? extends Chunk> getChunkIfLoaded(int x, int z);
+    Optional<Chunk> getChunkIfLoaded(int x, int z);
 }

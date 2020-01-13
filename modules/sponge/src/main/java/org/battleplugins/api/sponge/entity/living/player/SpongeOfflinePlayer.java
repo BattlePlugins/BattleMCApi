@@ -1,6 +1,7 @@
 package org.battleplugins.api.sponge.entity.living.player;
 
 import org.battleplugins.api.entity.living.player.OfflinePlayer;
+import org.battleplugins.api.entity.living.player.Player;
 import org.battleplugins.api.sponge.util.SpongeUtil;
 import org.battleplugins.api.util.MCWrapper;
 import org.battleplugins.api.world.Location;
@@ -35,7 +36,7 @@ public class SpongeOfflinePlayer extends MCWrapper<User> implements OfflinePlaye
     }
 
     @Override
-    public Optional<SpongePlayer> getPlayer() {
+    public Optional<Player> getPlayer() {
         return handle.getPlayer().map(SpongePlayer::new);
     }
 

@@ -67,8 +67,8 @@ public class BukkitEntity<T extends Entity> extends MCWrapper<T> implements org.
     }
 
     @Override
-    public List<BukkitEntity> getNearbyEntities(double x, double y, double z) {
-        List<BukkitEntity> entities = new ArrayList<>();
+    public List<org.battleplugins.api.entity.Entity> getNearbyEntities(double x, double y, double z) {
+        List<org.battleplugins.api.entity.Entity> entities = new ArrayList<>();
         for (org.bukkit.entity.Entity entity : handle.getNearbyEntities(x, y, z)) {
             entities.add(new BukkitEntity<>(entity));
         }

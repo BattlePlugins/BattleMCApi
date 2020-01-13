@@ -15,7 +15,7 @@ public class NukkitChest extends NukkitBlockEntity<BlockEntityChest> implements 
 	}
 
 	@Override
-	public Optional<NukkitChest> getNeighborChest() {
+	public Optional<org.battleplugins.api.world.block.entity.Chest> getNeighborChest() {
 		return Optional.ofNullable(handle.getPair()).map(NukkitChest::new);
 	}
 

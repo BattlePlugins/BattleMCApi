@@ -1,6 +1,7 @@
 package org.battleplugins.api.bukkit.entity.living.player;
 
 import org.battleplugins.api.bukkit.util.BukkitUtil;
+import org.battleplugins.api.entity.living.player.Player;
 import org.battleplugins.api.util.MCWrapper;
 import org.battleplugins.api.world.Location;
 import org.bukkit.OfflinePlayer;
@@ -31,7 +32,7 @@ public class BukkitOfflinePlayer extends MCWrapper<OfflinePlayer> implements org
     }
 
     @Override
-    public Optional<BukkitPlayer> getPlayer() {
+    public Optional<Player> getPlayer() {
         return Optional.ofNullable(handle.getPlayer()).map(BukkitPlayer::new);
     }
 

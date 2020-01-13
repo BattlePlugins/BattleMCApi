@@ -59,8 +59,8 @@ public class NukkitEntity<T extends Entity> extends MCWrapper<T> implements org.
     }
 
     @Override
-    public List<NukkitEntity> getNearbyEntities(double x, double y, double z) {
-        List<NukkitEntity> entityList = new ArrayList<>();
+    public List<org.battleplugins.api.entity.Entity> getNearbyEntities(double x, double y, double z) {
+        List<org.battleplugins.api.entity.Entity> entityList = new ArrayList<>();
         for (Entity entity : handle.getLevel().getNearbyEntities(handle.getBoundingBox().clone().grow(x, y, z))) {
             entityList.add(new NukkitEntity<>(entity));
         }

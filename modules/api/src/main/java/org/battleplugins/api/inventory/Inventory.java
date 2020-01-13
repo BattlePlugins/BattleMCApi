@@ -51,7 +51,7 @@ public interface Inventory {
 	 * @param slot the slot to get the item from
 	 * @return an item at the given slot
 	 */
-	Optional<? extends ItemStack> getItem(int slot);
+	Optional<ItemStack> getItem(int slot);
 
 	/**
 	 * Gets the amount of a specified {@link ItemStack}

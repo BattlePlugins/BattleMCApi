@@ -5,6 +5,8 @@ import mc.euro.version.Version;
 import org.battleplugins.api.Platform;
 import org.battleplugins.api.PlatformType;
 import org.battleplugins.api.PlatformTypes;
+import org.battleplugins.api.entity.living.player.OfflinePlayer;
+import org.battleplugins.api.entity.living.player.Player;
 import org.battleplugins.api.message.Message;
 import org.battleplugins.api.plugin.Plugin;
 import org.battleplugins.api.plugin.service.ServicePriority;
@@ -13,6 +15,7 @@ import org.battleplugins.api.sponge.entity.living.player.SpongePlayer;
 import org.battleplugins.api.sponge.inventory.item.SpongeItemStack;
 import org.battleplugins.api.sponge.message.SpongeMessage;
 import org.battleplugins.api.sponge.world.SpongeWorld;
+import org.battleplugins.api.world.World;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.item.ItemTypes;
 import org.spongepowered.api.item.inventory.ItemStack;
@@ -40,7 +43,7 @@ public class SpongePlatform extends Platform {
     }
 
     @Override
-    public Optional<SpongeWorld> getWorld(String world) {
+    public Optional<World> getWorld(String world) {
         return Sponge.getServer().getWorld(world).map(SpongeWorld::new);
     }
 
@@ -62,17 +65,17 @@ public class SpongePlatform extends Platform {
     }
 
     @Override
-    public Optional<SpongePlayer> getPlayer(String name) {
+    public Optional<Player> getPlayer(String name) {
         return Sponge.getServer().getPlayer(name).map(SpongePlayer::new);
     }
 
     @Override
-    public Optional<SpongePlayer> getPlayer(UUID uuid) {
+    public Optional<Player> getPlayer(UUID uuid) {
         return Sponge.getServer().getPlayer(uuid).map(SpongePlayer::new);
     }
 
     @Override
-    public Optional<SpongeOfflinePlayer> getOfflinePlayer(String name) {
+    public Optional<OfflinePlayer> getOfflinePlayer(String name) {
         Optional<UserStorageService> userStorageService = Sponge.getServiceManager().provide(UserStorageService.class);
         if (!userStorageService.isPresent())
             return Optional.empty();
@@ -81,7 +84,7 @@ public class SpongePlatform extends Platform {
     }
 
     @Override
-    public Optional<SpongeOfflinePlayer> getOfflinePlayer(UUID uuid) {
+    public Optional<OfflinePlayer> getOfflinePlayer(UUID uuid) {
         Optional<UserStorageService> userStorageService = Sponge.getServiceManager().provide(UserStorageService.class);
         if (!userStorageService.isPresent())
             return Optional.empty();
@@ -90,8 +93,8 @@ public class SpongePlatform extends Platform {
     }
 
     @Override
-    public Collection<SpongePlayer> getOnlinePlayers() {
-        List<SpongePlayer> playerList = new ArrayList<>();
+    public Collection<Player> getOnlinePlayers() {
+        List<Player> playerList = new ArrayList<>();
         for (org.spongepowered.api.entity.living.player.Player player : Sponge.getServer().getOnlinePlayers()) {
             playerList.add(new SpongePlayer(player));
         }
@@ -100,8 +103,8 @@ public class SpongePlatform extends Platform {
     }
 
     @Override
-    public Collection<SpongeOfflinePlayer> getOfflinePlayers() {
-        Collection<SpongeOfflinePlayer> players = new ArrayList<>();
+    public Collection<OfflinePlayer> getOfflinePlayers() {
+        Collection<OfflinePlayer> players = new ArrayList<>();
         // TODO: Find a way to do this
         return players;
     }
@@ -117,7 +120,7 @@ public class SpongePlatform extends Platform {
     }
 
     @Override
-    public Version<SpongePlatform> getVersion() {
+    public Version<Platform> getVersion() {
         return new Version<>(Sponge.getGame().getPlatform().getMinecraftVersion().getName());
     }
 

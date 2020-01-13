@@ -17,40 +17,40 @@ public interface PlayerInventory extends CarriedInventory<Human> {
      *
      * @return the item in the main hand of the player
      */
-    Optional<? extends ItemStack> getItemInMainHand();
+    Optional<ItemStack> getItemInMainHand();
 
     /**
      * Gets the item in the offhand of the {@link Player}
      *
      * @return the item in the offhand of the player
      */
-    Optional<? extends ItemStack> getItemInOffHand();
+    Optional<ItemStack> getItemInOffHand();
 
     /**
      * Gets the item in the helmet slot of the {@link Player}
      *
      * @return the item in the helmet slot of the player
      */
-    Optional<? extends ItemStack> getHelmet();
+    Optional<ItemStack> getHelmet();
 
     /**
      * Gets the item in the chestplate slot of the {@link Player}
      *
      * @return the item in the chestplate slot of the player
      */
-    Optional<? extends ItemStack> getChestplate();
+    Optional<ItemStack> getChestplate();
 
     /**
      * Gets the item in the leggings slot of the {@link Player}
      *
      * @return the item in the leggings slot of the player
      */
-    Optional<? extends ItemStack> getLeggings();
+    Optional<ItemStack> getLeggings();
 
     /**
      * Gets the item in the boots slot of the {@link Player}
      *
      * @return the item in the boots slot of the player
      */
-    Optional<? extends ItemStack> getBoots();
+    Optional<ItemStack> getBoots();
 }

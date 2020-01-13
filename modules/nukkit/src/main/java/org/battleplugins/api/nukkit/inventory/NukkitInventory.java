@@ -38,7 +38,7 @@ public class NukkitInventory<T extends Inventory> extends MCWrapper<T> implement
 	}
 
 	@Override
-	public Optional<NukkitItemStack> getItem(int slot) {
+	public Optional<ItemStack> getItem(int slot) {
 		return Optional.ofNullable(handle.getItem(slot)).map(NukkitItemStack::new);
 	}
 

@@ -33,7 +33,7 @@ public class SpongeInventory<T extends Inventory> extends MCWrapper<T> implement
     }
 
     @Override
-    public Optional<SpongeItemStack> getItem(int slot) {
+    public Optional<ItemStack> getItem(int slot) {
         return handle.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(slot))).peek().map(SpongeItemStack::new);
     }
 

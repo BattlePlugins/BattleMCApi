@@ -43,7 +43,7 @@ public abstract class Platform {
      * @param world the name of the world
      * @return the world from the given string
      */
-    public abstract Optional<? extends World> getWorld(String world);
+    public abstract Optional<World> getWorld(String world);
 
     /**
      * The {@link PlatformType}
@@ -69,7 +69,7 @@ public abstract class Platform {
      * @param name the name of the player
      * @return the player from the given name
      */
-    public abstract Optional<? extends Player> getPlayer(String name);
+    public abstract Optional<Player> getPlayer(String name);
 
     /**
      * Gets the {@link Player} from the given {@link UUID}.
@@ -79,7 +79,7 @@ public abstract class Platform {
      * @param uuid the UUID of the player
      * @return the player from the given name
      */
-    public abstract Optional<? extends Player> getPlayer(UUID uuid);
+    public abstract Optional<Player> getPlayer(UUID uuid);
 
     /**
      * Gets the {@link OfflinePlayer} from the given name.
@@ -89,7 +89,7 @@ public abstract class Platform {
      * @param name the name of the offline player
      * @return the offline player from the given name
      */
-    public abstract Optional<? extends OfflinePlayer> getOfflinePlayer(String name);
+    public abstract Optional<OfflinePlayer> getOfflinePlayer(String name);
 
     /**
      * Gets the {@link OfflinePlayer} from the given {@link UUID}.
@@ -99,14 +99,14 @@ public abstract class Platform {
      * @param uuid the UUID of the offline player
      * @return the offline player from the given name
      */
-    public abstract Optional<? extends OfflinePlayer> getOfflinePlayer(UUID uuid);
+    public abstract Optional<OfflinePlayer> getOfflinePlayer(UUID uuid);
 
     /**
      * A collection of all the online {@link Player}s
      *
      * @return a collection of all the online players
      */
-    public abstract Collection<? extends Player> getOnlinePlayers();
+    public abstract Collection<Player> getOnlinePlayers();
 
     /**
      * A collection of all the {@link OfflinePlayer}s
@@ -114,7 +114,7 @@ public abstract class Platform {
      *
      * @return a collection of all the offline players
      */
-    public abstract Collection<? extends OfflinePlayer> getOfflinePlayers();
+    public abstract Collection<OfflinePlayer> getOfflinePlayers();
 
     /**
      * If the main thread is being used
@@ -135,7 +135,7 @@ public abstract class Platform {
      *
      * @return the version of the platform
      */
-    public abstract Version<? extends Platform> getVersion();
+    public abstract Version<Platform> getVersion();
 
     /**
      * The default {@link Message} used for this platform

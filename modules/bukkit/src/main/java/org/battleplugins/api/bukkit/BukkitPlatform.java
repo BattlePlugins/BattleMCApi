@@ -12,9 +12,12 @@ import org.battleplugins.api.bukkit.inventory.item.BukkitItemStack;
 import org.battleplugins.api.bukkit.message.BukkitMessage;
 import org.battleplugins.api.bukkit.message.SpigotMessage;
 import org.battleplugins.api.bukkit.world.BukkitWorld;
+import org.battleplugins.api.entity.living.player.OfflinePlayer;
+import org.battleplugins.api.entity.living.player.Player;
 import org.battleplugins.api.plugin.Plugin;
 import org.battleplugins.api.message.Message;
 import org.battleplugins.api.plugin.service.ServicePriority;
+import org.battleplugins.api.world.World;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -41,7 +44,7 @@ public class BukkitPlatform extends Platform {
     }
 
     @Override
-    public Optional<BukkitWorld> getWorld(String world) {
+    public Optional<World> getWorld(String world) {
         return Optional.ofNullable(Bukkit.getWorld(world)).map(BukkitWorld::new);
     }
 
@@ -56,28 +59,28 @@ public class BukkitPlatform extends Platform {
     }
 
     @Override
-    public Optional<BukkitPlayer> getPlayer(String name) {
+    public Optional<Player> getPlayer(String name) {
         return Optional.ofNullable(Bukkit.getPlayer(name)).map(BukkitPlayer::new);
     }
 
     @Override
-    public Optional<BukkitPlayer> getPlayer(UUID uuid) {
+    public Optional<Player> getPlayer(UUID uuid) {
         return Optional.ofNullable(Bukkit.getPlayer(uuid)).map(BukkitPlayer::new);
     }
 
     @Override
-    public Optional<BukkitOfflinePlayer> getOfflinePlayer(String name) {
+    public Optional<OfflinePlayer> getOfflinePlayer(String name) {
         return Optional.ofNullable(Bukkit.getOfflinePlayer(name)).map(BukkitOfflinePlayer::new);
     }
 
     @Override
-    public Optional<BukkitOfflinePlayer> getOfflinePlayer(UUID uuid) {
+    public Optional<OfflinePlayer> getOfflinePlayer(UUID uuid) {
         return Optional.ofNullable(Bukkit.getOfflinePlayer(uuid)).map(BukkitOfflinePlayer::new);
     }
 
     @Override
-    public Collection<BukkitPlayer> getOnlinePlayers() {
-        List<BukkitPlayer> playerList = new ArrayList<>();
+    public Collection<Player> getOnlinePlayers() {
+        List<Player> playerList = new ArrayList<>();
         for (org.bukkit.entity.Player player : Bukkit.getOnlinePlayers()) {
             playerList.add(new BukkitPlayer(player));
         }
@@ -86,8 +89,8 @@ public class BukkitPlatform extends Platform {
     }
 
     @Override
-    public Collection<BukkitOfflinePlayer> getOfflinePlayers() {
-        List<BukkitOfflinePlayer> playerList = new ArrayList<>();
+    public Collection<OfflinePlayer> getOfflinePlayers() {
+        List<OfflinePlayer> playerList = new ArrayList<>();
         for (org.bukkit.OfflinePlayer player : Bukkit.getOfflinePlayers()) {
             playerList.add(new BukkitOfflinePlayer(player));
         }
@@ -106,7 +109,7 @@ public class BukkitPlatform extends Platform {
     }
 
     @Override
-    public Version<BukkitPlatform> getVersion() {
+    public Version<Platform> getVersion() {
         return new Version<>(Bukkit.getVersion());
     }
 

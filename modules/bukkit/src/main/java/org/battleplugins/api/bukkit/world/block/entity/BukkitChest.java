@@ -15,7 +15,7 @@ public class BukkitChest extends BukkitBlockEntity<Chest> implements org.battlep
 	}
 
 	@Override
-	public Optional<BukkitChest> getNeighborChest() {
+	public Optional<org.battleplugins.api.world.block.entity.Chest> getNeighborChest() {
 		if (handle.getBlock().getRelative(BlockFace.NORTH).getType() == Material.CHEST)
 			return Optional.of(new BukkitChest((Chest) handle.getBlock().getRelative(BlockFace.NORTH).getState()));
 

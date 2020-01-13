@@ -10,6 +10,7 @@ import org.battleplugins.api.bukkit.util.BukkitUtil;
 import org.battleplugins.api.bukkit.world.block.entity.BukkitBlockEntity;
 import org.battleplugins.api.entity.living.player.Player;
 import org.battleplugins.api.util.MCWrapper;
+import org.battleplugins.api.world.Chunk;
 import org.battleplugins.api.world.Location;
 import org.battleplugins.api.world.block.Block;
 import org.battleplugins.api.world.block.entity.BlockEntity;
@@ -33,7 +34,7 @@ public class BukkitWorld extends MCWrapper<World> implements org.battleplugins.a
     }
 
     @Override
-    public Optional<BukkitBlockEntity> getBlockEntityAt(Location loc) {
+    public Optional<BlockEntity> getBlockEntityAt(Location loc) {
         BlockState state = handle.getBlockAt(BukkitUtil.toBukkitLocation(loc)).getState();
         if (handle instanceof Chest)
             return Optional.of(new BukkitChest((Chest) state));
@@ -95,12 +96,12 @@ public class BukkitWorld extends MCWrapper<World> implements org.battleplugins.a
     }
 
     @Override
-    public CompletableFuture<BukkitChunk> getChunkAt(int x, int z, boolean generate) {
+    public CompletableFuture<Chunk> getChunkAt(int x, int z, boolean generate) {
         return PaperLib.getChunkAtAsync(handle, x, z, generate).thenApply(BukkitChunk::new);
     }
 
     @Override
-    public Optional<BukkitChunk> getChunkIfLoaded(int x, int z) {
+    public Optional<Chunk> getChunkIfLoaded(int x, int z) {
         return handle.isChunkLoaded(x, z) ? Optional.of(new BukkitChunk(handle.getChunkAt(x, z))) : Optional.empty();
     }
 }

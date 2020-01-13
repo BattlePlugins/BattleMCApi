@@ -3,6 +3,7 @@ package org.battleplugins.api.bukkit.inventory.entity;
 import org.battleplugins.api.bukkit.inventory.BukkitInventory;
 import org.battleplugins.api.bukkit.inventory.item.BukkitItemStack;
 import org.battleplugins.api.entity.living.Human;
+import org.battleplugins.api.inventory.item.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
 import java.util.Optional;
@@ -20,7 +21,7 @@ public class BukkitPlayerInventory extends BukkitInventory<PlayerInventory> impl
 	}
 
 	@Override
-	public Optional<BukkitItemStack> getItemInMainHand() {
+	public Optional<ItemStack> getItemInMainHand() {
 		try {
 			// 1.9+
 			return Optional.ofNullable(inventory.getItemInMainHand()).map(BukkitItemStack::new);
@@ -31,27 +32,27 @@ public class BukkitPlayerInventory extends BukkitInventory<PlayerInventory> impl
 	}
 
 	@Override
-	public Optional<BukkitItemStack> getItemInOffHand() {
+	public Optional<ItemStack> getItemInOffHand() {
 		return Optional.ofNullable(inventory.getItemInOffHand()).map(BukkitItemStack::new);
 	}
 
 	@Override
-	public Optional<BukkitItemStack> getHelmet() {
+	public Optional<ItemStack> getHelmet() {
 		return Optional.ofNullable(inventory.getHelmet()).map(BukkitItemStack::new);
 	}
 
 	@Override
-	public Optional<BukkitItemStack> getChestplate() {
+	public Optional<ItemStack> getChestplate() {
 		return Optional.ofNullable(inventory.getChestplate()).map(BukkitItemStack::new);
 	}
 
 	@Override
-	public Optional<BukkitItemStack> getLeggings() {
+	public Optional<ItemStack> getLeggings() {
 		return Optional.ofNullable(inventory.getLeggings()).map(BukkitItemStack::new);
 	}
 
 	@Override
-	public Optional<BukkitItemStack> getBoots() {
+	public Optional<ItemStack> getBoots() {
 		return Optional.ofNullable(inventory.getBoots()).map(BukkitItemStack::new);
 	}
 

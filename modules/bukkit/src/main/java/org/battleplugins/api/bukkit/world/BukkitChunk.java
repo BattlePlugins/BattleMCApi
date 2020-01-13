@@ -1,8 +1,8 @@
 package org.battleplugins.api.bukkit.world;
 
 import org.battleplugins.api.bukkit.entity.BukkitEntity;
-import org.battleplugins.api.util.MCWrapper;
 import org.battleplugins.api.bukkit.world.block.entity.BukkitBlockEntity;
+import org.battleplugins.api.util.MCWrapper;
 import org.bukkit.Chunk;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.Entity;
@@ -37,8 +37,8 @@ public class BukkitChunk extends MCWrapper<Chunk> implements org.battleplugins.a
     }
 
     @Override
-    public List<BukkitEntity> getEntities() {
-        List<BukkitEntity> entities = new ArrayList<>();
+    public List<org.battleplugins.api.entity.Entity> getEntities() {
+        List<org.battleplugins.api.entity.Entity> entities = new ArrayList<>();
         for (Entity entity : handle.getEntities()) {
             entities.add(new BukkitEntity<>(entity));
         }

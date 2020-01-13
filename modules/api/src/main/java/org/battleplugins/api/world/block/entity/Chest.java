@@ -26,7 +26,7 @@ public interface Chest extends BlockEntity, BlockEntityCarrier<Chest> {
 	 *
 	 * @return the neighbor chest to this one
 	 */
-	Optional<? extends Chest> getNeighborChest();
+	Optional<Chest> getNeighborChest();
 
 	/**
 	 * The contents of the chest {@link Inventory}

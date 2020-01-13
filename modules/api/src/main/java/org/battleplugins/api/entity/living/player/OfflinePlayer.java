@@ -38,7 +38,7 @@ public interface OfflinePlayer {
      *
      * @return the player object of this offline player
      */
-    Optional<? extends Player> getPlayer();
+    Optional<Player> getPlayer();
 
     /**
      * When the offline player first played. Will not be
