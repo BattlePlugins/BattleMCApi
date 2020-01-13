@@ -18,4 +18,9 @@ public class NukkitItemFlagComponent implements ItemFlagComponent {
     public Optional<Set<ItemFlag>> getValue(ItemStack itemStack) {
         return Optional.empty();
     }
+
+    @Override
+    public boolean isAppliable(ItemStack itemStack) {
+        return false;
+    }
 }

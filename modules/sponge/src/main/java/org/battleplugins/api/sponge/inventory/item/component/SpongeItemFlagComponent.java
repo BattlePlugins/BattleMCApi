@@ -67,4 +67,9 @@ public class SpongeItemFlagComponent implements ItemFlagComponent {
 
         return itemFlags.isEmpty() ? Optional.empty() : Optional.of(itemFlags);
     }
+
+    @Override
+    public boolean isAppliable(ItemStack itemStack) {
+        return true;
+    }
 }

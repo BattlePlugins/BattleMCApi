@@ -4,6 +4,7 @@ import io.papermc.lib.PaperLib;
 
 import org.battleplugins.api.bukkit.util.BukkitUtil;
 import org.battleplugins.api.bukkit.world.BukkitWorld;
+import org.battleplugins.api.entity.EntityType;
 import org.battleplugins.api.util.MCWrapper;
 import org.battleplugins.api.util.NamespacedKey;
 import org.battleplugins.api.world.Location;
@@ -28,6 +29,11 @@ public class BukkitEntity<T extends Entity> extends MCWrapper<T> implements org.
     @Override
     public NamespacedKey getKey() {
         return NamespacedKey.minecraft(handle.getType().getName());
+    }
+
+    @Override
+    public EntityType getType() {
+        return new BukkitEntityType(handle.getType());
     }
 
     @Override

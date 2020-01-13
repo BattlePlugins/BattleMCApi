@@ -987,7 +987,7 @@ public enum BukkitCompatMaterial {
         return new ItemStack(mat, 1, (byte) data);
     }
 
-    public boolean isDamageable(BukkitCompatMaterial type){
+    public static boolean isDamageable(BukkitCompatMaterial type){
         if (type == null)
             return false;
 

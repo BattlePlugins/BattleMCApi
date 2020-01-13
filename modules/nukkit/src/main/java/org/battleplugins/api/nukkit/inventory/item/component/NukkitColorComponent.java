@@ -31,4 +31,9 @@ public class NukkitColorComponent implements ColorComponent {
         ItemColorArmor colorItem = (ItemColorArmor) item;
         return Optional.of(new Color(colorItem.getColor().getRGB()));
     }
+
+    @Override
+    public boolean isAppliable(ItemStack itemStack) {
+        return itemStack instanceof ItemColorArmor;
+    }
 }

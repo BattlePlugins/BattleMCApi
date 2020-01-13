@@ -2,17 +2,17 @@ package org.battleplugins.api.bukkit.inventory.entity;
 
 import org.battleplugins.api.bukkit.inventory.BukkitInventory;
 import org.battleplugins.api.bukkit.inventory.item.BukkitItemStack;
-import org.battleplugins.api.entity.living.HumanEntity;
+import org.battleplugins.api.entity.living.Human;
 import org.bukkit.inventory.PlayerInventory;
 
 import java.util.Optional;
 
 public class BukkitPlayerInventory extends BukkitInventory<PlayerInventory> implements org.battleplugins.api.inventory.entity.PlayerInventory {
 
-	private HumanEntity carrier;
+	private Human carrier;
 	private PlayerInventory inventory;
 
-	public BukkitPlayerInventory(HumanEntity carrier, PlayerInventory inventory) {
+	public BukkitPlayerInventory(Human carrier, PlayerInventory inventory) {
 		super(inventory);
 
 		this.carrier = carrier;
@@ -56,7 +56,7 @@ public class BukkitPlayerInventory extends BukkitInventory<PlayerInventory> impl
 	}
 
 	@Override
-	public HumanEntity getCarrier() {
+	public Human getCarrier() {
 		return carrier;
 	}
 }

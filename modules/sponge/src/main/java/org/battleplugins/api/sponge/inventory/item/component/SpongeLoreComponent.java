@@ -23,4 +23,9 @@ public class SpongeLoreComponent implements LoreComponent {
         return ((SpongeItemStack) itemStack).getHandle().get(Keys.ITEM_LORE)
                 .map(val -> val.stream().map(Text::toPlain).collect(Collectors.toList()));
     }
+
+    @Override
+    public boolean isAppliable(ItemStack itemStack) {
+        return true;
+    }
 }

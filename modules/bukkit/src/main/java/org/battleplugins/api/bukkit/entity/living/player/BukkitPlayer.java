@@ -1,6 +1,6 @@
 package org.battleplugins.api.bukkit.entity.living.player;
 
-import org.battleplugins.api.bukkit.entity.living.BukkitHumanEntity;
+import org.battleplugins.api.bukkit.entity.living.BukkitHuman;
 import org.battleplugins.api.bukkit.inventory.BukkitInventory;
 
 import org.battleplugins.api.bukkit.util.BukkitUtil;
@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 import java.util.Optional;
 import java.util.OptionalLong;
 
-public class BukkitPlayer extends BukkitHumanEntity<Player> implements org.battleplugins.api.entity.living.player.Player {
+public class BukkitPlayer extends BukkitHuman<Player> implements org.battleplugins.api.entity.living.player.Player {
 
     public BukkitPlayer(Player player) {
         super(player);

@@ -1,7 +1,7 @@
 package org.battleplugins.api.entity.living.player;
 
 import org.battleplugins.api.command.CommandSender;
-import org.battleplugins.api.entity.living.HumanEntity;
+import org.battleplugins.api.entity.living.Human;
 import org.battleplugins.api.entity.living.player.gamemode.GameMode;
 import org.battleplugins.api.inventory.Inventory;
 import org.battleplugins.api.message.Message;
@@ -9,7 +9,7 @@ import org.battleplugins.api.message.Message;
 /**
  * Represents a player.
  */
-public interface Player extends CommandSender, OfflinePlayer, HumanEntity {
+public interface Player extends CommandSender, OfflinePlayer, Human {
 
 	/**
 	 * The display name of the player

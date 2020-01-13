@@ -3,12 +3,13 @@ package org.battleplugins.api.nukkit.entity.living;
 import cn.nukkit.entity.EntityLiving;
 
 import org.battleplugins.api.entity.Entity;
-import org.battleplugins.api.entity.living.LivingEntity;
+import org.battleplugins.api.entity.EntityType;
+import org.battleplugins.api.entity.living.Living;
 import org.battleplugins.api.nukkit.entity.NukkitEntity;
 
-public class NukkitLivingEntity<T extends EntityLiving> extends NukkitEntity<T> implements LivingEntity {
+public class NukkitLiving<T extends EntityLiving> extends NukkitEntity<T> implements Living {
 
-    public NukkitLivingEntity(T entity) {
+    public NukkitLiving(T entity) {
         super(entity);
     }
 

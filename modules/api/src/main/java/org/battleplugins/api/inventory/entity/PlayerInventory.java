@@ -1,6 +1,6 @@
 package org.battleplugins.api.inventory.entity;
 
-import org.battleplugins.api.entity.living.HumanEntity;
+import org.battleplugins.api.entity.living.Human;
 import org.battleplugins.api.entity.living.player.Player;
 import org.battleplugins.api.inventory.CarriedInventory;
 import org.battleplugins.api.inventory.item.ItemStack;
@@ -10,7 +10,7 @@ import java.util.Optional;
 /**
  * Represents an inventory for a player.
  */
-public interface PlayerInventory extends CarriedInventory<HumanEntity> {
+public interface PlayerInventory extends CarriedInventory<Human> {
 
     /**
      * Gets the item in the main hand of the {@link Player}

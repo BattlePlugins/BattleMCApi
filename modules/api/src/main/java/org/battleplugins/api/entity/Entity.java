@@ -1,11 +1,14 @@
 package org.battleplugins.api.entity;
 
+import org.battleplugins.api.Platform;
+import org.battleplugins.api.entity.component.EntityComponent;
 import org.battleplugins.api.util.NamespacedKey;
 import org.battleplugins.api.world.Location;
 import org.battleplugins.api.world.World;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -34,7 +37,16 @@ public interface Entity {
      *
      * @return the full namespaced key of this entity
      */
-    NamespacedKey getKey();
+    default NamespacedKey getKey() {
+        return getType().getKey();
+    }
+
+    /**
+     * The {@link EntityType} of this entity
+     *
+     * @return the entity type of this entity
+     */
+    EntityType getType();
 
     /**
      * The {@link UUID} of the entity
@@ -135,4 +147,36 @@ public interface Entity {
      * @param visible if the custom name of the entity should be visible
      */
     void setCustomNameVisible(boolean visible);
+
+    /**
+     * A set of the provided (allowed) {@link EntityComponent}s
+     * that can be applied to this entity type
+     *
+     * @return a set of the allowed entity components
+     */
+    default Set<Class<? extends EntityComponent>> getProvidedComponents() {
+        return getType().getProvidedComponents();
+    }
+
+    /**
+     * Applies the given component to the entity
+     *
+     * @param componentClass the component to apply
+     * @param value the value of the component
+     * @param <T> the value
+     */
+    default <T> void applyComponent(Class<? extends EntityComponent<T>> componentClass, T value) {
+        Platform.getPlatform().getRegistry().getEntityComponent(componentClass).applyComponent(this, value);
+    }
+
+    /**
+     * Gets the value of the given component class
+     *
+     * @param componentClass the class of the component
+     * @param <T> the value
+     * @return the value of the given component class
+     */
+    default <T> Optional<T> getValue(Class<? extends EntityComponent<T>> componentClass) {
+        return Platform.getPlatform().getRegistry().getEntityComponent(componentClass).getValue(this);
+    }
 }

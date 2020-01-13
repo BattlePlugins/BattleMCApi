@@ -17,4 +17,10 @@ public class SpongeCustomModelDataComponent implements CustomModelDataComponent 
     public Optional<Integer> getValue(ItemStack itemStack) {
         return Optional.empty();
     }
+
+    @Override
+    public boolean isAppliable(ItemStack itemStack) {
+        // not implemented (sponge is still 1.12)
+        return false;
+    }
 }

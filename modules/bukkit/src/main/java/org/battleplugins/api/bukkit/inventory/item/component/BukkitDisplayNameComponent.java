@@ -21,4 +21,9 @@ public class BukkitDisplayNameComponent implements DisplayNameComponent {
     public Optional<String> getValue(ItemStack itemStack) {
         return Optional.ofNullable(((BukkitItemStack) itemStack).getHandle().getItemMeta().getDisplayName());
     }
+
+    @Override
+    public boolean isAppliable(ItemStack itemStack) {
+        return true;
+    }
 }

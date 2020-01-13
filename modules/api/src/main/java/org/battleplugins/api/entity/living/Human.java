@@ -5,6 +5,5 @@ import org.battleplugins.api.inventory.carrier.Carrier;
 /**
  * Represents a human entity.
  */
-public interface HumanEntity extends LivingEntity, Carrier {
-
+public interface Human extends Living, Carrier {
 }

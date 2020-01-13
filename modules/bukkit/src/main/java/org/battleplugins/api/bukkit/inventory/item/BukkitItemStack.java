@@ -24,7 +24,7 @@ public class BukkitItemStack extends MCWrapper<ItemStack> implements org.battlep
 
 	@Override
 	public ItemType getType() {
-		return ((BukkitItemRegistry) ItemRegistry.REGISTRY).fromPlatformItem(handle.getType());
+		return new BukkitItemType(handle.getType());
 	}
 
 	@Override

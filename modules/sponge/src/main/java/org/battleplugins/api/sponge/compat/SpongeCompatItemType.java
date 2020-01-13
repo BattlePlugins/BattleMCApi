@@ -992,7 +992,7 @@ public enum SpongeCompatItemType {
                 .build();
     }
 
-    public boolean isDamageable(SpongeCompatItemType type){
+    public static boolean isDamageable(SpongeCompatItemType type){
         if (type == null)
             return false;
 

@@ -23,4 +23,9 @@ public class NukkitDisplayNameComponent implements DisplayNameComponent {
 
         return Optional.ofNullable(((NukkitItemStack) itemStack).getHandle().getCustomName());
     }
+
+    @Override
+    public boolean isAppliable(ItemStack itemStack) {
+        return true;
+    }
 }

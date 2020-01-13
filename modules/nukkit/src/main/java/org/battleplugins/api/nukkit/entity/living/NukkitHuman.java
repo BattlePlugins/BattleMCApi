@@ -2,14 +2,14 @@ package org.battleplugins.api.nukkit.entity.living;
 
 import cn.nukkit.entity.EntityHuman;
 
-import org.battleplugins.api.entity.living.HumanEntity;
+import org.battleplugins.api.entity.living.Human;
 import org.battleplugins.api.nukkit.inventory.entity.NukkitPlayerInventory;
 
 import java.util.UUID;
 
-public class NukkitHumanEntity<T extends EntityHuman> extends NukkitLivingEntity<T> implements HumanEntity {
+public class NukkitHuman<T extends EntityHuman> extends NukkitLiving<T> implements Human {
 
-    public NukkitHumanEntity(T humanEntity) {
+    public NukkitHuman(T humanEntity) {
         super(humanEntity);
     }
 

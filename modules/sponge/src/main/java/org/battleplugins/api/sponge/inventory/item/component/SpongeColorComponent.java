@@ -4,6 +4,7 @@ import org.battleplugins.api.inventory.item.ItemStack;
 import org.battleplugins.api.inventory.item.component.ColorComponent;
 import org.battleplugins.api.sponge.inventory.item.SpongeItemStack;
 import org.spongepowered.api.data.key.Keys;
+import org.spongepowered.api.data.manipulator.mutable.ColoredData;
 
 import java.awt.Color;
 import java.util.Optional;
@@ -19,5 +20,10 @@ public class SpongeColorComponent implements ColorComponent {
     public Optional<Color> getValue(ItemStack itemStack) {
         return ((SpongeItemStack) itemStack).getHandle().get(Keys.COLOR)
                 .map(org.spongepowered.api.util.Color::asJavaColor);
+    }
+
+    @Override
+    public boolean isAppliable(ItemStack itemStack) {
+        return ((SpongeItemStack) itemStack).getHandle().get(ColoredData.class).isPresent();
     }
 }

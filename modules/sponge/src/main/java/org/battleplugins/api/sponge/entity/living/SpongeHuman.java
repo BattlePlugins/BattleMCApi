@@ -1,12 +1,12 @@
 package org.battleplugins.api.sponge.entity.living;
 
-import org.battleplugins.api.entity.living.HumanEntity;
+import org.battleplugins.api.entity.living.Human;
 import org.battleplugins.api.sponge.inventory.entity.SpongePlayerInventory;
 import org.spongepowered.api.entity.living.Humanoid;
 
-public class SpongeHumanEntity<T extends Humanoid> extends SpongeLivingEntity<T> implements HumanEntity {
+public class SpongeHuman<T extends Humanoid> extends SpongeLiving<T> implements Human {
 
-    public SpongeHumanEntity(T humanEntity) {
+    public SpongeHuman(T humanEntity) {
         super(humanEntity);
     }
 

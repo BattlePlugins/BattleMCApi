@@ -5,14 +5,14 @@ import cn.nukkit.Player;
 import org.battleplugins.api.entity.living.player.gamemode.GameMode;
 import org.battleplugins.api.entity.living.player.gamemode.GameModes;
 import org.battleplugins.api.inventory.Inventory;
-import org.battleplugins.api.nukkit.entity.living.NukkitHumanEntity;
+import org.battleplugins.api.nukkit.entity.living.NukkitHuman;
 import org.battleplugins.api.nukkit.inventory.NukkitInventory;
 import org.battleplugins.api.world.Location;
 
 import java.util.Optional;
 import java.util.OptionalLong;
 
-public class NukkitPlayer extends NukkitHumanEntity<Player> implements org.battleplugins.api.entity.living.player.Player {
+public class NukkitPlayer extends NukkitHuman<Player> implements org.battleplugins.api.entity.living.player.Player {
 
     public NukkitPlayer(Player player){
         super(player);

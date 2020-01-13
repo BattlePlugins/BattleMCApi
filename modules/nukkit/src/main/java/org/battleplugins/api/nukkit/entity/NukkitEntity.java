@@ -3,10 +3,9 @@ package org.battleplugins.api.nukkit.entity;
 import cn.nukkit.entity.Entity;
 
 import org.battleplugins.api.nukkit.util.NukkitUtil;
-import org.battleplugins.api.util.MCWrapper;
-import org.battleplugins.api.util.NamespacedKey;
-import org.battleplugins.api.world.Location;
 import org.battleplugins.api.nukkit.world.NukkitWorld;
+import org.battleplugins.api.util.MCWrapper;
+import org.battleplugins.api.world.Location;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +24,8 @@ public class NukkitEntity<T extends Entity> extends MCWrapper<T> implements org.
     }
 
     @Override
-    public NamespacedKey getKey() {
-        return NamespacedKey.minecraft(handle.getSaveId().replace("Entity", ""));
+    public NukkitEntityType getType() {
+        return new NukkitEntityType(handle.getNetworkId());
     }
 
     @Override

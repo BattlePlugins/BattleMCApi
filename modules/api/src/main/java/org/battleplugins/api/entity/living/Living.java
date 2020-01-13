@@ -3,9 +3,9 @@ package org.battleplugins.api.entity.living;
 import org.battleplugins.api.entity.Entity;
 
 /**
- * Represents an entity capable of taking damage.
+ * Represents a living entity (mob).
  */
-public interface Damageable {
+public interface Living extends Entity {
 
     /**
      * Deals the given amount of damage to

@@ -16,4 +16,9 @@ public class NukkitUnbreakableComponent implements UnbreakableComponent {
     public Optional<Boolean> getValue(ItemStack itemStack) {
         return Optional.empty();
     }
+
+    @Override
+    public boolean isAppliable(ItemStack itemStack) {
+        return false;
+    }
 }

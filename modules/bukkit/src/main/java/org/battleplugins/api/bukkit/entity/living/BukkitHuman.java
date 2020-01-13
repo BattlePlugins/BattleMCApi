@@ -1,11 +1,12 @@
 package org.battleplugins.api.bukkit.entity.living;
 
 import org.battleplugins.api.bukkit.inventory.entity.BukkitPlayerInventory;
+import org.battleplugins.api.entity.living.Human;
 import org.bukkit.entity.HumanEntity;
 
-public class BukkitHumanEntity<T extends HumanEntity> extends BukkitLivingEntity<T> implements org.battleplugins.api.entity.living.HumanEntity {
+public class BukkitHuman<T extends HumanEntity> extends BukkitLiving<T> implements Human {
 
-    public BukkitHumanEntity(T humanEntity) {
+    public BukkitHuman(T humanEntity) {
         super(humanEntity);
     }
 

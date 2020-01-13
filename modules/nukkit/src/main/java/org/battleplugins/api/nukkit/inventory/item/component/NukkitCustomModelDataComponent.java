@@ -16,4 +16,9 @@ public class NukkitCustomModelDataComponent implements CustomModelDataComponent 
     public Optional<Integer> getValue(ItemStack itemStack) {
         return Optional.empty();
     }
+
+    @Override
+    public boolean isAppliable(ItemStack itemStack) {
+        return false;
+    }
 }

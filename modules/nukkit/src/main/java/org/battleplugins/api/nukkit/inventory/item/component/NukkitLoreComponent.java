@@ -22,4 +22,9 @@ public class NukkitLoreComponent implements LoreComponent {
     public Optional<List<String>> getValue(ItemStack itemStack) {
         return Optional.of(Arrays.asList(((NukkitItemStack) itemStack).getHandle().getLore()));
     }
+
+    @Override
+    public boolean isAppliable(ItemStack itemStack) {
+        return true;
+    }
 }

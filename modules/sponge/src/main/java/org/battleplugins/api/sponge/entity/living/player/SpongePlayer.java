@@ -3,7 +3,7 @@ package org.battleplugins.api.sponge.entity.living.player;
 import org.battleplugins.api.entity.living.player.gamemode.GameMode;
 import org.battleplugins.api.entity.living.player.gamemode.GameModes;
 import org.battleplugins.api.inventory.Inventory;
-import org.battleplugins.api.sponge.entity.living.SpongeHumanEntity;
+import org.battleplugins.api.sponge.entity.living.SpongeHuman;
 import org.battleplugins.api.sponge.inventory.SpongeInventory;
 import org.battleplugins.api.sponge.util.SpongeUtil;
 import org.battleplugins.api.world.Location;
@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Optional;
 import java.util.OptionalLong;
 
-public class SpongePlayer extends SpongeHumanEntity<Player> implements org.battleplugins.api.entity.living.player.Player {
+public class SpongePlayer extends SpongeHuman<Player> implements org.battleplugins.api.entity.living.player.Player {
 
     public SpongePlayer(Player player) {
         super(player);

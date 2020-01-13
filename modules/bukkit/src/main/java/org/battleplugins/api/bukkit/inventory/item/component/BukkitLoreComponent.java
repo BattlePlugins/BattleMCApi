@@ -22,4 +22,9 @@ public class BukkitLoreComponent implements LoreComponent {
     public Optional<List<String>> getValue(ItemStack itemStack) {
         return Optional.ofNullable(((BukkitItemStack) itemStack).getHandle().getItemMeta().getLore());
     }
+
+    @Override
+    public boolean isAppliable(ItemStack itemStack) {
+        return true;
+    }
 }

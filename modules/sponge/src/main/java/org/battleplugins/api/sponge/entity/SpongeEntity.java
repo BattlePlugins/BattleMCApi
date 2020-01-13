@@ -1,10 +1,10 @@
 package org.battleplugins.api.sponge.entity;
 
-import org.battleplugins.api.util.MCWrapper;
-import org.battleplugins.api.util.NamespacedKey;
-import org.battleplugins.api.world.Location;
+import org.battleplugins.api.entity.EntityType;
 import org.battleplugins.api.sponge.world.SpongeWorld;
 import org.battleplugins.api.sponge.util.SpongeUtil;
+import org.battleplugins.api.util.MCWrapper;
+import org.battleplugins.api.world.Location;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.text.Text;
@@ -26,8 +26,8 @@ public class SpongeEntity<T extends Entity> extends MCWrapper<T> implements org.
     }
 
     @Override
-    public NamespacedKey getKey() {
-        return NamespacedKey.of(handle.getType().getId().split(":")[0], handle.getType().getId().split(":")[1]);
+    public EntityType getType() {
+        return new SpongeEntityType(handle.getType());
     }
 
     @Override

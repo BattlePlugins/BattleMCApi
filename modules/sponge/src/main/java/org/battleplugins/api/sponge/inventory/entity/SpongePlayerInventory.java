@@ -1,9 +1,9 @@
 package org.battleplugins.api.sponge.inventory.entity;
 
-import org.battleplugins.api.entity.living.HumanEntity;
+import org.battleplugins.api.entity.living.Human;
 import org.battleplugins.api.inventory.entity.PlayerInventory;
+import org.battleplugins.api.sponge.entity.living.SpongeHuman;
 import org.battleplugins.api.sponge.inventory.SpongeInventory;
-import org.battleplugins.api.sponge.entity.living.SpongeHumanEntity;
 import org.battleplugins.api.sponge.inventory.item.SpongeItemStack;
 import org.spongepowered.api.data.type.HandTypes;
 import org.spongepowered.api.entity.living.player.Player;
@@ -56,7 +56,7 @@ public class SpongePlayerInventory extends SpongeInventory<CarriedInventory<? ex
     }
 
     @Override
-    public HumanEntity getCarrier() {
-        return new SpongeHumanEntity<>(inventory.getCarrier().get());
+    public Human getCarrier() {
+        return new SpongeHuman<>(inventory.getCarrier().get());
     }
 }

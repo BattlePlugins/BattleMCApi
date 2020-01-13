@@ -17,4 +17,9 @@ public class NukkitDamageComponent implements DamageComponent {
     public Optional<Short> getValue(ItemStack itemStack) {
         return Optional.of((short) ((NukkitItemStack) itemStack).getHandle().getDamage());
     }
+
+    @Override
+    public boolean isAppliable(ItemStack itemStack) {
+        return true;
+    }
 }

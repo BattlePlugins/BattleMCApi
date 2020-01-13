@@ -31,4 +31,14 @@ public class BukkitCustomModelDataComponent implements CustomModelDataComponent 
 
         return Optional.empty();
     }
+
+    @Override
+    public boolean isAppliable(ItemStack itemStack) {
+        try {
+            return ((BukkitItemStack) itemStack).getHandle().getItemMeta().hasCustomModelData();
+        } catch (Throwable ex) {
+            // May not be supported in this version
+        }
+        return false;
+    }
 }

@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @Getter @Setter
-public class ItemEntry {
+class ItemEntry {
 
     @SerializedName("bedrock_id")
     private int bedrockId;

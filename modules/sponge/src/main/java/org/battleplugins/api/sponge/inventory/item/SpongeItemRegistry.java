@@ -12,12 +12,11 @@ public class SpongeItemRegistry implements ItemRegistry<org.spongepowered.api.it
 
     @Override
     public ItemType fromPlatformItem(org.spongepowered.api.item.ItemType item) {
-        return null;
+        return new SpongeItemType(item);
     }
 
     @Override
     public Optional<ItemType> fromKey(NamespacedKey namespacedKey) {
-        // return BukkitMaterialAdapter.getMaterial(namespacedKey.getKey()).map(this::fromPlatformItem);
         Optional<ItemType> compatItemType = SpongeCompatItemType.fromString(namespacedKey.getKey())
                 .map(itemType -> fromPlatformItem(itemType.parseItem().getType()));
         if (!compatItemType.isPresent()) {

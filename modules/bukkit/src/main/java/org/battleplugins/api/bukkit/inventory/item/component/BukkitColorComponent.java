@@ -50,4 +50,18 @@ public class BukkitColorComponent implements ColorComponent {
 
         return Optional.empty();
     }
+
+    @Override
+    public boolean isAppliable(ItemStack itemStack) {
+        org.bukkit.inventory.ItemStack bukkitItemStack = ((BukkitItemStack) itemStack).getHandle();
+        try {
+            if (bukkitItemStack.getItemMeta() instanceof PotionMeta) {
+               return true;
+            }
+        } catch (Throwable ex) {
+            // May not be supported in this version
+        }
+
+        return bukkitItemStack.getItemMeta() instanceof LeatherArmorMeta;
+    }
 }
