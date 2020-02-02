@@ -18,9 +18,8 @@ public class BukkitPlugin extends JavaPlugin implements PlatformPlugin {
 
     @Override
     public void onEnable() {
-        Platform.setInstance(new BukkitPlatform());
-        this.plugin = Platform.getPluginManager().initializePlugin(this);
-        Platform.getPluginManager().enablePlugin(this.plugin);
+        Platform.setInstance(new BukkitPlatform(this.getServer()));
+        Platform.getPluginManager().enablePlugin(this.plugin = Platform.getPluginManager().initializePlugin(this));
     }
 
     @Override

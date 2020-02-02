@@ -11,17 +11,20 @@ import org.battleplugins.api.plugin.platform.PlatformPlugin;
 import org.battleplugins.api.sponge.logger.SpongeLogger;
 import org.battleplugins.api.sponge.SpongePlatform;
 import org.battleplugins.api.sponge.command.SpongeCommandExecutor;
+import org.spongepowered.api.Game;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.config.ConfigDir;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GameStartedServerEvent;
 import org.spongepowered.api.event.game.state.GameStoppedEvent;
-import org.spongepowered.api.plugin.PluginManager;
 
 import java.io.File;
 import java.util.List;
 
 public class AbstractSpongePlugin implements PlatformPlugin {
+
+    @Inject
+    private Game game;
 
     @Inject
     private org.slf4j.Logger logger;
@@ -30,19 +33,15 @@ public class AbstractSpongePlugin implements PlatformPlugin {
     @ConfigDir(sharedRoot = false)
     private File configDir;
 
-    @Inject
-    private PluginManager pluginManager;
-
     private boolean enabled = false;
 
     private Plugin plugin;
 
     @Listener
     public void onServerStart(GameStartedServerEvent event) {
-        Platform.setInstance(new SpongePlatform());
-        this.plugin = Platform.getPluginManager().initializePlugin(this);
-        Platform.getPluginManager().enablePlugin(this.plugin);
-        enabled = true;
+        Platform.setInstance(new SpongePlatform(game.getServer()));
+        Platform.getPluginManager().enablePlugin(this.plugin = Platform.getPluginManager().initializePlugin(this));
+        this.enabled = true;
     }
 
     @Listener

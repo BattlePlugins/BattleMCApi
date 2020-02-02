@@ -21,9 +21,8 @@ public class NukkitPlugin extends PluginBase implements PlatformPlugin {
     public void onEnable() {
         getServer().getPluginManager().registerEvents(new VirtualInventoryListener(this), this);
 
-        Platform.setInstance(new NukkitPlatform());
-        this.plugin = Platform.getPluginManager().initializePlugin(this);
-        Platform.getPluginManager().enablePlugin(this.plugin);
+        Platform.setInstance(new NukkitPlatform(this.getServer()));
+        Platform.getPluginManager().enablePlugin(this.plugin = Platform.getPluginManager().initializePlugin(this));
     }
 
     @Override
