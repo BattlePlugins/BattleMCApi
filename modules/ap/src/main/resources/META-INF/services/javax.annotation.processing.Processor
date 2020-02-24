@@ -1,1 +1,2 @@
 org.battleplugins.api.plugin.PluginProcessor
+org.battleplugins.api.plugin.SubscribeProcessor

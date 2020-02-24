@@ -2,24 +2,38 @@ package org.battleplugins.api.bukkit.plugin;
 
 import org.battleplugins.api.Platform;
 import org.battleplugins.api.bukkit.BukkitPlatform;
-import org.battleplugins.api.bukkit.command.BukkitCommandExecutor;
-import org.battleplugins.api.bukkit.logger.BukkitLogger;
-import org.battleplugins.api.bukkit.util.BukkitCommandUtil;
+import org.battleplugins.api.bukkit.event.BukkitEventListener;
 import org.battleplugins.api.command.Command;
 import org.battleplugins.api.command.CommandExecutor;
+import org.battleplugins.api.common.event.AbstractEventBus;
+import org.battleplugins.api.common.event.EventFactory;
 import org.battleplugins.api.logger.Logger;
 import org.battleplugins.api.plugin.Plugin;
+import org.battleplugins.api.plugin.PluginDescription;
 import org.battleplugins.api.plugin.platform.PlatformPlugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
+
 public class BukkitPlugin extends JavaPlugin implements PlatformPlugin {
 
-    private Plugin plugin;
+    protected Plugin plugin;
+    protected PlatformPlugin platformPlugin;
 
     @Override
     public void onEnable() {
-        Platform.setInstance(new BukkitPlatform(this.getServer()));
+        this.platformPlugin = new BukkitPlatformPlugin(this);
+
+        AbstractEventBus eventBus = new AbstractEventBus();
+        BukkitPluginManager pluginManager = new BukkitPluginManager(this.getServer().getPluginManager());
+        BukkitPlatform platform = new BukkitPlatform(this.getServer());
+        Platform.setInstance(platform, eventBus, pluginManager);
+        platform.getPlatformRegistry().setup();
+
         Platform.getPluginManager().enablePlugin(this.plugin = Platform.getPluginManager().initializePlugin(this));
+
+        EventFactory eventFactory = new EventFactory(eventBus);
+        this.getServer().getPluginManager().registerEvents(new BukkitEventListener(eventFactory), this);
     }
 
     @Override
@@ -28,15 +42,27 @@ public class BukkitPlugin extends JavaPlugin implements PlatformPlugin {
     }
 
     @Override
-    public void registerMCCommand(Command command, CommandExecutor executor) {
-        BukkitCommandUtil.BattleBukkitCommand bukkitCommand = new BukkitCommandUtil.BattleBukkitCommand(command, this, new BukkitCommandExecutor(executor));
-        BukkitCommandUtil.registerCommand(command.getLabel(), bukkitCommand);
-
-        // getCommand(command.getLabel()).setExecutor(new BukkitCommandExecutor(executor));
+    public PluginDescription getPluginDescription() {
+        return platformPlugin.getPluginDescription();
     }
 
     @Override
-    public Logger getMCLogger() {
-        return new BukkitLogger(getLogger());
+    public void registerPluginCommand(Command command, CommandExecutor executor) {
+        platformPlugin.registerPluginCommand(command, executor);
+    }
+
+    @Override
+    public File getPluginDataFolder() {
+        return platformPlugin.getPluginDataFolder();
+    }
+
+    @Override
+    public Logger getPluginLogger() {
+        return platformPlugin.getPluginLogger();
+    }
+
+    @Override
+    public boolean isPluginEnabled() {
+        return platformPlugin.isPluginEnabled();
     }
 }

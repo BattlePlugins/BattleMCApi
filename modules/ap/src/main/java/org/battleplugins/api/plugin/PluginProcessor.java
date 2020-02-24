@@ -80,7 +80,7 @@ public class PluginProcessor extends AbstractProcessor {
             this.plugin = pluginElement.getAnnotation(PluginProperties.class);
         }
 
-        return false;
+        return true;
     }
 
     public void complete() {

@@ -1,7 +1,9 @@
 package org.battleplugins.api.nukkit;
 
 import org.battleplugins.api.Registry;
+import org.battleplugins.api.entity.component.ageable.BabyComponent;
 import org.battleplugins.api.nukkit.entity.NukkitEntityRegistry;
+import org.battleplugins.api.nukkit.entity.component.ageable.NukkitBabyComponent;
 import org.battleplugins.api.nukkit.inventory.NukkitInventoryBuilder;
 import org.battleplugins.api.nukkit.inventory.item.NukkitItemRegistry;
 import org.battleplugins.api.nukkit.world.block.NukkitBlockRegistry;
@@ -12,12 +14,14 @@ public class NukkitRegistry extends Registry {
     private NukkitBlockRegistry blockRegistry;
     private NukkitEntityRegistry entityRegistry;
 
-    NukkitRegistry() {
-        itemRegistry = new NukkitItemRegistry();
-        blockRegistry = new NukkitBlockRegistry();
-        entityRegistry = new NukkitEntityRegistry();
+    public void setup() {
+        this.itemRegistry = new NukkitItemRegistry();
+        this.blockRegistry = new NukkitBlockRegistry();
+        this.entityRegistry = new NukkitEntityRegistry();
 
-        builders.add(NukkitInventoryBuilder.class);
+        this.builders.add(NukkitInventoryBuilder.class);
+
+        this.entityRegistry.registerComponent(BabyComponent.class, new NukkitBabyComponent());
     }
 
     @Override

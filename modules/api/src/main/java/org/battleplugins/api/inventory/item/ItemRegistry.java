@@ -67,4 +67,13 @@ public abstract class ItemRegistry<T> {
     protected <U extends ItemComponent> void registerComponent(Class<U> component, Class<? extends U> componentImpl) {
         itemComponents.put(component, componentImpl);
     }
+
+    /**
+     * Gets the current item registry
+     *
+     * @return the current item registry
+     */
+    public static ItemRegistry<?> get() {
+        return Platform.getRegistry().getItemRegistry();
+    }
 }

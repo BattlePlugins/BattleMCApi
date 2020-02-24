@@ -25,7 +25,7 @@ public class NukkitItemRegistry extends ItemRegistry<Item> {
     private static final Map<String, ItemEntry> IDENTIFIER_TO_ENTRY = new HashMap<>();
 
     public NukkitItemRegistry() {
-        InputStream inputStream = NukkitPlatform.class.getResourceAsStream("items.json");
+        InputStream inputStream = NukkitPlatform.class.getResourceAsStream("/mappings/items.json");
         if (inputStream == null)
             throw new AssertionError("Items Table not found");
 
@@ -33,7 +33,7 @@ public class NukkitItemRegistry extends ItemRegistry<Item> {
         Type mapType = new TypeToken<Map<String, ItemEntry>>() {}.getType();
         Map<String, ItemEntry> itemEntries = gson.fromJson(new InputStreamReader(inputStream), mapType);
         for (Map.Entry<String, ItemEntry> itemEntry : itemEntries.entrySet()) {
-            ITEM_ENTRIES.put(itemEntry.getValue(), new NukkitItemType(NamespacedKey.minecraft(itemEntry.getKey()),
+            ITEM_ENTRIES.put(itemEntry.getValue(), new NukkitItemType(NamespacedKey.of(itemEntry.getKey()),
                     Item.get(itemEntry.getValue().getBedrockId(), itemEntry.getValue().getBedrockData())));
             IDENTIFIER_TO_ENTRY.put(itemEntry.getKey(), itemEntry.getValue());
         }

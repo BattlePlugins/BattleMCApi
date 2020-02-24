@@ -117,7 +117,7 @@ public class EntityTypes {
      * @return an item type from the given namespaced key
      */
     public static Optional<EntityType> getEntityFromKey(NamespacedKey key) {
-        return EntityRegistry.REGISTRY.fromKey(key);
+        return EntityRegistry.get().fromKey(key);
     }
 
     private static EntityType getOrDefault(String name) {

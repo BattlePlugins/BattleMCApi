@@ -27,7 +27,7 @@ public class NukkitBlock extends MCWrapper<Block> implements org.battleplugins.a
 
 	@Override
 	public BlockType getType() {
-		return ((NukkitBlockRegistry) BlockRegistry.REGISTRY).fromPlatformBlock(handle);
+		return ((NukkitBlockRegistry) BlockRegistry.get()).fromPlatformBlock(handle);
 	}
 
 	@Override

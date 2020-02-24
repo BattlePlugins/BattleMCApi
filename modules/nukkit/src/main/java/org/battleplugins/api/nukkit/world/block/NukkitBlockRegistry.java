@@ -24,7 +24,9 @@ public class NukkitBlockRegistry implements BlockRegistry<Block> {
     private static final Map<String, Block> IDENTIFIER_TO_BLOCK = new HashMap<>();
 
     public NukkitBlockRegistry() {
-        InputStream inputStream = NukkitPlatform.class.getResourceAsStream("blocks.json");
+        // TODO: Rework block registry when nukkit 2.0 is released
+        /*
+        InputStream inputStream = NukkitPlatform.class.getResourceAsStream("/mappings/blocks.json");
         if (inputStream == null)
             throw new AssertionError("Blocks Table not found");
 
@@ -36,9 +38,11 @@ public class NukkitBlockRegistry implements BlockRegistry<Block> {
                         + blockEntry.getValue().getBedrockData());
 
             Block block = Block.get(item.getId(), item.getDamage());
-            BLOCK_ENTRIES.put(block, new NukkitBlockType(NamespacedKey.minecraft(blockEntry.getKey()), block));
+            BLOCK_ENTRIES.put(block, new NukkitBlockType(block));
             IDENTIFIER_TO_BLOCK.put(blockEntry.getKey(), block);
         }
+
+         */
     }
 
     @Override

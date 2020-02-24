@@ -62,12 +62,12 @@ public class BukkitPlatform extends Platform {
     }
 
     @Override
-    protected BukkitRegistry getPlatformRegistry() {
+    public BukkitRegistry getPlatformRegistry() {
         return registry;
     }
 
     @Override
-    protected Server getPlatformServer() {
+    public Server getPlatformServer() {
         return server;
     }
 

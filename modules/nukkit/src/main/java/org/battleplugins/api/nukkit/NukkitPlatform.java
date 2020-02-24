@@ -15,11 +15,10 @@ import org.battleplugins.api.plugin.Plugin;
 
 public class NukkitPlatform extends Platform {
 
-    private NukkitRegistry registry;
+    private NukkitRegistry registry = new NukkitRegistry();;
     private NukkitServer server;
 
     public NukkitPlatform(Server server) {
-        this.registry = new NukkitRegistry();
         this.server = new NukkitServer(server);
     }
 
@@ -60,12 +59,12 @@ public class NukkitPlatform extends Platform {
     }
 
     @Override
-    protected NukkitRegistry getPlatformRegistry() {
+    public NukkitRegistry getPlatformRegistry() {
         return registry;
     }
 
     @Override
-    protected org.battleplugins.api.Server getPlatformServer() {
+    public org.battleplugins.api.Server getPlatformServer() {
         return server;
     }
 }

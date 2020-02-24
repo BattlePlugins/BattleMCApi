@@ -2,18 +2,11 @@ package org.battleplugins.api;
 
 import mc.euro.version.Version;
 
-import org.battleplugins.api.entity.living.player.OfflinePlayer;
+import org.battleplugins.api.event.EventBus;
 import org.battleplugins.api.inventory.item.ItemStack;
 import org.battleplugins.api.message.Message;
 import org.battleplugins.api.plugin.Plugin;
 import org.battleplugins.api.plugin.PluginManager;
-import org.battleplugins.api.plugin.service.ServicePriority;
-import org.battleplugins.api.world.World;
-import org.battleplugins.api.entity.living.player.Player;
-
-import java.util.Collection;
-import java.util.Optional;
-import java.util.UUID;
 
 /**
  * Represents a platform. Can be extended by any of the
@@ -22,17 +15,24 @@ import java.util.UUID;
 public abstract class Platform {
 
     private static Platform INSTANCE;
-
-    private static PluginManager pluginManager = new PluginManager();
+    private static EventBus EVENT_BUS;
+    private static PluginManager PLUGIN_MANAGER;
 
     /**
      * Sets the instance of this platform
      *
      * @param platform the platform instance
      */
-    public static void setInstance(Platform platform) {
+    public static void setInstance(Platform platform, EventBus bus, PluginManager pluginManager) {
         if (INSTANCE == null) {
             INSTANCE = platform;
+        }
+        if (EVENT_BUS == null) {
+            EVENT_BUS = bus;
+        }
+
+        if (PLUGIN_MANAGER == null) {
+            PLUGIN_MANAGER = pluginManager;
         }
     }
 
@@ -83,7 +83,16 @@ public abstract class Platform {
      * @return the plugin manager
      */
     public static PluginManager getPluginManager() {
-        return pluginManager;
+        return PLUGIN_MANAGER;
+    }
+
+    /**
+     * The {@link EventBus}
+     *
+     * @return the event bus
+     */
+    public static EventBus getEventBus() {
+        return EVENT_BUS;
     }
 
     /**

@@ -1,10 +1,15 @@
 package org.battleplugins.api.plugin;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 import org.battleplugins.api.Platform;
 import org.battleplugins.api.PlatformType;
 import org.battleplugins.api.PlatformTypes;
+import org.battleplugins.api.Server;
 import org.battleplugins.api.command.Command;
 import org.battleplugins.api.command.CommandExecutor;
+import org.battleplugins.api.event.EventBus;
 import org.battleplugins.api.plugin.platform.PlatformCodeHandler;
 import org.battleplugins.api.plugin.platform.PlatformPlugin;
 import org.battleplugins.api.logger.Logger;
@@ -18,8 +23,23 @@ import java.util.Map;
  */
 public abstract class Plugin {
 
+	/**
+	 * The {@link PlatformPlugin}
+	 *
+	 * @return the {@link PlatformPlugin}
+	 */
+	@Getter
+	@Setter
 	protected PlatformPlugin platformPlugin;
+
 	protected Map<PlatformType, PlatformCodeHandler> platformCode;
+
+	public Plugin() {
+		this.platformCode = new HashMap<>();
+		for (PlatformType type : PlatformTypes.values()) {
+			platformCode.put(type, new PlatformCodeHandler());
+		}
+	}
 
 	/**
 	 * Called when the plugin is enabled
@@ -31,20 +51,13 @@ public abstract class Plugin {
 	 */
 	public abstract void onDisable();
 
-	public Plugin() {
-		this.platformCode = new HashMap<>();
-		for (PlatformType type : PlatformTypes.values()) {
-			platformCode.put(type, new PlatformCodeHandler());
-		}
-	}
-
 	/**
 	 * If the plugin is enabled
 	 *
 	 * @return if the plugin is enabled
 	 */
 	public boolean isEnabled() {
-		return platformPlugin.isEnabled();
+		return platformPlugin.isPluginEnabled();
 	}
 
 	/**
@@ -53,7 +66,7 @@ public abstract class Plugin {
 	 * @return the data folder of the plugin
 	 */
 	public File getDataFolder() {
-		return platformPlugin.getDataFolder();
+		return platformPlugin.getPluginDataFolder();
 	}
 
 	/**
@@ -62,7 +75,7 @@ public abstract class Plugin {
 	 * @return the {@link Logger}
 	 */
 	public Logger getLogger() {
-		return platformPlugin.getMCLogger();
+		return platformPlugin.getPluginLogger();
 	}
 
 	/**
@@ -73,20 +86,7 @@ public abstract class Plugin {
 	 * @param executor the executor of the command
 	 */
 	public void registerCommand(Command command, CommandExecutor executor) {
-		platformPlugin.registerMCCommand(command, executor);
-	}
-
-	/**
-	 * The {@link PlatformPlugin}
-	 *
-	 * @return the {@link PlatformPlugin}
-	 */
-	public PlatformPlugin getPlatformPlugin() {
-		return platformPlugin;
-	}
-
-	protected void setPlatformPlugin(PlatformPlugin platformPlugin) {
-		this.platformPlugin = platformPlugin;
+		platformPlugin.registerPluginCommand(command, executor);
 	}
 
 	/**
@@ -95,8 +95,8 @@ public abstract class Plugin {
 	 *
 	 * @return the {@link PluginDescription}
 	 */
-	public PluginDescription getDescription() {
-		return new PluginDescription(getClass().getAnnotation(PluginProperties.class));
+	public PluginPropertiesDescription getDescription() {
+		return new PluginPropertiesDescription(getClass().getAnnotation(PluginProperties.class));
 	}
 
 	/**
@@ -116,5 +116,23 @@ public abstract class Plugin {
 	 */
 	public Platform getPlatform() {
 		return Platform.getPlatform();
+	}
+
+	/**
+	 * The {@link Server}
+	 *
+	 * @return the {@link Server}
+	 */
+	public Server getServer() {
+		return Platform.getServer();
+	}
+
+	/**
+	 * The {@link EventBus}
+	 *
+	 * @return the {@link EventBus}
+	 */
+	public EventBus getEventBus() {
+		return Platform.getEventBus();
 	}
 }

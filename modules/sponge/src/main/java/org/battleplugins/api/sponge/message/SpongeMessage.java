@@ -24,6 +24,10 @@ public class SpongeMessage extends Message {
 
     @Override
     public void sendMessage(Player player) {
+        ((SpongePlayer) player).getHandle().sendMessage(getMessage());
+    }
+
+    public Text getMessage() {
         Text.Builder builder = Text.builder(message);
         if (hoverAction != null && hoverMessage != null) {
             switch (hoverAction) {
@@ -61,8 +65,6 @@ public class SpongeMessage extends Message {
                     break;
             }
         }
-
-        SpongePlayer spongePlayer = (SpongePlayer) player;
-        spongePlayer.getHandle().sendMessage(builder.build());
+        return builder.build();
     }
 }

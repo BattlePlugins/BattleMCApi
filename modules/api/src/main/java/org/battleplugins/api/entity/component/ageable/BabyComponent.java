@@ -3,6 +3,7 @@ package org.battleplugins.api.entity.component.ageable;
 import static org.battleplugins.api.entity.EntityTypes.*;
 
 import org.battleplugins.api.entity.EntityType;
+import org.battleplugins.api.entity.EntityTypes;
 import org.battleplugins.api.entity.component.EntityComponent;
 
 import java.util.Arrays;
@@ -17,6 +18,7 @@ public interface BabyComponent extends EntityComponent<Boolean> {
 
     @Override
     default Set<EntityType> getValidEntityTypes() {
+
         return new HashSet<>(Arrays.asList(BEE, CAT, CHICKEN,
                 COW, DONKEY, DROWNED, FOX, HORSE, HUSK, LLAMA,
                 MULE, MOOSHROOM, OCELOT, PANDA, PIG, PANDA,

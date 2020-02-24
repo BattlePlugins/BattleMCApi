@@ -26,7 +26,7 @@ public class BukkitBlock extends MCWrapper<Block> implements org.battleplugins.a
 
 	@Override
 	public BlockType getType() {
-		return ((BukkitBlockRegistry) BlockRegistry.REGISTRY).fromPlatformBlock(handle.getType());
+		return ((BukkitBlockRegistry) BlockRegistry.get()).fromPlatformBlock(handle.getType());
 	}
 
 	@Override

@@ -28,6 +28,12 @@
         </dependency>
         <dependency>
             <groupId>org.battleplugins</groupId>
+            <artifactId>McAPI-common</artifactId>
+            <version>parent</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.battleplugins</groupId>
             <artifactId>McAPI-bukkit</artifactId>
             <version>parent</version>
             <scope>compile</scope>
@@ -73,20 +79,25 @@
                                     <include>mc.euro:Version</include>
                                     <include>io.papermc:paperlib</include>
                                     <include>javassist:javassist</include>
+                                    <include>net.kyori:event-api</include>
                                 </includes>
                             </artifactSet>
                             <relocations>
                                 <relocation>
                                     <pattern>javassist</pattern>
-                                    <shadedPattern>org.battleplugins.alib.javassist</shadedPattern>
+                                    <shadedPattern>org.battleplugins.api.shaded.javassist</shadedPattern>
                                 </relocation>
                                 <relocation>
                                     <pattern>io.papermc.lib</pattern>
-                                    <shadedPattern>org.battleplugins.alib.paperlib</shadedPattern>
+                                    <shadedPattern>org.battleplugins.api.shaded.paperlib</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>net.kyori.event</pattern>
+                                    <shadedPattern>org.battleplugins.api.shaded.event</shadedPattern>
                                 </relocation>
                                 <relocation>
                                     <pattern>mc.euro.version</pattern>
-                                    <shadedPattern>org.battleplugins.util.version</shadedPattern>
+                                    <shadedPattern>org.battleplugins.api.util.version</shadedPattern>
                                 </relocation>
                             </relocations>
                         </configuration>

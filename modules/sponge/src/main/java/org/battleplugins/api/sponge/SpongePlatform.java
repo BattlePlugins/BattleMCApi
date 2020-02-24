@@ -18,12 +18,12 @@ import java.util.concurrent.TimeUnit;
 
 public class SpongePlatform extends Platform {
 
-    private SpongeRegistry registry;
+    private SpongeRegistry registry = new SpongeRegistry();
     private SpongeServer server;
 
     public SpongePlatform(org.spongepowered.api.Server server) {
-        this.registry = new SpongeRegistry();
         this.server = new SpongeServer(server);
+        this.registry.setup();
     }
 
     @Override
@@ -64,12 +64,12 @@ public class SpongePlatform extends Platform {
     }
 
     @Override
-    protected SpongeRegistry getPlatformRegistry() {
+    public SpongeRegistry getPlatformRegistry() {
         return registry;
     }
 
     @Override
-    protected Server getPlatformServer() {
+    public Server getPlatformServer() {
         return server;
     }
 }

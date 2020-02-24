@@ -19,8 +19,6 @@ import java.util.Optional;
  */
 public interface BlockRegistry<T> {
 
-    BlockRegistry<?> REGISTRY = Platform.getPlatform().getRegistry().getBlockRegistry();
-
     /**
      * Gets the given block type from the platform
      * block
@@ -42,4 +40,13 @@ public interface BlockRegistry<T> {
      * @return the block type from the given namespaced key
      */
     Optional<BlockType> fromKey(NamespacedKey namespacedKey);
+
+    /**
+     * Gets the current block registry
+     *
+     * @return the current block registry
+     */
+    static BlockRegistry<?> get() {
+        return Platform.getRegistry().getBlockRegistry();
+    }
 }

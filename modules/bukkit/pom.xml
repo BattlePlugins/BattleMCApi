@@ -27,7 +27,7 @@
         </dependency>
         <dependency>
             <groupId>org.battleplugins</groupId>
-            <artifactId>McAPI-api</artifactId>
+            <artifactId>McAPI-common</artifactId>
             <version>parent</version>
             <scope>compile</scope>
         </dependency>

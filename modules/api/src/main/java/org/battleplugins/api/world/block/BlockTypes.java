@@ -697,7 +697,7 @@ public class BlockTypes {
      * @return an block type from the given namespaced key
      */
     public static Optional<BlockType> getBlockFromKey(NamespacedKey key) {
-        return BlockRegistry.REGISTRY.fromKey(key);
+        return BlockRegistry.get().fromKey(key);
     }
 
     private static BlockType getOrDefault(String name) {

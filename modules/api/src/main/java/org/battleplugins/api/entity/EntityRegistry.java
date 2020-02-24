@@ -13,10 +13,8 @@ import java.util.*;
  */
 public abstract class EntityRegistry<T> {
 
-    public static final EntityRegistry<?> REGISTRY = Platform.getPlatform().getRegistry().getEntityRegistry();
-
     private Map<EntityType, Set<Class<? extends EntityComponent>>> validComponents = new HashMap<>();
-    private Map<Class<? extends EntityComponent>, Class<? extends EntityComponent>> entityComponents = new HashMap<>();
+    private Map<Class<? extends EntityComponent<?>>, EntityComponent<?>> entityComponents = new HashMap<>();
 
     /**
      * Gets the given {@link EntityType} from the platform
@@ -57,28 +55,26 @@ public abstract class EntityRegistry<T> {
         if (!entityComponents.containsKey(componentClass))
             throw new IllegalArgumentException("Component class " + componentClass + " not registered!");
 
-        try {
-            return componentClass.cast(entityComponents.get(componentClass).newInstance());
-        } catch (InstantiationException | IllegalAccessException ex) {
-            throw new IllegalArgumentException("Component class " + componentClass + " was unable to be instantiated!");
-        }
+
+        return componentClass.cast(entityComponents.get(componentClass));
     }
 
-    protected <U extends EntityComponent> void registerComponent(Class<U> component, Class<? extends U> componentImpl) {
-        try {
-            EntityComponent<?> comp = componentImpl.newInstance();
-            for (EntityType type : comp.getValidEntityTypes()) {
-                Set<Class<? extends EntityComponent>> components = validComponents.getOrDefault(type, new HashSet<>());
-                components.add(component);
-                validComponents.put(type, components);
-            }
-
-        } catch (InstantiationException | IllegalAccessException ex) {
-            System.err.println("Failed to register component " + component + " with impl " + componentImpl);
-            ex.printStackTrace();
-            return;
+    public <U extends EntityComponent<?>> void registerComponent(Class<U> component, U componentImpl) {
+        for (EntityType type : componentImpl.getValidEntityTypes()) {
+            Set<Class<? extends EntityComponent>> components = validComponents.getOrDefault(type, new HashSet<>());
+            components.add(component);
+            validComponents.put(type, components);
         }
 
         entityComponents.put(component, componentImpl);
+    }
+
+    /**
+     * Gets the current entity registry
+     *
+     * @return the current entity registry
+     */
+    public static EntityRegistry<?> get() {
+        return Platform.getRegistry().getEntityRegistry();
     }
 }
