@@ -24,7 +24,6 @@ public class ItemTypes {
     public static final ItemType ACACIA_SLAB = getOrDefault("acacia_slab");
     public static final ItemType ACACIA_STAIRS = getOrDefault("acacia_stairs");
     public static final ItemType ACACIA_TRAPDOOR = getOrDefault("acacia_trapdoor");
-    public static final ItemType ACACIA_WALL_SIGN = getOrDefault("acacia_wall_sign");
     public static final ItemType ACACIA_WOOD = getOrDefault("acacia_wood");
     public static final ItemType ACTIVATOR_RAIL = getOrDefault("activator_rail");
     public static final ItemType AIR = getOrDefault("air");
@@ -37,12 +36,9 @@ public class ItemTypes {
     public static final ItemType APPLE = getOrDefault("apple");
     public static final ItemType ARMOR_STAND = getOrDefault("armor_stand");
     public static final ItemType ARROW = getOrDefault("arrow");
-    public static final ItemType ATTACHED_MELON_STEM = getOrDefault("attached_melon_stem");
-    public static final ItemType ATTACHED_PUMPKIN_STEM = getOrDefault("attached_pumpkin_stem");
     public static final ItemType AZURE_BLUET = getOrDefault("azure_bluet");
     public static final ItemType BAKED_POTATO = getOrDefault("baked_potato");
     public static final ItemType BAMBOO = getOrDefault("bamboo");
-    public static final ItemType BAMBOO_SAPLING = getOrDefault("bamboo_sapling");
     public static final ItemType BARREL = getOrDefault("barrel");
     public static final ItemType BARRIER = getOrDefault("barrier");
     public static final ItemType BAT_SPAWN_EGG = getOrDefault("bat_spawn_egg");
@@ -51,7 +47,6 @@ public class ItemTypes {
     public static final ItemType BEEF = getOrDefault("beef");
     public static final ItemType BEEHIVE = getOrDefault("beehive");
     public static final ItemType BEETROOT = getOrDefault("beetroot");
-    public static final ItemType BEETROOTS = getOrDefault("beetroots");
     public static final ItemType BEETROOT_SEEDS = getOrDefault("beetroot_seeds");
     public static final ItemType BEETROOT_SOUP = getOrDefault("beetroot_soup");
     public static final ItemType BEE_NEST = getOrDefault("bee_nest");
@@ -71,7 +66,6 @@ public class ItemTypes {
     public static final ItemType BIRCH_SLAB = getOrDefault("birch_slab");
     public static final ItemType BIRCH_STAIRS = getOrDefault("birch_stairs");
     public static final ItemType BIRCH_TRAPDOOR = getOrDefault("birch_trapdoor");
-    public static final ItemType BIRCH_WALL_SIGN = getOrDefault("birch_wall_sign");
     public static final ItemType BIRCH_WOOD = getOrDefault("birch_wood");
     public static final ItemType BLACK_BANNER = getOrDefault("black_banner");
     public static final ItemType BLACK_BED = getOrDefault("black_bed");
@@ -84,7 +78,6 @@ public class ItemTypes {
     public static final ItemType BLACK_STAINED_GLASS = getOrDefault("black_stained_glass");
     public static final ItemType BLACK_STAINED_GLASS_PANE = getOrDefault("black_stained_glass_pane");
     public static final ItemType BLACK_TERRACOTTA = getOrDefault("black_terracotta");
-    public static final ItemType BLACK_WALL_BANNER = getOrDefault("black_wall_banner");
     public static final ItemType BLACK_WOOL = getOrDefault("black_wool");
     public static final ItemType BLAST_FURNACE = getOrDefault("blast_furnace");
     public static final ItemType BLAZE_POWDER = getOrDefault("blaze_powder");
@@ -103,7 +96,6 @@ public class ItemTypes {
     public static final ItemType BLUE_STAINED_GLASS = getOrDefault("blue_stained_glass");
     public static final ItemType BLUE_STAINED_GLASS_PANE = getOrDefault("blue_stained_glass_pane");
     public static final ItemType BLUE_TERRACOTTA = getOrDefault("blue_terracotta");
-    public static final ItemType BLUE_WALL_BANNER = getOrDefault("blue_wall_banner");
     public static final ItemType BLUE_WOOL = getOrDefault("blue_wool");
     public static final ItemType BONE = getOrDefault("bone");
     public static final ItemType BONE_BLOCK = getOrDefault("bone_block");
@@ -115,7 +107,6 @@ public class ItemTypes {
     public static final ItemType BRAIN_CORAL = getOrDefault("brain_coral");
     public static final ItemType BRAIN_CORAL_BLOCK = getOrDefault("brain_coral_block");
     public static final ItemType BRAIN_CORAL_FAN = getOrDefault("brain_coral_fan");
-    public static final ItemType BRAIN_CORAL_WALL_FAN = getOrDefault("brain_coral_wall_fan");
     public static final ItemType BREAD = getOrDefault("bread");
     public static final ItemType BREWING_STAND = getOrDefault("brewing_stand");
     public static final ItemType BRICK = getOrDefault("brick");
@@ -136,25 +127,20 @@ public class ItemTypes {
     public static final ItemType BROWN_STAINED_GLASS = getOrDefault("brown_stained_glass");
     public static final ItemType BROWN_STAINED_GLASS_PANE = getOrDefault("brown_stained_glass_pane");
     public static final ItemType BROWN_TERRACOTTA = getOrDefault("brown_terracotta");
-    public static final ItemType BROWN_WALL_BANNER = getOrDefault("brown_wall_banner");
     public static final ItemType BROWN_WOOL = getOrDefault("brown_wool");
-    public static final ItemType BUBBLE_COLUMN = getOrDefault("bubble_column");
     public static final ItemType BUBBLE_CORAL = getOrDefault("bubble_coral");
     public static final ItemType BUBBLE_CORAL_BLOCK = getOrDefault("bubble_coral_block");
     public static final ItemType BUBBLE_CORAL_FAN = getOrDefault("bubble_coral_fan");
-    public static final ItemType BUBBLE_CORAL_WALL_FAN = getOrDefault("bubble_coral_wall_fan");
     public static final ItemType BUCKET = getOrDefault("bucket");
     public static final ItemType CACTUS = getOrDefault("cactus");
     public static final ItemType CAKE = getOrDefault("cake");
     public static final ItemType CAMPFIRE = getOrDefault("campfire");
     public static final ItemType CARROT = getOrDefault("carrot");
-    public static final ItemType CARROTS = getOrDefault("carrots");
     public static final ItemType CARROT_ON_A_STICK = getOrDefault("carrot_on_a_stick");
     public static final ItemType CARTOGRAPHY_TABLE = getOrDefault("cartography_table");
     public static final ItemType CARVED_PUMPKIN = getOrDefault("carved_pumpkin");
     public static final ItemType CAT_SPAWN_EGG = getOrDefault("cat_spawn_egg");
     public static final ItemType CAULDRON = getOrDefault("cauldron");
-    public static final ItemType CAVE_AIR = getOrDefault("cave_air");
     public static final ItemType CAVE_SPIDER_SPAWN_EGG = getOrDefault("cave_spider_spawn_egg");
     public static final ItemType CHAINMAIL_BOOTS = getOrDefault("chainmail_boots");
     public static final ItemType CHAINMAIL_CHESTPLATE = getOrDefault("chainmail_chestplate");
@@ -186,7 +172,6 @@ public class ItemTypes {
     public static final ItemType COBBLESTONE_STAIRS = getOrDefault("cobblestone_stairs");
     public static final ItemType COBBLESTONE_WALL = getOrDefault("cobblestone_wall");
     public static final ItemType COBWEB = getOrDefault("cobweb");
-    public static final ItemType COCOA = getOrDefault("cocoa");
     public static final ItemType COCOA_BEANS = getOrDefault("cocoa_beans");
     public static final ItemType COD = getOrDefault("cod");
     public static final ItemType COD_BUCKET = getOrDefault("cod_bucket");
@@ -212,7 +197,6 @@ public class ItemTypes {
     public static final ItemType CREEPER_BANNER_PATTERN = getOrDefault("creeper_banner_pattern");
     public static final ItemType CREEPER_HEAD = getOrDefault("creeper_head");
     public static final ItemType CREEPER_SPAWN_EGG = getOrDefault("creeper_spawn_egg");
-    public static final ItemType CREEPER_WALL_HEAD = getOrDefault("creeper_wall_head");
     public static final ItemType CROSSBOW = getOrDefault("crossbow");
     public static final ItemType CUT_RED_SANDSTONE = getOrDefault("cut_red_sandstone");
     public static final ItemType CUT_RED_SANDSTONE_SLAB = getOrDefault("cut_red_sandstone_slab");
@@ -229,7 +213,6 @@ public class ItemTypes {
     public static final ItemType CYAN_STAINED_GLASS = getOrDefault("cyan_stained_glass");
     public static final ItemType CYAN_STAINED_GLASS_PANE = getOrDefault("cyan_stained_glass_pane");
     public static final ItemType CYAN_TERRACOTTA = getOrDefault("cyan_terracotta");
-    public static final ItemType CYAN_WALL_BANNER = getOrDefault("cyan_wall_banner");
     public static final ItemType CYAN_WOOL = getOrDefault("cyan_wool");
     public static final ItemType DAMAGED_ANVIL = getOrDefault("damaged_anvil");
     public static final ItemType DANDELION = getOrDefault("dandelion");
@@ -247,7 +230,6 @@ public class ItemTypes {
     public static final ItemType DARK_OAK_SLAB = getOrDefault("dark_oak_slab");
     public static final ItemType DARK_OAK_STAIRS = getOrDefault("dark_oak_stairs");
     public static final ItemType DARK_OAK_TRAPDOOR = getOrDefault("dark_oak_trapdoor");
-    public static final ItemType DARK_OAK_WALL_SIGN = getOrDefault("dark_oak_wall_sign");
     public static final ItemType DARK_OAK_WOOD = getOrDefault("dark_oak_wood");
     public static final ItemType DARK_PRISMARINE = getOrDefault("dark_prismarine");
     public static final ItemType DARK_PRISMARINE_SLAB = getOrDefault("dark_prismarine_slab");
@@ -256,24 +238,19 @@ public class ItemTypes {
     public static final ItemType DEAD_BRAIN_CORAL = getOrDefault("dead_brain_coral");
     public static final ItemType DEAD_BRAIN_CORAL_BLOCK = getOrDefault("dead_brain_coral_block");
     public static final ItemType DEAD_BRAIN_CORAL_FAN = getOrDefault("dead_brain_coral_fan");
-    public static final ItemType DEAD_BRAIN_CORAL_WALL_FAN = getOrDefault("dead_brain_coral_wall_fan");
     public static final ItemType DEAD_BUBBLE_CORAL = getOrDefault("dead_bubble_coral");
     public static final ItemType DEAD_BUBBLE_CORAL_BLOCK = getOrDefault("dead_bubble_coral_block");
     public static final ItemType DEAD_BUBBLE_CORAL_FAN = getOrDefault("dead_bubble_coral_fan");
-    public static final ItemType DEAD_BUBBLE_CORAL_WALL_FAN = getOrDefault("dead_bubble_coral_wall_fan");
     public static final ItemType DEAD_BUSH = getOrDefault("dead_bush");
     public static final ItemType DEAD_FIRE_CORAL = getOrDefault("dead_fire_coral");
     public static final ItemType DEAD_FIRE_CORAL_BLOCK = getOrDefault("dead_fire_coral_block");
     public static final ItemType DEAD_FIRE_CORAL_FAN = getOrDefault("dead_fire_coral_fan");
-    public static final ItemType DEAD_FIRE_CORAL_WALL_FAN = getOrDefault("dead_fire_coral_wall_fan");
     public static final ItemType DEAD_HORN_CORAL = getOrDefault("dead_horn_coral");
     public static final ItemType DEAD_HORN_CORAL_BLOCK = getOrDefault("dead_horn_coral_block");
     public static final ItemType DEAD_HORN_CORAL_FAN = getOrDefault("dead_horn_coral_fan");
-    public static final ItemType DEAD_HORN_CORAL_WALL_FAN = getOrDefault("dead_horn_coral_wall_fan");
     public static final ItemType DEAD_TUBE_CORAL = getOrDefault("dead_tube_coral");
     public static final ItemType DEAD_TUBE_CORAL_BLOCK = getOrDefault("dead_tube_coral_block");
     public static final ItemType DEAD_TUBE_CORAL_FAN = getOrDefault("dead_tube_coral_fan");
-    public static final ItemType DEAD_TUBE_CORAL_WALL_FAN = getOrDefault("dead_tube_coral_wall_fan");
     public static final ItemType DEBUG_STICK = getOrDefault("debug_stick");
     public static final ItemType DETECTOR_RAIL = getOrDefault("detector_rail");
     public static final ItemType DIAMOND = getOrDefault("diamond");
@@ -300,7 +277,6 @@ public class ItemTypes {
     public static final ItemType DRAGON_BREATH = getOrDefault("dragon_breath");
     public static final ItemType DRAGON_EGG = getOrDefault("dragon_egg");
     public static final ItemType DRAGON_HEAD = getOrDefault("dragon_head");
-    public static final ItemType DRAGON_WALL_HEAD = getOrDefault("dragon_wall_head");
     public static final ItemType DRIED_KELP = getOrDefault("dried_kelp");
     public static final ItemType DRIED_KELP_BLOCK = getOrDefault("dried_kelp_block");
     public static final ItemType DROPPER = getOrDefault("dropper");
@@ -320,8 +296,6 @@ public class ItemTypes {
     public static final ItemType ENDER_EYE = getOrDefault("ender_eye");
     public static final ItemType ENDER_PEARL = getOrDefault("ender_pearl");
     public static final ItemType END_CRYSTAL = getOrDefault("end_crystal");
-    public static final ItemType END_GATEWAY = getOrDefault("end_gateway");
-    public static final ItemType END_PORTAL = getOrDefault("end_portal");
     public static final ItemType END_PORTAL_FRAME = getOrDefault("end_portal_frame");
     public static final ItemType END_ROD = getOrDefault("end_rod");
     public static final ItemType END_STONE = getOrDefault("end_stone");
@@ -336,14 +310,12 @@ public class ItemTypes {
     public static final ItemType FERMENTED_SPIDER_EYE = getOrDefault("fermented_spider_eye");
     public static final ItemType FERN = getOrDefault("fern");
     public static final ItemType FILLED_MAP = getOrDefault("filled_map");
-    public static final ItemType FIRE = getOrDefault("fire");
     public static final ItemType FIREWORK_ROCKET = getOrDefault("firework_rocket");
     public static final ItemType FIREWORK_STAR = getOrDefault("firework_star");
     public static final ItemType FIRE_CHARGE = getOrDefault("fire_charge");
     public static final ItemType FIRE_CORAL = getOrDefault("fire_coral");
     public static final ItemType FIRE_CORAL_BLOCK = getOrDefault("fire_coral_block");
     public static final ItemType FIRE_CORAL_FAN = getOrDefault("fire_coral_fan");
-    public static final ItemType FIRE_CORAL_WALL_FAN = getOrDefault("fire_coral_wall_fan");
     public static final ItemType FISHING_ROD = getOrDefault("fishing_rod");
     public static final ItemType FLETCHING_TABLE = getOrDefault("fletching_table");
     public static final ItemType FLINT = getOrDefault("flint");
@@ -351,7 +323,6 @@ public class ItemTypes {
     public static final ItemType FLOWER_BANNER_PATTERN = getOrDefault("flower_banner_pattern");
     public static final ItemType FLOWER_POT = getOrDefault("flower_pot");
     public static final ItemType FOX_SPAWN_EGG = getOrDefault("fox_spawn_egg");
-    public static final ItemType FROSTED_ICE = getOrDefault("frosted_ice");
     public static final ItemType FURNACE = getOrDefault("furnace");
     public static final ItemType FURNACE_MINECART = getOrDefault("furnace_minecart");
     public static final ItemType GHAST_SPAWN_EGG = getOrDefault("ghast_spawn_egg");
@@ -398,7 +369,6 @@ public class ItemTypes {
     public static final ItemType GRAY_STAINED_GLASS = getOrDefault("gray_stained_glass");
     public static final ItemType GRAY_STAINED_GLASS_PANE = getOrDefault("gray_stained_glass_pane");
     public static final ItemType GRAY_TERRACOTTA = getOrDefault("gray_terracotta");
-    public static final ItemType GRAY_WALL_BANNER = getOrDefault("gray_wall_banner");
     public static final ItemType GRAY_WOOL = getOrDefault("gray_wool");
     public static final ItemType GREEN_BANNER = getOrDefault("green_banner");
     public static final ItemType GREEN_BED = getOrDefault("green_bed");
@@ -411,7 +381,6 @@ public class ItemTypes {
     public static final ItemType GREEN_STAINED_GLASS = getOrDefault("green_stained_glass");
     public static final ItemType GREEN_STAINED_GLASS_PANE = getOrDefault("green_stained_glass_pane");
     public static final ItemType GREEN_TERRACOTTA = getOrDefault("green_terracotta");
-    public static final ItemType GREEN_WALL_BANNER = getOrDefault("green_wall_banner");
     public static final ItemType GREEN_WOOL = getOrDefault("green_wool");
     public static final ItemType GRINDSTONE = getOrDefault("grindstone");
     public static final ItemType GUARDIAN_SPAWN_EGG = getOrDefault("guardian_spawn_egg");
@@ -428,7 +397,6 @@ public class ItemTypes {
     public static final ItemType HORN_CORAL = getOrDefault("horn_coral");
     public static final ItemType HORN_CORAL_BLOCK = getOrDefault("horn_coral_block");
     public static final ItemType HORN_CORAL_FAN = getOrDefault("horn_coral_fan");
-    public static final ItemType HORN_CORAL_WALL_FAN = getOrDefault("horn_coral_wall_fan");
     public static final ItemType HORSE_SPAWN_EGG = getOrDefault("horse_spawn_egg");
     public static final ItemType HUSK_SPAWN_EGG = getOrDefault("husk_spawn_egg");
     public static final ItemType ICE = getOrDefault("ice");
@@ -474,10 +442,8 @@ public class ItemTypes {
     public static final ItemType JUNGLE_SLAB = getOrDefault("jungle_slab");
     public static final ItemType JUNGLE_STAIRS = getOrDefault("jungle_stairs");
     public static final ItemType JUNGLE_TRAPDOOR = getOrDefault("jungle_trapdoor");
-    public static final ItemType JUNGLE_WALL_SIGN = getOrDefault("jungle_wall_sign");
     public static final ItemType JUNGLE_WOOD = getOrDefault("jungle_wood");
     public static final ItemType KELP = getOrDefault("kelp");
-    public static final ItemType KELP_PLANT = getOrDefault("kelp_plant");
     public static final ItemType KNOWLEDGE_BOOK = getOrDefault("knowledge_book");
     public static final ItemType LADDER = getOrDefault("ladder");
     public static final ItemType LANTERN = getOrDefault("lantern");
@@ -485,7 +451,6 @@ public class ItemTypes {
     public static final ItemType LAPIS_LAZULI = getOrDefault("lapis_lazuli");
     public static final ItemType LAPIS_ORE = getOrDefault("lapis_ore");
     public static final ItemType LARGE_FERN = getOrDefault("large_fern");
-    public static final ItemType LAVA = getOrDefault("lava");
     public static final ItemType LAVA_BUCKET = getOrDefault("lava_bucket");
     public static final ItemType LEAD = getOrDefault("lead");
     public static final ItemType LEATHER = getOrDefault("leather");
@@ -507,7 +472,6 @@ public class ItemTypes {
     public static final ItemType LIGHT_BLUE_STAINED_GLASS = getOrDefault("light_blue_stained_glass");
     public static final ItemType LIGHT_BLUE_STAINED_GLASS_PANE = getOrDefault("light_blue_stained_glass_pane");
     public static final ItemType LIGHT_BLUE_TERRACOTTA = getOrDefault("light_blue_terracotta");
-    public static final ItemType LIGHT_BLUE_WALL_BANNER = getOrDefault("light_blue_wall_banner");
     public static final ItemType LIGHT_BLUE_WOOL = getOrDefault("light_blue_wool");
     public static final ItemType LIGHT_GRAY_BANNER = getOrDefault("light_gray_banner");
     public static final ItemType LIGHT_GRAY_BED = getOrDefault("light_gray_bed");
@@ -520,7 +484,6 @@ public class ItemTypes {
     public static final ItemType LIGHT_GRAY_STAINED_GLASS = getOrDefault("light_gray_stained_glass");
     public static final ItemType LIGHT_GRAY_STAINED_GLASS_PANE = getOrDefault("light_gray_stained_glass_pane");
     public static final ItemType LIGHT_GRAY_TERRACOTTA = getOrDefault("light_gray_terracotta");
-    public static final ItemType LIGHT_GRAY_WALL_BANNER = getOrDefault("light_gray_wall_banner");
     public static final ItemType LIGHT_GRAY_WOOL = getOrDefault("light_gray_wool");
     public static final ItemType LIGHT_WEIGHTED_PRESSURE_PLATE = getOrDefault("light_weighted_pressure_plate");
     public static final ItemType LILAC = getOrDefault("lilac");
@@ -537,7 +500,6 @@ public class ItemTypes {
     public static final ItemType LIME_STAINED_GLASS = getOrDefault("lime_stained_glass");
     public static final ItemType LIME_STAINED_GLASS_PANE = getOrDefault("lime_stained_glass_pane");
     public static final ItemType LIME_TERRACOTTA = getOrDefault("lime_terracotta");
-    public static final ItemType LIME_WALL_BANNER = getOrDefault("lime_wall_banner");
     public static final ItemType LIME_WOOL = getOrDefault("lime_wool");
     public static final ItemType LINGERING_POTION = getOrDefault("lingering_potion");
     public static final ItemType LLAMA_SPAWN_EGG = getOrDefault("llama_spawn_egg");
@@ -553,7 +515,6 @@ public class ItemTypes {
     public static final ItemType MAGENTA_STAINED_GLASS = getOrDefault("magenta_stained_glass");
     public static final ItemType MAGENTA_STAINED_GLASS_PANE = getOrDefault("magenta_stained_glass_pane");
     public static final ItemType MAGENTA_TERRACOTTA = getOrDefault("magenta_terracotta");
-    public static final ItemType MAGENTA_WALL_BANNER = getOrDefault("magenta_wall_banner");
     public static final ItemType MAGENTA_WOOL = getOrDefault("magenta_wool");
     public static final ItemType MAGMA_BLOCK = getOrDefault("magma_block");
     public static final ItemType MAGMA_CREAM = getOrDefault("magma_cream");
@@ -562,7 +523,6 @@ public class ItemTypes {
     public static final ItemType MELON = getOrDefault("melon");
     public static final ItemType MELON_SEEDS = getOrDefault("melon_seeds");
     public static final ItemType MELON_SLICE = getOrDefault("melon_slice");
-    public static final ItemType MELON_STEM = getOrDefault("melon_stem");
     public static final ItemType MILK_BUCKET = getOrDefault("milk_bucket");
     public static final ItemType MINECART = getOrDefault("minecart");
     public static final ItemType MOJANG_BANNER_PATTERN = getOrDefault("mojang_banner_pattern");
@@ -575,7 +535,6 @@ public class ItemTypes {
     public static final ItemType MOSSY_STONE_BRICK_SLAB = getOrDefault("mossy_stone_brick_slab");
     public static final ItemType MOSSY_STONE_BRICK_STAIRS = getOrDefault("mossy_stone_brick_stairs");
     public static final ItemType MOSSY_STONE_BRICK_WALL = getOrDefault("mossy_stone_brick_wall");
-    public static final ItemType MOVING_PISTON = getOrDefault("moving_piston");
     public static final ItemType MULE_SPAWN_EGG = getOrDefault("mule_spawn_egg");
     public static final ItemType MUSHROOM_STEM = getOrDefault("mushroom_stem");
     public static final ItemType MUSHROOM_STEW = getOrDefault("mushroom_stew");
@@ -602,7 +561,6 @@ public class ItemTypes {
     public static final ItemType NETHER_BRICK_SLAB = getOrDefault("nether_brick_slab");
     public static final ItemType NETHER_BRICK_STAIRS = getOrDefault("nether_brick_stairs");
     public static final ItemType NETHER_BRICK_WALL = getOrDefault("nether_brick_wall");
-    public static final ItemType NETHER_PORTAL = getOrDefault("nether_portal");
     public static final ItemType NETHER_QUARTZ_ORE = getOrDefault("nether_quartz_ore");
     public static final ItemType NETHER_STAR = getOrDefault("nether_star");
     public static final ItemType NETHER_WART = getOrDefault("nether_wart");
@@ -622,7 +580,6 @@ public class ItemTypes {
     public static final ItemType OAK_SLAB = getOrDefault("oak_slab");
     public static final ItemType OAK_STAIRS = getOrDefault("oak_stairs");
     public static final ItemType OAK_TRAPDOOR = getOrDefault("oak_trapdoor");
-    public static final ItemType OAK_WALL_SIGN = getOrDefault("oak_wall_sign");
     public static final ItemType OAK_WOOD = getOrDefault("oak_wood");
     public static final ItemType OBSERVER = getOrDefault("observer");
     public static final ItemType OBSIDIAN = getOrDefault("obsidian");
@@ -639,7 +596,6 @@ public class ItemTypes {
     public static final ItemType ORANGE_STAINED_GLASS_PANE = getOrDefault("orange_stained_glass_pane");
     public static final ItemType ORANGE_TERRACOTTA = getOrDefault("orange_terracotta");
     public static final ItemType ORANGE_TULIP = getOrDefault("orange_tulip");
-    public static final ItemType ORANGE_WALL_BANNER = getOrDefault("orange_wall_banner");
     public static final ItemType ORANGE_WOOL = getOrDefault("orange_wool");
     public static final ItemType OXEYE_DAISY = getOrDefault("oxeye_daisy");
     public static final ItemType PACKED_ICE = getOrDefault("packed_ice");
@@ -665,12 +621,9 @@ public class ItemTypes {
     public static final ItemType PINK_STAINED_GLASS_PANE = getOrDefault("pink_stained_glass_pane");
     public static final ItemType PINK_TERRACOTTA = getOrDefault("pink_terracotta");
     public static final ItemType PINK_TULIP = getOrDefault("pink_tulip");
-    public static final ItemType PINK_WALL_BANNER = getOrDefault("pink_wall_banner");
     public static final ItemType PINK_WOOL = getOrDefault("pink_wool");
     public static final ItemType PISTON = getOrDefault("piston");
-    public static final ItemType PISTON_HEAD = getOrDefault("piston_head");
     public static final ItemType PLAYER_HEAD = getOrDefault("player_head");
-    public static final ItemType PLAYER_WALL_HEAD = getOrDefault("player_wall_head");
     public static final ItemType PODZOL = getOrDefault("podzol");
     public static final ItemType POISONOUS_POTATO = getOrDefault("poisonous_potato");
     public static final ItemType POLAR_BEAR_SPAWN_EGG = getOrDefault("polar_bear_spawn_egg");
@@ -687,33 +640,7 @@ public class ItemTypes {
     public static final ItemType POPPY = getOrDefault("poppy");
     public static final ItemType PORKCHOP = getOrDefault("porkchop");
     public static final ItemType POTATO = getOrDefault("potato");
-    public static final ItemType POTATOES = getOrDefault("potatoes");
     public static final ItemType POTION = getOrDefault("potion");
-    public static final ItemType POTTED_ACACIA_SAPLING = getOrDefault("potted_acacia_sapling");
-    public static final ItemType POTTED_ALLIUM = getOrDefault("potted_allium");
-    public static final ItemType POTTED_AZURE_BLUET = getOrDefault("potted_azure_bluet");
-    public static final ItemType POTTED_BAMBOO = getOrDefault("potted_bamboo");
-    public static final ItemType POTTED_BIRCH_SAPLING = getOrDefault("potted_birch_sapling");
-    public static final ItemType POTTED_BLUE_ORCHID = getOrDefault("potted_blue_orchid");
-    public static final ItemType POTTED_BROWN_MUSHROOM = getOrDefault("potted_brown_mushroom");
-    public static final ItemType POTTED_CACTUS = getOrDefault("potted_cactus");
-    public static final ItemType POTTED_CORNFLOWER = getOrDefault("potted_cornflower");
-    public static final ItemType POTTED_DANDELION = getOrDefault("potted_dandelion");
-    public static final ItemType POTTED_DARK_OAK_SAPLING = getOrDefault("potted_dark_oak_sapling");
-    public static final ItemType POTTED_DEAD_BUSH = getOrDefault("potted_dead_bush");
-    public static final ItemType POTTED_FERN = getOrDefault("potted_fern");
-    public static final ItemType POTTED_JUNGLE_SAPLING = getOrDefault("potted_jungle_sapling");
-    public static final ItemType POTTED_LILY_OF_THE_VALLEY = getOrDefault("potted_lily_of_the_valley");
-    public static final ItemType POTTED_OAK_SAPLING = getOrDefault("potted_oak_sapling");
-    public static final ItemType POTTED_ORANGE_TULIP = getOrDefault("potted_orange_tulip");
-    public static final ItemType POTTED_OXEYE_DAISY = getOrDefault("potted_oxeye_daisy");
-    public static final ItemType POTTED_PINK_TULIP = getOrDefault("potted_pink_tulip");
-    public static final ItemType POTTED_POPPY = getOrDefault("potted_poppy");
-    public static final ItemType POTTED_RED_MUSHROOM = getOrDefault("potted_red_mushroom");
-    public static final ItemType POTTED_RED_TULIP = getOrDefault("potted_red_tulip");
-    public static final ItemType POTTED_SPRUCE_SAPLING = getOrDefault("potted_spruce_sapling");
-    public static final ItemType POTTED_WHITE_TULIP = getOrDefault("potted_white_tulip");
-    public static final ItemType POTTED_WITHER_ROSE = getOrDefault("potted_wither_rose");
     public static final ItemType POWERED_RAIL = getOrDefault("powered_rail");
     public static final ItemType PRISMARINE = getOrDefault("prismarine");
     public static final ItemType PRISMARINE_BRICKS = getOrDefault("prismarine_bricks");
@@ -730,7 +657,6 @@ public class ItemTypes {
     public static final ItemType PUMPKIN = getOrDefault("pumpkin");
     public static final ItemType PUMPKIN_PIE = getOrDefault("pumpkin_pie");
     public static final ItemType PUMPKIN_SEEDS = getOrDefault("pumpkin_seeds");
-    public static final ItemType PUMPKIN_STEM = getOrDefault("pumpkin_stem");
     public static final ItemType PURPLE_BANNER = getOrDefault("purple_banner");
     public static final ItemType PURPLE_BED = getOrDefault("purple_bed");
     public static final ItemType PURPLE_CARPET = getOrDefault("purple_carpet");
@@ -742,7 +668,6 @@ public class ItemTypes {
     public static final ItemType PURPLE_STAINED_GLASS = getOrDefault("purple_stained_glass");
     public static final ItemType PURPLE_STAINED_GLASS_PANE = getOrDefault("purple_stained_glass_pane");
     public static final ItemType PURPLE_TERRACOTTA = getOrDefault("purple_terracotta");
-    public static final ItemType PURPLE_WALL_BANNER = getOrDefault("purple_wall_banner");
     public static final ItemType PURPLE_WOOL = getOrDefault("purple_wool");
     public static final ItemType PURPUR_BLOCK = getOrDefault("purpur_block");
     public static final ItemType PURPUR_PILLAR = getOrDefault("purpur_pillar");
@@ -765,8 +690,6 @@ public class ItemTypes {
     public static final ItemType REDSTONE_LAMP = getOrDefault("redstone_lamp");
     public static final ItemType REDSTONE_ORE = getOrDefault("redstone_ore");
     public static final ItemType REDSTONE_TORCH = getOrDefault("redstone_torch");
-    public static final ItemType REDSTONE_WALL_TORCH = getOrDefault("redstone_wall_torch");
-    public static final ItemType REDSTONE_WIRE = getOrDefault("redstone_wire");
     public static final ItemType RED_BANNER = getOrDefault("red_banner");
     public static final ItemType RED_BED = getOrDefault("red_bed");
     public static final ItemType RED_CARPET = getOrDefault("red_carpet");
@@ -790,7 +713,6 @@ public class ItemTypes {
     public static final ItemType RED_STAINED_GLASS_PANE = getOrDefault("red_stained_glass_pane");
     public static final ItemType RED_TERRACOTTA = getOrDefault("red_terracotta");
     public static final ItemType RED_TULIP = getOrDefault("red_tulip");
-    public static final ItemType RED_WALL_BANNER = getOrDefault("red_wall_banner");
     public static final ItemType RED_WOOL = getOrDefault("red_wool");
     public static final ItemType REPEATER = getOrDefault("repeater");
     public static final ItemType REPEATING_COMMAND_BLOCK = getOrDefault("repeating_command_block");
@@ -820,7 +742,6 @@ public class ItemTypes {
     public static final ItemType SKELETON_HORSE_SPAWN_EGG = getOrDefault("skeleton_horse_spawn_egg");
     public static final ItemType SKELETON_SKULL = getOrDefault("skeleton_skull");
     public static final ItemType SKELETON_SPAWN_EGG = getOrDefault("skeleton_spawn_egg");
-    public static final ItemType SKELETON_WALL_SKULL = getOrDefault("skeleton_wall_skull");
     public static final ItemType SKULL_BANNER_PATTERN = getOrDefault("skull_banner_pattern");
     public static final ItemType SLIME_BALL = getOrDefault("slime_ball");
     public static final ItemType SLIME_BLOCK = getOrDefault("slime_block");
@@ -862,7 +783,6 @@ public class ItemTypes {
     public static final ItemType SPRUCE_SLAB = getOrDefault("spruce_slab");
     public static final ItemType SPRUCE_STAIRS = getOrDefault("spruce_stairs");
     public static final ItemType SPRUCE_TRAPDOOR = getOrDefault("spruce_trapdoor");
-    public static final ItemType SPRUCE_WALL_SIGN = getOrDefault("spruce_wall_sign");
     public static final ItemType SPRUCE_WOOD = getOrDefault("spruce_wood");
     public static final ItemType SQUID_SPAWN_EGG = getOrDefault("squid_spawn_egg");
     public static final ItemType STICK = getOrDefault("stick");
@@ -903,9 +823,7 @@ public class ItemTypes {
     public static final ItemType SUNFLOWER = getOrDefault("sunflower");
     public static final ItemType SUSPICIOUS_STEW = getOrDefault("suspicious_stew");
     public static final ItemType SWEET_BERRIES = getOrDefault("sweet_berries");
-    public static final ItemType SWEET_BERRY_BUSH = getOrDefault("sweet_berry_bush");
     public static final ItemType TALL_GRASS = getOrDefault("tall_grass");
-    public static final ItemType TALL_SEAGRASS = getOrDefault("tall_seagrass");
     public static final ItemType TERRACOTTA = getOrDefault("terracotta");
     public static final ItemType TIPPED_ARROW = getOrDefault("tipped_arrow");
     public static final ItemType TNT = getOrDefault("tnt");
@@ -915,7 +833,6 @@ public class ItemTypes {
     public static final ItemType TRADER_LLAMA_SPAWN_EGG = getOrDefault("trader_llama_spawn_egg");
     public static final ItemType TRAPPED_CHEST = getOrDefault("trapped_chest");
     public static final ItemType TRIDENT = getOrDefault("trident");
-    public static final ItemType TRIPWIRE = getOrDefault("tripwire");
     public static final ItemType TRIPWIRE_HOOK = getOrDefault("tripwire_hook");
     public static final ItemType TROPICAL_FISH = getOrDefault("tropical_fish");
     public static final ItemType TROPICAL_FISH_BUCKET = getOrDefault("tropical_fish_bucket");
@@ -923,7 +840,6 @@ public class ItemTypes {
     public static final ItemType TUBE_CORAL = getOrDefault("tube_coral");
     public static final ItemType TUBE_CORAL_BLOCK = getOrDefault("tube_coral_block");
     public static final ItemType TUBE_CORAL_FAN = getOrDefault("tube_coral_fan");
-    public static final ItemType TUBE_CORAL_WALL_FAN = getOrDefault("tube_coral_wall_fan");
     public static final ItemType TURTLE_EGG = getOrDefault("turtle_egg");
     public static final ItemType TURTLE_HELMET = getOrDefault("turtle_helmet");
     public static final ItemType TURTLE_SPAWN_EGG = getOrDefault("turtle_spawn_egg");
@@ -931,10 +847,7 @@ public class ItemTypes {
     public static final ItemType VILLAGER_SPAWN_EGG = getOrDefault("villager_spawn_egg");
     public static final ItemType VINDICATOR_SPAWN_EGG = getOrDefault("vindicator_spawn_egg");
     public static final ItemType VINE = getOrDefault("vine");
-    public static final ItemType VOID_AIR = getOrDefault("void_air");
-    public static final ItemType WALL_TORCH = getOrDefault("wall_torch");
     public static final ItemType WANDERING_TRADER_SPAWN_EGG = getOrDefault("wandering_trader_spawn_egg");
-    public static final ItemType WATER = getOrDefault("water");
     public static final ItemType WATER_BUCKET = getOrDefault("water_bucket");
     public static final ItemType WET_SPONGE = getOrDefault("wet_sponge");
     public static final ItemType WHEAT = getOrDefault("wheat");
@@ -951,13 +864,11 @@ public class ItemTypes {
     public static final ItemType WHITE_STAINED_GLASS_PANE = getOrDefault("white_stained_glass_pane");
     public static final ItemType WHITE_TERRACOTTA = getOrDefault("white_terracotta");
     public static final ItemType WHITE_TULIP = getOrDefault("white_tulip");
-    public static final ItemType WHITE_WALL_BANNER = getOrDefault("white_wall_banner");
     public static final ItemType WHITE_WOOL = getOrDefault("white_wool");
     public static final ItemType WITCH_SPAWN_EGG = getOrDefault("witch_spawn_egg");
     public static final ItemType WITHER_ROSE = getOrDefault("wither_rose");
     public static final ItemType WITHER_SKELETON_SKULL = getOrDefault("wither_skeleton_skull");
     public static final ItemType WITHER_SKELETON_SPAWN_EGG = getOrDefault("wither_skeleton_spawn_egg");
-    public static final ItemType WITHER_SKELETON_WALL_SKULL = getOrDefault("wither_skeleton_wall_skull");
     public static final ItemType WOLF_SPAWN_EGG = getOrDefault("wolf_spawn_egg");
     public static final ItemType WOODEN_AXE = getOrDefault("wooden_axe");
     public static final ItemType WOODEN_HOE = getOrDefault("wooden_hoe");
@@ -977,14 +888,12 @@ public class ItemTypes {
     public static final ItemType YELLOW_STAINED_GLASS = getOrDefault("yellow_stained_glass");
     public static final ItemType YELLOW_STAINED_GLASS_PANE = getOrDefault("yellow_stained_glass_pane");
     public static final ItemType YELLOW_TERRACOTTA = getOrDefault("yellow_terracotta");
-    public static final ItemType YELLOW_WALL_BANNER = getOrDefault("yellow_wall_banner");
     public static final ItemType YELLOW_WOOL = getOrDefault("yellow_wool");
     public static final ItemType ZOMBIE_HEAD = getOrDefault("zombie_head");
     public static final ItemType ZOMBIE_HORSE_SPAWN_EGG = getOrDefault("zombie_horse_spawn_egg");
     public static final ItemType ZOMBIE_PIGMAN_SPAWN_EGG = getOrDefault("zombie_pigman_spawn_egg");
     public static final ItemType ZOMBIE_SPAWN_EGG = getOrDefault("zombie_spawn_egg");
     public static final ItemType ZOMBIE_VILLAGER_SPAWN_EGG = getOrDefault("zombie_villager_spawn_egg");
-    public static final ItemType ZOMBIE_WALL_HEAD = getOrDefault("zombie_wall_head");
 
     /**
      * Gets an {@link ItemType} from the given {@link NamespacedKey}
