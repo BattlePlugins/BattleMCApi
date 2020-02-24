@@ -20,7 +20,7 @@ public class NukkitInventory<T extends Inventory> extends MCWrapper<T> implement
 
 	@Override
 	public void addItem(ItemStack itemStack) {
-		if (itemStack == null || itemStack.getType().getKey().getKey().equals("air")) {
+		if (itemStack == null || itemStack.getType().getIdentifier().getKey().equals("air")) {
 			return;
 		}
 

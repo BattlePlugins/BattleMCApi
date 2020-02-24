@@ -2,8 +2,8 @@ package org.battleplugins.api.bukkit.inventory.item;
 
 import org.battleplugins.api.bukkit.compat.BukkitCompatMaterial;
 import org.battleplugins.api.inventory.item.ItemType;
+import org.battleplugins.api.util.Identifier;
 import org.battleplugins.api.util.MCWrapper;
-import org.battleplugins.api.util.NamespacedKey;
 import org.bukkit.Material;
 
 public class BukkitItemType extends MCWrapper<Material> implements ItemType {
@@ -13,9 +13,9 @@ public class BukkitItemType extends MCWrapper<Material> implements ItemType {
     }
 
     @Override
-    public NamespacedKey getKey() {
+    public Identifier getIdentifier() {
         BukkitCompatMaterial bukkitMaterial = BukkitCompatMaterial.fromMaterial(handle);
-        return NamespacedKey.minecraft(bukkitMaterial.name().toLowerCase());
+        return Identifier.minecraft(bukkitMaterial.name().toLowerCase());
     }
 
     @Override

@@ -2,7 +2,7 @@ package org.battleplugins.api.entity;
 
 import org.battleplugins.api.Platform;
 import org.battleplugins.api.entity.component.EntityComponent;
-import org.battleplugins.api.util.NamespacedKey;
+import org.battleplugins.api.util.Identifier;
 import org.battleplugins.api.world.Location;
 import org.battleplugins.api.world.World;
 
@@ -24,21 +24,12 @@ public interface Entity {
     String getName();
 
     /**
-     * The identifier of this entity
+     * The full {@link Identifier} of this entity
      *
-     * @return the identifier of this entity
+     * @return the full identifier of this entity
      */
-    default String getIdentifier() {
-        return getKey().toString();
-    }
-
-    /**
-     * The full {@link NamespacedKey} of this entity
-     *
-     * @return the full namespaced key of this entity
-     */
-    default NamespacedKey getKey() {
-        return getType().getKey();
+    default Identifier getIdentifier() {
+        return getType().getIdentifier();
     }
 
     /**

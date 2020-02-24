@@ -1,7 +1,7 @@
 package org.battleplugins.api.inventory.item;
 
 import org.battleplugins.api.Platform;
-import org.battleplugins.api.util.NamespacedKey;
+import org.battleplugins.api.util.Identifier;
 
 import java.util.Optional;
 
@@ -896,16 +896,16 @@ public class ItemTypes {
     public static final ItemType ZOMBIE_VILLAGER_SPAWN_EGG = getOrDefault("zombie_villager_spawn_egg");
 
     /**
-     * Gets an {@link ItemType} from the given {@link NamespacedKey}
+     * Gets an {@link ItemType} from the given {@link Identifier}
      *
-     * @param key the namespaced key to get the item from
-     * @return an item type from the given namespaced key
+     * @param identifier the identifier to get the item from
+     * @return an item type from the given identifier
      */
-    public static Optional<ItemType> getItemFromKey(NamespacedKey key) {
-        return Platform.getPlatform().getRegistry().getItemRegistry().fromKey(key);
+    public static Optional<ItemType> getItemFromIdentifier(Identifier identifier) {
+        return Platform.getRegistry().getItemRegistry().fromIdentifier(identifier);
     }
 
     private static ItemType getOrDefault(String name) {
-        return getItemFromKey(NamespacedKey.minecraft(name)).orElse(ItemTypes.STONE);
+        return getItemFromIdentifier(Identifier.minecraft(name)).orElse(ItemTypes.STONE);
     }
 }

@@ -1,19 +1,11 @@
 package org.battleplugins.api.nukkit.world.block;
 
 import cn.nukkit.block.Block;
-import cn.nukkit.item.Item;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import org.battleplugins.api.nukkit.NukkitPlatform;
 import org.battleplugins.api.world.block.BlockRegistry;
-import org.battleplugins.api.util.NamespacedKey;
+import org.battleplugins.api.util.Identifier;
 import org.battleplugins.api.world.block.BlockType;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -51,8 +43,8 @@ public class NukkitBlockRegistry implements BlockRegistry<Block> {
     }
 
     @Override
-    public Optional<BlockType> fromKey(NamespacedKey namespacedKey) {
-        Block block = IDENTIFIER_TO_BLOCK.get(namespacedKey.toString());
+    public Optional<BlockType> fromIdentifier(Identifier identifier) {
+        Block block = IDENTIFIER_TO_BLOCK.get(identifier.toString());
         if (block == null)
             return Optional.empty();
 

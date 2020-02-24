@@ -1,6 +1,6 @@
 package org.battleplugins.api.world.block;
 
-import org.battleplugins.api.util.NamespacedKey;
+import org.battleplugins.api.util.Identifier;
 
 import java.util.Optional;
 
@@ -691,16 +691,16 @@ public class BlockTypes {
     public static final BlockType ZOMBIE_WALL_HEAD = getOrDefault("zombie_wall_head");
 
     /**
-     * Gets a {@link BlockType} from the given {@link NamespacedKey}
+     * Gets a {@link BlockType} from the given {@link Identifier}
      *
-     * @param key the namespaced key to get the item from
-     * @return an block type from the given namespaced key
+     * @param key the identifier to get the item from
+     * @return an block type from the given identifier
      */
-    public static Optional<BlockType> getBlockFromKey(NamespacedKey key) {
-        return BlockRegistry.get().fromKey(key);
+    public static Optional<BlockType> getBlockFromIdentifier(Identifier key) {
+        return BlockRegistry.get().fromIdentifier(key);
     }
 
     private static BlockType getOrDefault(String name) {
-        return getBlockFromKey(NamespacedKey.minecraft(name)).orElse(BlockTypes.STONE);
+        return getBlockFromIdentifier(Identifier.minecraft(name)).orElse(BlockTypes.STONE);
     }
 }

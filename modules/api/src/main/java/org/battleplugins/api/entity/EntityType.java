@@ -2,27 +2,18 @@ package org.battleplugins.api.entity;
 
 import org.battleplugins.api.Platform;
 import org.battleplugins.api.entity.component.EntityComponent;
-import org.battleplugins.api.util.NamespacedKey;
+import org.battleplugins.api.util.Identifier;
 
 import java.util.Set;
 
 public interface EntityType {
 
     /**
-     * The identifier of this entity type
+     * The full {@link Identifier} of this entity type
      *
-     * @return the identifier of this entity type
+     * @return the full identifier of this entity type
      */
-    default String getIdentifier() {
-        return getKey().toString();
-    }
-
-    /**
-     * The full {@link NamespacedKey} of this entity type
-     *
-     * @return the full namespaced key of this entity type
-     */
-    NamespacedKey getKey();
+    Identifier getIdentifier();
 
     /**
      * A set of the provided (allowed) {@link EntityComponent}s
@@ -31,6 +22,6 @@ public interface EntityType {
      * @return a set of the allowed entity components
      */
     default Set<Class<? extends EntityComponent>> getProvidedComponents() {
-        return Platform.getPlatform().getRegistry().getEntityRegistry().validComponentsFor(this);
+        return Platform.getRegistry().getEntityRegistry().validComponentsFor(this);
     }
 }

@@ -2,7 +2,7 @@ package org.battleplugins.api.bukkit.world.block;
 
 import org.battleplugins.api.world.block.BlockRegistry;
 import org.battleplugins.api.bukkit.util.BukkitMaterialAdapter;
-import org.battleplugins.api.util.NamespacedKey;
+import org.battleplugins.api.util.Identifier;
 import org.battleplugins.api.world.block.BlockType;
 import org.bukkit.Material;
 
@@ -16,7 +16,7 @@ public class BukkitBlockRegistry implements BlockRegistry<Material> {
     }
 
     @Override
-    public Optional<BlockType> fromKey(NamespacedKey namespacedKey) {
-        return BukkitMaterialAdapter.getMaterial(namespacedKey.getKey()).map(this::fromPlatformBlock);
+    public Optional<BlockType> fromIdentifier(Identifier identifier) {
+        return BukkitMaterialAdapter.getMaterial(identifier.getKey()).map(this::fromPlatformBlock);
     }
 }

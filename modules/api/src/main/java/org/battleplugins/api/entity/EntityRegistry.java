@@ -2,7 +2,7 @@ package org.battleplugins.api.entity;
 
 import org.battleplugins.api.Platform;
 import org.battleplugins.api.entity.component.EntityComponent;
-import org.battleplugins.api.util.NamespacedKey;
+import org.battleplugins.api.util.Identifier;
 
 import java.util.*;
 
@@ -27,16 +27,16 @@ public abstract class EntityRegistry<T> {
 
     /**
      * Gets the {@link EntityType} from the given
-     * {@link NamespacedKey}. Returns empty if the
+     * {@link Identifier}. Returns empty if the
      * entity could not be found. The only reason this should
      * be used is if an entity type needs to be obtained
      * from a string, an item is not in the {@link EntityTypes}
      * class, or if a modded entity (Sponge) needs to be obtained.
      *
-     * @param namespacedKey the given namespaced key
-     * @return the entity type from the given namespaced key
+     * @param identifier the identifier
+     * @return the entity type from the given identifier
      */
-    public abstract Optional<EntityType> fromKey(NamespacedKey namespacedKey);
+    public abstract Optional<EntityType> fromIdentifier(Identifier identifier);
 
     Set<Class<? extends EntityComponent>> validComponentsFor(EntityType type) {
         return validComponents.computeIfAbsent(type, set -> new HashSet<>());

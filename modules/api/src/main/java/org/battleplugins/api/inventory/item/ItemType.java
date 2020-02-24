@@ -1,6 +1,6 @@
 package org.battleplugins.api.inventory.item;
 
-import org.battleplugins.api.util.NamespacedKey;
+import org.battleplugins.api.util.Identifier;
 
 /**
  * Represents an item type.
@@ -12,16 +12,7 @@ public interface ItemType {
      *
      * @return the item identifier of the item
      */
-    default String getIdentifier() {
-        return getKey().toString();
-    }
-
-    /**
-     * The full namespaced key of the item
-     *
-     * @return the full namespaced key of the item
-     */
-    NamespacedKey getKey();
+    Identifier getIdentifier();
 
     /**
      * The maximum size this item can stack to

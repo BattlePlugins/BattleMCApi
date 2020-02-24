@@ -2,7 +2,7 @@ package org.battleplugins.api.inventory.item;
 
 import org.battleplugins.api.Platform;
 import org.battleplugins.api.inventory.item.component.ItemComponent;
-import org.battleplugins.api.util.NamespacedKey;
+import org.battleplugins.api.util.Identifier;
 
 import java.util.*;
 
@@ -14,7 +14,7 @@ import java.util.*;
  * on different values (e.g. Bukkit is Material/identifier
  * based whilst Nukkit is ID based). This class allows for
  * items to be mapped from their platform implementations as
- * well as from {@link NamespacedKey}'s.
+ * well as from {@link Identifier}'s.
  *
  * @param <T> the platform implementation
  */
@@ -33,16 +33,16 @@ public abstract class ItemRegistry<T> {
 
     /**
      * Gets the item type from the given
-     * {@link NamespacedKey}. Returns empty if the
+     * {@link Identifier}. Returns empty if the
      * item could not be found. The only reason this should
      * be used is if an item type needs to be obtained
      * from a string, an item is not in the {@link ItemTypes}
      * class, or if a modded item (Sponge) needs to be obtained.
      *
-     * @param namespacedKey the given {@link NamespacedKey}
-     * @return the item type from the given namespaced key
+     * @param identifier the given {@link Identifier}
+     * @return the item type from the given identifier
      */
-    public abstract Optional<ItemType> fromKey(NamespacedKey namespacedKey);
+    public abstract Optional<ItemType> fromIdentifier(Identifier identifier);
 
     /**
      * Returns an item component instance from

@@ -1,7 +1,7 @@
 package org.battleplugins.api.bukkit.entity;
 
 import org.battleplugins.api.entity.EntityRegistry;
-import org.battleplugins.api.util.NamespacedKey;
+import org.battleplugins.api.util.Identifier;
 import org.bukkit.entity.EntityType;
 
 import java.util.Optional;
@@ -14,7 +14,7 @@ public class BukkitEntityRegistry extends EntityRegistry<EntityType> {
     }
 
     @Override
-    public Optional<org.battleplugins.api.entity.EntityType> fromKey(NamespacedKey namespacedKey) {
-        return Optional.ofNullable(EntityType.fromName(namespacedKey.getKey())).map(BukkitEntityType::new);
+    public Optional<org.battleplugins.api.entity.EntityType> fromIdentifier(Identifier identifier) {
+        return Optional.ofNullable(EntityType.fromName(identifier.getKey())).map(BukkitEntityType::new);
     }
 }

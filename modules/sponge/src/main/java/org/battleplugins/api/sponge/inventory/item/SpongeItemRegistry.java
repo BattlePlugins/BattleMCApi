@@ -5,7 +5,7 @@ import org.battleplugins.api.inventory.item.ItemType;
 import org.battleplugins.api.inventory.item.component.*;
 import org.battleplugins.api.sponge.compat.SpongeCompatItemType;
 import org.battleplugins.api.sponge.inventory.item.component.*;
-import org.battleplugins.api.util.NamespacedKey;
+import org.battleplugins.api.util.Identifier;
 import org.spongepowered.api.Sponge;
 
 import java.util.Optional;
@@ -28,12 +28,12 @@ public class SpongeItemRegistry extends ItemRegistry<org.spongepowered.api.item.
     }
 
     @Override
-    public Optional<ItemType> fromKey(NamespacedKey namespacedKey) {
-        Optional<ItemType> compatItemType = SpongeCompatItemType.fromString(namespacedKey.getKey())
+    public Optional<ItemType> fromIdentifier(Identifier identifier) {
+        Optional<ItemType> compatItemType = SpongeCompatItemType.fromString(identifier.getKey())
                 .map(itemType -> fromPlatformItem(itemType.parseItem().getType()));
         if (!compatItemType.isPresent()) {
             // check for modded items
-            return Sponge.getRegistry().getType(org.spongepowered.api.item.ItemType.class, namespacedKey.toString()).map(SpongeItemType::new);
+            return Sponge.getRegistry().getType(org.spongepowered.api.item.ItemType.class, identifier.toString()).map(SpongeItemType::new);
         }
         return compatItemType;
     }

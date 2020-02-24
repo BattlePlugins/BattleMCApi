@@ -1,7 +1,7 @@
 package org.battleplugins.api.world.block;
 
 import org.battleplugins.api.inventory.item.ItemType;
-import org.battleplugins.api.util.NamespacedKey;
+import org.battleplugins.api.util.Identifier;
 
 /**
  * Represents a block type.
@@ -9,21 +9,12 @@ import org.battleplugins.api.util.NamespacedKey;
 public interface BlockType {
 
     /**
-     * The item identifier of the item
+     * The full identifier of the block
      *
-     * @return the item identifier of the item
+     * @return the full identifier of the block
      */
-    default String getIdentifier() {
-        return getKey().toString();
-    }
-
-    /**
-     * The full namespaced key of the block
-     *
-     * @return the full namespaced key of the block
-     */
-    default NamespacedKey getKey() {
-        return toItemType().getKey();
+    default Identifier getIdentifier() {
+        return toItemType().getIdentifier();
     }
 
     /**

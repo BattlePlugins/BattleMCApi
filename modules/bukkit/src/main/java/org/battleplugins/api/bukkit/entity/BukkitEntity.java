@@ -6,7 +6,7 @@ import org.battleplugins.api.bukkit.util.BukkitUtil;
 import org.battleplugins.api.bukkit.world.BukkitWorld;
 import org.battleplugins.api.entity.EntityType;
 import org.battleplugins.api.util.MCWrapper;
-import org.battleplugins.api.util.NamespacedKey;
+import org.battleplugins.api.util.Identifier;
 import org.battleplugins.api.world.Location;
 import org.bukkit.entity.Entity;
 
@@ -27,8 +27,8 @@ public class BukkitEntity<T extends Entity> extends MCWrapper<T> implements org.
     }
 
     @Override
-    public NamespacedKey getKey() {
-        return NamespacedKey.minecraft(handle.getType().getName());
+    public Identifier getIdentifier() {
+        return Identifier.minecraft(handle.getType().getName());
     }
 
     @Override

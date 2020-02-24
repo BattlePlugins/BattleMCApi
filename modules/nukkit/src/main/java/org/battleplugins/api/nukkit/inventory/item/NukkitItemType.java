@@ -2,24 +2,24 @@ package org.battleplugins.api.nukkit.inventory.item;
 
 import cn.nukkit.item.Item;
 
+import org.battleplugins.api.util.Identifier;
 import org.battleplugins.api.util.MCWrapper;
 import org.battleplugins.api.inventory.item.ItemType;
-import org.battleplugins.api.util.NamespacedKey;
 
 public class NukkitItemType extends MCWrapper<Item> implements ItemType {
 
-    protected NamespacedKey key;
+    protected Identifier identifier;
     protected Item item;
 
-    NukkitItemType(NamespacedKey key, Item handle) {
+    NukkitItemType(Identifier identifier, Item handle) {
         super(handle);
 
-        this.key = key;
+        this.identifier = identifier;
     }
 
     @Override
-    public NamespacedKey getKey() {
-        return key;
+    public Identifier getIdentifier() {
+        return identifier;
     }
 
     @Override

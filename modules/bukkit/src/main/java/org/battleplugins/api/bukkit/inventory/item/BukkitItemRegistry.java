@@ -5,7 +5,7 @@ import org.battleplugins.api.bukkit.util.BukkitMaterialAdapter;
 import org.battleplugins.api.inventory.item.ItemRegistry;
 import org.battleplugins.api.inventory.item.ItemType;
 import org.battleplugins.api.inventory.item.component.*;
-import org.battleplugins.api.util.NamespacedKey;
+import org.battleplugins.api.util.Identifier;
 import org.bukkit.Material;
 
 import java.util.Optional;
@@ -28,7 +28,7 @@ public class BukkitItemRegistry extends ItemRegistry<Material> {
     }
 
     @Override
-    public Optional<ItemType> fromKey(NamespacedKey namespacedKey) {
-        return BukkitMaterialAdapter.getMaterial(namespacedKey.getKey()).map(this::fromPlatformItem);
+    public Optional<ItemType> fromIdentifier(Identifier identifier) {
+        return BukkitMaterialAdapter.getMaterial(identifier.getKey()).map(this::fromPlatformItem);
     }
 }

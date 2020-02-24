@@ -10,7 +10,7 @@ import org.battleplugins.api.inventory.item.ItemType;
 import org.battleplugins.api.inventory.item.component.*;
 import org.battleplugins.api.nukkit.NukkitPlatform;
 import org.battleplugins.api.nukkit.inventory.item.component.*;
-import org.battleplugins.api.util.NamespacedKey;
+import org.battleplugins.api.util.Identifier;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -33,7 +33,7 @@ public class NukkitItemRegistry extends ItemRegistry<Item> {
         Type mapType = new TypeToken<Map<String, ItemEntry>>() {}.getType();
         Map<String, ItemEntry> itemEntries = gson.fromJson(new InputStreamReader(inputStream), mapType);
         for (Map.Entry<String, ItemEntry> itemEntry : itemEntries.entrySet()) {
-            ITEM_ENTRIES.put(itemEntry.getValue(), new NukkitItemType(NamespacedKey.of(itemEntry.getKey()),
+            ITEM_ENTRIES.put(itemEntry.getValue(), new NukkitItemType(Identifier.of(itemEntry.getKey()),
                     Item.get(itemEntry.getValue().getBedrockId(), itemEntry.getValue().getBedrockData())));
             IDENTIFIER_TO_ENTRY.put(itemEntry.getKey(), itemEntry.getValue());
         }
@@ -53,8 +53,8 @@ public class NukkitItemRegistry extends ItemRegistry<Item> {
     }
 
     @Override
-    public Optional<ItemType> fromKey(NamespacedKey namespacedKey) {
-        ItemEntry itemEntry = IDENTIFIER_TO_ENTRY.get(namespacedKey.toString());
+    public Optional<ItemType> fromIdentifier(Identifier identifier) {
+        ItemEntry itemEntry = IDENTIFIER_TO_ENTRY.get(identifier.toString());
         if (itemEntry == null)
             return Optional.empty();
 

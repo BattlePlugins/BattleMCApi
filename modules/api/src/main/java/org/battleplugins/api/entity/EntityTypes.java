@@ -1,6 +1,6 @@
 package org.battleplugins.api.entity;
 
-import org.battleplugins.api.util.NamespacedKey;
+import org.battleplugins.api.util.Identifier;
 
 import java.util.Optional;
 
@@ -111,16 +111,16 @@ public class EntityTypes {
     public static final EntityType ZOMBIE_VILLAGER = getOrDefault("zombie_villager");
 
     /**
-     * Gets an {@link EntityType} from the given {@link NamespacedKey}
+     * Gets an {@link EntityType} from the given {@link Identifier}
      *
-     * @param key the namespaced key to get the item from
-     * @return an item type from the given namespaced key
+     * @param identifier the identifier to get the item from
+     * @return an item type from the given identifier
      */
-    public static Optional<EntityType> getEntityFromKey(NamespacedKey key) {
-        return EntityRegistry.get().fromKey(key);
+    public static Optional<EntityType> getEntityFromIdentifier(Identifier identifier) {
+        return EntityRegistry.get().fromIdentifier(identifier);
     }
 
     private static EntityType getOrDefault(String name) {
-        return getEntityFromKey(NamespacedKey.minecraft(name)).orElse(EntityTypes.PIG);
+        return getEntityFromIdentifier(Identifier.minecraft(name)).orElse(EntityTypes.PIG);
     }
 }

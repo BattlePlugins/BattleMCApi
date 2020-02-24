@@ -17,7 +17,7 @@ public class BukkitInventory<T extends Inventory> extends MCWrapper<T> implement
 
 	@Override
 	public void addItem(ItemStack itemStack) {
-		if (itemStack == null || itemStack.getType().getKey().getKey().equalsIgnoreCase(Material.AIR.name())) {
+		if (itemStack == null || itemStack.getType().getIdentifier().getKey().equalsIgnoreCase(Material.AIR.name())) {
 			return;
 		}
 

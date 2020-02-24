@@ -21,7 +21,7 @@ public class SpongeItemStack extends MCWrapper<ItemStack> implements org.battlep
 
     @Override
     public void setType(org.battleplugins.api.inventory.item.ItemType type) {
-        Optional<ItemType> opItem = Sponge.getGame().getRegistry().getType(ItemType.class, type.getIdentifier());
+        Optional<ItemType> opItem = Sponge.getGame().getRegistry().getType(ItemType.class, type.getIdentifier().toString());
         if (!opItem.isPresent())
             return;
 

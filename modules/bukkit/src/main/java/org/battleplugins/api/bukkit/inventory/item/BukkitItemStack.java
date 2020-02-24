@@ -19,7 +19,7 @@ public class BukkitItemStack extends MCWrapper<ItemStack> implements org.battlep
 
 	@Override
 	public void setType(ItemType type) {
-		handle.setType(BukkitMaterialAdapter.getMaterial(type.getIdentifier()).orElse(Material.AIR));
+		handle.setType(BukkitMaterialAdapter.getMaterial(type.getIdentifier().toString()).orElse(Material.AIR));
 	}
 
 	@Override

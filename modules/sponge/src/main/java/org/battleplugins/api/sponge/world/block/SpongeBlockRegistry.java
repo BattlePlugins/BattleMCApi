@@ -1,7 +1,7 @@
 package org.battleplugins.api.sponge.world.block;
 
 import org.battleplugins.api.sponge.compat.SpongeCompatItemType;
-import org.battleplugins.api.util.NamespacedKey;
+import org.battleplugins.api.util.Identifier;
 import org.battleplugins.api.world.block.BlockRegistry;
 import org.battleplugins.api.world.block.BlockType;
 import org.spongepowered.api.Sponge;
@@ -17,8 +17,8 @@ public class SpongeBlockRegistry implements BlockRegistry<org.spongepowered.api.
     }
 
     @Override
-    public Optional<BlockType> fromKey(NamespacedKey namespacedKey) {
-        return SpongeCompatItemType.fromString(namespacedKey.getKey())
+    public Optional<BlockType> fromIdentifier(Identifier identifier) {
+        return SpongeCompatItemType.fromString(identifier.getKey())
                 .map(itemType -> fromPlatformBlock(Sponge.getRegistry()
                         .getType(org.spongepowered.api.block.BlockType.class,
                                 itemType.name()).orElse(BlockTypes.AIR)));

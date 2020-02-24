@@ -102,13 +102,13 @@ public class SpongePlayer extends SpongeHuman<Player> implements org.battleplugi
     public GameMode getGameMode() {
         org.spongepowered.api.entity.living.player.gamemode.GameMode spongeGamemode = handle.gameMode().get();
         return Arrays.stream(GameModes.values())
-                .filter(mode -> mode.getKey().getKey().equals(spongeGamemode.getId()))
+                .filter(mode -> mode.getIdentifier().getKey().equals(spongeGamemode.getId()))
                 .findFirst().orElse(GameModes.SURVIVAL);
     }
 
     @Override
     public void setGameMode(GameMode gameMode) {
         handle.offer(Keys.GAME_MODE, Sponge.getRegistry().getType(org.spongepowered.api.entity.living.player.gamemode.GameMode.class,
-                gameMode.getKey().getKey().toUpperCase()).orElse(org.spongepowered.api.entity.living.player.gamemode.GameModes.SURVIVAL));
+                gameMode.getIdentifier().getKey().toUpperCase()).orElse(org.spongepowered.api.entity.living.player.gamemode.GameModes.SURVIVAL));
     }
 }

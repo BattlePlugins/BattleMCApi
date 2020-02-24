@@ -3,7 +3,7 @@ package org.battleplugins.api.entity.living.player.gamemode;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.battleplugins.api.util.NamespacedKey;
+import org.battleplugins.api.util.Identifier;
 
 /**
  * Represents a game mode.
@@ -20,9 +20,9 @@ public class GameMode {
     private int id;
 
     /**
-     * The {@link NamespacedKey} of the gamemode
+     * The {@link Identifier} of the gamemode
      *
-     * @return the namespaced key of the gamemode
+     * @return the identifier of the gamemode
      */
-    private NamespacedKey key;
+    private Identifier identifier;
 }
