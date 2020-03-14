@@ -145,7 +145,7 @@ public interface Entity {
      *
      * @return a set of the allowed entity components
      */
-    default Set<Class<? extends EntityComponent>> getProvidedComponents() {
+    default Set<Class<? extends EntityComponent<?>>> getProvidedComponents() {
         return getType().getProvidedComponents();
     }
 
@@ -157,7 +157,7 @@ public interface Entity {
      * @param <T> the value
      */
     default <T> void applyComponent(Class<? extends EntityComponent<T>> componentClass, T value) {
-        Platform.getPlatform().getRegistry().getEntityRegistry().getEntityComponent(componentClass).applyComponent(this, value);
+        Platform.getRegistry().getEntityRegistry().getComponent(componentClass).applyComponent(this, value);
     }
 
     /**
@@ -168,6 +168,6 @@ public interface Entity {
      * @return the value of the given component class
      */
     default <T> Optional<T> getValue(Class<? extends EntityComponent<T>> componentClass) {
-        return Platform.getPlatform().getRegistry().getEntityRegistry().getEntityComponent(componentClass).getValue(this);
+        return Platform.getRegistry().getEntityRegistry().getComponent(componentClass).getValue(this);
     }
 }

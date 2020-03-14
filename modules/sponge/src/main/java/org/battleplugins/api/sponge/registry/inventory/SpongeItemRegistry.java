@@ -1,9 +1,10 @@
-package org.battleplugins.api.sponge.inventory.item;
+package org.battleplugins.api.sponge.registry.inventory;
 
-import org.battleplugins.api.inventory.item.ItemRegistry;
+import org.battleplugins.api.registry.inventory.ItemRegistry;
 import org.battleplugins.api.inventory.item.ItemType;
 import org.battleplugins.api.inventory.item.component.*;
 import org.battleplugins.api.sponge.compat.SpongeCompatItemType;
+import org.battleplugins.api.sponge.inventory.item.SpongeItemType;
 import org.battleplugins.api.sponge.inventory.item.component.*;
 import org.battleplugins.api.util.Identifier;
 import org.spongepowered.api.Sponge;
@@ -13,13 +14,13 @@ import java.util.Optional;
 public class SpongeItemRegistry extends ItemRegistry<org.spongepowered.api.item.ItemType> {
 
     public SpongeItemRegistry() {
-        registerComponent(ColorComponent.class, SpongeColorComponent.class);
-        registerComponent(CustomModelDataComponent.class, SpongeCustomModelDataComponent.class);
-        registerComponent(DamageComponent.class, SpongeDamageComponent.class);
-        registerComponent(DisplayNameComponent.class, SpongeDisplayNameComponent.class);
-        registerComponent(ItemFlagComponent.class, SpongeItemFlagComponent.class);
-        registerComponent(LoreComponent.class, SpongeLoreComponent.class);
-        registerComponent(UnbreakableComponent.class, SpongeUnbreakableComponent.class);
+        this.registerComponent(ColorComponent.class, new SpongeColorComponent());
+        this.registerComponent(CustomModelDataComponent.class, new SpongeCustomModelDataComponent());
+        this.registerComponent(DamageComponent.class, new SpongeDamageComponent());
+        this.registerComponent(DisplayNameComponent.class, new SpongeDisplayNameComponent());
+        this.registerComponent(ItemFlagComponent.class, new SpongeItemFlagComponent());
+        this.registerComponent(LoreComponent.class, new SpongeLoreComponent());
+        this.registerComponent(UnbreakableComponent.class, new SpongeUnbreakableComponent());
     }
 
     @Override

@@ -4,9 +4,9 @@ import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
 
 import org.battleplugins.api.Platform;
-import org.battleplugins.api.inventory.item.ItemRegistry;
 import org.battleplugins.api.inventory.item.ItemStack;
 import org.battleplugins.api.inventory.item.ItemType;
+import org.battleplugins.api.nukkit.registry.inventory.NukkitItemRegistry;
 import org.battleplugins.api.util.MCWrapper;
 
 import java.util.HashMap;

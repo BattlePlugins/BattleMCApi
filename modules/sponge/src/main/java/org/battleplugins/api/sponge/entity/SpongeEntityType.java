@@ -1,12 +1,11 @@
 package org.battleplugins.api.sponge.entity;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 
 import org.battleplugins.api.entity.EntityType;
 import org.battleplugins.api.util.Identifier;
 
-@AllArgsConstructor(access = AccessLevel.PACKAGE)
+@AllArgsConstructor
 public class SpongeEntityType implements EntityType {
 
     private org.spongepowered.api.entity.EntityType type;

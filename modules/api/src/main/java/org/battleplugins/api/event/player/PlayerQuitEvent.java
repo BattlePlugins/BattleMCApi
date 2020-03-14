@@ -1,14 +1,15 @@
 package org.battleplugins.api.event.player;
 
+import org.battleplugins.api.entity.living.player.Player;
 import org.battleplugins.api.message.Message;
 
 /**
- * An event called when a player quits the server.
+ * An event called when a {@link Player} quits the server.
  */
 public interface PlayerQuitEvent extends PlayerEvent {
 
     /**
-     * The quit message sent when the player
+     * The quit message sent when the {@link Player}
      * quits the server
      *
      * @return the quit message
@@ -17,7 +18,7 @@ public interface PlayerQuitEvent extends PlayerEvent {
 
     /**
      * Sets the quit message sent when the
-     * player quits the server
+     * {@link Player} quits the server
      *
      * @param quitMessage the quitMessage
      */

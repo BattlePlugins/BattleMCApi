@@ -1,18 +1,11 @@
 package org.battleplugins.api.inventory.item;
 
-import org.battleplugins.api.util.Identifier;
+import org.battleplugins.api.util.Identifiable;
 
 /**
  * Represents an item type.
  */
-public interface ItemType {
-
-    /**
-     * The item identifier of the item
-     *
-     * @return the item identifier of the item
-     */
-    Identifier getIdentifier();
+public interface ItemType extends Identifiable {
 
     /**
      * The maximum size this item can stack to

@@ -1,6 +1,5 @@
 package org.battleplugins.api.nukkit.entity;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 
 import org.battleplugins.api.entity.EntityType;
@@ -9,7 +8,7 @@ import org.battleplugins.api.util.Identifier;
 
 import java.util.Arrays;
 
-@AllArgsConstructor(access = AccessLevel.PACKAGE)
+@AllArgsConstructor
 public class NukkitEntityType implements EntityType {
 
     private int id;

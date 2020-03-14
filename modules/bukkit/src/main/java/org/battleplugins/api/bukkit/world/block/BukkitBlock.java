@@ -1,6 +1,7 @@
 package org.battleplugins.api.bukkit.world.block;
 
-import org.battleplugins.api.world.block.BlockRegistry;
+import org.battleplugins.api.bukkit.registry.world.BukkitBlockRegistry;
+import org.battleplugins.api.registry.world.BlockRegistry;
 import org.battleplugins.api.bukkit.util.BukkitUtil;
 import org.battleplugins.api.bukkit.world.BukkitWorld;
 import org.battleplugins.api.util.MCWrapper;

@@ -1,18 +1,20 @@
 package org.battleplugins.api.world.block;
 
 import org.battleplugins.api.inventory.item.ItemType;
+import org.battleplugins.api.util.Identifiable;
 import org.battleplugins.api.util.Identifier;
 
 /**
  * Represents a block type.
  */
-public interface BlockType {
+public interface BlockType extends Identifiable {
 
     /**
      * The full identifier of the block
      *
      * @return the full identifier of the block
      */
+    @Override
     default Identifier getIdentifier() {
         return toItemType().getIdentifier();
     }

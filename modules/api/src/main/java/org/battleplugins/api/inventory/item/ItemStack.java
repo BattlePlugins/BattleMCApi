@@ -62,7 +62,7 @@ public interface ItemStack {
      * @param <T> the value
      */
     default <T> void applyComponent(Class<? extends ItemComponent<T>> componentClass, T value) {
-        Platform.getPlatform().getRegistry().getItemRegistry().getItemComponent(componentClass).applyComponent(this, value);
+        Platform.getRegistry().getItemRegistry().getComponent(componentClass).applyComponent(this, value);
     }
 
     /**
@@ -73,7 +73,7 @@ public interface ItemStack {
      * @return the value of the given component class
      */
     default <T> Optional<T> getValue(Class<? extends ItemComponent<T>> componentClass) {
-        return Platform.getPlatform().getRegistry().getItemRegistry().getItemComponent(componentClass).getValue(this);
+        return Platform.getRegistry().getItemRegistry().getComponent(componentClass).getValue(this);
     }
 
     /**

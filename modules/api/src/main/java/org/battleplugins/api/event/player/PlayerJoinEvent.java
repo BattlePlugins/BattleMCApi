@@ -1,14 +1,15 @@
 package org.battleplugins.api.event.player;
 
+import org.battleplugins.api.entity.living.player.Player;
 import org.battleplugins.api.message.Message;
 
 /**
- * An event called when a player joins the server.
+ * An event called when a {@link Player} joins the server.
  */
 public interface PlayerJoinEvent extends PlayerEvent {
 
     /**
-     * The join message sent when the player
+     * The {@link Player} message sent when the player
      * joins the server
      *
      * @return the join message
@@ -16,7 +17,7 @@ public interface PlayerJoinEvent extends PlayerEvent {
     Message getJoinMessage();
 
     /**
-     * Sets the join message sent when the
+     * Sets the {@link Player} message sent when the
      * player joins the server
      *
      * @param joinMessage the joinMessage

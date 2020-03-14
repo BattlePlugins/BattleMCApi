@@ -1,8 +1,9 @@
-package org.battleplugins.api.nukkit.world.block;
+package org.battleplugins.api.nukkit.registry.world;
 
 import cn.nukkit.block.Block;
 
-import org.battleplugins.api.world.block.BlockRegistry;
+import org.battleplugins.api.nukkit.world.block.NukkitBlockType;
+import org.battleplugins.api.registry.world.BlockRegistry;
 import org.battleplugins.api.util.Identifier;
 import org.battleplugins.api.world.block.BlockType;
 
@@ -10,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class NukkitBlockRegistry implements BlockRegistry<Block> {
+public class NukkitBlockRegistry extends BlockRegistry<Block> {
 
     private static final Map<Block, NukkitBlockType> BLOCK_ENTRIES = new HashMap<>();
     private static final Map<String, Block> IDENTIFIER_TO_BLOCK = new HashMap<>();

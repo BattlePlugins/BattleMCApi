@@ -1,15 +1,16 @@
-package org.battleplugins.api.sponge.world.block;
+package org.battleplugins.api.sponge.registry.world;
 
 import org.battleplugins.api.sponge.compat.SpongeCompatItemType;
+import org.battleplugins.api.sponge.world.block.SpongeBlockType;
 import org.battleplugins.api.util.Identifier;
-import org.battleplugins.api.world.block.BlockRegistry;
+import org.battleplugins.api.registry.world.BlockRegistry;
 import org.battleplugins.api.world.block.BlockType;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.block.BlockTypes;
 
 import java.util.Optional;
 
-public class SpongeBlockRegistry implements BlockRegistry<org.spongepowered.api.block.BlockType> {
+public class SpongeBlockRegistry extends BlockRegistry<org.spongepowered.api.block.BlockType> {
 
     @Override
     public BlockType fromPlatformBlock(org.spongepowered.api.block.BlockType block) {

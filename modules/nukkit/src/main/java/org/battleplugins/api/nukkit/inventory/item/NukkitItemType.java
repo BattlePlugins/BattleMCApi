@@ -11,7 +11,7 @@ public class NukkitItemType extends MCWrapper<Item> implements ItemType {
     protected Identifier identifier;
     protected Item item;
 
-    NukkitItemType(Identifier identifier, Item handle) {
+    public NukkitItemType(Identifier identifier, Item handle) {
         super(handle);
 
         this.identifier = identifier;

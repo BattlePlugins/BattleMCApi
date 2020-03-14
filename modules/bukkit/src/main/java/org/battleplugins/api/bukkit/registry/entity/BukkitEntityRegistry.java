@@ -1,6 +1,7 @@
-package org.battleplugins.api.bukkit.entity;
+package org.battleplugins.api.bukkit.registry.entity;
 
-import org.battleplugins.api.entity.EntityRegistry;
+import org.battleplugins.api.bukkit.entity.BukkitEntityType;
+import org.battleplugins.api.registry.entity.EntityRegistry;
 import org.battleplugins.api.util.Identifier;
 import org.bukkit.entity.EntityType;
 

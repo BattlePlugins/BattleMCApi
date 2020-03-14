@@ -1,5 +1,7 @@
 package org.battleplugins.api.inventory.entity;
 
+import org.battleplugins.api.entity.hand.Hand;
+import org.battleplugins.api.entity.hand.Hands;
 import org.battleplugins.api.entity.living.Human;
 import org.battleplugins.api.entity.living.player.Player;
 import org.battleplugins.api.inventory.CarriedInventory;
@@ -11,6 +13,16 @@ import java.util.Optional;
  * Represents an inventory for a player.
  */
 public interface PlayerInventory extends CarriedInventory<Human> {
+
+    default Optional<ItemStack> getItemInHand(Hand hand) {
+        if (hand == Hands.MAIN_HAND) {
+            return getItemInMainHand();
+        }
+        if (hand == Hands.OFF_HAND) {
+            return getItemInOffHand();
+        }
+        return Optional.empty();
+    }
 
     /**
      * Gets the item in the main hand of the {@link Player}

@@ -1,5 +1,6 @@
 package org.battleplugins.api.entity;
 
+import org.battleplugins.api.registry.entity.EntityRegistry;
 import org.battleplugins.api.util.Identifier;
 
 import java.util.Optional;

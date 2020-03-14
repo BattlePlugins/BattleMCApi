@@ -1,5 +1,6 @@
 package org.battleplugins.api.world.block;
 
+import org.battleplugins.api.registry.world.BlockRegistry;
 import org.battleplugins.api.util.Identifier;
 
 import java.util.Optional;

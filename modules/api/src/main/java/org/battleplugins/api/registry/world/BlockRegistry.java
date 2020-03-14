@@ -1,7 +1,10 @@
-package org.battleplugins.api.world.block;
+package org.battleplugins.api.registry.world;
 
 import org.battleplugins.api.Platform;
+import org.battleplugins.api.registry.IdentifiableRegistry;
 import org.battleplugins.api.util.Identifier;
+import org.battleplugins.api.world.block.BlockType;
+import org.battleplugins.api.world.block.BlockTypes;
 
 import java.util.Optional;
 
@@ -17,7 +20,9 @@ import java.util.Optional;
  *
  * @param <T> the platform implementation
  */
-public interface BlockRegistry<T> {
+public abstract class BlockRegistry<T> implements IdentifiableRegistry<BlockType> {
+
+    private boolean closed;
 
     /**
      * Gets the given block type from the platform
@@ -26,7 +31,7 @@ public interface BlockRegistry<T> {
      * @param block the platform block
      * @return the given block type
      */
-    BlockType fromPlatformBlock(T block);
+    public abstract BlockType fromPlatformBlock(T block);
 
     /**
      * Gets the block type from the given
@@ -39,14 +44,24 @@ public interface BlockRegistry<T> {
      * @param identifier the given {@link Identifier}
      * @return the block type from the given identifier
      */
-    Optional<BlockType> fromIdentifier(Identifier identifier);
+    public abstract Optional<BlockType> fromIdentifier(Identifier identifier);
+
+    @Override
+    public boolean isClosed() {
+        return this.closed;
+    }
+
+    @Override
+    public void close() {
+        this.closed = true;
+    }
 
     /**
      * Gets the current block registry
      *
      * @return the current block registry
      */
-    static BlockRegistry<?> get() {
+    public static BlockRegistry<?> get() {
         return Platform.getRegistry().getBlockRegistry();
     }
 }

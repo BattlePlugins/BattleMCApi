@@ -3,7 +3,6 @@ package org.battleplugins.api.bukkit.inventory.item;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.battleplugins.api.inventory.item.ItemRegistry;
 import org.battleplugins.api.bukkit.util.BukkitMaterialAdapter;
 import org.battleplugins.api.inventory.item.ItemType;
 import org.battleplugins.api.util.MCWrapper;

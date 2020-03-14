@@ -2,18 +2,11 @@ package org.battleplugins.api.entity;
 
 import org.battleplugins.api.Platform;
 import org.battleplugins.api.entity.component.EntityComponent;
-import org.battleplugins.api.util.Identifier;
+import org.battleplugins.api.util.Identifiable;
 
 import java.util.Set;
 
-public interface EntityType {
-
-    /**
-     * The full {@link Identifier} of this entity type
-     *
-     * @return the full identifier of this entity type
-     */
-    Identifier getIdentifier();
+public interface EntityType extends Identifiable {
 
     /**
      * A set of the provided (allowed) {@link EntityComponent}s
@@ -21,7 +14,7 @@ public interface EntityType {
      *
      * @return a set of the allowed entity components
      */
-    default Set<Class<? extends EntityComponent>> getProvidedComponents() {
+    default Set<Class<? extends EntityComponent<?>>> getProvidedComponents() {
         return Platform.getRegistry().getEntityRegistry().validComponentsFor(this);
     }
 }

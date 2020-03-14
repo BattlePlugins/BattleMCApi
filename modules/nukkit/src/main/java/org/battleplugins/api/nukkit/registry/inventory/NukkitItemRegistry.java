@@ -1,11 +1,12 @@
-package org.battleplugins.api.nukkit.inventory.item;
+package org.battleplugins.api.nukkit.registry.inventory;
 
 import cn.nukkit.item.Item;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import org.battleplugins.api.inventory.item.ItemRegistry;
+import org.battleplugins.api.nukkit.inventory.item.NukkitItemType;
+import org.battleplugins.api.registry.inventory.ItemRegistry;
 import org.battleplugins.api.inventory.item.ItemType;
 import org.battleplugins.api.inventory.item.component.*;
 import org.battleplugins.api.nukkit.NukkitPlatform;
@@ -38,13 +39,13 @@ public class NukkitItemRegistry extends ItemRegistry<Item> {
             IDENTIFIER_TO_ENTRY.put(itemEntry.getKey(), itemEntry.getValue());
         }
 
-        registerComponent(ColorComponent.class, NukkitColorComponent.class);
-        registerComponent(CustomModelDataComponent.class, NukkitCustomModelDataComponent.class);
-        registerComponent(DamageComponent.class, NukkitDamageComponent.class);
-        registerComponent(DisplayNameComponent.class, NukkitDisplayNameComponent.class);
-        registerComponent(ItemFlagComponent.class, NukkitItemFlagComponent.class);
-        registerComponent(LoreComponent.class, NukkitLoreComponent.class);
-        registerComponent(UnbreakableComponent.class, NukkitUnbreakableComponent.class);
+        this.registerComponent(ColorComponent.class, new NukkitColorComponent());
+        this.registerComponent(CustomModelDataComponent.class, new NukkitCustomModelDataComponent());
+        this.registerComponent(DamageComponent.class, new NukkitDamageComponent());
+        this.registerComponent(DisplayNameComponent.class, new NukkitDisplayNameComponent());
+        this.registerComponent(ItemFlagComponent.class, new NukkitItemFlagComponent());
+        this.registerComponent(LoreComponent.class, new NukkitLoreComponent());
+        this.registerComponent(UnbreakableComponent.class, new NukkitUnbreakableComponent());
     }
 
     @Override

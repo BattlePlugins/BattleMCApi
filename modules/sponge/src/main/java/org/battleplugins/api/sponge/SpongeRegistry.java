@@ -2,22 +2,26 @@ package org.battleplugins.api.sponge;
 
 import org.battleplugins.api.Registry;
 import org.battleplugins.api.entity.component.ageable.BabyComponent;
-import org.battleplugins.api.sponge.entity.SpongeEntityRegistry;
+import org.battleplugins.api.registry.world.DirectionRegistry;
+import org.battleplugins.api.sponge.registry.entity.SpongeEntityRegistry;
 import org.battleplugins.api.sponge.entity.component.ageable.SpongeBabyComponent;
 import org.battleplugins.api.sponge.inventory.SpongeInventoryBuilder;
-import org.battleplugins.api.sponge.world.block.SpongeBlockRegistry;
-import org.battleplugins.api.sponge.inventory.item.SpongeItemRegistry;
+import org.battleplugins.api.sponge.registry.world.SpongeBlockRegistry;
+import org.battleplugins.api.sponge.registry.inventory.SpongeItemRegistry;
+import org.battleplugins.api.sponge.registry.world.SpongeDirectionRegistry;
 
 public class SpongeRegistry extends Registry {
 
     private SpongeItemRegistry itemRegistry;
     private SpongeBlockRegistry blockRegistry;
     private SpongeEntityRegistry entityRegistry;
+    private SpongeDirectionRegistry directionRegistry;
 
     public void setup() {
         this.itemRegistry = new SpongeItemRegistry();
         this.blockRegistry = new SpongeBlockRegistry();
         this.entityRegistry = new SpongeEntityRegistry();
+        this.directionRegistry = new SpongeDirectionRegistry();
 
         this.builders.add(SpongeInventoryBuilder.class);
 
@@ -37,5 +41,10 @@ public class SpongeRegistry extends Registry {
     @Override
     public SpongeEntityRegistry getEntityRegistry() {
         return entityRegistry;
+    }
+
+    @Override
+    public SpongeDirectionRegistry getDirectionRegistry() {
+        return directionRegistry;
     }
 }

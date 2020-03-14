@@ -7,7 +7,7 @@ import org.battleplugins.api.util.MCWrapper;
 
 public class SpongeItemType extends MCWrapper<org.spongepowered.api.item.ItemType> implements ItemType {
 
-    SpongeItemType(org.spongepowered.api.item.ItemType handle) {
+    public SpongeItemType(org.spongepowered.api.item.ItemType handle) {
         super(handle);
     }
 

@@ -1,4 +1,4 @@
-package org.battleplugins.api.nukkit.inventory.item;
+package org.battleplugins.api.nukkit.registry.inventory;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.AccessLevel;
