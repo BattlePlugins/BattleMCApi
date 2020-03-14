@@ -4,6 +4,7 @@ import org.battleplugins.api.command.CommandSender;
 import org.battleplugins.api.entity.living.Human;
 import org.battleplugins.api.entity.living.player.gamemode.GameMode;
 import org.battleplugins.api.inventory.Inventory;
+import org.battleplugins.api.inventory.entity.PlayerInventory;
 import org.battleplugins.api.message.Message;
 
 /**
@@ -52,4 +53,12 @@ public interface Player extends CommandSender, OfflinePlayer, Human {
 	 * @param gameMode the gamemode to set for the player
 	 */
 	void setGameMode(GameMode gameMode);
+
+	/**
+	 * The inventory of the player
+	 *
+	 * @return the inventory of the player
+	 */
+	@Override
+	PlayerInventory getInventory();
 }
