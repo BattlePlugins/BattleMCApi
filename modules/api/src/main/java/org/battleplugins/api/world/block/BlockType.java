@@ -4,6 +4,8 @@ import org.battleplugins.api.inventory.item.ItemType;
 import org.battleplugins.api.util.Identifiable;
 import org.battleplugins.api.util.Identifier;
 
+import java.util.Objects;
+
 /**
  * Represents a block type.
  */
@@ -32,4 +34,15 @@ public interface BlockType extends Identifiable {
      * @return the hardness of the block
      */
     float getHardness();
+
+    /**
+     * If this block type is equal to the
+     * given type
+     *
+     * @param type the block type to check equality for
+     * @return if this block type is equal to the given type
+     */
+    default boolean is(BlockType type) {
+        return Objects.equals(this, type);
+    }
 }
