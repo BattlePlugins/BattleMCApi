@@ -1,5 +1,7 @@
 package org.battleplugins.api.sponge.entity.living.player;
 
+import org.battleplugins.api.entity.hand.Hand;
+import org.battleplugins.api.entity.hand.Hands;
 import org.battleplugins.api.entity.living.player.gamemode.GameMode;
 import org.battleplugins.api.entity.living.player.gamemode.GameModes;
 import org.battleplugins.api.inventory.Inventory;
@@ -7,8 +9,11 @@ import org.battleplugins.api.sponge.entity.living.SpongeHuman;
 import org.battleplugins.api.sponge.inventory.SpongeInventory;
 import org.battleplugins.api.sponge.util.SpongeUtil;
 import org.battleplugins.api.world.Location;
+import org.spongepowered.api.CatalogTypes;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.data.key.Keys;
+import org.spongepowered.api.data.type.HandPreference;
+import org.spongepowered.api.data.type.HandPreferences;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.util.RespawnLocation;
@@ -110,5 +115,10 @@ public class SpongePlayer extends SpongeHuman<Player> implements org.battleplugi
     public void setGameMode(GameMode gameMode) {
         handle.offer(Keys.GAME_MODE, Sponge.getRegistry().getType(org.spongepowered.api.entity.living.player.gamemode.GameMode.class,
                 gameMode.getIdentifier().getKey().toUpperCase()).orElse(org.spongepowered.api.entity.living.player.gamemode.GameModes.SURVIVAL));
+    }
+
+    @Override
+    public Hand getHand() {
+        return handle.get(Keys.DOMINANT_HAND).orElse(HandPreferences.RIGHT) == HandPreferences.RIGHT ? Hands.MAIN_HAND : Hands.OFF_HAND;
     }
 }

@@ -16,7 +16,7 @@
         <dependency>
             <groupId>org.spongepowered</groupId>
             <artifactId>spongeapi</artifactId>
-            <version>7.1.0</version>
+            <version>7.2.0-20200130.194701-33</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

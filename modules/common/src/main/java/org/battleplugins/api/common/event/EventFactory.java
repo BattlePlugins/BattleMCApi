@@ -3,14 +3,22 @@ package org.battleplugins.api.common.event;
 import lombok.AllArgsConstructor;
 
 import org.battleplugins.api.common.event.gen.EventGenerator;
+import org.battleplugins.api.entity.Entity;
+import org.battleplugins.api.entity.hand.Hand;
 import org.battleplugins.api.event.Cancellable;
 import org.battleplugins.api.event.Event;
+import org.battleplugins.api.event.player.PlayerInteractBlockEvent;
+import org.battleplugins.api.event.player.PlayerInteractEntityEvent;
+import org.battleplugins.api.event.player.PlayerInteractItemEvent;
 import org.battleplugins.api.event.player.PlayerJoinEvent;
 import org.battleplugins.api.event.player.PlayerQuitEvent;
 import org.battleplugins.api.entity.living.player.Player;
+import org.battleplugins.api.inventory.item.ItemStack;
 import org.battleplugins.api.message.Message;
+import org.battleplugins.api.world.block.Block;
 
 import java.util.LinkedHashMap;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 @AllArgsConstructor
@@ -39,8 +47,8 @@ public class EventFactory {
 
     public PlayerJoinEvent firePlayerJoin(Player player, Message joinMessage) {
         LinkedHashMap<String, Object> joinMap = new LinkedHashMap<>();
-        joinMap.put("joinMessage", joinMessage);
         joinMap.put("player", player);
+        joinMap.put("joinMessage", joinMessage);
         PlayerJoinEvent joinEvent = generateEvent(PlayerJoinEvent.class, joinMap);
         this.bus.fire(joinEvent);
         return joinEvent;
@@ -48,10 +56,43 @@ public class EventFactory {
 
     public PlayerQuitEvent firePlayerQuit(Player player, Message quitMessage) {
         LinkedHashMap<String, Object> quitMap = new LinkedHashMap<>();
-        quitMap.put("quitMessage", quitMessage);
         quitMap.put("player", player);
+        quitMap.put("quitMessage", quitMessage);
         PlayerQuitEvent quitEvent = generateEvent(PlayerQuitEvent.class, quitMap);
         this.bus.fire(quitEvent);
         return quitEvent;
+    }
+
+    public PlayerInteractEntityEvent firePlayerInteractEntity(Player player, Hand hand, Entity entity, PlayerInteractEntityEvent.Action action) {
+        LinkedHashMap<String, Object> interactMap = new LinkedHashMap<>();
+        interactMap.put("player", player);
+        interactMap.put("hand", hand);
+        interactMap.put("entity", entity);
+        interactMap.put("action", action);
+        PlayerInteractEntityEvent interactEntityEvent = generateEvent(PlayerInteractEntityEvent.class, interactMap);
+        this.bus.fire(interactEntityEvent);
+        return interactEntityEvent;
+    }
+
+    public PlayerInteractBlockEvent firePlayerInteractBlock(Player player, Hand hand, Block block, PlayerInteractBlockEvent.Action action) {
+        LinkedHashMap<String, Object> interactMap = new LinkedHashMap<>();
+        interactMap.put("player", player);
+        interactMap.put("hand", hand);
+        interactMap.put("block", block);
+        interactMap.put("action", action);
+        PlayerInteractBlockEvent interactBlockEvent = generateEvent(PlayerInteractBlockEvent.class, interactMap);
+        this.bus.fire(interactBlockEvent);
+        return interactBlockEvent;
+    }
+
+    public PlayerInteractItemEvent firePlayerInteractItem(Player player, Hand hand, ItemStack item, PlayerInteractItemEvent.Action action) {
+        LinkedHashMap<String, Object> interactMap = new LinkedHashMap<>();
+        interactMap.put("player", player);
+        interactMap.put("hand", hand);
+        interactMap.put("item", Optional.ofNullable(item));
+        interactMap.put("action", action);
+        PlayerInteractItemEvent interactItemEvent = generateEvent(PlayerInteractItemEvent.class, interactMap);
+        this.bus.fire(interactItemEvent);
+        return interactItemEvent;
     }
 }

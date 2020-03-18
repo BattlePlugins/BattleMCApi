@@ -2,6 +2,8 @@ package org.battleplugins.api.nukkit.entity.living.player;
 
 import cn.nukkit.Player;
 
+import org.battleplugins.api.entity.hand.Hand;
+import org.battleplugins.api.entity.hand.Hands;
 import org.battleplugins.api.entity.living.player.gamemode.GameMode;
 import org.battleplugins.api.entity.living.player.gamemode.GameModes;
 import org.battleplugins.api.inventory.Inventory;
@@ -90,6 +92,11 @@ public class NukkitPlayer extends NukkitHuman<Player> implements org.battleplugi
     @Override
     public void setGameMode(GameMode gameMode) {
         handle.setGamemode(gameMode.getId());
+    }
+
+    @Override
+    public Hand getHand() {
+        return Hands.MAIN_HAND; // no support for this in Nukkit :(
     }
 
     @Override

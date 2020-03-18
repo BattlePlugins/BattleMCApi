@@ -4,11 +4,14 @@ import org.battleplugins.api.bukkit.entity.living.BukkitHuman;
 import org.battleplugins.api.bukkit.inventory.BukkitInventory;
 
 import org.battleplugins.api.bukkit.util.BukkitUtil;
+import org.battleplugins.api.entity.hand.Hand;
+import org.battleplugins.api.entity.hand.Hands;
 import org.battleplugins.api.entity.living.player.gamemode.GameMode;
 import org.battleplugins.api.entity.living.player.gamemode.GameModes;
 import org.battleplugins.api.inventory.Inventory;
 import org.battleplugins.api.world.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.MainHand;
 
 import java.util.Optional;
 import java.util.OptionalLong;
@@ -90,5 +93,10 @@ public class BukkitPlayer extends BukkitHuman<Player> implements org.battleplugi
     @Override
     public void setGameMode(GameMode gameMode) {
         handle.setGameMode(org.bukkit.GameMode.values()[gameMode.getId()]);
+    }
+
+    @Override
+    public Hand getHand() {
+        return handle.getMainHand() == MainHand.LEFT ? Hands.OFF_HAND : Hands.MAIN_HAND;
     }
 }
