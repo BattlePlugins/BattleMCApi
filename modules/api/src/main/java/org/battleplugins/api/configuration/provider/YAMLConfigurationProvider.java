@@ -4,8 +4,8 @@ import org.battleplugins.api.configuration.ConfigurationProvider;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.LinkedHashMap;
 
 /**
@@ -23,11 +23,11 @@ public class YAMLConfigurationProvider extends ConfigurationProvider {
     }
 
     @Override
-    protected void save(File file) throws IOException {
+    protected void save(Path path) throws IOException {
         DumperOptions dumperOptions = new DumperOptions();
         dumperOptions.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
         Yaml yaml = new Yaml(dumperOptions);
         String content = yaml.dump(configContents);
-        this.write(file, content);
+        this.write(path, content);
     }
 }

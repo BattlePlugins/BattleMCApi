@@ -4,19 +4,12 @@ import lombok.Getter;
 
 import org.battleplugins.api.plugin.platform.PlatformPlugin;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * The plugin manager for managing plugins built against
  * this API (not to be confused with the platform plugin manager).
  */
-@Getter
 public interface PluginManager {
 
     /**

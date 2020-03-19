@@ -1,8 +1,8 @@
 package org.battleplugins.api.plugin;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+
 import org.battleplugins.api.Platform;
 import org.battleplugins.api.PlatformType;
 import org.battleplugins.api.PlatformTypes;
@@ -14,7 +14,7 @@ import org.battleplugins.api.plugin.platform.PlatformCodeHandler;
 import org.battleplugins.api.plugin.platform.PlatformPlugin;
 import org.battleplugins.api.logger.Logger;
 
-import java.io.File;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -65,7 +65,7 @@ public abstract class Plugin {
 	 *
 	 * @return the data folder of the plugin
 	 */
-	public File getDataFolder() {
+	public Path getDataFolder() {
 		return platformPlugin.getPluginDataFolder();
 	}
 

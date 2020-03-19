@@ -2,10 +2,10 @@ package org.battleplugins.api.configuration.provider;
 
 import org.battleplugins.api.configuration.ConfigurationProvider;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.StringReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Map;
 import java.util.Properties;
 
@@ -29,9 +29,9 @@ public class PropertiesConfigurationProvider extends ConfigurationProvider {
     }
 
     @Override
-    protected void save(File file) throws IOException {
+    protected void save(Path path) throws IOException {
         Properties properties = new Properties();
         properties.putAll(configContents);
-        properties.store(new FileOutputStream(file), null);
+        properties.store(Files.newBufferedWriter(path), null);
     }
 }

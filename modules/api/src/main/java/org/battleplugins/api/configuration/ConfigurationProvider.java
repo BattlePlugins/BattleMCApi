@@ -1,11 +1,8 @@
 package org.battleplugins.api.configuration;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.LinkedHashMap;
 
 /**
@@ -30,20 +27,12 @@ public abstract class ConfigurationProvider {
     /**
      * Saves the configuration contents
      *
-     * @param file the file to save
+     * @param path the file to save
      * @throws IOException if the file could not be saved
      */
-    protected abstract void save(File file) throws IOException;
+    protected abstract void save(Path path) throws IOException;
 
-    protected void write(File file, String content) throws IOException {
-        InputStream inputStream = new ByteArrayInputStream(content.getBytes(StandardCharsets.UTF_8));
-        try (FileOutputStream stream = new FileOutputStream(file)) {
-            byte[] buffer = new byte[1024];
-            int length;
-            while ((length = inputStream.read(buffer)) != -1) {
-                stream.write(buffer, 0, length);
-            }
-        }
-        inputStream.close();
+    protected void write(Path path, String content) throws IOException {
+        Files.write(path, content.getBytes());
     }
 }

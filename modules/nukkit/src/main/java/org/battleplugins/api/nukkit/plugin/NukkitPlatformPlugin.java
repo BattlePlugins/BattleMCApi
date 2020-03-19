@@ -9,7 +9,7 @@ import org.battleplugins.api.nukkit.logger.NukkitLogger;
 import org.battleplugins.api.plugin.platform.PlatformPlugin;
 import org.battleplugins.api.util.MCWrapper;
 
-import java.io.File;
+import java.nio.file.Path;
 
 public class NukkitPlatformPlugin extends MCWrapper<Plugin> implements PlatformPlugin {
 
@@ -33,8 +33,8 @@ public class NukkitPlatformPlugin extends MCWrapper<Plugin> implements PlatformP
     }
 
     @Override
-    public File getPluginDataFolder() {
-        return handle.getDataFolder();
+    public Path getPluginDataFolder() {
+        return handle.getDataFolder().toPath();
     }
 
     @Override

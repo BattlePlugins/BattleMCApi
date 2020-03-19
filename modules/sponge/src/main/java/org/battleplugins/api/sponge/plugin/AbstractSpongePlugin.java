@@ -20,7 +20,7 @@ import org.spongepowered.api.event.game.state.GameStartedServerEvent;
 import org.spongepowered.api.event.game.state.GameStoppedEvent;
 import org.spongepowered.api.plugin.PluginContainer;
 
-import java.io.File;
+import java.nio.file.Path;
 
 public class AbstractSpongePlugin implements PlatformPlugin {
 
@@ -35,7 +35,7 @@ public class AbstractSpongePlugin implements PlatformPlugin {
 
     @Inject
     @ConfigDir(sharedRoot = false)
-    private File configDir;
+    private Path configDir;
 
     private Plugin plugin;
     private PlatformPlugin platformPlugin;
@@ -66,7 +66,7 @@ public class AbstractSpongePlugin implements PlatformPlugin {
     }
 
     @Override
-    public File getPluginDataFolder() {
+    public Path getPluginDataFolder() {
         return configDir;
     }
 

@@ -15,7 +15,7 @@ import org.battleplugins.api.plugin.Plugin;
 import org.battleplugins.api.plugin.PluginDescription;
 import org.battleplugins.api.plugin.platform.PlatformPlugin;
 
-import java.io.File;
+import java.nio.file.Path;
 
 public class NukkitPlugin extends PluginBase implements PlatformPlugin {
 
@@ -55,7 +55,7 @@ public class NukkitPlugin extends PluginBase implements PlatformPlugin {
     }
 
     @Override
-    public File getPluginDataFolder() {
+    public Path getPluginDataFolder() {
         return platformPlugin.getPluginDataFolder();
     }
 

@@ -13,7 +13,7 @@ import org.battleplugins.api.plugin.PluginDescription;
 import org.battleplugins.api.plugin.platform.PlatformPlugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
+import java.nio.file.Path;
 
 public class BukkitPlugin extends JavaPlugin implements PlatformPlugin {
 
@@ -52,7 +52,7 @@ public class BukkitPlugin extends JavaPlugin implements PlatformPlugin {
     }
 
     @Override
-    public File getPluginDataFolder() {
+    public Path getPluginDataFolder() {
         return platformPlugin.getPluginDataFolder();
     }
 

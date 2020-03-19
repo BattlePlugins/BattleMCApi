@@ -9,7 +9,7 @@ import org.battleplugins.api.plugin.platform.PlatformPlugin;
 import org.battleplugins.api.util.MCWrapper;
 import org.bukkit.plugin.Plugin;
 
-import java.io.File;
+import java.nio.file.Path;
 
 public class BukkitPlatformPlugin extends MCWrapper<Plugin> implements PlatformPlugin {
 
@@ -31,8 +31,8 @@ public class BukkitPlatformPlugin extends MCWrapper<Plugin> implements PlatformP
     }
 
     @Override
-    public File getPluginDataFolder() {
-        return handle.getDataFolder();
+    public Path getPluginDataFolder() {
+        return handle.getDataFolder().toPath();
     }
 
     @Override

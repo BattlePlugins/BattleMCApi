@@ -5,7 +5,7 @@ import org.battleplugins.api.command.CommandExecutor;
 import org.battleplugins.api.logger.Logger;
 import org.battleplugins.api.plugin.PluginDescription;
 
-import java.io.File;
+import java.nio.file.Path;
 
 /**
  * Represents a platform plugin.
@@ -33,7 +33,7 @@ public interface PlatformPlugin {
      *
      * @return the data folder of the plugin
      */
-    File getPluginDataFolder();
+    Path getPluginDataFolder();
 
     /**
      * The {@link Logger}

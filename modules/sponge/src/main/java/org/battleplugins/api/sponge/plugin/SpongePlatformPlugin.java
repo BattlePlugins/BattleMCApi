@@ -13,7 +13,8 @@ import org.battleplugins.api.util.MCWrapper;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.plugin.PluginContainer;
 
-import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
@@ -67,8 +68,8 @@ public class SpongePlatformPlugin extends MCWrapper<PluginContainer> implements 
     }
 
     @Override
-    public File getPluginDataFolder() {
-        return new File("config/" + handle.getId() + "/");
+    public Path getPluginDataFolder() {
+        return Paths.get("config",handle.getId());
     }
 
     @Override

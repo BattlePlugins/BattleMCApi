@@ -1,9 +1,9 @@
 package org.battleplugins.api.configuration;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 /**
  * Represents a file that contains persistable configuration
@@ -12,14 +12,14 @@ import java.io.IOException;
  */
 public class Configuration {
 
-    private File file;
+    private Path path;
     private ConfigurationProvider provider;
 
-    private Configuration(File file, Class<? extends ConfigurationProvider> providerClass) {
-        if (!file.exists())
-            throw new IllegalArgumentException("Could not find file " + file + "!");
-
-        this.file = file;
+    private Configuration(Path path, Class<? extends ConfigurationProvider> providerClass) {
+        if (Files.notExists(path)) {
+            throw new IllegalArgumentException("Could not find file " + path.toString() + "!");
+        }
+        this.path = path;
 
         try {
             this.provider = providerClass.newInstance();
@@ -66,11 +66,11 @@ public class Configuration {
      * @throws IOException if the file could not be saved
      */
     public void save() throws IOException {
-        this.provider.save(file);
+        this.provider.save(path);
     }
 
     private String getReadableContents() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+        try (BufferedReader reader = new BufferedReader(Files.newBufferedReader(path))) {
             String temp;
             StringBuilder stringBuilder = new StringBuilder();
             temp = reader.readLine();
@@ -100,14 +100,14 @@ public class Configuration {
 
     public static class Builder {
 
-        private File file;
+        private Path path;
         private Class<? extends ConfigurationProvider> providerClass;
 
         private Builder() {
         }
 
-        public Builder file(File file) {
-            this.file = file;
+        public Builder path(Path path) {
+            this.path = path;
             return this;
         }
 
@@ -117,7 +117,7 @@ public class Configuration {
         }
 
         public Configuration build() {
-            return new Configuration(file, providerClass);
+            return new Configuration(path, providerClass);
         }
     }
 }

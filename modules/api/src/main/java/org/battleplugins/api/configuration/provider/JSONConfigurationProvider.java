@@ -6,8 +6,8 @@ import com.google.gson.reflect.TypeToken;
 
 import org.battleplugins.api.configuration.ConfigurationProvider;
 
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.LinkedHashMap;
 
 /**
@@ -24,7 +24,7 @@ public class JSONConfigurationProvider extends ConfigurationProvider {
     }
 
     @Override
-    protected void save(File file) throws IOException {
-        this.write(file, new GsonBuilder().setPrettyPrinting().create().toJson(configContents));
+    protected void save(Path path) throws IOException {
+        this.write(path, new GsonBuilder().setPrettyPrinting().create().toJson(configContents));
     }
 }
