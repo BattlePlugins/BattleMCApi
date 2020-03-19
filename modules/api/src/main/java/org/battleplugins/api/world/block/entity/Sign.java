@@ -1,5 +1,7 @@
 package org.battleplugins.api.world.block.entity;
 
+import org.battleplugins.api.entity.living.player.Player;
+
 /**
  * Represents a sign.
  */
@@ -29,4 +31,15 @@ public interface Sign extends BlockEntity {
 	 * @param text the text to set
 	 */
 	void setLine(int index, String text);
+
+	/**
+	 * Sends a temporary sign update to the player. This
+	 * is not persistent and only lasts until the player
+	 * logs out, chunks unload, or the sign is updated
+	 * by something else
+	 *
+	 * @param player the player to send the sign change for
+	 * @param lines the lines to update
+	 */
+	void sendSignUpdate(Player player, String[] lines);
 }

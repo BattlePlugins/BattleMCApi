@@ -1,5 +1,6 @@
 package org.battleplugins.api.sponge.world.block.entity;
 
+import org.battleplugins.api.entity.living.player.Player;
 import org.spongepowered.api.block.tileentity.Sign;
 import org.spongepowered.api.data.manipulator.mutable.tileentity.SignData;
 import org.spongepowered.api.text.Text;
@@ -30,5 +31,12 @@ public class SpongeSign extends SpongeBlockEntity<Sign> implements org.battleplu
         SignData signData = handle.getOrCreate(SignData.class).get();
         signData.set(signData.lines().set(index, Text.of(line)));
         handle.offer(signData);
+    }
+
+    @Override
+    public void sendSignUpdate(Player player, String[] lines) {
+        for (String line : lines) {
+            player.sendMessage(line); // no support for this in sponge :P
+        }
     }
 }

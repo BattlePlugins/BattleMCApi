@@ -2,6 +2,8 @@ package org.battleplugins.api.nukkit.world.block.entity;
 
 import cn.nukkit.blockentity.BlockEntitySign;
 
+import org.battleplugins.api.entity.living.player.Player;
+import org.battleplugins.api.nukkit.entity.living.player.NukkitPlayer;
 import org.battleplugins.api.world.block.entity.Sign;
 
 public class NukkitSign extends NukkitBlockEntity<BlockEntitySign> implements Sign {
@@ -17,6 +19,11 @@ public class NukkitSign extends NukkitBlockEntity<BlockEntitySign> implements Si
 
 		handle.setText(text);
 		handle.scheduleUpdate();
+	}
+
+	@Override
+	public void sendSignUpdate(Player player, String[] lines) {
+		// TODO: Nukkit 2.0 : ((NukkitPlayer) player).getHandle().sendSignChange(handle.getLocation(), lines);
 	}
 
 	@Override
