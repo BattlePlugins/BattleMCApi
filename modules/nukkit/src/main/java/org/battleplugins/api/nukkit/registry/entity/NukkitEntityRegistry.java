@@ -9,12 +9,7 @@ import org.battleplugins.api.util.Identifier;
 import java.util.Arrays;
 import java.util.Optional;
 
-public class NukkitEntityRegistry extends EntityRegistry<Integer> {
-
-    @Override
-    public EntityType fromPlatformType(Integer type) {
-        return new NukkitEntityType(type);
-    }
+public class NukkitEntityRegistry extends EntityRegistry {
 
     @Override
     public Optional<EntityType> fromIdentifier(Identifier identifier) {

@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class NukkitItemRegistry extends ItemRegistry<Item> {
+public class NukkitItemRegistry extends ItemRegistry {
 
     private static final Map<ItemEntry, NukkitItemType> ITEM_ENTRIES = new HashMap<>();
     private static final Map<String, ItemEntry> IDENTIFIER_TO_ENTRY = new HashMap<>();
@@ -46,11 +46,6 @@ public class NukkitItemRegistry extends ItemRegistry<Item> {
         this.registerComponent(ItemFlagComponent.class, new NukkitItemFlagComponent());
         this.registerComponent(LoreComponent.class, new NukkitLoreComponent());
         this.registerComponent(UnbreakableComponent.class, new NukkitUnbreakableComponent());
-    }
-
-    @Override
-    public ItemType fromPlatformItem(Item item) {
-        return ITEM_ENTRIES.get(new ItemEntry(item.getId(), item.getDamage()));
     }
 
     @Override

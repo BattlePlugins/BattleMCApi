@@ -7,12 +7,7 @@ import org.bukkit.entity.EntityType;
 
 import java.util.Optional;
 
-public class BukkitEntityRegistry extends EntityRegistry<EntityType> {
-
-    @Override
-    public org.battleplugins.api.entity.EntityType fromPlatformType(EntityType type) {
-        return new BukkitEntityType(type);
-    }
+public class BukkitEntityRegistry extends EntityRegistry {
 
     @Override
     public Optional<org.battleplugins.api.entity.EntityType> fromIdentifier(Identifier identifier) {

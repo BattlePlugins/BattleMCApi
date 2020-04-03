@@ -7,11 +7,10 @@ import org.battleplugins.api.registry.inventory.ItemRegistry;
 import org.battleplugins.api.inventory.item.ItemType;
 import org.battleplugins.api.inventory.item.component.*;
 import org.battleplugins.api.util.Identifier;
-import org.bukkit.Material;
 
 import java.util.Optional;
 
-public class BukkitItemRegistry extends ItemRegistry<Material> {
+public class BukkitItemRegistry extends ItemRegistry {
 
     public BukkitItemRegistry() {
         this.registerComponent(ColorComponent.class, new BukkitColorComponent());
@@ -24,12 +23,7 @@ public class BukkitItemRegistry extends ItemRegistry<Material> {
     }
 
     @Override
-    public ItemType fromPlatformItem(Material material) {
-        return new BukkitItemType(material);
-    }
-
-    @Override
     public Optional<ItemType> fromIdentifier(Identifier identifier) {
-        return BukkitMaterialAdapter.getMaterial(identifier.getKey()).map(this::fromPlatformItem);
+        return BukkitMaterialAdapter.getMaterial(identifier.getKey()).map(BukkitItemType::new);
     }
 }

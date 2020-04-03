@@ -16,19 +16,8 @@ import org.battleplugins.api.util.Identifier;
  * based whilst Nukkit is ID based). This class allows for
  * items to be mapped from their platform implementations as
  * well as from {@link Identifier}'s.
- *
- * @param <T> the platform implementation
  */
-public abstract class ItemRegistry<T> extends ComponentRegistry<ItemComponent<?>> implements IdentifiableRegistry<ItemType> {
-
-    /**
-     * Gets the given item type from the platform
-     * item
-     *
-     * @param item the platform item
-     * @return the given item type
-     */
-    public abstract ItemType fromPlatformItem(T item);
+public abstract class ItemRegistry extends ComponentRegistry<ItemComponent<?>> implements IdentifiableRegistry<ItemType> {
 
     /**
      * Gets the current item registry

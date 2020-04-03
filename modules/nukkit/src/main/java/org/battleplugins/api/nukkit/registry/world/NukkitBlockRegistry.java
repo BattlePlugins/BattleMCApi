@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class NukkitBlockRegistry extends BlockRegistry<Block> {
+public class NukkitBlockRegistry extends BlockRegistry {
 
     private static final Map<Block, NukkitBlockType> BLOCK_ENTRIES = new HashMap<>();
     private static final Map<String, Block> IDENTIFIER_TO_BLOCK = new HashMap<>();
@@ -36,11 +36,6 @@ public class NukkitBlockRegistry extends BlockRegistry<Block> {
         }
 
          */
-    }
-
-    @Override
-    public BlockType fromPlatformBlock(Block block) {
-        return BLOCK_ENTRIES.get(block);
     }
 
     @Override

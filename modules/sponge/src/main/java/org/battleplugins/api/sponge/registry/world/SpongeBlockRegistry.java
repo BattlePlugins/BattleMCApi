@@ -10,17 +10,12 @@ import org.spongepowered.api.block.BlockTypes;
 
 import java.util.Optional;
 
-public class SpongeBlockRegistry extends BlockRegistry<org.spongepowered.api.block.BlockType> {
-
-    @Override
-    public BlockType fromPlatformBlock(org.spongepowered.api.block.BlockType block) {
-        return new SpongeBlockType(block);
-    }
+public class SpongeBlockRegistry extends BlockRegistry {
 
     @Override
     public Optional<BlockType> fromIdentifier(Identifier identifier) {
         return SpongeCompatItemType.fromString(identifier.getKey())
-                .map(itemType -> fromPlatformBlock(Sponge.getRegistry()
+                .map(itemType -> new SpongeBlockType(Sponge.getRegistry()
                         .getType(org.spongepowered.api.block.BlockType.class,
                                 itemType.name()).orElse(BlockTypes.AIR)));
     }

@@ -16,21 +16,10 @@ import java.util.Set;
 
 /**
  * A registry containing all the registered entities.
- *
- * @param <T> the platform implementation
  */
-public abstract class EntityRegistry<T> extends ComponentRegistry<EntityComponent<?>> implements IdentifiableRegistry<EntityType> {
+public abstract class EntityRegistry extends ComponentRegistry<EntityComponent<?>> implements IdentifiableRegistry<EntityType> {
 
     private Map<EntityType, Set<Class<? extends EntityComponent<?>>>> validComponents = new HashMap<>();
-
-    /**
-     * Gets the given {@link EntityType} from the platform
-     * entity
-     *
-     * @param type the platform entity type
-     * @return the given entity type
-     */
-    public abstract EntityType fromPlatformType(T type);
 
     /**
      * Gets the {@link EntityType} from the given

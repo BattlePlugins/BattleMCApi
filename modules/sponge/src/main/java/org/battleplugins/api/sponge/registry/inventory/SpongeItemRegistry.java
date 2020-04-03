@@ -11,7 +11,7 @@ import org.spongepowered.api.Sponge;
 
 import java.util.Optional;
 
-public class SpongeItemRegistry extends ItemRegistry<org.spongepowered.api.item.ItemType> {
+public class SpongeItemRegistry extends ItemRegistry {
 
     public SpongeItemRegistry() {
         this.registerComponent(ColorComponent.class, new SpongeColorComponent());
@@ -24,14 +24,9 @@ public class SpongeItemRegistry extends ItemRegistry<org.spongepowered.api.item.
     }
 
     @Override
-    public ItemType fromPlatformItem(org.spongepowered.api.item.ItemType item) {
-        return new SpongeItemType(item);
-    }
-
-    @Override
     public Optional<ItemType> fromIdentifier(Identifier identifier) {
         Optional<ItemType> compatItemType = SpongeCompatItemType.fromString(identifier.getKey())
-                .map(itemType -> fromPlatformItem(itemType.parseItem().getType()));
+                .map(itemType -> new SpongeItemType(itemType.parseItem().getType()));
         if (!compatItemType.isPresent()) {
             // check for modded items
             return Sponge.getRegistry().getType(org.spongepowered.api.item.ItemType.class, identifier.toString()).map(SpongeItemType::new);

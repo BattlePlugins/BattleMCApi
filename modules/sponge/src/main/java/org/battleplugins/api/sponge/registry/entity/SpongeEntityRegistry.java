@@ -8,12 +8,7 @@ import org.spongepowered.api.Sponge;
 
 import java.util.Optional;
 
-public class SpongeEntityRegistry extends EntityRegistry<org.spongepowered.api.entity.EntityType> {
-
-    @Override
-    public EntityType fromPlatformType(org.spongepowered.api.entity.EntityType type) {
-        return new SpongeEntityType(type);
-    }
+public class SpongeEntityRegistry extends EntityRegistry {
 
     @Override
     public Optional<EntityType> fromIdentifier(Identifier identifier) {

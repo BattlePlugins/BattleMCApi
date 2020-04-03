@@ -40,11 +40,11 @@ public abstract class Registry {
         throw new IllegalArgumentException("Builder class " + builderClass + " not registered!");
     }
 
-    public abstract ItemRegistry<?> getItemRegistry();
+    public abstract ItemRegistry getItemRegistry();
 
-    public abstract BlockRegistry<?> getBlockRegistry();
+    public abstract BlockRegistry getBlockRegistry();
 
-    public abstract EntityRegistry<?> getEntityRegistry();
+    public abstract EntityRegistry getEntityRegistry();
 
     public abstract DirectionRegistry getDirectionRegistry();
 }

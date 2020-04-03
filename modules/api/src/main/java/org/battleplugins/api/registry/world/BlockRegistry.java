@@ -17,21 +17,10 @@ import java.util.Optional;
  * based whilst Nukkit is ID based). This class allows for
  * blocks to be mapped from their platform implementations as
  * well as from {@link Identifier}'s.
- *
- * @param <T> the platform implementation
  */
-public abstract class BlockRegistry<T> implements IdentifiableRegistry<BlockType> {
+public abstract class BlockRegistry implements IdentifiableRegistry<BlockType> {
 
     private boolean closed;
-
-    /**
-     * Gets the given block type from the platform
-     * block
-     *
-     * @param block the platform block
-     * @return the given block type
-     */
-    public abstract BlockType fromPlatformBlock(T block);
 
     /**
      * Gets the block type from the given
