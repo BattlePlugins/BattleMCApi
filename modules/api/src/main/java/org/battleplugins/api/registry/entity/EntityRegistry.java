@@ -65,7 +65,7 @@ public abstract class EntityRegistry<T> extends ComponentRegistry<EntityComponen
      *
      * @return the current entity registry
      */
-    public static EntityRegistry<?> get() {
+    public static EntityRegistry get() {
         return Platform.getRegistry().getEntityRegistry();
     }
 }

@@ -61,7 +61,7 @@ public abstract class BlockRegistry<T> implements IdentifiableRegistry<BlockType
      *
      * @return the current block registry
      */
-    public static BlockRegistry<?> get() {
+    public static BlockRegistry get() {
         return Platform.getRegistry().getBlockRegistry();
     }
 }

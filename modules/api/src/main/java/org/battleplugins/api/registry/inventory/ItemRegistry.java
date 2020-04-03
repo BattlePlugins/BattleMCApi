@@ -35,7 +35,7 @@ public abstract class ItemRegistry<T> extends ComponentRegistry<ItemComponent<?>
      *
      * @return the current item registry
      */
-    public static ItemRegistry<?> get() {
+    public static ItemRegistry get() {
         return Platform.getRegistry().getItemRegistry();
     }
 }
