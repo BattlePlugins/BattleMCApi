@@ -1,7 +1,5 @@
 package org.battleplugins.api.bukkit.world.block;
 
-import org.battleplugins.api.bukkit.registry.world.BukkitBlockRegistry;
-import org.battleplugins.api.registry.world.BlockRegistry;
 import org.battleplugins.api.bukkit.util.BukkitUtil;
 import org.battleplugins.api.bukkit.world.BukkitWorld;
 import org.battleplugins.api.util.MCWrapper;
@@ -27,7 +25,7 @@ public class BukkitBlock extends MCWrapper<Block> implements org.battleplugins.a
 
 	@Override
 	public BlockType getType() {
-		return ((BukkitBlockRegistry) BlockRegistry.get()).fromPlatformBlock(handle.getType());
+		return new BukkitBlockType(handle.getType());
 	}
 
 	@Override

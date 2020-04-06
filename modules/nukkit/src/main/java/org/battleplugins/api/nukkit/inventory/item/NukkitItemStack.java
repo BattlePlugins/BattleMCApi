@@ -3,10 +3,9 @@ package org.battleplugins.api.nukkit.inventory.item;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
 
-import org.battleplugins.api.Platform;
 import org.battleplugins.api.inventory.item.ItemStack;
 import org.battleplugins.api.inventory.item.ItemType;
-import org.battleplugins.api.nukkit.registry.inventory.NukkitItemRegistry;
+import org.battleplugins.api.util.Identifier;
 import org.battleplugins.api.util.MCWrapper;
 
 import java.util.HashMap;
@@ -43,7 +42,7 @@ public class NukkitItemStack extends MCWrapper<Item> implements ItemStack {
 
 	@Override
 	public ItemType getType() {
-		return ((NukkitItemRegistry) Platform.getPlatform().getRegistry().getItemRegistry()).fromPlatformItem(handle);
+		return new NukkitItemType(Identifier.minecraft("stone"), handle); // FIXME (waiting for 2.0)
 	}
 
 	@Override

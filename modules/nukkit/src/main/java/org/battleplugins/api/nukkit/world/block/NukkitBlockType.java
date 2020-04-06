@@ -2,9 +2,9 @@ package org.battleplugins.api.nukkit.world.block;
 
 import cn.nukkit.block.Block;
 
-import org.battleplugins.api.Platform;
 import org.battleplugins.api.inventory.item.ItemType;
-import org.battleplugins.api.nukkit.registry.inventory.NukkitItemRegistry;
+import org.battleplugins.api.nukkit.inventory.item.NukkitItemType;
+import org.battleplugins.api.util.Identifier;
 import org.battleplugins.api.util.MCWrapper;
 import org.battleplugins.api.world.block.BlockType;
 
@@ -16,7 +16,7 @@ public class NukkitBlockType extends MCWrapper<Block> implements BlockType {
 
     @Override
     public ItemType toItemType() {
-        return ((NukkitItemRegistry) Platform.getRegistry().getItemRegistry()).fromPlatformItem(handle.toItem());
+        return new NukkitItemType(Identifier.minecraft("stone"), handle.toItem()); // FIXME (waiting for 2.0)
     }
 
     @Override
