@@ -20,9 +20,11 @@ import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.block.InteractBlockEvent;
 import org.spongepowered.api.event.cause.EventContextKeys;
 import org.spongepowered.api.event.entity.InteractEntityEvent;
+import org.spongepowered.api.event.filter.IsCancelled;
 import org.spongepowered.api.event.filter.cause.First;
 import org.spongepowered.api.event.item.inventory.InteractItemEvent;
 import org.spongepowered.api.event.network.ClientConnectionEvent;
+import org.spongepowered.api.util.Tristate;
 
 @AllArgsConstructor
 public class SpongeEventListener {
@@ -45,6 +47,7 @@ public class SpongeEventListener {
         event.setMessage(((SpongeMessage) quitEvent.getQuitMessage()).getMessage());
     }
 
+    @IsCancelled(Tristate.UNDEFINED)
     @Listener
     public void onInteractBlockBreak(InteractBlockEvent.Primary event, @First Player player) {
         SpongePlayer spongePlayer = new SpongePlayer(player);
@@ -53,11 +56,13 @@ public class SpongeEventListener {
                 spongePlayer,
                 hand,
                 new SpongeBlock(event.getTargetBlock()),
-                PlayerInteractBlockEvent.Action.BREAK
+                PlayerInteractBlockEvent.Action.BREAK,
+                event.isCancelled()
         );
         event.setCancelled(playerInteractBlockEvent.isCancelled());
     }
 
+    @IsCancelled(Tristate.UNDEFINED)
     @Listener
     public void onInteractBlockPlace(InteractBlockEvent.Secondary event, @First Player player) {
         SpongePlayer spongePlayer = new SpongePlayer(player);
@@ -66,11 +71,13 @@ public class SpongeEventListener {
                 spongePlayer,
                 hand,
                 new SpongeBlock(event.getTargetBlock()),
-                PlayerInteractBlockEvent.Action.PLACE
+                PlayerInteractBlockEvent.Action.PLACE,
+                event.isCancelled()
         );
         event.setCancelled(playerInteractBlockEvent.isCancelled());
     }
 
+    @IsCancelled(Tristate.UNDEFINED)
     @Listener
     public void onInteractItemPrimary(InteractItemEvent.Primary event, @First Player player) {
         SpongePlayer spongePlayer = new SpongePlayer(player);
@@ -79,11 +86,13 @@ public class SpongeEventListener {
                 spongePlayer,
                 hand,
                 new SpongeItemStack(event.getItemStack().createStack()),
-                PlayerInteractItemEvent.Action.PRIMARY
+                PlayerInteractItemEvent.Action.PRIMARY,
+                event.isCancelled()
         );
         event.setCancelled(playerInteractItemEvent.isCancelled());
     }
 
+    @IsCancelled(Tristate.UNDEFINED)
     @Listener
     public void onInteractItemSecondary(InteractItemEvent.Secondary event, @First Player player) {
         SpongePlayer spongePlayer = new SpongePlayer(player);
@@ -92,11 +101,13 @@ public class SpongeEventListener {
                 spongePlayer,
                 hand,
                 new SpongeItemStack(event.getItemStack().createStack()),
-                PlayerInteractItemEvent.Action.SECONDARY
+                PlayerInteractItemEvent.Action.SECONDARY,
+                event.isCancelled()
         );
         event.setCancelled(playerInteractItemEvent.isCancelled());
     }
 
+    @IsCancelled(Tristate.UNDEFINED)
     @Listener
     public void onInteractEntityPrimary(InteractEntityEvent.Primary event, @First Player player) {
         SpongePlayer spongePlayer = new SpongePlayer(player);
@@ -105,11 +116,13 @@ public class SpongeEventListener {
                 spongePlayer,
                 hand,
                 new SpongeEntity<>(event.getTargetEntity()),
-                PlayerInteractEntityEvent.Action.ATTACK
+                PlayerInteractEntityEvent.Action.ATTACK,
+                event.isCancelled()
         );
         event.setCancelled(playerInteractEntityEvent.isCancelled());
     }
 
+    @IsCancelled(Tristate.UNDEFINED)
     @Listener
     public void onInteractEntitySecondary(InteractEntityEvent.Secondary event, @First Player player) {
         SpongePlayer spongePlayer = new SpongePlayer(player);
@@ -118,7 +131,8 @@ public class SpongeEventListener {
                 spongePlayer,
                 hand,
                 new SpongeEntity<>(event.getTargetEntity()),
-                PlayerInteractEntityEvent.Action.INTERACT
+                PlayerInteractEntityEvent.Action.INTERACT,
+                event.isCancelled()
         );
         event.setCancelled(playerInteractEntityEvent.isCancelled());
     }

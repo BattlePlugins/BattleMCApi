@@ -50,7 +50,8 @@ public class NukkitEventListener implements Listener {
                     player,
                     Hands.MAIN_HAND,
                     new NukkitBlock(event.getBlock()),
-                    event.getAction() == PlayerInteractEvent.Action.LEFT_CLICK_BLOCK ? PlayerInteractBlockEvent.Action.BREAK : PlayerInteractBlockEvent.Action.PLACE
+                    event.getAction() == PlayerInteractEvent.Action.LEFT_CLICK_BLOCK ? PlayerInteractBlockEvent.Action.BREAK : PlayerInteractBlockEvent.Action.PLACE,
+                    event.isCancelled()
             );
             event.setCancelled(playerInteractBlockEvent.isCancelled());
         }
@@ -59,7 +60,8 @@ public class NukkitEventListener implements Listener {
                     player,
                     Hands.MAIN_HAND,
                     new NukkitItemStack(event.getItem()),
-                    event.getAction() == PlayerInteractEvent.Action.LEFT_CLICK_AIR ? PlayerInteractItemEvent.Action.PRIMARY : PlayerInteractItemEvent.Action.SECONDARY
+                    event.getAction() == PlayerInteractEvent.Action.LEFT_CLICK_AIR ? PlayerInteractItemEvent.Action.PRIMARY : PlayerInteractItemEvent.Action.SECONDARY,
+                    event.isCancelled()
             );
             event.setCancelled(playerInteractItemEvent.isCancelled());
         }
@@ -73,7 +75,8 @@ public class NukkitEventListener implements Listener {
                         player,
                         Hands.MAIN_HAND,
                         new NukkitEntity<>(event.getEntity()),
-                        org.battleplugins.api.event.player.PlayerInteractEntityEvent.Action.INTERACT
+                        org.battleplugins.api.event.player.PlayerInteractEntityEvent.Action.INTERACT,
+                        event.isCancelled()
                 );
         event.setCancelled(playerInteractEntityEvent.isCancelled());
     }
@@ -89,7 +92,8 @@ public class NukkitEventListener implements Listener {
                         player,
                         player.getHand(),
                         new NukkitEntity<>(event.getEntity()),
-                        org.battleplugins.api.event.player.PlayerInteractEntityEvent.Action.INTERACT
+                        org.battleplugins.api.event.player.PlayerInteractEntityEvent.Action.INTERACT,
+                        event.isCancelled()
                 );
         event.setCancelled(playerInteractEntityEvent.isCancelled());
     }

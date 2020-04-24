@@ -17,7 +17,8 @@ import org.battleplugins.api.inventory.item.ItemStack;
 import org.battleplugins.api.message.Message;
 import org.battleplugins.api.world.block.Block;
 
-import java.util.LinkedHashMap;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -41,12 +42,12 @@ public class EventFactory {
         }
     }
 
-    private <T extends Event> T generateEvent(Class<T> eventClass, LinkedHashMap<String, Object> params) {
+    private <T extends Event> T generateEvent(Class<T> eventClass, Map<String, Object> params) {
         return (T) EventGenerator.generate(eventClass).newInstance(params);
     }
 
     public PlayerJoinEvent firePlayerJoin(Player player, Message joinMessage) {
-        LinkedHashMap<String, Object> joinMap = new LinkedHashMap<>();
+        Map<String, Object> joinMap = new HashMap<>();
         joinMap.put("player", player);
         joinMap.put("joinMessage", joinMessage);
         PlayerJoinEvent joinEvent = generateEvent(PlayerJoinEvent.class, joinMap);
@@ -55,7 +56,7 @@ public class EventFactory {
     }
 
     public PlayerQuitEvent firePlayerQuit(Player player, Message quitMessage) {
-        LinkedHashMap<String, Object> quitMap = new LinkedHashMap<>();
+        Map<String, Object> quitMap = new HashMap<>();
         quitMap.put("player", player);
         quitMap.put("quitMessage", quitMessage);
         PlayerQuitEvent quitEvent = generateEvent(PlayerQuitEvent.class, quitMap);
@@ -63,34 +64,37 @@ public class EventFactory {
         return quitEvent;
     }
 
-    public PlayerInteractEntityEvent firePlayerInteractEntity(Player player, Hand hand, Entity entity, PlayerInteractEntityEvent.Action action) {
-        LinkedHashMap<String, Object> interactMap = new LinkedHashMap<>();
+    public PlayerInteractEntityEvent firePlayerInteractEntity(Player player, Hand hand, Entity entity, PlayerInteractEntityEvent.Action action, boolean cancelled) {
+        Map<String, Object> interactMap = new HashMap<>();
         interactMap.put("player", player);
         interactMap.put("hand", hand);
         interactMap.put("entity", entity);
         interactMap.put("action", action);
+        interactMap.put("cancelled", cancelled);
         PlayerInteractEntityEvent interactEntityEvent = generateEvent(PlayerInteractEntityEvent.class, interactMap);
         this.bus.fire(interactEntityEvent);
         return interactEntityEvent;
     }
 
-    public PlayerInteractBlockEvent firePlayerInteractBlock(Player player, Hand hand, Block block, PlayerInteractBlockEvent.Action action) {
-        LinkedHashMap<String, Object> interactMap = new LinkedHashMap<>();
+    public PlayerInteractBlockEvent firePlayerInteractBlock(Player player, Hand hand, Block block, PlayerInteractBlockEvent.Action action, boolean cancelled) {
+        Map<String, Object> interactMap = new HashMap<>();
         interactMap.put("player", player);
         interactMap.put("hand", hand);
         interactMap.put("block", block);
         interactMap.put("action", action);
+        interactMap.put("cancelled", cancelled);
         PlayerInteractBlockEvent interactBlockEvent = generateEvent(PlayerInteractBlockEvent.class, interactMap);
         this.bus.fire(interactBlockEvent);
         return interactBlockEvent;
     }
 
-    public PlayerInteractItemEvent firePlayerInteractItem(Player player, Hand hand, ItemStack item, PlayerInteractItemEvent.Action action) {
-        LinkedHashMap<String, Object> interactMap = new LinkedHashMap<>();
+    public PlayerInteractItemEvent firePlayerInteractItem(Player player, Hand hand, ItemStack item, PlayerInteractItemEvent.Action action, boolean cancelled) {
+        Map<String, Object> interactMap = new HashMap<>();
         interactMap.put("player", player);
         interactMap.put("hand", hand);
         interactMap.put("item", Optional.ofNullable(item));
         interactMap.put("action", action);
+        interactMap.put("cancelled", cancelled);
         PlayerInteractItemEvent interactItemEvent = generateEvent(PlayerInteractItemEvent.class, interactMap);
         this.bus.fire(interactItemEvent);
         return interactItemEvent;

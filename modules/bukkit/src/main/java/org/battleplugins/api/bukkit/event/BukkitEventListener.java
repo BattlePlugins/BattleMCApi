@@ -13,6 +13,7 @@ import org.battleplugins.api.event.player.PlayerInteractBlockEvent;
 import org.battleplugins.api.event.player.PlayerInteractItemEvent;
 import org.battleplugins.api.message.Message;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -53,7 +54,8 @@ public class BukkitEventListener implements Listener {
                     player,
                     hand,
                     new BukkitBlock(event.getClickedBlock()),
-                    event.getAction() == Action.LEFT_CLICK_BLOCK ? PlayerInteractBlockEvent.Action.BREAK : PlayerInteractBlockEvent.Action.PLACE
+                    event.getAction() == Action.LEFT_CLICK_BLOCK ? PlayerInteractBlockEvent.Action.BREAK : PlayerInteractBlockEvent.Action.PLACE,
+                    event.useInteractedBlock() == Event.Result.DENY
             );
             event.setCancelled(playerInteractBlockEvent.isCancelled());
         }
@@ -62,7 +64,8 @@ public class BukkitEventListener implements Listener {
                     player,
                     hand,
                     new BukkitItemStack(event.getItem()),
-                    event.getAction() == Action.LEFT_CLICK_AIR ? PlayerInteractItemEvent.Action.PRIMARY : PlayerInteractItemEvent.Action.SECONDARY
+                    event.getAction() == Action.LEFT_CLICK_AIR ? PlayerInteractItemEvent.Action.PRIMARY : PlayerInteractItemEvent.Action.SECONDARY,
+                    event.useItemInHand() == Event.Result.DENY
             );
             event.setCancelled(playerInteractItemEvent.isCancelled());
         }
@@ -77,7 +80,8 @@ public class BukkitEventListener implements Listener {
                         player,
                         hand,
                         new BukkitEntity<>(event.getRightClicked()),
-                        org.battleplugins.api.event.player.PlayerInteractEntityEvent.Action.INTERACT
+                        org.battleplugins.api.event.player.PlayerInteractEntityEvent.Action.INTERACT,
+                        event.isCancelled()
                 );
         event.setCancelled(playerInteractEntityEvent.isCancelled());
     }
@@ -93,7 +97,8 @@ public class BukkitEventListener implements Listener {
                         player,
                         player.getHand(),
                         new BukkitEntity<>(event.getEntity()),
-                        org.battleplugins.api.event.player.PlayerInteractEntityEvent.Action.INTERACT
+                        org.battleplugins.api.event.player.PlayerInteractEntityEvent.Action.INTERACT,
+                        event.isCancelled()
                 );
         event.setCancelled(playerInteractEntityEvent.isCancelled());
     }

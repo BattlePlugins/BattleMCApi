@@ -1,15 +1,21 @@
 package org.battleplugins.api.common.event.gen;
 
+import com.google.common.base.CaseFormat;
 import com.google.common.collect.ForwardingMap;
+import com.google.common.primitives.Primitives;
 
+import org.battleplugins.api.common.util.MethodHandleUtil;
 import org.battleplugins.api.event.Event;
 
-import java.lang.invoke.MethodHandles;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -20,33 +26,22 @@ import java.util.stream.Collectors;
  */
 public class EventGenerator {
 
-    private static final Constructor<MethodHandles.Lookup> LOOKUP_CONSTRUCTOR;
     private static final Map<Class<? extends Event>, EventGenerator> EVENT_CACHE = new ForwardingEventMap<>(new ConcurrentHashMap<>(), EventGenerator::new);
-
-    static {
-        try {
-            LOOKUP_CONSTRUCTOR = MethodHandles.Lookup.class.getDeclaredConstructor(Class.class, int.class);
-            LOOKUP_CONSTRUCTOR.setAccessible(true);
-        } catch (NoSuchMethodException e) {
-            throw new ExceptionInInitializerError(e);
-        }
-    }
 
     private Class<? extends Event> eventClass;
     private List<Method> methods;
-    private List<Class<?>> returnTypes;
+    private Map<String, Class<?>> returnTypes;
 
     private EventGenerator(Class<? extends Event> eventClass) {
         this.eventClass = eventClass;
+
         this.methods = Collections.unmodifiableList(Arrays.stream(
                 eventClass.getMethods())
                 .filter(method -> !method.isDefault())
                 .collect(Collectors.toList())
         );
-        this.returnTypes = Collections.unmodifiableList(this.methods.stream()
-                .map(Method::getReturnType)
-                .collect(Collectors.toList())
-        );
+        this.returnTypes = Collections.unmodifiableMap(this.methods.stream()
+                .collect(Collectors.toMap(Method::getName, Method::getReturnType)));
     }
 
     /**
@@ -56,12 +51,28 @@ public class EventGenerator {
      * @param parameters the parameters
      * @return a new event with the given parameters
      */
-    public Event newInstance(LinkedHashMap<String, Object> parameters) {
-        for (int i = 0; i < parameters.size(); i++) {
-            Object param = new ArrayList<>(parameters.values()).get(i);
-            Class<?> expectedType = this.returnTypes.get(i);
-            if (!expectedType.isInstance(param) && !(expectedType.equals(Void.TYPE))) {
-                throw new IllegalArgumentException("Parameter at index " + i + " (" + param.getClass() + ") cannot be assigned to " + expectedType);
+    public Event newInstance(Map<String, Object> parameters) {
+        for (Map.Entry<String, Class<?>> returnTypeEntry : returnTypes.entrySet()) {
+            String variable = returnTypeEntry.getKey();
+            if (returnTypeEntry.getKey().startsWith("is")) {
+                variable = returnTypeEntry.getKey().substring("is".length());
+            }
+
+            if (returnTypeEntry.getKey().startsWith("get")) {
+                variable = returnTypeEntry.getKey().substring("get".length());
+            }
+
+            if (returnTypeEntry.getKey().startsWith("set")) {
+                variable = returnTypeEntry.getKey().substring("set".length());
+            }
+            Object parameter = parameters.get(CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, variable));
+            if (parameter == null) {
+                throw new IllegalArgumentException("Could not find parameter with method " + returnTypeEntry.getKey() + " and variable name " + variable + "!");
+            }
+
+            // We need to wrap here since maps auto box
+            if (!Primitives.wrap(returnTypeEntry.getValue()).isInstance(parameter) && !returnTypeEntry.getValue().equals(Void.TYPE)) {
+                throw new IllegalArgumentException("Parameter " + variable + " (" + parameter.getClass() + ") cannot be assigned to " + returnTypeEntry.getValue());
             }
         }
 
@@ -83,13 +94,6 @@ public class EventGenerator {
 
         @Override
         public Object invoke(Object obj, Method method, Object[] args) throws Throwable {
-            if (method.getDeclaringClass() == Object.class || method.isDefault()) {
-                return LOOKUP_CONSTRUCTOR.newInstance(method.getDeclaringClass(), -1)
-                        .unreflectSpecial(method, method.getDeclaringClass())
-                        .bindTo(obj)
-                        .invokeWithArguments(args);
-            }
-
             if (method.getName().equals("toString")) {
                 return "Event(" +
                         "proxy=" + obj.getClass().getName() + "@" + Integer.toHexString(obj.hashCode()) + ", " +
@@ -103,6 +107,17 @@ public class EventGenerator {
 
             if (method.getName().equals("hashCode")) {
                 return System.identityHashCode(obj);
+            }
+
+            if (method.isDefault()) {
+                try {
+                    return MethodHandleUtil.getMethodHandle(method)
+                            .bindTo(obj)
+                            .invokeWithArguments(args);
+                } catch (Throwable ex) {
+                    ex.printStackTrace();
+                }
+                return null;
             }
 
             if (method.getName().startsWith("is")) {
