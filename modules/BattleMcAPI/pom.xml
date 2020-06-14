@@ -80,6 +80,10 @@
                                     <include>io.papermc:paperlib</include>
                                     <include>javassist:javassist</include>
                                     <include>net.kyori:event-api</include>
+                                    <include>org.spongepowered:configurate-core</include>
+                                    <include>org.spongepowered:configurate-hocon</include>
+                                    <include>org.spongepowered:configurate-json</include>
+                                    <include>org.spongepowered:configurate-yaml</include>
                                 </includes>
                             </artifactSet>
                             <relocations>
@@ -98,6 +102,10 @@
                                 <relocation>
                                     <pattern>mc.euro.version</pattern>
                                     <shadedPattern>org.battleplugins.api.util.version</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>ninja.leaping.configurate</pattern>
+                                    <shadedPattern>org.spongepowered.configurate</shadedPattern>
                                 </relocation>
                             </relocations>
                         </configuration>
