@@ -80,6 +80,8 @@
                                     <include>io.papermc:paperlib</include>
                                     <include>javassist:javassist</include>
                                     <include>net.kyori:event-api</include>
+                                    <include>com.fasterxml.jackson.core:jackson-core</include>
+                                    <include>com.typesafe:config</include>
                                     <include>org.spongepowered:configurate-core</include>
                                     <include>org.spongepowered:configurate-hocon</include>
                                     <include>org.spongepowered:configurate-json</include>
@@ -87,6 +89,14 @@
                                 </includes>
                             </artifactSet>
                             <relocations>
+                                <relocation>
+                                    <pattern>com.fasterxml.jackson</pattern>
+                                    <shadedPattern>org.battleplugins.api.shaded.jackson</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.typesafe.config</pattern>
+                                    <shadedPattern>org.battleplugins.api.shaded.typesafe</shadedPattern>
+                                </relocation>
                                 <relocation>
                                     <pattern>javassist</pattern>
                                     <shadedPattern>org.battleplugins.api.shaded.javassist</shadedPattern>
