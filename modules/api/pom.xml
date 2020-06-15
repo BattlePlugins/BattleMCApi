@@ -63,6 +63,12 @@
         </dependency>
         <dependency>
             <groupId>org.spongepowered</groupId>
+            <artifactId>configurate-xml</artifactId>
+            <version>3.6.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.spongepowered</groupId>
             <artifactId>configurate-yaml</artifactId>
             <version>3.6.1</version>
             <scope>compile</scope>
