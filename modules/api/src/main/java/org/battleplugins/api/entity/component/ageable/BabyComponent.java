@@ -24,6 +24,6 @@ public interface BabyComponent extends EntityComponent<Boolean> {
                 MULE, MOOSHROOM, OCELOT, PANDA, PIG, PANDA,
                 POLAR_BEAR, RABBIT, SHEEP, SKELETON_HORSE,
                 TURTLE, VILLAGER, WOLF, ZOMBIE, ZOMBIE_HORSE,
-                ZOMBIE_PIGMAN, ZOMBIE_VILLAGER));
+                ZOMBIFIED_PIGLIN, ZOMBIE_VILLAGER));
     }
 }
