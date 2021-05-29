@@ -28,7 +28,7 @@ public class BukkitEntity<T extends Entity> extends MCWrapper<T> implements org.
 
     @Override
     public Identifier getIdentifier() {
-        return Identifier.minecraft(handle.getType().getName());
+        return Identifier.of(handle.getType().getKey().toString());
     }
 
     @Override

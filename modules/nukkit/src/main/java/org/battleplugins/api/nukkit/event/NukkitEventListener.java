@@ -11,11 +11,11 @@ import cn.nukkit.event.player.PlayerQuitEvent;
 
 import lombok.AllArgsConstructor;
 
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.battleplugins.api.common.event.EventFactory;
 import org.battleplugins.api.entity.hand.Hands;
 import org.battleplugins.api.event.player.PlayerInteractBlockEvent;
 import org.battleplugins.api.event.player.PlayerInteractItemEvent;
-import org.battleplugins.api.message.Message;
 import org.battleplugins.api.nukkit.entity.NukkitEntity;
 import org.battleplugins.api.nukkit.entity.living.player.NukkitPlayer;
 import org.battleplugins.api.nukkit.inventory.item.NukkitItemStack;
@@ -29,17 +29,17 @@ public class NukkitEventListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         org.battleplugins.api.event.player.PlayerJoinEvent joinEvent =
-                factory.firePlayerJoin(new NukkitPlayer(event.getPlayer()), Message.builder().message(event.getJoinMessage().getText()).build());
+                factory.firePlayerJoin(new NukkitPlayer(event.getPlayer()), LegacyComponentSerializer.legacySection().deserialize(event.getJoinMessage().getText()));
 
-        event.setJoinMessage(joinEvent.getJoinMessage().getPlainText());
+        event.setJoinMessage(LegacyComponentSerializer.legacySection().serialize(joinEvent.getJoinMessage()));
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         org.battleplugins.api.event.player.PlayerQuitEvent quitEvent =
-                factory.firePlayerQuit(new NukkitPlayer(event.getPlayer()), Message.builder().message(event.getQuitMessage().getText()).build());
+                factory.firePlayerQuit(new NukkitPlayer(event.getPlayer()), LegacyComponentSerializer.legacySection().deserialize(event.getQuitMessage().getText()));
 
-        event.setQuitMessage(quitEvent.getQuitMessage().getPlainText());
+        event.setQuitMessage(LegacyComponentSerializer.legacySection().serialize(quitEvent.getQuitMessage()));
     }
 
     @EventHandler

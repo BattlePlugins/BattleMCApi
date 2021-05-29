@@ -1,5 +1,6 @@
 package org.battleplugins.api.bukkit.entity.living.player;
 
+import net.kyori.adventure.text.Component;
 import org.battleplugins.api.bukkit.entity.living.BukkitHuman;
 import org.battleplugins.api.bukkit.inventory.BukkitInventory;
 
@@ -78,6 +79,11 @@ public class BukkitPlayer extends BukkitHuman<Player> implements org.battleplugi
     @Override
     public void updateInventory() {
         handle.updateInventory();
+    }
+
+    @Override
+    public void sendMessage(Component message) {
+        handle.sendMessage(message);
     }
 
     @Override

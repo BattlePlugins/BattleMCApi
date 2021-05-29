@@ -11,7 +11,6 @@ import org.battleplugins.api.entity.hand.Hand;
 import org.battleplugins.api.entity.hand.Hands;
 import org.battleplugins.api.event.player.PlayerInteractBlockEvent;
 import org.battleplugins.api.event.player.PlayerInteractItemEvent;
-import org.battleplugins.api.message.Message;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
@@ -32,17 +31,17 @@ public class BukkitEventListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         org.battleplugins.api.event.player.PlayerJoinEvent joinEvent =
-                factory.firePlayerJoin(new BukkitPlayer(event.getPlayer()), Message.builder().message(event.getJoinMessage()).build());
+                factory.firePlayerJoin(new BukkitPlayer(event.getPlayer()), event.joinMessage());
 
-        event.setJoinMessage(joinEvent.getJoinMessage().getPlainText());
+        event.joinMessage(joinEvent.getJoinMessage());
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         org.battleplugins.api.event.player.PlayerQuitEvent quitEvent =
-                factory.firePlayerQuit(new BukkitPlayer(event.getPlayer()), Message.builder().message(event.getQuitMessage()).build());
+                factory.firePlayerQuit(new BukkitPlayer(event.getPlayer()), event.quitMessage());
 
-        event.setQuitMessage(quitEvent.getQuitMessage().getPlainText());
+        event.quitMessage(quitEvent.getQuitMessage());
     }
 
     @EventHandler

@@ -8,8 +8,6 @@ import mc.euro.version.Version;
 import org.battleplugins.api.Platform;
 import org.battleplugins.api.PlatformType;
 import org.battleplugins.api.PlatformTypes;
-import org.battleplugins.api.message.Message;
-import org.battleplugins.api.nukkit.message.NukkitMessage;
 import org.battleplugins.api.nukkit.inventory.item.NukkitItemStack;
 import org.battleplugins.api.plugin.Plugin;
 
@@ -40,11 +38,6 @@ public class NukkitPlatform extends Platform {
     @Override
     public Version<Platform> getVersion() {
         return new Version<>(Server.getInstance().getVersion());
-    }
-
-    @Override
-    public Message getDefaultPlatformMessage() {
-        return new NukkitMessage();
     }
 
     @Override

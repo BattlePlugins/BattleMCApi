@@ -1,7 +1,5 @@
 package org.battleplugins.api.bukkit;
 
-import io.papermc.lib.PaperLib;
-
 import mc.euro.version.Version;
 
 import org.battleplugins.api.Platform;
@@ -9,10 +7,7 @@ import org.battleplugins.api.PlatformType;
 import org.battleplugins.api.PlatformTypes;
 import org.battleplugins.api.Server;
 import org.battleplugins.api.bukkit.inventory.item.BukkitItemStack;
-import org.battleplugins.api.bukkit.message.BukkitMessage;
-import org.battleplugins.api.bukkit.message.SpigotMessage;
 import org.battleplugins.api.plugin.Plugin;
-import org.battleplugins.api.message.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -46,14 +41,6 @@ public class BukkitPlatform extends Platform {
     @Override
     public Version<Platform> getVersion() {
         return new Version<>(Bukkit.getVersion());
-    }
-
-    @Override
-    public Message getDefaultPlatformMessage() {
-        if (PaperLib.isSpigot() || PaperLib.isPaper())
-            return new SpigotMessage();
-
-        return new BukkitMessage();
     }
 
     @Override

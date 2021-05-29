@@ -12,6 +12,6 @@ public class BukkitEntityType implements EntityType {
 
     @Override
     public Identifier getIdentifier() {
-        return Identifier.minecraft(type.getName());
+        return Identifier.of(type.getKey().toString());
     }
 }

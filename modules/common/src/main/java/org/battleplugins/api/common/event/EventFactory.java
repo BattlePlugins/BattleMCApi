@@ -2,6 +2,7 @@ package org.battleplugins.api.common.event;
 
 import lombok.AllArgsConstructor;
 
+import net.kyori.adventure.text.Component;
 import org.battleplugins.api.common.event.gen.EventGenerator;
 import org.battleplugins.api.entity.Entity;
 import org.battleplugins.api.entity.hand.Hand;
@@ -14,7 +15,6 @@ import org.battleplugins.api.event.player.PlayerJoinEvent;
 import org.battleplugins.api.event.player.PlayerQuitEvent;
 import org.battleplugins.api.entity.living.player.Player;
 import org.battleplugins.api.inventory.item.ItemStack;
-import org.battleplugins.api.message.Message;
 import org.battleplugins.api.world.block.Block;
 
 import java.util.HashMap;
@@ -46,7 +46,7 @@ public class EventFactory {
         return (T) EventGenerator.generate(eventClass).newInstance(params);
     }
 
-    public PlayerJoinEvent firePlayerJoin(Player player, Message joinMessage) {
+    public PlayerJoinEvent firePlayerJoin(Player player, Component joinMessage) {
         Map<String, Object> joinMap = new HashMap<>();
         joinMap.put("player", player);
         joinMap.put("joinMessage", joinMessage);
@@ -55,7 +55,7 @@ public class EventFactory {
         return joinEvent;
     }
 
-    public PlayerQuitEvent firePlayerQuit(Player player, Message quitMessage) {
+    public PlayerQuitEvent firePlayerQuit(Player player, Component quitMessage) {
         Map<String, Object> quitMap = new HashMap<>();
         quitMap.put("player", player);
         quitMap.put("quitMessage", quitMessage);

@@ -6,10 +6,8 @@ import org.battleplugins.api.Platform;
 import org.battleplugins.api.PlatformType;
 import org.battleplugins.api.PlatformTypes;
 import org.battleplugins.api.Server;
-import org.battleplugins.api.message.Message;
 import org.battleplugins.api.plugin.Plugin;
 import org.battleplugins.api.sponge.inventory.item.SpongeItemStack;
-import org.battleplugins.api.sponge.message.SpongeMessage;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.item.ItemTypes;
 import org.spongepowered.api.item.inventory.ItemStack;
@@ -51,11 +49,6 @@ public class SpongePlatform extends Platform {
     @Override
     public Version<Platform> getVersion() {
         return new Version<>(Sponge.getGame().getPlatform().getMinecraftVersion().getName());
-    }
-
-    @Override
-    public Message getDefaultPlatformMessage() {
-        return new SpongeMessage();
     }
 
     @Override

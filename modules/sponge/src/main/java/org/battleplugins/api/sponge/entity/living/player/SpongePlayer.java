@@ -1,5 +1,6 @@
 package org.battleplugins.api.sponge.entity.living.player;
 
+import net.kyori.adventure.text.Component;
 import org.battleplugins.api.entity.hand.Hand;
 import org.battleplugins.api.entity.hand.Hands;
 import org.battleplugins.api.entity.living.player.gamemode.GameMode;
@@ -96,6 +97,11 @@ public class SpongePlayer extends SpongeHuman<Player> implements org.battleplugi
     @Override
     public void updateInventory() {
         // TODO: Add API here
+    }
+
+    @Override
+    public void sendMessage(Component message) {
+        // TODO: API 8 - has full support for adventure
     }
 
     @Override

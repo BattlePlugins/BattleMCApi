@@ -2,6 +2,8 @@ package org.battleplugins.api.nukkit.entity.living.player;
 
 import cn.nukkit.Player;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.battleplugins.api.entity.hand.Hand;
 import org.battleplugins.api.entity.hand.Hands;
 import org.battleplugins.api.entity.living.player.gamemode.GameMode;
@@ -77,6 +79,11 @@ public class NukkitPlayer extends NukkitHuman<Player> implements org.battleplugi
     @Override
     public void updateInventory() {
         // TODO: Add API here
+    }
+
+    @Override
+    public void sendMessage(Component message) {
+        this.sendMessage(LegacyComponentSerializer.legacySection().serialize(message));
     }
 
     @Override

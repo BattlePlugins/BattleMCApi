@@ -8,11 +8,9 @@ import org.battleplugins.api.entity.hand.Hands;
 import org.battleplugins.api.event.player.PlayerInteractBlockEvent;
 import org.battleplugins.api.event.player.PlayerInteractEntityEvent;
 import org.battleplugins.api.event.player.PlayerInteractItemEvent;
-import org.battleplugins.api.message.Message;
 import org.battleplugins.api.sponge.entity.SpongeEntity;
 import org.battleplugins.api.sponge.entity.living.player.SpongePlayer;
 import org.battleplugins.api.sponge.inventory.item.SpongeItemStack;
-import org.battleplugins.api.sponge.message.SpongeMessage;
 import org.battleplugins.api.sponge.world.block.SpongeBlock;
 import org.spongepowered.api.data.type.HandTypes;
 import org.spongepowered.api.entity.living.player.Player;
@@ -34,17 +32,18 @@ public class SpongeEventListener {
     @Listener
     public void onPlayerJoin(ClientConnectionEvent.Join event) {
         org.battleplugins.api.event.player.PlayerJoinEvent joinEvent =
-                factory.firePlayerJoin(new SpongePlayer(event.getTargetEntity()), Message.builder().message(event.getMessage().toPlain()).build());
+                factory.firePlayerJoin(new SpongePlayer(event.getTargetEntity()), null); // TODO: API 8 - has full support for adventure
 
-        event.setMessage(((SpongeMessage) joinEvent.getJoinMessage()).getMessage());
+        event.setMessage(event.getMessage());
+        // TODO: API 8 - has full support for adventure
     }
 
     @Listener
     public void onPlayerQuit(ClientConnectionEvent.Disconnect event) {
         org.battleplugins.api.event.player.PlayerQuitEvent quitEvent =
-                factory.firePlayerQuit(new SpongePlayer(event.getTargetEntity()), Message.builder().message(event.getMessage().toPlain()).build());
+                factory.firePlayerQuit(new SpongePlayer(event.getTargetEntity()), null); // TODO: API 8 - has full support for adventure
 
-        event.setMessage(((SpongeMessage) quitEvent.getQuitMessage()).getMessage());
+        event.setMessage(event.getMessage()); // TODO: API 8 - has full support for adventure
     }
 
     @IsCancelled(Tristate.UNDEFINED)

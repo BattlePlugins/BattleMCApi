@@ -1,7 +1,7 @@
 package org.battleplugins.api.event.player;
 
+import net.kyori.adventure.text.Component;
 import org.battleplugins.api.entity.living.player.Player;
-import org.battleplugins.api.message.Message;
 
 /**
  * An event called when a {@link Player} quits the server.
@@ -14,7 +14,7 @@ public interface PlayerQuitEvent extends PlayerEvent {
      *
      * @return the quit message
      */
-    Message getQuitMessage();
+    Component getQuitMessage();
 
     /**
      * Sets the quit message sent when the
@@ -22,5 +22,5 @@ public interface PlayerQuitEvent extends PlayerEvent {
      *
      * @param quitMessage the quitMessage
      */
-    void setQuitMessage(Message quitMessage);
+    void setQuitMessage(Component quitMessage);
 }

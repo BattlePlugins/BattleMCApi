@@ -4,7 +4,6 @@ import mc.euro.version.Version;
 
 import org.battleplugins.api.event.EventBus;
 import org.battleplugins.api.inventory.item.ItemStack;
-import org.battleplugins.api.message.Message;
 import org.battleplugins.api.plugin.Plugin;
 import org.battleplugins.api.plugin.PluginManager;
 
@@ -58,13 +57,6 @@ public abstract class Platform {
      * @return the version of the platform
      */
     public abstract Version<Platform> getVersion();
-
-    /**
-     * The default {@link Message} used for this platform
-     *
-     * @return the default Message for this platform
-     */
-    public abstract Message getDefaultPlatformMessage();
 
     /**
      * The default {@link ItemStack} used for this platform

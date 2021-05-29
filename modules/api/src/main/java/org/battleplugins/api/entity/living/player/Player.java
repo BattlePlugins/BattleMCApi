@@ -1,12 +1,12 @@
 package org.battleplugins.api.entity.living.player;
 
+import net.kyori.adventure.text.Component;
 import org.battleplugins.api.command.CommandSender;
 import org.battleplugins.api.entity.hand.Hand;
 import org.battleplugins.api.entity.living.Human;
 import org.battleplugins.api.entity.living.player.gamemode.GameMode;
 import org.battleplugins.api.inventory.Inventory;
 import org.battleplugins.api.inventory.entity.PlayerInventory;
-import org.battleplugins.api.message.Message;
 
 /**
  * Represents a player.
@@ -33,13 +33,11 @@ public interface Player extends CommandSender, OfflinePlayer, Human {
 	void updateInventory();
 
 	/**
-	 * Sends a {@link Message} to the player
+	 * Sends a message in the form of a {@link Component} to the player
 	 *
 	 * @param message the message to send
 	 */
-	default void sendMessage(Message message) {
-		message.sendMessage(this);
-	}
+	void sendMessage(Component message);
 
 	/**
 	 * The player's {@link GameMode}

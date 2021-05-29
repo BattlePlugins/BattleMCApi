@@ -1,7 +1,7 @@
 package org.battleplugins.api.event.player;
 
+import net.kyori.adventure.text.Component;
 import org.battleplugins.api.entity.living.player.Player;
-import org.battleplugins.api.message.Message;
 
 /**
  * An event called when a {@link Player} joins the server.
@@ -14,7 +14,7 @@ public interface PlayerJoinEvent extends PlayerEvent {
      *
      * @return the join message
      */
-    Message getJoinMessage();
+    Component getJoinMessage();
 
     /**
      * Sets the {@link Player} message sent when the
@@ -22,5 +22,5 @@ public interface PlayerJoinEvent extends PlayerEvent {
      *
      * @param joinMessage the joinMessage
      */
-    void setJoinMessage(Message joinMessage);
+    void setJoinMessage(Component joinMessage);
 }
