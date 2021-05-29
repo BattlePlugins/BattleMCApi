@@ -5,24 +5,18 @@
         <groupId>org.battleplugins</groupId>
         <artifactId>McAPI-parent</artifactId>
         <version>parent</version>
-        <relativePath>../../</relativePath>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
     <groupId>org.battleplugins</groupId>
-    <artifactId>McAPI-bukkit</artifactId>
+    <artifactId>McAPI-paper</artifactId>
     <version>parent</version>
     <packaging>jar</packaging>
-    <name>McAPI-bukkit</name>
-    <repositories>
-        <repository>
-            <id>paper-repo</id>
-            <url>https://papermc.io/repo/repository/maven-public/</url>
-        </repository>
-    </repositories>
+    <name>McAPI-paper</name>
     <dependencies>
         <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
-            <version>1.16.1-R0.1-SNAPSHOT</version>
+            <groupId>com.destroystokyo.paper</groupId>
+            <artifactId>paper-api</artifactId>
+            <version>1.16.5-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

@@ -7,6 +7,8 @@ import org.battleplugins.api.bukkit.util.BukkitMaterialAdapter;
 import org.battleplugins.api.inventory.item.ItemType;
 import org.battleplugins.api.util.MCWrapper;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
@@ -18,7 +20,7 @@ public class BukkitItemStack extends MCWrapper<ItemStack> implements org.battlep
 
 	@Override
 	public void setType(ItemType type) {
-		handle.setType(BukkitMaterialAdapter.getMaterial(type.getIdentifier().toString()).orElse(Material.AIR));
+		handle.setType(Registry.MATERIAL.get(NamespacedKey.fromString(type.getIdentifier().toString())));
 	}
 
 	@Override

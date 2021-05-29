@@ -5,7 +5,7 @@
         <groupId>org.battleplugins</groupId>
         <artifactId>McAPI-parent</artifactId>
         <version>parent</version>
-        <relativePath>../../</relativePath>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
     <groupId>org.battleplugins</groupId>
     <artifactId>McAPI-common</artifactId>

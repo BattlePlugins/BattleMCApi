@@ -1,6 +1,5 @@
 package org.battleplugins.api.bukkit.inventory.item;
 
-import org.battleplugins.api.bukkit.compat.BukkitCompatMaterial;
 import org.battleplugins.api.inventory.item.ItemType;
 import org.battleplugins.api.util.Identifier;
 import org.battleplugins.api.util.MCWrapper;
@@ -14,8 +13,7 @@ public class BukkitItemType extends MCWrapper<Material> implements ItemType {
 
     @Override
     public Identifier getIdentifier() {
-        BukkitCompatMaterial bukkitMaterial = BukkitCompatMaterial.fromMaterial(handle);
-        return Identifier.minecraft(bukkitMaterial.name().toLowerCase());
+        return Identifier.of(handle.getKey().toString());
     }
 
     @Override

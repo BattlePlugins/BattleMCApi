@@ -22,9 +22,9 @@ public class PlatformTypes {
     static Set<PlatformType> platformTypes = new HashSet<>();
 
     /**
-     * The Bukkit Platform: https://bukkit.org
+     * The Paper Platform: https://papermc.io
      */
-    public static PlatformType BUKKIT = new PlatformType("Bukkit", new Version<>("1.8.8"));
+    public static PlatformType PAPER = new PlatformType("Paper", new Version<>("1.16.4/5"));
 
     /**
      * The Nukkit Platform: https://nukkitx.com

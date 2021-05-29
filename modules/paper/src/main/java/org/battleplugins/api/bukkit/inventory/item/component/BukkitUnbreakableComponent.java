@@ -1,7 +1,7 @@
 package org.battleplugins.api.bukkit.inventory.item.component;
 
-import org.battleplugins.api.bukkit.compat.BukkitCompatMaterial;
 import org.battleplugins.api.bukkit.inventory.item.BukkitItemStack;
+import org.battleplugins.api.bukkit.inventory.item.BukkitItemType;
 import org.battleplugins.api.inventory.item.ItemStack;
 import org.battleplugins.api.inventory.item.component.UnbreakableComponent;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -27,6 +27,6 @@ public class BukkitUnbreakableComponent implements UnbreakableComponent {
     @Override
     public boolean isAppliable(ItemStack itemStack) {
         // If it's damageable, it can be set to unbreakable
-        return BukkitCompatMaterial.isDamageable(BukkitCompatMaterial.fromMaterial(((BukkitItemStack) itemStack).getHandle().getType()));
+        return ((BukkitItemStack) itemStack).getHandle().getType().getMaxDurability() > 0;
     }
 }

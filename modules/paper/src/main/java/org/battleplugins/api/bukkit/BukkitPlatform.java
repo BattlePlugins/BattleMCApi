@@ -30,7 +30,7 @@ public class BukkitPlatform extends Platform {
 
     @Override
     public PlatformType getType() {
-        return PlatformTypes.BUKKIT;
+        return PlatformTypes.PAPER;
     }
 
     @Override

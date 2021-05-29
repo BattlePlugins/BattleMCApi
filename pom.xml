@@ -17,8 +17,8 @@
         <module>modules/ap</module>
         <module>modules/api</module>
         <module>modules/common</module>
-        <module>modules/bukkit</module>
         <module>modules/nukkit</module>
+        <module>modules/paper</module>
         <module>modules/sponge</module>
         <module>modules/BattleMcAPI</module>
     </modules>
@@ -34,6 +34,10 @@
         <repository>
             <id>bukkit-public</id>
             <url>https://repo.md-5.net/content/repositories/public/</url>
+        </repository>
+        <repository>
+            <id>paper-repo</id>
+            <url>https://papermc.io/repo/repository/maven-public/</url>
         </repository>
         <repository>
             <id>nukkit-repo</id>
@@ -91,25 +95,6 @@
                 <configuration>
                     <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok-maven-plugin</artifactId>
-                <version>1.18.10.0</version>
-                <executions>
-                    <execution>
-                        <id>delombok</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>delombok</goal>
-                        </goals>
-                        <configuration>
-                            <addOutputDirectory>false</addOutputDirectory>
-                            <sourceDirectory>src/main/java</sourceDirectory>
-                            <outputDirectory>${basedir}/delombok/main</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
