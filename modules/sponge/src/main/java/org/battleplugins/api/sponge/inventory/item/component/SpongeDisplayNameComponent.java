@@ -1,5 +1,6 @@
 package org.battleplugins.api.sponge.inventory.item.component;
 
+import net.kyori.adventure.text.Component;
 import org.battleplugins.api.inventory.item.ItemStack;
 import org.battleplugins.api.inventory.item.component.DisplayNameComponent;
 import org.battleplugins.api.sponge.inventory.item.SpongeItemStack;
@@ -12,13 +13,13 @@ import java.util.Optional;
 public class SpongeDisplayNameComponent implements DisplayNameComponent {
 
     @Override
-    public void applyComponent(ItemStack itemStack, String displayName) {
-        ((SpongeItemStack) itemStack).getHandle().offer(Keys.DISPLAY_NAME, Text.of(displayName));
+    public void applyComponent(ItemStack itemStack, Component displayName) {
+        // TODO: API 8 - has full support for adventure
     }
 
     @Override
-    public Optional<String> getValue(ItemStack itemStack) {
-        return ((SpongeItemStack) itemStack).getHandle().get(Keys.DISPLAY_NAME).map(Text::toPlain);
+    public Optional<Component> getValue(ItemStack itemStack) {
+        return Optional.empty(); // TODO: API 8 - has full support for adventure
     }
 
     @Override
