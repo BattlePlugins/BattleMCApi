@@ -2,6 +2,8 @@ package org.battleplugins.api.nukkit.command;
 
 import cn.nukkit.command.CommandSender;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.battleplugins.api.util.MCWrapper;
 
 public abstract class NukkitCommandSender<T extends CommandSender> extends MCWrapper<T> implements org.battleplugins.api.command.CommandSender {
@@ -18,6 +20,11 @@ public abstract class NukkitCommandSender<T extends CommandSender> extends MCWra
 	@Override
 	public void sendMessage(String message) {
 		handle.sendMessage(message);
+	}
+
+	@Override
+	public void sendMessage(Component message) {
+		handle.sendMessage(LegacyComponentSerializer.legacySection().serialize(message));
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package org.battleplugins.api.bukkit.command;
 
+import net.kyori.adventure.text.Component;
 import org.battleplugins.api.util.MCWrapper;
 import org.bukkit.command.CommandSender;
 
@@ -16,6 +17,11 @@ public abstract class BukkitCommandSender<T extends CommandSender> extends MCWra
 
 	@Override
 	public void sendMessage(String message) {
+		handle.sendMessage(message);
+	}
+
+	@Override
+	public void sendMessage(Component message) {
 		handle.sendMessage(message);
 	}
 

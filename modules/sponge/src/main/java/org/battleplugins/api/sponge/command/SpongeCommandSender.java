@@ -1,5 +1,6 @@
 package org.battleplugins.api.sponge.command;
 
+import net.kyori.adventure.text.Component;
 import org.battleplugins.api.command.CommandSender;
 import org.battleplugins.api.util.MCWrapper;
 import org.spongepowered.api.command.CommandSource;
@@ -19,6 +20,11 @@ public abstract class SpongeCommandSender<T extends CommandSource> extends MCWra
     @Override
     public void sendMessage(String message) {
         handle.sendMessage(Text.of(message));
+    }
+
+    @Override
+    public void sendMessage(Component message) {
+        this.sendMessage(message.toString()); // TODO: API 8 - has full support for adventure
     }
 
     @Override

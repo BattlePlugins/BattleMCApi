@@ -1,5 +1,7 @@
 package org.battleplugins.api.command;
 
+import net.kyori.adventure.text.Component;
+
 /**
  * An object capable of executing commands.
  */
@@ -19,6 +21,14 @@ public interface CommandSender {
 	 * @param message the message to send
 	 */
 	void sendMessage(String message);
+
+	/**
+	 * Sends a message in the form of a
+	 * {@link Component} to the sender
+	 *
+	 * @param message the message to send
+	 */
+	void sendMessage(Component message);
 
 	/**
 	 * The name of the sender
